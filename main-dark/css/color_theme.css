@@ -860,11 +860,11 @@ Theme Primary Color
 
 /*---text---*/
 .theme-primary .text-primary {
-  color: #6993ff !important; }
+  color: #24a8e1 !important; }
 .theme-primary a.text-primary:hover, .theme-primary a.text-primary:focus {
-  color: #6993ff !important; }
+  color: #24a8e1 !important; }
 .theme-primary .hover-primary:hover, .theme-primary .hover-primary:focus {
-  color: #6993ff !important; }
+  color: #24a8e1 !important; }
 .theme-primary .text-info {
   color: #8950fc !important; }
 .theme-primary a.text-info:hover, .theme-primary a.text-info:focus {
@@ -872,23 +872,23 @@ Theme Primary Color
 .theme-primary .hover-info:hover, .theme-primary .hover-info:focus {
   color: #8950fc !important; }
 .theme-primary .text-success {
-  color: #1bc5bd !important; }
+  color: #7CFC00 !important; }
 .theme-primary a.text-success:hover, .theme-primary a.text-success:focus {
-  color: #1bc5bd !important; }
+  color: #7CFC00 !important; }
 .theme-primary .hover-success:hover, .theme-primary .hover-success:focus {
-  color: #1bc5bd !important; }
+  color: #7CFC00 !important; }
 .theme-primary .text-danger {
-  color: #f64e60 !important; }
+  color: #FF0000 !important; }
 .theme-primary a.text-danger:hover, .theme-primary a.text-danger:focus {
-  color: #f64e60 !important; }
+  color: #FF0000 !important; }
 .theme-primary .hover-danger:hover, .theme-primary .hover-danger:focus {
-  color: #f64e60 !important; }
+  color: #FF0000 !important; }
 .theme-primary .text-warning {
-  color: #ffa800 !important; }
+  color: #FFAA33 !important; }
 .theme-primary a.text-warning:hover, .theme-primary a.text-warning:focus {
-  color: #ffa800 !important; }
+  color: #FFAA33 !important; }
 .theme-primary .hover-warning:hover, .theme-primary .hover-warning:focus {
-  color: #ffa800 !important; }
+  color: #FFAA33 !important; }
 
 /*---active background---*/
 .theme-primary .active.active-primary {
