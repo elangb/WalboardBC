@@ -109,7 +109,7 @@
         </div>
         <section class="content">
           <div class="row">
-            <!-- Row Kiri -->
+            <!-- ROW Atas -->
             <div class="row">
               <!-- Card Column -->
               <div class="col-4">
@@ -118,38 +118,37 @@
                   <div class="col-6 mb-3">
                     <div class="card">
                       <div class="card-body text-center">
-                        <i class="fas fa-inbox fa-2x"></i>
-                        <div class="value text-warning display-4">48</div>
-                        <div class="label">Inbox</div>
+                        <div class="label">Total Service</div>
+                        <div class="value display-4">48</div>
+                        <div class="label text-danger">Pusat</div>
                       </div>
                     </div>
                   </div>
                   <div class="col-6 mb-3">
                     <div class="card">
                       <div class="card-body text-center">
-                        <i class="fas fa-edit fa-2x"></i>
-                        <div class="value text-warning display-4">13</div>
-                        <div class="label">Handling</div>
+                        <div class="label">Total Service</div>
+                        <div class="value display-4">13</div>
+                        <div class="label text-warning">Tanjung Priok</div>
                       </div>
                     </div>
                   </div>
-
                   <!-- Second Card Row -->
                   <div class="col-6 mb-3">
                     <div class="card">
                       <div class="card-body text-center">
-                        <i class="fas fa-clock fa-2x text-warning"></i>
-                        <div class="value text-danger display-4">30</div>
-                        <div class="label">Queueing</div>
+                        <div class="label">Total Service</div>
+                        <div class="value display-4">30</div>
+                        <div class="label text-primary">Soekarno-Hatta</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-6 mb-3">
                     <div class="card">
                       <div class="card-body text-center">
-                        <i class="fas fa-clock fa-2x text-warning"></i>
-                        <div class="value text-danger display-4">30</div>
-                        <div class="label">Queueing</div>
+                        <div class="label">Total Service</div>
+                        <div class="value display-4">30</div>
+                        <div class="label text-success">Pos Pasar Baru</div>
                       </div>
                     </div>
                   </div>
@@ -159,30 +158,105 @@
               <!-- Chart Column -->
               <div class="col-8">
                 <div class="row">
-                  <div class="col-6 mb-3">
+                  <div class="col-4 mb-3">
                     <div class="card chart-card">
                       <div class="card-body">
-                        <h5 class="card-title">Pie Chart 1</h5>
+                        <h5 class="card-title">% Service Volume per Site</h5>
                         <div id="pieChartApex1"></div> <!-- Div for the first pie chart -->
                       </div>
                     </div>
                   </div>
 
                   <!-- Second Pie Chart -->
-                  <div class="col-6 mb-3">
+                  <div class="col-4 mb-3">
                     <div class="card chart-card">
                       <div class="card-body">
-                        <h5 class="card-title">Pie Chart 2</h5>
+                        <h5 class="card-title">% Service Volume per Channel</h5>
                         <div id="pieChartApex2"></div> <!-- Div for the second pie chart -->
                       </div>
                     </div>
                   </div>
 
-                  
+                  <!-- Bar Chart -->
+                  <div class="col-4 mb-3">
+                    <div class="card chart-cardbar">
+                      <div class="card-body">
+                        <h5 class="card-title">Top 10 Service Categories</h5>
+                        <div id="barChartApex3"></div> <!-- Div for the bar chart -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Column -->
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="card chart-card">
+                      <div class="card-body">
+                        <h5 class="card-title">Service Volume Trend per Site</h5>
+                        <canvas id="socialMediaTrend"></canvas> <!-- Changed div to canvas for the chart -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="card chart-card">
+                      <div class="card-body">
+                        <h5 class="card-title">Service Volume Trend per Channel</h5>
+                        <canvas id="socialMediaTrend2"></canvas> <!-- Changed div to canvas for the chart -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="row">
+                      <!-- First Card Row -->
+                      <div class="col-6 mb-3">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <div class="label">% Ans. Call</div>
+                            <div class="value text-success display-4">48</div>
+                            <div class="label">Pusat</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6 mb-3">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <div class="label">% Ans. Call</div>
+                            <div class="value text-success display-4">13</div>
+                            <div class="label">Tanjung Priok</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Second Card Row -->
+                      <div class="col-6 mb-3">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <div class="label">% Ans. Call</div>
+                            <div class="value text-warning display-4">30</div>
+                            <div class="label">Soekarno-Hatta</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6 mb-3">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <div class="label">% Ans. Call</div>
+                            <div class="value text-danger display-4">30</div>
+                            <div class="label">Pasar Baru</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+
 
 
 
@@ -219,54 +293,216 @@
     <!-- Include ApexCharts library -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-<script>
-  var options = {
-    series: [44, 55, 13, 43, 22],
-    chart: {
-      width: 380,
-      type: 'pie',
-    },
-    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-    responsive: [{
-      breakpoint: 480,
-      options: {
+    <script>
+      var options = {
+        series: [44, 55, 13, 43, 22],
         chart: {
-          width: 200
+          width: 380,
+          type: 'pie',
         },
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }]
-  };
+        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      };
 
-  var chart = new ApexCharts(document.querySelector("#pieChartApex1"), options); // Corrected selector
-  chart.render();
-</script>
-<script>
-  var options = {
-    series: [44, 55, 13, 43, 22],
-    chart: {
-      width: 380,
-      type: 'pie',
-    },
-    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-    responsive: [{
-      breakpoint: 480,
-      options: {
+      var chart = new ApexCharts(document.querySelector("#pieChartApex1"), options); // Corrected selector
+      chart.render();
+
+    </script>
+
+    <script>
+      var options = {
+        series: [44, 55, 13, 43, 22],
         chart: {
-          width: 200
+          width: 380,
+          type: 'pie',
         },
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }]
-  };
+        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      };
 
-  var chart = new ApexCharts(document.querySelector("#pieChartApex2"), options); // Corrected selector
-  chart.render();
-</script>
+      var chart = new ApexCharts(document.querySelector("#pieChartApex2"), options); // Corrected selector
+      chart.render();
+    </script>
+
+    <script>
+      var options = {
+        series: [{
+          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        }],
+        chart: {
+          type: 'bar',
+          height: 420
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            borderRadiusApplication: 'end',
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+            'United States', 'China', 'Germany'
+          ],
+          labels: {
+            style: {
+              colors: '#ffffff' // Set the text color to white
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: '#ffffff' // Set the text color to white for y-axis as well, if needed
+            }
+          }
+        },
+        tooltip: {
+          style: {
+            color: '#ffffff' // Set the tooltip text color to white
+          }
+        }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#barChartApex3"), options);
+      chart.render();
+
+    </script>
+
+
+<!-- Grafik Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      var ctx = document.getElementById('socialMediaTrend2').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Facebook',
+            borderColor: '#21a1ff',
+            data: [10, 20, 15, 30, 25, 40, 35, 50, 45, 60]
+          }, {
+            label: 'Instagram',
+            borderColor: '#ff4d4d',
+            data: [5, 15, 10, 20, 15, 30, 25, 40, 35, 50]
+          }, {
+            label: 'X',
+            borderColor: '#ffb84d',
+            data: [2, 12, 8, 18, 14, 28, 22, 36, 30, 44]
+          }, {
+            label: 'Whatsapp',
+            borderColor: '#21ff4d',
+            data: [8, 18, 12, 22, 18, 32, 28, 42, 38, 52]
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+    <script>
+      var ctx = document.getElementById('socialMediaTrend3').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Facebook',
+            borderColor: '#21a1ff',
+            data: [10, 20, 15, 30, 25, 40, 35, 50, 45, 60]
+          }, {
+            label: 'Instagram',
+            borderColor: '#ff4d4d',
+            data: [5, 15, 10, 20, 15, 30, 25, 40, 35, 50]
+          }, {
+            label: 'X',
+            borderColor: '#ffb84d',
+            data: [2, 12, 8, 18, 14, 28, 22, 36, 30, 44]
+          }, {
+            label: 'Whatsapp',
+            borderColor: '#21ff4d',
+            data: [8, 18, 12, 22, 18, 32, 28, 42, 38, 52]
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+    <script>
+      var ctx = document.getElementById('socialMediaTrend').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Facebook',
+            borderColor: '#21a1ff',
+            data: [10, 20, 15, 30, 25, 40, 35, 50, 45, 60]
+          }, {
+            label: 'Instagram',
+            borderColor: '#ff4d4d',
+            data: [5, 15, 10, 20, 15, 30, 25, 40, 35, 50]
+          }, {
+            label: 'X',
+            borderColor: '#ffb84d',
+            data: [2, 12, 8, 18, 14, 28, 22, 36, 30, 44]
+          }, {
+            label: 'Whatsapp',
+            borderColor: '#21ff4d',
+            data: [8, 18, 12, 22, 18, 32, 28, 42, 38, 52]
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
 </body>
 
 </html>

@@ -67,23 +67,33 @@ body {
 }
 
 .chart-card {
-    height: 390px; /* Set a uniform height */
+    height: 345px; /* Set a uniform height */
   }
   
   .chart-card div {
-    height: 400px /* Make sure the chart container fills the card */
+    margin-top: 10px;
+    height: 120px /* Make sure the chart container fills the card */
   }
   
+.chart-cardbar {
+    height: 350px; /* Set a uniform height */
+  }
+  
+  .chart-cardbar div {
+    margin-top: 10px;
+    height: 130px /* Make sure the chart container fills the card */
+  }
+  
+
 
 /* Chart Styles */
 .chart {
     background-color: #1e2746;
     padding: 10px;
-    margin-top: 10px;
 }
 
 .chart canvas {
-    width: 500px;
+    width: 100%;
 }
 
 .value2{
