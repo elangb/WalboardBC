@@ -1,0 +1,5 @@
+Split/Skill:;CC Soetta
+;Agent Name;Login ID;Extn;AUX Reason;State;Split/Skill;Time;VDN Name;Interrupt Status
+2;Ananda Jasmine;2039;2108;;AVAIL;0;.56;;NA
+3;Arief Dandy K;2022;2107;;ACDIN;22;2.37;Agent Soetta;NA
+2;Riyan Pratama;2024;2106;;AVAIL;0;2.46;;NA

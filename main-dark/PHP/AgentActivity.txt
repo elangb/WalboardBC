@@ -1,0 +1,3 @@
+Split/Skill:;Informasi;Pengaduan;CC Priok;CC Ps Baru;CC Soetta
+;Agent Name;Login ID;Extn;AUX Reason;State;Split/Skill;Time;VDN Name;Interrupt Status
+;Dans;198;1822;Aux sholat;tst;test;1300;test;acdid
