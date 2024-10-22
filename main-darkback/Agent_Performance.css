@@ -12,6 +12,12 @@ body {
     align-items: center;
 }
 
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px; /* Increase font size */
+    margin-left: -100px;
+}
+
 .header img {
     height: 50px;
 }
@@ -20,52 +26,128 @@ body {
     font-size: 24px;
 }
 
-.header .date-time {
-    text-align: right;
+.date-time-text {
+    font-size: 22px; /* Ukuran teks lebih besar */
+    margin: 10px 0; /* Margin atas dan bawah sama */
+    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
 }
 
 .section-title {
     color: orange;
     margin-top: 20px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .table-container {
-    background-color: #0b0b45;
+    background-color: #1e2746;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 .table {
     color: #fff;
+    width: 100%;
+    text-align: center; /* Default: Center align all content */
+    border-collapse: collapse; /* Pastikan border di-collapse */
 }
 
 .table th,
 .table td {
-    border: none;
+    border: none; /* Menghilangkan semua border */
+    padding: 8px;
+    font-size: 14px;
+    /* Untuk menghilangkan border atas jika masih ada */
+    border-top: none !important; /* Menonaktifkan garis atas */
+    border-bottom: none !important; /* Menonaktifkan garis atas */
+}
+
+/* Align left only for the "Nama Agent" column */
+.table td:first-child,
+.table th:first-child {
+    text-align: left;
+}
+
+/* Alternate row colors */
+.table tbody tr:nth-child(odd) {
+    background-color: #050513; /* Warna untuk baris ganjil */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #1e2746; /* Warna untuk baris genap */
+}
+
+.table-scroll {
+    max-height: 436px; /* Atur tinggi maksimum sesuai kebutuhan */
+    overflow-y: auto; /* Menampilkan scrollbar vertikal */
+    border-radius: 10px; /* Sudut melengkung untuk scroll container */
+    position: relative; /* Untuk mengatur posisi relative untuk elemen anak */
+}
+
+/* Menjaga header tetap di atas */
+.table thead {
+    position: sticky; /* Membuat posisi sticky */
+    top: 0; /* Menempatkan header di atas */
+    background-color: #1e2746; /* Warna latar belakang header */
+    z-index: 10; /* Memastikan header tetap di atas konten lainnya */
+}
+
+/* Styling untuk scrollbar di Chrome, Safari, dan Edge */
+.table-scroll::-webkit-scrollbar {
+    width: 12px; /* Lebar scrollbar */
+}
+
+.table-scroll::-webkit-scrollbar-track {
+    background: #1e2746; /* Warna latar belakang track scrollbar */
+    border-radius: 10px; /* Sudut melengkung pada track */
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+    background-color: #4a6e8c; /* Warna scrollbar */
+    border-radius: 10px; /* Sudut melengkung pada scrollbar */
+    border: 3px solid #1e2746; /* Menambahkan border di sekitar scrollbar untuk efek yang lebih halus */
+}
+
+/* Styling untuk scrollbar di Firefox */
+.table-scroll {
+    scrollbar-width: thin; /* Mengatur lebar scrollbar */
+    scrollbar-color: #4a6e8c #1e2746; /* Warna scrollbar dan warna latar belakang track */
+}
+
+.table thead {
+    position: sticky; /* Membuat posisi sticky */
+    top: 0; /* Menempatkan header di atas */
+    background-color: #1e2746; /* Warna latar belakang header, bisa disesuaikan */
+    z-index: 10; /* Memastikan header tetap di atas konten lainnya */
+}
+
+.badge-green, .badge-orange, .badge-pink {
+    background-color: #059d55;
+    color: #fff;
+    padding: 5px 10px; /* Padding atas-bawah 5px, kanan-kiri 20px */
+    border-radius: 5px;
+    min-width: 60px; /* Set lebar minimal */
+    display: inline-block; /* Agar badge mengikuti konten */
+    text-align: center; /* Untuk membuat teks berada di tengah */
 }
 
 .badge-green {
-    background-color: #00ff00;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #059d55;
 }
 
 .badge-orange {
-    background-color: #ff8000;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #dea039;
 }
 
 .badge-pink {
-    background-color: #ff0066;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #e65055;
 }
 
 .channel-icons i {
     margin-right: 5px;
 }
+

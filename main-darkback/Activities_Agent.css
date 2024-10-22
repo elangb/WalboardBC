@@ -5,7 +5,7 @@ body {
 }
 
 .header {
-    background-color: #0b0b45;
+    background-color: #1e2746;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -20,94 +20,108 @@ body {
     font-size: 24px;
 }
 
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px; /* Increase font size */
+    margin-left: -100px;
+}
+
+
 .header .date-time {
     text-align: right;
+}
+
+.date-time-text {
+    font-size: 22px; /* Ukuran teks lebih besar */
+    margin: 10px 0; /* Margin atas dan bawah sama */
+    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
 }
 
 .section-title {
     color: orange;
     margin-top: 20px;
     margin-bottom: 10px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .table-container {
-    background-color: #0b0b45;
+    background-color: #1e2746;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 .table {
     color: #fff;
+    width: 100%;
+    text-align: center; /* Default: Center align all content */
+    border-collapse: collapse; /* Pastikan border di-collapse */
 }
 
 .table th,
 .table td {
-    border: none;
+    border: none; /* Menghilangkan semua border */
+    padding: 8px;
+    font-size: 14px;
+    /* Untuk menghilangkan border atas jika masih ada */
+    border-top: none !important; /* Menonaktifkan garis atas */
+    border-bottom: none !important; /* Menonaktifkan garis atas */
+}
+
+/* Align left only for the "Nama Agent" column */
+.table td:first-child,
+.table th:first-child {
+    text-align: left;
+}
+
+/* Alternate row colors */
+.table tbody tr:nth-child(odd) {
+    background-color: #050513; /* Warna untuk baris ganjil */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #1e2746; /* Warna untuk baris genap */
+}
+
+.status-available, .status-acd, .status-acw, .status-istirahat, 
+.status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
+    background-color: #059d55;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px; /* Padding atas-bawah 10px, kanan-kiri 20px */
+    min-width: 100px; /* Set lebar minimal */
+    display: inline-block; /* Agar kotak mengikuti konten */
+    text-align: center; /* Untuk membuat teks berada di tengah */
 }
 
 .status-available {
-    background-color: #00ff00;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #059d55;
 }
 
 .status-acd {
-    background-color: #00ffff;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #00a0e9;
 }
 
 .status-acw {
-    background-color: #ff8000;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #dea039;
 }
 
-.status-istirahat {
-    background-color: #ff0066;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+.status-istirahat, .status-toilet, .status-makan {
+    background-color: #e65055;
 }
 
 .status-ringing {
-    background-color: #8000ff;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #746cac;
 }
 
 .status-other {
     background-color: #4d4d4d;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.status-toilet {
-    background-color: #ff0066;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.status-makan {
-    background-color: #ff0066;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.channel-icons i {
-    margin-right: 5px;
 }
 
 .longest-time {
-    background-color: #dc3545;
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #e65055;
 }
