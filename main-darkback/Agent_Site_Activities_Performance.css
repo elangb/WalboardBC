@@ -1,6 +1,5 @@
-/* Section Title Backgrounds */
 .section-titlebg.tanjung-priok {
-    background-image: url('assets/Tanjung Priok.png');
+    background-image: url('../assets/Tanjung Priok.png'); /* Sesuaikan path */
     font-size: 34px;
 }
 
@@ -44,6 +43,12 @@ body {
     align-items: center;
 }
 
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px; /* Increase font size */
+    margin-left: -100px;
+}
+
 .header img {
     height: 50px;
 }
@@ -56,49 +61,85 @@ body {
     text-align: right;
 }
 
+.date-time-text {
+    font-size: 22px; /* Ukuran teks lebih besar */
+    margin: 10px 0; /* Margin atas dan bawah sama */
+    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
+}
+
 .section-title {
-    color: orange;
-    margin-top: 20px;
+    color: #dea039;
+    margin-top: 14px;
     margin-bottom: 10px;
     text-align: center;
+    font-size: 28px;
 }
 
 .table-container {
     background-color: #1e2746;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 .table {
     color: #fff;
+    width: 100%;
+    text-align: center; /* Default: Center align all content */
+    border-collapse: collapse; /* Pastikan border di-collapse */
 }
 
 .table th,
 .table td {
-    border: none;
+    border: none; /* Menghilangkan semua border */
+    padding: 8px;
+    font-size: 12px;
+    /* Untuk menghilangkan border atas jika masih ada */
+    border-top: none !important; /* Menonaktifkan garis atas */
+    border-bottom: none !important; /* Menonaktifkan garis atas */
+}
+
+/* Align left only for the "Nama Agent" column */
+.table td:first-child,
+.table th:first-child {
+    text-align: left;
+}
+
+/* Alternate row colors */
+.table tbody tr:nth-child(odd) {
+    background-color: #050513; /* Warna untuk baris ganjil */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #1e2746; /* Warna untuk baris genap */
+}
+
+.badge-green, .badge-orange, .badge-pink {
+    background-color: #059d55;
+    color: #fff;
+    padding: 5px 10px; /* Padding atas-bawah 5px, kanan-kiri 20px */
+    border-radius: 5px;
+    min-width: 60px; /* Set lebar minimal */
+    display: inline-block; /* Agar badge mengikuti konten */
+    text-align: center; /* Untuk membuat teks berada di tengah */
 }
 
 .badge-green {
-    background-color: #00ff00;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #059d55;
 }
 
 .badge-orange {
-    background-color: #ff8000;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #dea039;
 }
 
 .badge-pink {
-    background-color: #ff0066;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #e65055;
 }
 
 .channel-icons i {
     margin-right: 5px;
 }
+

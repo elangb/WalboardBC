@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="../images/bravo.png">
 
     <title>Agent Performances </title>
 
@@ -23,7 +23,8 @@
 
     <script src="Chart.bundle.js"></script>
     <script src="chartjs-gauge.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <style>
         .containerXXX {
             position: relative;
@@ -52,44 +53,33 @@
 
         <header class="main-header">
             <div class="d-flex align-items-center logo-box pl-10">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <!-- Logo Test -->
                 <a href="index.html" class="logo">
-                    <!-- logo-->
                     <div class="logo-lg">
-                        <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
-                        <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+                        <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+                        <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
                     </div>
                 </a>
             </div>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top pl-10">
                 <!-- Sidebar toggle button-->
-                <div class="app-menu">
+                <div class="app-menu contact-center-text">
                     Contact Center <br>
-                    Bravo Bea Cukai <a style="color: red;">1500225</a>
+                    Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
                 </div>
-
                 <div class="navbar-custom-menu r-side">
                     <ul class="nav navbar-nav">
-
                         <li class="btn-group d-md-inline-flex d-none">
                             <div class="app-menu">
-                                <div class="search-bx mx-5">
-
-                                    <br>
-                                    <a style="color: goldenrod;">01 OKtober 2024 | Selasa | </a>
-
-                                    </form>
-                                </div>
+                                <a class="date-time-text" style="color: goldenrod;">Selasa | 01 Oktober 2024 | 08:00</a>
                             </div>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="container-full">
@@ -105,152 +95,22 @@
                         <!-- Call -->
                         <div class="col-md-6">
                             <div class="table-container">
-                                <h3 class="section-title">
-                                    Call
-                                </h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Nama Agent
-                                            </th>
-                                            <th>
-                                                Calls
-                                            </th>
-                                            <th>
-                                                Avg. Ring Time
-                                            </th>
-                                            <th>
-                                                Avg. Talk Time
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    35
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:09
-                                            </td>
-                                            <td>
-                                                05:11
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    28
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    00:12
-                                                </span>
-                                            </td>
-                                            <td>
-                                                11:00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Glorio Theodore
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    26
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:03
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    23:11
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Hafazh Gumilar
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    21
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:02
-                                            </td>
-                                            <td>
-                                                01:20
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Markus Afrie
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    20
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:05
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    30:00
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                M. Ekawinny
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    15
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    00:10
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:12
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Rizal Abdul
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    13
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    00:11
-                                                </span>
-                                            </td>
-                                            <td>
-                                                04:55
-                                            </td>
-                                        </tr> -->
-
-                                    </tbody>
-                                </table>
+                                <h3 class="section-title">Call</h3>
+                                <div class="table-scroll">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Agent</th>
+                                                <th>Calls</th>
+                                                <th>Avg. Ring Time</th>
+                                                <th>Avg. Talk Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Data akan dimasukkan di sini -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -634,7 +494,7 @@
                 .then(data => {
                     let tableBody = document.querySelector('.table tbody');
                     tableBody.innerHTML = ''; // Clear current table content
-    
+
                     data.forEach(agent => {
                         let row = `
                             <tr>
@@ -649,13 +509,41 @@
                 })
                 .catch(error => console.error('Error fetching data:', error));
         }
-    
+
         // Fetch data every 5 seconds
         setInterval(fetchAgentData, 5000);
-    
+
         // Initial data load
         fetchAgentData();
-    </script>    
+    </script>
+
+    <script>
+        // Mendapatkan waktu saat ini
+        function updateDateTime() {
+            const now = new Date();
+
+            // Daftar nama hari
+            const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const day = days[now.getDay()]; // Mendapatkan hari saat ini
+
+            // Daftar nama bulan
+            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+
+            // Format tanggal
+            const date = now.getDate(); // Tanggal
+            const year = now.getFullYear(); // Tahun
+            const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
+            const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+
+            // Mengupdate elemen dengan waktu saat ini
+            document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', updateDateTime);
+    </script>
 
 </body>
 
