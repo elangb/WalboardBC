@@ -26,12 +26,14 @@ function AutoCall(){
     // ListAgentSoetta();
 	 // ListAgentTanjungPriok();
 	 getDataEmail();
+	 getListMultichat();
+	 getListSosmed();
   
 }
-async function getDataEmail(){
+async function getListSosmed(){
 
     try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailAllSide", {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataActivitiesSosmed", {
             method: "GET",
             headers: {
                 'Accept': 'text/plain' // Setting the accept header
@@ -51,41 +53,30 @@ async function getDataEmail(){
 		 var table = '<table class="table table-dark table-striped">';
 				  table += '<tr>' +                                               
 									'<th>Nama Agent</th>' +
+									'<th>Role</th>' +
 									'<th>Status</th>' +
 									'<th>Now Handle</th>' +
-									'<th>Emails</th>' +							
+									'<th>Longest</th>' +							
 									'</tr>';
-									
-									
-		var table2 = '<table class="table table-dark table-striped">';
-				  table2 += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									'<th>Status</th>' +
-									'<th>Now Handle</th>' +
-									'<th>Emails</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
+							
 							 json.forEach(items => {
 								 
-								 if(items["sideId"] == "Soekarno Hatta"){
+								
 								 
 									table += '<tr>';
 									table += '<td>' + items["name"] + '</td>';
-									table += '<td>' + items["loginTime"] + '</td>';
-									table += '<td>' + items["handleTime"] + '</td>';
-									table += '<td>' + items["status"] + '</td>';
-								 }
+									table += '<td>' + items["levelUser"] + '</td>';
+									//table += '<td>' + items["status"] + '</td>';
+									if (items["status"] == 'Ready')
+											table += '<td><span class="status-available">' + items["status"] + '</span></td>';
+									else
+											table += '<td><span class="status-istirahat">' + items["status"] + '</span></td>';
+                                            
+									table += '<td>' + items["nowHandle"] + '</td>';
+									table += '<td>' + items["longers"] + '</td>';
+								
 								 
-								 if(items["sideId"] == "Pasar Baru"){
-								 
-									table2 += '<tr>';
-									table2 += '<td>' + items["name"] + '</td>';
-									table2 += '<td>' + items["loginTime"] + '</td>';
-									table2 += '<td>' + items["handleTime"] + '</td>';
-									table2 += '<td>' + items["status"] + '</td>';
-								 }
+								
 								
 								
 							});
@@ -94,9 +85,153 @@ async function getDataEmail(){
 
 							table += '</table>';
 							
-							table2 += '</table>';
-							$('#listEailSoetta').html(table);
-							$('#ListEmailPasarBaru').html(table);
+							
+							$('#ListSosmed').html(table);
+							
+		  
+		 
+					   
+						
+  
+       
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+  
+    
+
+}
+async function getListMultichat(){
+
+    try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataActivitiesMultiChat", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain' // Setting the accept header
+            }
+        });
+
+        // Check if the response is okay
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text(); // Using text() since accept is text/plain
+		 console.log(data);
+		
+		 var json = JSON.parse(data);
+		
+		 var table = '<table class="table table-dark table-striped">';
+				  table += '<tr>' +                                               
+									'<th>Nama Agent</th>' +
+									'<th>Role</th>' +
+									'<th>Status</th>' +
+									'<th>Now Handle</th>' +
+									'<th>Longest</th>' +							
+									'</tr>';
+							
+							 json.forEach(items => {
+								 
+								
+								 
+									table += '<tr>';
+									table += '<td>' + items["name"] + '</td>';
+									table += '<td>' + items["levelUser"] + '</td>';
+									//table += '<td>' + items["status"] + '</td>';
+									if (items["status"] == 'Ready')
+											table += '<td><span class="status-available">' + items["status"] + '</span></td>';
+									else
+											table += '<td><span class="status-istirahat">' + items["status"] + '</span></td>';
+                                            
+									table += '<td>' + items["nowHandle"] + '</td>';
+									table += '<td>' + items["longers"] + '</td>';
+								
+								 
+								
+								
+								
+							});
+
+							
+
+							table += '</table>';
+							
+							
+							$('#ListMultichat').html(table);
+							
+		  
+		 
+					   
+						
+  
+       
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+  
+    
+
+}
+async function getDataEmail(){
+
+    try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailActivites", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain' // Setting the accept header
+            }
+        });
+
+        // Check if the response is okay
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text(); // Using text() since accept is text/plain
+		 console.log(data);
+		
+		 var json = JSON.parse(data);
+		
+		 var table = '<table class="table table-dark table-striped">';
+				  table += '<tr>' +                                               
+									'<th>Nama Agent</th>' +
+									'<th>Role</th>' +
+									'<th>Status</th>' +
+									'<th>Now Handle</th>' +
+									'<th>Longest</th>' +							
+									'</tr>';
+							
+							 json.forEach(items => {
+								 
+								
+								 
+									table += '<tr>';
+									table += '<td>' + items["name"] + '</td>';
+									table += '<td>' + items["levelUser"] + '</td>';
+									//table += '<td>' + items["status"] + '</td>';
+									if (items["status"] == 'Ready')
+											table += '<td><span class="status-available">' + items["status"] + '</span></td>';
+									else
+											table += '<td><span class="status-istirahat">' + items["status"] + '</span></td>';
+                                            
+									table += '<td>' + items["nowHandle"] + '</td>';
+									table += '<td>' + items["longers"] + '</td>';
+								
+								 
+								
+								
+								
+							});
+
+							
+
+							table += '</table>';
+							
+							
+							$('#listEmail').html(table);
+							
 		  
 		 
 					   
@@ -133,24 +268,27 @@ var jqxhr = $.getJSON("PHP/Agent_Activity.php", function(data) {
 							// const agents = JSON.parse(data.Head);
 
 								 for (const key in agents) {
-												if (key !== "Split Skill") {
+												if (key !== "Split Skill"  ) {
 													const items = agents[key];
+													if (items[0] !== "Agent Name"){
 													table += '<tr>';
 													table += '<td>' + items[0] + '</td>';
 													table += '<td>' + items[2] + '</td>';
-													if (items[3] == 'Avaliable')
-														table += '<td><span class="badge badge-success">' + items[3] + '</span></td>';
-													else if (items[3] == 'ACW')
-														table += '<td><span class="badge badge-primary">' + items[3] + '</span></td>';
-                                                    else if (items[3] == 'ACD')
-														table += '<td><span class="badge badge-danger">' + items[3] + '</span></td>';
+													if (items[4] == 'AVAIL')
+														table += '<td><span class="status-available">' + items[4] + '</span></td>';
+													else if (items[4] == 'ACW')
+														table += '<td><span class="badge badge-primary">' + items[4] + '</span></td>';
+                                                    else if (items[4] == 'ACDIN')
+														table += '<td><span class="badge badge-success">' + items[4] + '</span></td>';
 
-                                                    else if (items[3] == 'AUX')
-														table += '<td><span class="badge badge-danger">' + items[3] + '</span></td>';
+                                                    else if (items[4] == 'AUX')
+														table += '<td><span class="badge badge-danger">' + items[4] + '</span></td>';
                                                     else
-                                                    table += '<td><span class="badge badge-light">' + items[3] + '</span></td>';
+                                                    table += '<td><span class="badge badge-light">' + items[4] + '</span></td>';
 
 													table += '<td><span class="badge badge-green">' + items[6] + '</span></td>';
+													
+													}
 												}
 								}	
 								
@@ -228,7 +366,9 @@ var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
   divTimenya.empty();
   divTimenya.append(time);
   divDateNya.empty();
+
   divDateNya.append( hari[current_date.getDay()] +" | "+day_value + " " +  months[month_value]  + " " + year_value +" | " + time );
+ // divDateNya.append( 'September' + " " + '27' + ", " + '2024' );
   
   
      

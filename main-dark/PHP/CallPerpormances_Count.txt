@@ -1,4 +1,4 @@
 Splits/Skills UI;Informasi;Pengaduan
 Split/Skill;Skill State;Agents Staffed;Avg Aban Time;Aban Calls;Avg ACD Time;ACD Calls;Avg Speed Ans;Avg ACD Time;TOTAL_I_ACDACW;% Ans Calls;% Ans Calls;% Aban Calls;% ACD Time;AUXINCALLS;Agents Avail;ACCEPTABLE;RINGTIME;Calls Waiting;% accep;Avg ACW Time;CALLSOFFERED;ACWINCALLS;Agents in AUX;Agents on ACD Calls;INQUEUE;Oldest Call Waiting;ACD Time;ACW Time
-Informasi;NORMAL;0;.45;122;4.07;150;.32;.04.07;13.49.55;23;23;19;31;0;0;96;1.35.49;0;55;.00.47;658;0;0;0;0;.00.00;10.16.34;1.57.32
-Pengaduan;NORMAL;0;0;0;0;0;0;0;.00.00;0;0;0;0;0;0;0;.00.00;0;0;0;0;0;0;0;0;.00.00;.00.00;.00.00
+Informasi;NORMAL;5;.36;39;5.23;46;.16;.05.23;5.32.29;25;25;21;18;0;1;39;.19.35;0;54;.01.25;187;0;4;0;0;.00.00;4.07.42;1.05.12
+Pengaduan;NORMAL;3;0;0;0;0;0;0;.00.00;0;0;0;0;0;1;0;.00.00;0;0;0;0;0;2;0;0;.00.00;.00.00;.00.00

@@ -1,0 +1,20 @@
+#contain {
+  height: 100px;  
+  overflow-y: scroll;  
+}
+#table_scroll {
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+#table_scroll tbody td {
+  padding: 10px;
+  background-color: #7fe55e;
+  color: #fff;
+}
+#table_fixed thead th {
+  padding: 10px;
+  background-color: #b90be0;
+  color: #fff;
+  font-weight: 100;
+}

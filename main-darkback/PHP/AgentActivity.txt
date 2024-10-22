@@ -1,0 +1,23 @@
+Split/Skill:;Informasi;Pengaduan;CC Priok;CC Ps Baru;CC Soetta
+;Agent Name;Login ID;Extn;AUX Reason;State;Split/Skill;Time;VDN Name;Interrupt Status
+;Dans;198;1822;Aux sholat;tst;test;1300;test;acdid
+;Kresna Karisma S;2025;2107;;RING;22;.07;;NA
+;Hafid Cipto Goma;1361;1111;Toilet;AUX;0;48.34;;NA
+;Ririn Dwi Utami;1367;1120;;OTHER;0;1.57;;NA
+;Hafizh Ahmad;2032;2106;;RING;22;.01;;NA
+;M. Afdal;1351;1122;Istirahat;AUX;0;227.53;;NA
+;Reynaldo Ebenezer S;1366;1116;;OTHER;0;1.20;;NA
+;M. Afdal;1351;1122;Istirahat;AUX;0;227.53;;NA
+;Habil Alrasyid;2005;2102;Istirahat;AUX;0;.37;;NA
+;Faisal Irfin;1302;1108;;OTHER;0;.40;;NA
+;Lilis Nur Jallilah;2042;2110;Toilet;AUX;0;15.22;;NA
+;Handika Riqza Pradan;1385;1101;;ACDIN;3;.11;Informasi;NA
+;Muhammad Farrell;1315;1117;;ACW;3;.07;Informasi;NA
+;Rizal Abdul Aziz;1310;1113;Sholat;AUX;0;7.10;;NA
+;Rinto Pangihutan;2054;2109;;AVAIL;0;6.18;;NA
+;Hafid Cipto Goma;1361;1111;Toilet;AUX;0;48.34;;NA
+;M. Fajri Pratama;1344;2101;;OTHER;0;1.02;;NA
+;Faisal Irfin;1302;1108;;OTHER;0;.40;;NA
+;Handika Riqza Pradan;1385;1101;;ACDIN;3;.11;Informasi;NA
+;Wahyuni;2070;2103;;OTHER;0;2.47;;NA
+;Anggraeni Dinda L;2030;2108;;AVAIL;0;2.05;;NA

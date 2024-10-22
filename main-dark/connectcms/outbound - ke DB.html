@@ -1,0 +1,574 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Wallboard Outbound</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+
+    <link href="css/stylesheets.css" rel="stylesheet" type="text/css" />
+
+    <script type='text/javascript' src='js/plugins/jquery/jquery.min.js'></script>
+    <script type='text/javascript' src='js/plugins/jquery/jquery-ui.min.js'></script>
+    <script type='text/javascript' src='js/plugins/jquery/jquery-migrate.min.js'></script>
+    <script type='text/javascript' src='js/plugins/jquery/globalize.js'></script>
+    <script type='text/javascript' src='js/plugins/bootstrap/bootstrap.min.js'></script>
+
+    <!--<script type='text/javascript' src='js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js'></script>
+    <script type='text/javascript' src='js/plugins/uniform/jquery.uniform.min.js'></script>-->
+
+    <script type='text/javascript' src='js/plugins/knob/jquery.knob.js'></script>
+    <script type='text/javascript' src='js/plugins/sparkline/jquery.sparkline.min.js'></script>
+    <script type='text/javascript' src='js/plugins/flot/jquery.flot.js'></script>
+    <script type='text/javascript' src='js/plugins/flot/jquery.flot.resize.js'></script>
+
+    <script type='text/javascript' src='js/plugins.js'></script>
+    <script type='text/javascript' src='js/actions.js'></script>
+    <script type='text/javascript' src='js/charts.js'></script>
+    <script type='text/javascript' src='js/settings.js'></script>
+    <script type='text/javascript' src='js/outbound.js'></script>
+  
+    
+	 <style>
+		  .blink {
+			text-decoration: blink;
+			font-weight: 600; font-size:120px; color:#ffffff; 
+		  }
+    </style>
+	<script>
+		// jsfiddle configured to load jQuery Sparkline 2.1
+		// http://omnipotent.net/jquery.sparkline/
+		// Values to render
+		$( document ).ready(function() {
+                getData_StatusCall();
+                getData_ListAgent1();
+                getData_ListAgent2();
+                getData_Summary();
+                getDateTime();
+                getOUT();
+				var values = [1, 2, 3];
+
+				// Draw a sparkline for the #sparkline element
+				$('#sparkline').sparkline(values, {
+					type: "pie",
+                    sliceColors: ['#dc3912','#ff9900','#109618'],
+					width: '200',
+					height: '200',
+					// Map the offset in the list of values to a name to use in the tooltip
+					tooltipFormat: '{{offset:offset}} ({{percent.1}}%)',
+					tooltipValueLookups: {
+						'offset': {
+							0: 'Welcome Call',
+							1: 'Survey Call',
+							2: 'Promotion Call'
+						}
+					},
+				});
+				console.log( "ready!" );
+		});
+       
+      
+    </script>
+
+</head>
+
+<body class="bg-img-num16">
+
+    <div class="container">
+        <span id='ct' ></span>
+        <div class="row">
+
+            <div class="col-md-3">
+                <div style="padding-top:10px;">
+                    <img src="img/logo-default.png" width="200">
+                    <div class="content">
+                        <!--<img height="70px;" src="img/sunrise.png">-->
+                        <h1 style="font-weight: 600; font-size:50px;">Outbound<br> <div id="timeNya"></h1><br>
+                        <h1 style="position: relative; top:-30px;"><div id="dateNya"></h1>
+                        <hr style="width: 120px; float:left;">
+                    </div>
+                </div>
+                <div class="block block-transparent">
+                    <div class="block">
+                        <h2 style="font-weight: 600; padding-top:30px;">Agent States</h2>
+                        <div class="head bg-dot30">
+                            <div class="head-panel nm">
+                                <!--<div class="hp-info pull-left">
+                                    <div class="hp-icon">
+                                        <img height="25px;" src="img/profile-user_notready.png">
+                                    </div>
+                                    <span style="font-size:20px; padding-bottom:5px; font-weight:700;"
+                                        class="hp-main" id="lblNotReady"></span>
+                                    <span style="font-size:15px;" class="hp-sm">Not Ready</span>
+                                </div>-->
+								<div class="hp-info pull-left">
+                                    <div class="hp-icon">
+                                        <img height="25px;" src="img/profile-user_ready.png">
+                                    </div>
+                                    <span style="font-size:20px; padding-bottom:5px; font-weight:700;"
+                                        class="hp-main" id="lblReady"></span>
+                                    <span style="font-size:15px;" class="hp-sm">Avail</span>
+                                </div>
+                                <div class="hp-info pull-left">
+                                    <div class="hp-icon">
+                                        <img height="25px;" src="img/profile-user.png">
+                                    </div>
+                                    <span style="font-size:20px; padding-bottom:5px; font-weight:700;"
+                                        class="hp-main" id="lblTalking"></span>
+                                    <span style="font-size:15px;" class="hp-sm">Talking</span>
+                                </div>
+                                
+                
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" block block-transparent">
+                        <div class="content">
+                            <div>
+                                <h2 style="font-weight: 600;">Answered</h2>
+                                <h1 style="font-weight: 600; font-size:120px; color:#ffffff; " id="sumAnswered"></h1>
+                                <p
+                                    style="font-size:20px;color: #2d384a;position:relative;background-color: white;width: 280px;padding-left: 10px;top:-20px;">
+                                     Call Outbound <!--<- Ini status Call-->
+                                    <strong style="font-weight: 600;" id="sumTotal"></strong></p>
+                            </div>
+                            
+                            <!--<div class="sparkline">
+                                <span sparkWidth="250" sparkHeight="120" sparkLineColor="#ffffff" sparkFillColor="false"
+                                    sparkSpotColor="#ffffff" sparkMinSpotColor="#ffffff" sparkMaxSpotColor="#ffffff"
+                                    sparkHighlightSpotColor="#ffffff" sparkHighlightLineColor="#FFF" sparkSpotRadius="3"
+                                    sparkLineWidth="2">5,6,7,9,9,5,3,2,2,4,6,7</span>
+                            </div>-->
+                        </div>
+                        <div class="content">
+                            
+                            <!--<div class="sparkline">
+                                <span sparkWidth="250" sparkHeight="120" sparkLineColor="#ffffff" sparkFillColor="false"
+                                    sparkSpotColor="#ffffff" sparkMinSpotColor="#ffffff" sparkMaxSpotColor="#ffffff"
+                                    sparkHighlightSpotColor="#ffffff" sparkHighlightLineColor="#FFF" sparkSpotRadius="3"
+                                    sparkLineWidth="2">5,6,7,9,9,5,3,2,2,4,6,7</span>
+                            </div>-->
+                        </div>
+                    </div>
+                   
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <div style="padding-top:20px; " class="block block-transparent">
+                   
+                       <h2 style="font-weight: 600; padding-top:50px;">Reason Call</h2>
+                <div style="margin-top:0px;" class="block block-drop-shadow">
+                    <div class="content content-transparent np">
+                        <div class="list list-contacts" id="listStatusCall">
+                            <!--<a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/icon/checked.png" width="36px">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Done</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 20
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/icon/noanswer.png" width="36px">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name"> No Answer</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 30
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/icon/busy.png" width="36px">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Busy</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 30
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/icon/unregistered.png" width="36px" >
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Unregistered</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 30
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/icon/call.png"  width="36px">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Wrong Number</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 30
+                                        Called
+                                    </div>
+                                </div>
+                            </a>-->
+                        </div>
+                    </div>
+                </div>
+                   
+                </div>
+                <div>
+                   
+                      <!--<h2 style="font-weight: 600; padding-top:50px;">Top 3 Outbound Agent</h2>
+                <div style="margin-top:0px;" class="block block-drop-shadow">
+                    <div class="content content-transparent np">
+                        <div class="list list-contacts">
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/dmitry_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">John Doe</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 20
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/helen_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name"> Michel G</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 30
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/olga_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Ananta Michel</span>
+                                    <div style="font-size:13px;" class="list-text-info"><i class="icon-circle"></i> 30
+                                        Called
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+                   
+                </div>
+
+
+                
+                <div class="block block-transparent">
+                    <div class="block block-drop-shadow">
+                        <div class="head bg-dot20">
+                           
+                           
+							 <div>
+                                <h1>Queuing Outbound Data</h1>
+                                <h1 class="blink" id="sumQue"></h1>
+								
+                                <!--<div class="sparkline">
+                                    <span id="sparkline">&nbsp;</span>
+                                </div>
+                                <div style="font-size:11px;" class="list-text-info">
+                                    <i class="icon-circle-welcome"></i> Welcome Call
+                                    <i class="icon-circle-survey"></i> Survey Call
+                                    <i class="icon-circle-promo"></i> Promotion Call
+                                </div>-->
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            
+            <div class="col-md-3">
+                
+                <h2 style="font-weight: 600; padding-top:70px;">Outbound Agent</h2>
+                <div style="margin-top:0px;" class="block block-drop-shadow">
+                    <div class="content content-transparent np">
+                        <div class="list list-contacts" id="listAgent1">
+                           <!--
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/dmitry_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">John Doe</span>
+                                    <div style="font-size:13px; color:rgb(128, 83, 0);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Not Ready - 8 Outstanding List
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/helen_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name"> Michel G</span>
+                                    <div style="font-size:13px; color:green;" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Ready - 8 Outstanding List
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/olga_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Ananta Michel</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking - 9 Outstanding List
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/olga_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Siera Uye</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking - 3 Outstanding List
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/helen_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Jeny Go</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking - 6 Outstanding List
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>-->
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                
+                <h2 style="font-weight: 600; padding-top:70px;">Outbound Agent</h2>
+                <div style="margin-top:0px;" class="block block-drop-shadow">
+                    <div class="content content-transparent np">
+                        <div class="list list-contacts" id="listAgent2">
+                            <!--
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/dmitry_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">John Doe</span>
+                                    <div style="font-size:13px; color:rgb(128, 83, 0);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Not Ready
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/helen_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name"> Michel G</span>
+                                    <div style="font-size:13px; color:green;" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Ready
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/olga_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Ananta Michel</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/olga_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Siera Uye</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/helen_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Jeny Go</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#" class="list-item">
+                                <div class="list-info">
+                                    <img src="img/example/user/alexey_s.jpg" class="img-circle img-thumbnail">
+                                </div>
+                                <div class="list-text">
+                                    <span style="font-size:18px;" class="list-text-name">Yueana Re</span>
+                                    <div style="font-size:13px; color:rgb(255, 255, 255);" class="list-text-info"><i
+                                            class="icon-circle"></i>
+                                        Talking
+                                    </div>
+                                </div>
+                            </a>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

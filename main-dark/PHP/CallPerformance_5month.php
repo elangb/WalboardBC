@@ -20,48 +20,38 @@
 	
 	$string =file_get_contents("CallPerformances_Reportmontly.txt");
 
-    $lines = preg_split('/\r\n|\n|\r/', trim($string));
+    $baris = preg_split('/\r\n|\n|\r/', trim($string));
 
-$data = [];
-$headerProcessed = false;
-
-// Process each line
-foreach ($lines as $key => $line) {
-    // Clean and split the line by semicolon
-    $items = explode(";", filter($line));
-
-    if ($key < 4) { // First 4 lines are headers
-        switch ($key) {
-            case 0: $data['Dates'] = filter($items[1]); break;
-            case 1: $data['TimeZone'] = filter($items[1]); break;
-            case 2: $data['SplitSkill'] = filter($items[1]); break;
-            case 3:
-                $data['Columns'] = array_map('filter', array_slice($items, 1));
-                break;
-        }
-    } else {
-        if ($key == 4) {
-            $data['Totals'] = array_map('filter', array_slice($items, 1));
+    $data = [];
+    foreach ($baris as $key => $value) {
+        if($key <= 13) {
+            $items = explode(";", filter($value));
+            $item_value = array_splice($items, 1);
+            $data['Head'][filter($items[0])] = (count($item_value) == 1) ? $item_value[0] : $item_value;
         } else {
-            $detail = [];
-            for ($i = 1; $i < count($items); $i++) {
-                $detail[$data['Columns'][$i - 1]] = filter($items[$i]);
+            $items = explode(";", filter($value));
+            
+            if($key == 14) {
+                $groups = $items;
+                $groupKey = $groups[0];
             }
-            $data['DataDetail'][] = $detail;
+
+            if($key > 14) { 
+                for ($i=0; $i < count($items)-1; $i++) { 
+                    $detail[filter($groups[(1+$i)])] = filter($items[(1+$i)]);
+                }
+                
+                $data['DataDetail'][] = $detail;
+            }
         }
     }
-}
 
-// Function to clean the input strings
-function filter($text)
-{
-    return trim(preg_replace('/\s+/', ' ', preg_replace("/[^A-Za-z0-9\.,\/\ \;]/", " ", $text)));
-}
+    function filter($teks)
+    {
+        return trim(preg_replace('/\s+/', ' ', preg_replace("/[^A-Za-z0-9\ \;]/", " ", $teks)));
+    }
+    
+    // print_r($data);
 
-// Set the content type to JSON
-header('Content-Type: application/json');
-
-// Output the structured data as JSON
-echo json_encode($data, JSON_PRETTY_PRINT);
-
+    echo json_encode($data);
 	?>

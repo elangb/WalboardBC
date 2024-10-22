@@ -1,2 +1,3 @@
 Split/Skill:;CC Priok
 ;Agent Name;Login ID;Extn;AUX Reason;State;Split/Skill;Time;VDN Name;Interrupt Status
+5;KGS M. Ridhwan;2011;2103;Istirahat;AUX;0;9.36;;NA

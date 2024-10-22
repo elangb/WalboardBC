@@ -277,6 +277,8 @@ function getDateTime() {
   var time = hours + ":" + minutes + " WIB"
   var today = new Date();
   var dateNya = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  //var dateNya = 'September' + " " + '27' + ", " + '2024';
+ // divDateNya.append('September' + " " + '27' + ", " + '2024');
   //var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = dateNya + ' ' + time;
   

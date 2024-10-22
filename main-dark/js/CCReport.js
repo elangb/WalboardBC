@@ -10,7 +10,7 @@ var myVarX;
 var myVarY;
 function myFunction() {
 	
-	 myVarY = setInterval(AutoCall, 8000);
+	 myVarY = setInterval(AutoCall, 80000);
 	
    
   
@@ -87,9 +87,10 @@ const Soetta = data.Head["CC Soetta"];
 
 async function LineChart2(){
     var callData=[];
-    var EmailCall=[];
+    var EmailData=[];
     var LcData=[];
     var SosmedData=[];
+    var days=[];
 	
 	
      try {
@@ -117,60 +118,56 @@ async function LineChart2(){
           const groupedData = {};
 
 					json.forEach(item => {
-					  const { name, hari, jumlah } = item;
-
-					  // Inisialisasi jika hari belum ada
-					  if (!groupedData[hari]) {
-						groupedData[hari] = {
-						  Call: [],
-						  Email: []
-						};
-					  }
-
-					  // Menambahkan jumlah ke dalam array sesuai dengan jenis
-					  groupedData[hari][name].push(jumlah);
+						days.push(item.hari);
+						if(item.name == "Call")
+							callData.push(item.jumlah);
+						if(item.name == "Email")
+							EmailData.push(item.jumlah);
+						if(item.name == "LiveChat")
+							LcData.push(item.jumlah);
+						if(item.name == "SosialMedia")
+							SosmedData.push(item.jumlah);
+						
+					
 					});
 
 
-					   const days = Object.keys(data);
-				const callData = days.map(day => data[day].Call); // Mengambil data Call
-				const emailData = days.map(day => data[day].Email); // Mengambil data Email
 
 				const options = {
-					chart: {
-						type: 'line',
-						height: 350
-					},
-					series: [
-						{
-							name: 'Call',
-							data: callData
+						chart: {
+							type: 'line',
+							height: 350
 						},
-						{
-							name: 'Email',
-							data: emailData
-						}
-					],
-					xaxis: {
-						categories: days // Menyusun kategori pada sumbu X
-					},
-					title: {
-						text: 'Jumlah Call dan Email per Hari',
-						align: 'left'
-					},
-					stroke: {
-						curve: 'smooth'
-					},
-					markers: {
-						size: 5
-					},
-					tooltip: {
-						shared: true,
-						intersect: false,
-					}
-				};
+						series: [
+							{
+								name: 'Call',
+								data: callData
+							},
+							{
+								name: 'Email',
+								data: EmailData
+							}
+						],
+						xaxis: {
+							categories: days // Menyusun kategori pada sumbu X
+						},
+						title: {
+							text: 'Jumlah Call dan Email per Hari',
+							align: 'left'
+						},
+						stroke: {
+							curve: 'smooth'
+						},
+						markers: {
+							size: 5
+						},
+						tooltip: {
+							shared: true,
+							intersect: false,
+						},
+						 colors: ['#f64e60', '#ffa800', '#6993ff', '#1bc5bd']
 
-    
+				}
        // Create and render the chart
        document.querySelector("#line-chart2").innerHTML = '';
        var chart = new ApexCharts(document.querySelector("#line-chart2"), options);
@@ -188,67 +185,110 @@ async function LineChart2(){
 }
 
 async function LineChart(){
-    var lastweek=[];
-    var currentWeek=[];
-   
-   var jqxhr = $.getJSON("PHP/CallPerformances_daily.php", function(data) {
-                
-                
-               
-                
-                
-                 console.log(data.DataDetail);
-                $.each(data.DataDetail, function(index, metric) {
-                    
-                       if (index >= 0 && index <= 6) {
-                           lastweek.push(metric["ACD Calls"]);
-                       } else {
-                           currentWeek.push(metric["ACD Calls"]);
-                       }
-                            
-                   // $('#totals-table tbody').append(`<tr><td>${metric}</td><td>${data.Totals[index]}</td></tr>`);
-               });
-                
-              var options = {
-                               chart: {
-                                   height: 350,
-                                   type: 'line'
-                               },
-                               series: [
-                                   {
-                                       name: 'Last week',
-                                       data: lastweek // Sample data for Product A
-                                   },
-                                   {
-                                       name: 'Current week',
-                                       data: currentWeek // Sample data for Product B
-                                   }
-                               ],
-                               xaxis: {
-                                   categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] // Days of the week
-                               },
-                              colors: ['#007A00', '#164FEB'], 
-                               title: {
-                                   text: ''
-                               },
-                               dataLabels: {
-                                   enabled: true 
-                               },
-                               stroke: {
-                                   curve: 'smooth' 
-                               },
-                               tooltip: {
-                                   shared: true,
-                                   intersect: false
-                               }
-                           };
+     var pasarBaru=[];
+    var Pusat=[];
+    var Soetta=[];
+    var tjPriok=[];
+    var days=[];
+	
+	
+     try {
+		 
+		 
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/ContactCenterReport/TotalVolumeSitePerweek", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain' // Setting the accept header
+            }
+        });
 
+        // Check if the response is okay
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text(); // Using text() since accept is text/plain
+		 console.log(data);
+		
+		
+		
+		var json = JSON.parse(data);
+         var namaHari=[];
+          const groupedData = {};
+
+					json.forEach(item => {
+						days.push(item.hari);
+						if(item.name == "Pusat")
+							Pusat.push(item.jumlah);
+						if(item.name == "Tanjung Priuk")
+							tjPriok.push(item.jumlah);
+						if(item.name == "Soekarno Hatta")
+							Soetta.push(item.jumlah);
+						if(item.name == "Pasar Baru")
+							pasarBaru.push(item.jumlah);
+						
+					
+					});
+
+
+
+				const options = {
+						chart: {
+							type: 'line',
+							height: 350
+						},
+						series: [
+							{
+								name: 'Pusat',
+								data: Pusat
+							},
+							{
+								name: 'Tanjung Priuk',
+								data: tjPriok
+							},
+							{
+								name: 'Soekarno Hatta',
+								data: Soetta
+							},{
+								name: 'Pasar Baru',
+								data: pasarBaru
+							}
+						],
+						xaxis: {
+							categories: days // Menyusun kategori pada sumbu X
+						},
+						title: {
+							text: 'Jumlah Call dan Email per Hari',
+							align: 'left'
+						},
+						stroke: {
+							curve: 'smooth'
+						},
+						markers: {
+							size: 5
+						},
+						tooltip: {
+							shared: true,
+							intersect: false,
+						},
+						 colors: ['#f64e60', '#ffa800', '#6993ff', '#1bc5bd'],
+				}
+
+    
        // Create and render the chart
        document.querySelector("#line-chart").innerHTML = '';
        var chart = new ApexCharts(document.querySelector("#line-chart"), options);
        chart.render();
+	 
 
-   });
+	 
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+   
+
+  
    
                        
 }
@@ -293,6 +333,7 @@ function getDateTime() {
   divTimenya.append(time);
   divDateNya.empty();
   divDateNya.append(months[month_value] + " " + day_value + ", " + year_value);
+  //divDateNya.append('September' + " " + '27' + ", " + '2024');
 }
 
 

@@ -93,7 +93,9 @@ var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
   divTimenya.empty();
   divTimenya.append(time);
   divDateNya.empty();
+  //divDateNya.append( hari[current_date.getDay()] +" | "+day_value + " " +  months[month_value]  + " " + year_value +" | " + time );
   divDateNya.append( hari[current_date.getDay()] +" | "+day_value + " " +  months[month_value]  + " " + year_value +" | " + time );
+  //divDateNya.append( 'September' + " " + '27' + ", " + '2024' );
   
   
      
@@ -253,8 +255,23 @@ function chartPie(avail,acd,acw,aux){
 
 function last5month() {
     $.getJSON("PHP/CallPerformance_5month.php", function(data) {
-        console.log(data.DataDetail);
+        console.log(data.Head);
+ var dates = ["01 05 2024", "01 06 2024", "01 07 2024", "01 08 2024", "01 09 2024"];
 
+            // Output the data
+            var output = '';
+            // $.each(dates, function(index, date) {
+               // // if (data.Head[date]) {
+                    // // Split the string by spaces to get individual metrics
+                    // var metrics = data.Head.split(' ');
+                    // // Assuming the "Ans Calls" is the last value in the string
+                    // var ansCalls = metrics[metrics.length - 1];
+                    // output += '<strong>' + date + ' - Ans Calls:</strong> ' + ansCalls + '<br>';
+               // // }
+            // });
+
+            // Append the output to the HTML
+           // $('#data-output').html(output);
        
 	  
       const elementIds = [

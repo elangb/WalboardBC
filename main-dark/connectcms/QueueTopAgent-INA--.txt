@@ -1,0 +1,17 @@
+"Top Agents Staffed:";2;"Split/Skill:";"BRILIFE INBOUND INA"
+"Top Agents Avail:";0
+"Skill State:";"NORMAL"
+"Top Agents Ringing:";0
+"Calls Waiting:";0
+"Top Agents on ACD Calls:";0
+"Oldest Call Waiting:";0;"Top Agents in ACW:";0
+"Top Agents in AUX:";2
+"Direct Agent Calls Waiting:";0
+"Top Agents in Other:";0
+"% Within Service Level:";0
+"Service Level:";0;"Flex Agents Staffed:";0
+"ACD Calls:";0;"Reserve1 Agents Staffed:";0
+"Aban Calls:";0;"Reserve2 Agents Staffed:";0
+"";"Agent Name";"Login ID";"Extn";"AUX Reason";"State";"Split/Skill";"Level";"Time";"VDN Name"
+5;"Agent01";"5701";"4703";"Outgoing Call";"AUX";0;"";214206;""
+5;"Agent03";"5703";"4704";"Eskalasi";"AUX";0;"";263195;""

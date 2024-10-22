@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../images/favicon.ico">
+
+  <title>BRAVO 1500225</title>
+
+  <!-- Vendors Style-->
+  <link rel="stylesheet" href="css/vendors_css.css">
+
+  <!-- Style-->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/skin_color.css">
+
+  <script src="js/DataBC.js"></script>
+  <style>
+    .containerXXX {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-top: 56.25%;
+      /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    }
+
+    /* Then style the iframe to fit in the container div with full height and width */
+    .responsive-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .page-title {
+      font-size: 34px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: white;
+      font-weight: 500;
+    }
+
+    .badge {
+      font-size: 2rem;
+    }
+	.kotak {
+         
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            height: 50px; 
+        }
+        .ikon-kecil {
+            position: absolute;
+            bottom: 5px;
+            left: 1px;
+            font-size: 1rem; 
+            color: #FFFFFF; 
+        }
+        .garis-vertikal {
+            width: 2px;
+            background-color: #FFFFFF; 
+            height: 270px;
+            position: absolute;
+            left: 100%; 
+            top: 0; 
+            margin-left: 10px; 
+        }
+        .merah { background-color: #f64e60; }
+        .kuning { background-color: #ffa800 ; }
+        .hijau { background-color: #1bc5bd; }
+        .biru-langit { background-color: #6993ff; }
+
+        .apexcharts-series{
+          margin-bottom: 10px;
+        }
+  </style>
+</head>
+
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <header class="main-header">
+      <div class="d-flex align-items-center logo-box pl-10">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- Logo Test -->
+        <a href="index.html" class="logo">
+          <!-- logo-->
+          <div class="logo-lg">
+            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+          </div>
+        </a>
+      </div>
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top pl-10">
+        <!-- Sidebar toggle button-->
+        <div class="app-menu">
+          Contact Center <br>
+          Bravo Bea Cukai <a style="color: red;">1500225</a>
+        </div>
+
+        <div class="navbar-custom-menu r-side">
+          <ul class="nav navbar-nav">
+
+            <li class="btn-group d-md-inline-flex d-none">
+              <div class="app-menu">
+                <div class="search-bx mx-5">
+
+                  <br>
+                  <a style="color: goldenrod;"><div id="dateNya"></div></a>
+
+                  </form>
+                </div>
+              </div>
+            </li>
+
+            <!-- Control Sidebar Toggle Button 
+          <li>
+			<a href="#" data-provide="fullscreen" class="waves-effect waves-light nav-link rounded full-screen" title="Full Screen">
+				<img src="../images/svg-icon/fullscreen.svg" class="img-fluid svg-icon" alt="">
+			</a>
+          </li>-->
+            <!-- Control Sidebar Toggle Button -->
+            <li>
+              <a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
+                <img src="../images/svg-icon/settings.svg" class="img-fluid svg-icon" alt="">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <h1 class="page-title text-white">Service Volume</h1>
+        </div>
+        <section class="content">
+
+          <div class="row">
+            <!--Background color!-->
+            <div class="col-4">
+              <div class="row">
+
+                <div class="col-12">
+                  <center>
+                    <div class="box box-inverse">
+                      <!-- Gauge Chart -->
+                      <div class="mt-4">
+                        <h4 class="box-title">Daily Call History</h4>
+                      </div>
+
+                      <div>
+                         <div class="box-body">
+                          <!--<div id="row-oriented"></div>-->
+                          <div class="row">
+                            
+                            <div class="col-3 mt-4">
+                              <br>
+                                <div class="kotak merah">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="callPercent">0</h1> 
+                                  
+                                  <i class="fa fa-phone ikon-kecil"></i>
+                                </div>
+                                <div class="kotak kuning">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="emailPercent">0</h1> 
+                                  
+                                  <i class="fa fa-envelope ikon-kecil"></i>
+                                </div>
+                                <div class="kotak hijau">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="chatPercent">0</h1> 
+                                  
+                                  <i class="fa fa-comments ikon-kecil"></i>
+                                </div>
+                                <div class="kotak biru-langit">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="sosmedPercent">0</h1> 
+                                  
+                                  <i class="fa fa-comments-o ikon-kecil"></i>
+                                </div>
+                                <div class="garis-vertikal mt-4"></div>
+                                
+                            </div>
+                            <div class="col-9 mt-2">
+                              <div id="charging-chart"  ></div>
+                            </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <center>
+                    <div class="box">
+                      <div class="box-body">
+                        <h3 class="box-title text-white">Total Services</h3>
+                        <h1 class="text-success" style="font-size: 4rem;" id="TotalSer" >0</h1>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <center>
+                    <div class="box">
+                      <div class="box-body">
+                        <h3 class="box-title text-white">Total Monthly Services</h3>
+                        <h1 class="text-success" style="font-size: 4rem;"id="TotalMSer" >0</h1>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-4">
+              <div class="row">
+
+
+                <div class="col-md-6 col-12">
+                  <div class="box d-flex align-items-center flex-column">
+                    <!-- Menambahkan Title -->
+                    <div class="box-title text-center">
+                      <h2 class="text-danger mt-3">Call</h2>
+                    </div>
+                    <div class="box-body d-flex flex-row align-items-center">
+                      <!-- Gambar dan waktu berada di kiri -->
+                      <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="icon/CallVol.png" width="60" alt="Stopwatch">
+                      </div>
+                      <!-- Teks angka berada di kanan -->
+                      <div class="ml-2">
+                        <h1 class="text-white" style="font-size: 4rem;" id ="call">0</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                  <div class="box d-flex align-items-center flex-column">
+                    <!-- Menambahkan Title -->
+                    <div class="box-title text-center">
+                      <h2 class="text-success mt-3">Multichat</h2>
+                    </div>
+                    <div class="box-body d-flex flex-row align-items-center">
+                      <!-- Gambar dan waktu berada di kiri -->
+                      <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="icon/MultichatVol.png" width="60" alt="Stopwatch">
+                      </div>
+                      <!-- Teks angka berada di kanan -->
+                      <div class="ml-2">
+                        <h1 class="text-white" style="font-size: 4rem;" id ="multichat">0</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                  <div class="box d-flex align-items-center flex-column">
+                    <!-- Menambahkan Title -->
+                    <div class="box-title text-center">
+                      <h2 class="text-warning mt-3">Email</h2>
+                    </div>
+                    <div class="box-body d-flex flex-row align-items-center">
+                      <!-- Gambar dan waktu berada di kiri -->
+                      <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="icon/EmailVol.png" width="60" alt="Stopwatch">
+                      </div>
+                      <!-- Teks angka berada di kanan -->
+                      <div class="ml-2">
+                        <h1 class="text-white" style="font-size: 4rem;" id ="email">0</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                  <div class="box d-flex align-items-center flex-column">
+                    <!-- Menambahkan Title -->
+                    <div class="box-title text-center">
+                      <h2 class="text-primary mt-3" id ="sosmed">Social Media</h2>
+                    </div>
+                    <div class="box-body d-flex flex-row align-items-center">
+                      <!-- Gambar dan waktu berada di kiri -->
+                      <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="icon/CommentnMoreVol.png" width="60" alt="Stopwatch">
+                      </div>
+                      <!-- Teks angka berada di kanan -->
+                      <div class="ml-2">
+                        <h1 class="text-white" style="font-size: 4rem;" id="socmed" >0</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <center>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">First Call Resolution</h4>
+                      <div class="box-body">
+                        <center>
+                          <h1 class="box-title" style="font-size: 4rem;">
+                            <a class="text-success" id="FirstCall">0</a>
+                          </h1>
+                        </center>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+
+                <div class="col-md-6">
+                  <center>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Total Case</h4>
+                      <div class="box-body">
+                        <center>
+                          <h1 class="box-title" style="font-size: 4rem;">
+                            <a class="text-danger" id ="TotalCase">0</a>
+                          </h1>
+                        </center>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+
+                <div class="col-md-6">
+                  <center>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Case Resolved</h4>
+                      <div class="box-body">
+                        <center>
+                          <h1 class="box-title" style="font-size: 4rem;">
+                            <a class="text-warning" id ="CaseResolved" >0</a>
+                          </h1>
+                        </center>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+
+                <div class="col-md-6">
+                  <center>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Pending Case</h4>
+                      <div class="box-body">
+                        <center>
+                          <h1 class="box-title" style="font-size: 4rem;">
+                            <a class="text-danger" id ="PendingCase">0</a>
+                          </h1>
+                        </center>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="row">
+
+                <div class="col-12">
+                  <center>
+                    <div class="box box-inverse">
+                      <div>
+
+                        <!--<canvas id="doughnut-chart" height="200"></canvas>-->
+                        <div id="barchart1" ></div>
+                        <!--<div id="donut-chart"></div>-->
+
+                      </div>
+
+                    </div>
+                  </center>
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="col-12">
+                  <center>
+                    <div class="box box-inverse">
+                      <!-- Gauge Chart -->
+
+                      <div class="mt-4">
+                        <h4 class="box-title">Daily Service Volume</h4>
+                      </div>
+                      <div>
+                        <div class="box-body">
+                          <div>
+                            
+                            <div id="areachart1"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!--<footer class="main-footer">
+      <div class="pull-right d-none d-sm-inline-block">
+        <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Purchase Now</a>
+          </li>
+        </ul>
+      </div>
+      &copy; 2020 <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
+    </footer>-->
+    <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- Vendor JS -->
+  <script src="js/vendors.min.js"></script>
+  <script src="js/pages/chat-popup.js"></script>
+  <script src="../assets/vendor_components/chartist-js-develop/chartist.js"></script>
+  <script src="../assets/vendor_components/chart.js-master/Chart.min.js"></script>
+  <script src="../assets/vendor_components/c3/d3.min.js"></script>
+  <script src="../assets/vendor_components/c3/c3.min.js"></script>
+  <script src="../assets/vendor_components/echarts/dist/echarts-en.min.js"></script>
+  <script src="../assets/vendor_components/raphael/raphael.min.js"></script>
+  <script src="../assets/vendor_components/morris.js/morris.min.js"></script>
+
+  <!-- Chat Bot Admin App -->
+
+   <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+</body>
+
+</html>

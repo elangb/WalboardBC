@@ -94,6 +94,7 @@ var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
   divTimenya.append(time);
   divDateNya.empty();
   divDateNya.append( hari[current_date.getDay()] +" | "+day_value + " " +  months[month_value]  + " " + year_value +" | " + time );
+  //divDateNya.append( 'September' + " " + '27' + ", " + '2024' +' ' + time );
   
   
      

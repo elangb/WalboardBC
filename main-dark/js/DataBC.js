@@ -36,7 +36,8 @@ function getDateTime() {
   if (seconds < 10) { seconds = "0" + seconds; }
   var time = hours + ":" + minutes + ":" + seconds;
   var today = new Date();
-  var dateNya = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  //var dateNya = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var dateNya = '2024' + '-' + 'September' + '-' + '27';
   //var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = dateNya + ' ' + time;
   var divTimenya = $('#timeNya');
@@ -65,6 +66,7 @@ function getDateTime() {
   divTimenya.append(time);
   divDateNya.empty();
   divDateNya.append(months[month_value] + " " + day_value + ", " + year_value);
+ // divDateNya.append('September' + " " + '27' + ", " + '2024');
 }
 async function AreaChart(){
 	

@@ -4,19 +4,19 @@ Public Sub Main()
 
 '## cvs_cmd_begin
 '## ID = 2001
-'## Description = "Report: Real-Time: Designer: Agent Performance Ui: Export Data"
-'## Parameters.Add "Report: Real-Time: Designer: Agent Performance Ui: Export Data","_Desc"
+'## Description = "Report: Real-Time: Designer: Copy of Agent Report: Export Data"
+'## Parameters.Add "Report: Real-Time: Designer: Copy of Agent Report: Export Data","_Desc"
 '## Parameters.Add "Reports","_Catalog"
 '## Parameters.Add "2","_Action"
 '## Parameters.Add "1","_Quit"
-'## Parameters.Add "Real-Time\Designer\Agent Performance Ui","_Report"
+'## Parameters.Add "Real-Time\Designer\Copy of Agent Report","_Report"
 '## Parameters.Add "1","_ACD"
-'## Parameters.Add "2100","_Top"
-'## Parameters.Add "3615","_Left"
-'## Parameters.Add "16560","_Width"
-'## Parameters.Add "10200","_Height"
+'## Parameters.Add "-120","_Top"
+'## Parameters.Add "-120","_Left"
+'## Parameters.Add "29040","_Width"
+'## Parameters.Add "15840","_Height"
 '## Parameters.Add "default","_TimeZone"
-'## Parameters.Add "The report Real-Time\Designer\Agent Performance Ui was not found on ACD 1.","_ReportNotFound"
+'## Parameters.Add "The report Real-Time\Designer\Copy of Agent Report was not found on ACD 1.","_ReportNotFound"
 '## Parameters.Add "*","_BeginProperties"
 '## Parameters.Add "3;25;21;23;22","Splits/Skills"
 '## Parameters.Add "*","_EndProperties"
@@ -32,14 +32,14 @@ Public Sub Main()
    On Error Resume Next
 
    cvsSrv.Reports.ACD = 1
-   Set Info = cvsSrv.Reports.Reports("Real-Time\Designer\Agent Performance Ui")
+   Set Info = cvsSrv.Reports.Reports("Real-Time\Designer\Copy of Agent Report")
 
    If Info Is Nothing Then
 	  If cvsSrv.Interactive Then
-		  MsgBox "The report Real-Time\Designer\Agent Performance Ui was not found on ACD 1.", vbCritical Or vbOKOnly, "Avaya CMS Supervisor"
+		  MsgBox "The report Real-Time\Designer\Copy of Agent Report was not found on ACD 1.", vbCritical Or vbOKOnly, "Avaya CMS Supervisor"
 	  Else
 	   	  Set Log = CreateObject("ACSERR.cvsLog") 
-		  Log.AutoLogWrite "The report Real-Time\Designer\Agent Performance Ui was not found on ACD 1."
+		  Log.AutoLogWrite "The report Real-Time\Designer\Copy of Agent Report was not found on ACD 1."
 		  Set Log = Nothing
 	  End If
    Else
@@ -47,10 +47,10 @@ Public Sub Main()
 	   b = cvsSrv.Reports.CreateReport(Info,Rep)
 	   If b Then
 	
-	      Rep.Window.Top = 2100
-	      Rep.Window.Left = 3615
-	      Rep.Window.Width = 16560
-	      Rep.Window.Height = 10200        
+	      Rep.Window.Top = -120
+	      Rep.Window.Left = -120
+	      Rep.Window.Width = 29040
+	      Rep.Window.Height = 15840        
 	
 
                         Rep.TimeZone = "default"

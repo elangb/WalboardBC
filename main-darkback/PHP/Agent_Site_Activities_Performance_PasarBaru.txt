@@ -1,0 +1,2 @@
+Split/Skill:;CC Ps Baru
+;Agent Name;Login ID;Extn;AUX Reason;State;Split/Skill;Time;VDN Name;Interrupt Status

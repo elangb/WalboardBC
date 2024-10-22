@@ -1,0 +1,4 @@
+"Splits/Skills";"BRILIFE INBOUND INA;OUTBOUND"
+"Split/Skill";"ACD Calls";"csplit.INQUEUE";"Agents Staffed";"Agents in AUX";"Aban Calls";"% Within Service Level";"% Aban Calls"
+"BRILIFE INBOUND INA";48;0;8;0;4;70;6
+"OUTBOUND";0;0;20;9;0;0;0

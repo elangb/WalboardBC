@@ -83,7 +83,7 @@
 									datasets: [{
 										data: _dataArray,
 										value: needleValue, // Use the calculated average
-										backgroundColor: ['green', 'yellow', 'orange', 'red'],
+										backgroundColor: ['red', 'orange', 'yellow', 'green'],
 										borderWidth: 2
 									}]
 								},
