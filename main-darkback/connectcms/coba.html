@@ -1,0 +1,97 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		function llll(){
+			var jqxhr = $.getJSON( "test.php", function(data) {
+				  //console.log( data );
+				 
+					var i, x, result = "";
+					$.each(data, function(i, item) {
+							// console.log( data.DataDetail );
+							var object = item['Top Agents Staffed'];
+							var AgentsInAUX = item['Top Agents in AUX'];
+							
+							//var val2 = this.val2;
+							if(object!== undefined){
+								console.log("Object : " + object);
+								console.log("Agents Aux : " + AgentsInAUX);
+							}
+							$.each(data.DataDetail, function(x, itemx) {
+								console.log("Name : " + itemx['Agent Name']);
+								console.log("Aux : " + itemx['AUX Reason']);
+							});
+							/*$.each(this.DataPolis, function() {
+								  var namaPolis = this.Nama;
+								  var NomorPolis = this.NomorPolis;
+								  console.log("Nama Pemegang : " + namaPolis)
+								  console.log("No Polis : " + NomorPolis)
+								  //var url = this.Url;
+								  $.each(this.Detail, function() {
+										 $.each(this.Ahliwaris, function() {
+											var call_nama_ahli_waris = this.call_nama_ahli_waris;
+											//var NomorPolis = this.NomorPolis;
+											console.log("Nama Ahli Waris : " + call_nama_ahli_waris)
+											//console.log("No Polis : " + NomorPolis)
+										 });
+										 $.each(this.Rider, function() {
+											var call_manfaat = this.call_manfaat;
+											//var NomorPolis = this.NomorPolis;
+											console.log("Nama Rider : " + call_manfaat)
+											//console.log("No Polis : " + NomorPolis)
+										 });
+										 $.each(this.Fund, function() {
+											var call_jenis_investasi = this.call_jenis_investasi;
+											//var NomorPolis = this.NomorPolis;
+											console.log("Nama Fund : " + call_jenis_investasi)
+											//console.log("No Polis : " + NomorPolis)
+										 });
+									});
+							});*/
+					  });
+					/*for (i = 0; i < data.length; i++) {
+						//alert();
+						//alert();
+						//alert(json[i].UserCreate);
+						console.log("Object : " + data[i].object)
+						console.log("TotalTrx : " + data[i].TotalTrx)
+						console.log("IdTrx : " + data[i].IdTrx)
+						console.log( "Array Detail" );
+							for (x = 0; x < data[i].DataPolis.length; x++) {
+								console.log("Nama Data Polis : " + data[i].DataPolis[x].Nama)
+								console.log("No Polis : " + data[i].DataPolis[x].NomorPolis)
+									for (x = 0; x < data[i].DataPolis.length; x++) {
+									//console.log("Nama Data Polis : " + data[i].DataPolis[x].Nama)	
+									}
+							}
+					}*/
+				})
+				  .done(function() {
+					//console.log( "done" );
+				  })
+				  .fail(function() {
+					//console.log( "error" );
+				  })
+				  .always(function() {
+					//console.log( "complete" );
+				  });
+				 
+				// Perform other work here ...
+				 
+				// Set another completion function for the request above
+				jqxhr.always(function() {
+				  //console.log( "second complete" );
+				});
+				}
+		function myFunction() {
+			myVar = setInterval(llll, 2000);
+		}
+		
+	</script>
+	
+
+</head>
+<body onload="myFunction()">
+<a href="#" onclick="llll()">Get</a>
+</body>
+</html>

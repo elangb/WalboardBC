@@ -1,0 +1,19 @@
+"ACD";"ACD1";"ACD1"
+"Split/Skill";"BRILIFE INBOUND INA";"OUTBOUND"
+"Skill State";"NORMAL";"NORMAL"
+"Time in Overload1";"0";"0"
+"Time in Overload2";"0";"0"
+"Calls Waiting";0;0
+"Oldest Call Waiting";0;0
+"Avg Speed Ans";0;0
+"ACD Calls";0;0
+"Avg ACD Time";0;0
+"Aban Calls";0;0
+"Avg Aban Time";0;0
+"Agents Staffed";1;2
+"Agents Avail";1;2
+"Agents on ACD Calls";0;0
+"Agents in ACW";0;0
+"Agents in AUX";0;0
+"Agents in Other";0;0
+"Agents Ringing";0;0

@@ -1,0 +1,344 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #0b0b45;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px;
+    /* Increase font size */
+    margin-left: -100px;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header .title {
+    font-size: 24px;
+}
+
+.date-time-text {
+    font-size: 22px;
+    /* Ukuran teks lebih besar */
+    margin: 10px 0;
+    /* Margin atas dan bawah sama */
+    color: goldenrod;
+    /* Warna sesuai dengan style yang sudah ada */
+}
+
+.section-title {
+    color: orange;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Card Styles */
+.card {
+    background-color: #1e2746;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    text-align: center;
+    /* Center text in card body */
+}
+
+.card-body i {
+    margin-bottom: 10px;
+    /* Space below the icon */
+    font-size: 36px;
+    /* Larger icon */
+}
+
+.card-body .value {
+    font-weight: bold;
+    /* Bold font for value */
+    font-size: 60px;
+    /* Larger number */
+}
+
+.card-body .label {
+    font-size: 20px;
+    /* Larger label text */
+}
+
+.table-container {
+    background-color: #1e2746;
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.table {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    /* Default: Center align all content */
+    border-collapse: collapse;
+    /* Pastikan border di-collapse */
+}
+
+.table th,
+.table td {
+    border: none;
+    /* Menghilangkan semua border */
+    padding: 8px;
+    font-size: 14px;
+    /* Untuk menghilangkan border atas jika masih ada */
+    border-top: none !important;
+    /* Menonaktifkan garis atas */
+    border-bottom: none !important;
+    /* Menonaktifkan garis atas */
+}
+
+/* Align left only for the "Nama Agent" column */
+.table td:first-child,
+.table th:first-child {
+    text-align: left;
+}
+
+/* Alternate row colors */
+.table tbody tr:nth-child(odd) {
+    background-color: #050513;
+    /* Warna untuk baris ganjil */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #1e2746;
+    /* Warna untuk baris genap */
+}
+
+.table-scroll {
+    max-height: 436px;
+    /* Atur tinggi maksimum sesuai kebutuhan */
+    overflow-y: auto;
+    /* Menampilkan scrollbar vertikal */
+    border-radius: 10px;
+    /* Sudut melengkung untuk scroll container */
+    position: relative;
+    /* Untuk mengatur posisi relative untuk elemen anak */
+}
+
+/* Menjaga header tetap di atas */
+.table thead {
+    position: sticky;
+    /* Membuat posisi sticky */
+    top: 0;
+    /* Menempatkan header di atas */
+    background-color: #1e2746;
+    /* Warna latar belakang header */
+    z-index: 10;
+    /* Memastikan header tetap di atas konten lainnya */
+}
+
+/* Styling untuk scrollbar di Chrome, Safari, dan Edge */
+.table-scroll::-webkit-scrollbar {
+    width: 12px;
+    /* Lebar scrollbar */
+}
+
+.table-scroll::-webkit-scrollbar-track {
+    background: #1e2746;
+    /* Warna latar belakang track scrollbar */
+    border-radius: 10px;
+    /* Sudut melengkung pada track */
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+    background-color: #4a6e8c;
+    /* Warna scrollbar */
+    border-radius: 10px;
+    /* Sudut melengkung pada scrollbar */
+    border: 3px solid #1e2746;
+    /* Menambahkan border di sekitar scrollbar untuk efek yang lebih halus */
+}
+
+/* Styling untuk scrollbar di Firefox */
+.table-scroll {
+    scrollbar-width: thin;
+    /* Mengatur lebar scrollbar */
+    scrollbar-color: #4a6e8c #1e2746;
+    /* Warna scrollbar dan warna latar belakang track */
+}
+
+.table thead {
+    position: sticky;
+    /* Membuat posisi sticky */
+    top: 0;
+    /* Menempatkan header di atas */
+    background-color: #1e2746;
+    /* Warna latar belakang header, bisa disesuaikan */
+    z-index: 10;
+    /* Memastikan header tetap di atas konten lainnya */
+}
+
+.chart-title h4 {
+    font-size: 24px;
+    color: #ffffff;
+    /* Adjust text color if necessary */
+    padding-top: 20px;
+}
+
+.chart-card {
+    height: 340px;
+    /* Set a uniform height */
+}
+
+.chart-card div {
+    margin-top: 10px;
+    height: 120px
+        /* Make sure the chart container fills the card */
+}
+
+.chart-cardbar {
+    height: 350px;
+    /* Set a uniform height */
+}
+
+.chart-cardbar div {
+    margin-top: 10px;
+    height: 130px
+        /* Make sure the chart container fills the card */
+}
+
+
+/* Chart Styles */
+.chart {
+    min-height: 240px;
+}
+
+.chart canvas {
+    width: 100%;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 200px;
+    /* Set a height that fits your needs */
+}
+
+/* Style for the background segments */
+.background-segments {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip-path: circle(50%);
+}
+
+.segment {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+}
+
+.badge2 {
+    padding: 16px 36px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.badge-biru {
+    background-color: #009fe8; /* Primary color */
+}
+
+.badge-merah {
+    background-color: #e74e53; /* Danger color */
+}
+
+.badge-hijau {
+    background-color: #009a44; /* Success color */
+}
+
+.badge-kuning {
+    background-color: #dea037; /* Warning color */
+}
+
+/* Optional: Add a hover effect for better interactivity */
+.badge:hover {
+    opacity: 0.8; /* Slightly fade on hover */
+}
+
+
+
+.segment1 {
+    background-color: #ff0000;
+    /* Red for 0%-25% */
+    transform: rotate(0deg);
+}
+
+.segment2 {
+    background-color: #ff8000;
+    /* Orange for 25%-50% */
+    transform: rotate(90deg);
+}
+
+.segment3 {
+    background-color: #ffff00;
+    /* Yellow for 50%-75% */
+    transform: rotate(180deg);
+}
+
+.segment4 {
+    background-color: #00ff00;
+    /* Green for 75%-100% */
+    transform: rotate(270deg);
+}
+
+.badge-green, .badge-orange, .badge-pink {
+    background-color: #059d55;
+    color: #fff;
+    padding: 5px 10px;
+    /* Padding atas-bawah 5px, kanan-kiri 20px */
+    border-radius: 5px;
+    min-width: 60px;
+    /* Set lebar minimal */
+    display: inline-block;
+    /* Agar badge mengikuti konten */
+    text-align: center;
+    /* Untuk membuat teks berada di tengah */
+}
+
+.badge-green {
+    background-color: #059d55;
+}
+
+.badge-orange {
+    background-color: #dea039;
+}
+
+.badge-pink {
+    background-color: #e65055;
+}
+
+.channel-icons i {
+    margin-right: 5px;
+}

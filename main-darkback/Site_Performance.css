@@ -1,0 +1,185 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Section Title Styles */
+.section-title {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    height: 120px;
+    /* Adjusted height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    /* Reduced top margin */
+    margin-bottom: 10px;
+    /* Reduced bottom margin */
+}
+
+/* Row Styles */
+.row {
+    margin-top: 0;
+    /* Remove top margin if any */
+}
+
+/* Section Title Backgrounds */
+.section-title.tanjung-priok {
+    background-image: url('assets/Tanjung Priok.png');
+    font-size: 34px;
+}
+
+.section-title.soekarno-hatta {
+    background-image: url('assets/Soekarno Hatta.png');
+    font-size: 34px;
+}
+
+.section-title.pos-pasar-baru {
+    background-image: url('assets/Pos Pasar Baru.png');
+    font-size: 34px;
+}
+
+/* Card Styles */
+.card {
+    background-color: #1e2746;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    text-align: center;
+    /* Center text in card body */
+}
+
+.card-body i {
+    margin-bottom: 10px;
+    /* Space below the icon */
+    font-size: 36px;
+    /* Larger icon */
+}
+
+.card-body .value {
+    font-weight: bold;
+    /* Bold font for value */
+    font-size: 60px;
+    /* Larger number */
+}
+
+.card-body .label {
+    font-size: 20px;
+    /* Larger label text */
+}
+
+.cardkiribawah {
+    background-color: #1e2746;
+    border: none;
+    margin-bottom: 10px;
+    height: 240px;
+    border-radius: 12px;
+}
+
+/* Card Styles */
+.cardtengahbawah {
+    background-color: #1e2746;
+    border: none;
+    height: 114px;
+    /* Adjust as necessary */
+    border-radius: 12px;
+}
+
+.cardtengahbawah-body {
+    display: flex;
+    /* Use flexbox for the card body */
+    align-items: center;
+    /* Center items vertically */
+    padding: 20px;
+    /* Padding for better spacing */
+}
+
+.cardtengahbawah-body .value {
+    font-weight: bold;
+    /* Bold font for value */
+    font-size: 44px;
+    /* Larger number */
+    margin-left: 10px;
+    /* Space between number and image */
+}
+
+.icon-img {
+    width: 40px;
+    height: 44px;
+    margin-right: 50px;
+}
+
+.text-left {
+    font-size: 14px;
+    /* Adjust as necessary */
+    text-align: left;
+    /* Ensure the text is left-aligned */
+}
+
+/* Centering the icon */
+.cardtengahbawah-body .text-left {
+    margin-right: 10px;
+    /* Space between text and icon */
+}
+
+.cardtengahbawah-body .value {
+    margin-left: auto;
+    /* Push the value to the right */
+}
+
+/* Chart Styles */
+.chart {
+    background-color: #1e2746;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.chart canvas {
+    width: 100%;
+}
+
+.value2 {
+    margin-bottom: 50px;
+    font-size: 120px;
+    font-weight: bold;
+}
+
+
+.card2 {
+    background-size: cover;
+    /* Ensures the image covers the entire card */
+    background-position: center;
+    /* Centers the background image */
+    color: white;
+    /* Default text color for better readability */
+    border-radius: 10px;
+    /* Optional: rounded corners */
+    height: 200px;
+    /* Adjust height as needed */
+    margin-bottom: 10px;
+}
+
+
+.card2.whatsapp {
+    background-image: url('assets/Wallboard 3 - Whatsapp.png');
+}
+
+.card2.facebook {
+    background-image: url('assets/Wallboard 3 - Facebook.png');
+}
+
+.card2.instagram {
+    background-image: url('assets/Wallboard 3 - Instagram.png');
+}
+
+.card2.x {
+    background-image: url('assets/Wallboard 3 - X.png');
+}
