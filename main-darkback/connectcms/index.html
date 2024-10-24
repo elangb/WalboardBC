@@ -1,0 +1,92 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	//0-Top Agents Staffed:1;Split/Skill:BRILIFE INBOUND ENG
+	//0-Top Agents Staffed:1;Split/Skill:BRILIFE INBOUND INA
+	//0-Splits/Skills;BRILIFE INBOUND INA;BRILIFE INBOUND ENG;OUTBOUND
+	//1-Split/Skill;System Aux;Istirahat;Eskalasi;Briefing;Outgoing Call;Isi Foam;Rest Room;Sholat;System Error;0
+		function llll(){
+			setTimeout(async () => {
+			  const text = await navigator.clipboard.readText();
+			  var textNya = JSON.stringify(JSON.stringify(text))
+			  //console.log("isiNya : " + textNya);
+			  var someStr = text;
+			  var someStr_1 = someStr.replace(/['"]+/g, '');
+			  var someStr_2 = someStr_1.replace(/:;/g, ':');
+			  //console.log(someStr_2.replace(/\n/g, "|"));
+			  var someStr_3 = someStr_2.replace(/\n/g, "|");
+			  var a = someStr_3.split("|");
+				var html_str = "";
+				for (var i = 0; i < a.length; i++) { // loop to a.length-1 so you don't need an if-statement to check blanks
+				  var b = a[i];
+				  var val = b[0];
+				  var txt = b[i];
+				  var aaa='123';
+				  var cekNya = a[0];
+				  var cekNya1 = a[1];
+				  if(cekNya.trim()=="Top Agents Staffed:1;Split/Skill:BRILIFE INBOUND ENG"){
+					//console.log("Eng");
+					truncate table
+					fungsi insert ke sqllite
+				  }
+				  if(cekNya.trim()=="Top Agents Staffed:2;Split/Skill:BRILIFE INBOUND INA"){
+					//console.log("Ina");
+				  }
+				  if(cekNya.trim()=="Splits/Skills;BRILIFE INBOUND INA;BRILIFE INBOUND ENG;OUTBOUND"){
+					//console.log("Abn");
+				  }
+				  if(cekNya1.trim()=="Split/Skill;System Aux;Istirahat;Eskalasi;Briefing;Outgoing Call;Isi Foam;Rest Room;Sholat;System Error;0"){
+					//console.log("Aux");
+				  }
+				  //html_str += '<option value="' + val +'">' + txt +'</option>';
+				  console.log(i +'-'+ b.trim());
+				}
+			  
+			}, 1000);
+		}
+		
+		
+		function abcd(){
+			//setTimeout(function(){ alert("Hello"); }, 3000);
+			var iteration = true;
+			var time = new Date();
+			var delay = 5000; // 5 secondes
+
+			while(iteration) {
+				if(time.getTime() + 5000 < new Date().getTime()) {
+					 iteration = false;
+				}
+			}
+
+			document.getElementById('buttonX').click();
+		}
+		
+	</script>
+	 <script language ="javascript" >
+        var tmp;
+        function f1() {
+            tmp = setTimeout("callitrept()", 2000);
+        }
+        function callitrept() {
+            document.getElementById("buttonX").click();
+        }
+		function myFunction() {
+			myVar = setInterval(alertFunc, 3000);
+		}
+
+		function alertFunc() {
+			wbinboundOnload();
+		}
+		function wbinboundOnload(){
+			llll();
+			//document.getElementById("buttonX").click();
+		}
+    </script>
+
+</head>
+<body onload="myFunction()">
+<a href="#" onclick="llll()">Get</a>
+<button id="buttonX" onclick="dataNya()">aa</button>
+</body>
+</html>

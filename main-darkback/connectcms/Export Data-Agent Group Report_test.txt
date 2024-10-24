@@ -1,0 +1,2 @@
+"Agent Group:";"OUTBOUND"
+"";"Agent Name";"Login ID";"Extn";"AUX Reason";"State";"Split/Skill";"Time";"VDN Name"

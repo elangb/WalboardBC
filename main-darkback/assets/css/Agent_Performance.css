@@ -1,0 +1,71 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #0b0b45;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header .title {
+    font-size: 24px;
+}
+
+.header .date-time {
+    text-align: right;
+}
+
+.section-title {
+    color: orange;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    background-color: #0b0b45;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.table {
+    color: #fff;
+}
+
+.table th,
+.table td {
+    border: none;
+}
+
+.badge-green {
+    background-color: #00ff00;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.badge-orange {
+    background-color: #ff8000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.badge-pink {
+    background-color: #ff0066;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.channel-icons i {
+    margin-right: 5px;
+}

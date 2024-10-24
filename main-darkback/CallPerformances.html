@@ -16,9 +16,9 @@
 
 	<!-- Style-->
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/skin_color.css">
+	<link rel="stylesheet" href="CallPerformances.css">
 
-	
+
 	<script src="Chart.bundle.js"></script>
 	<script src="chartjs-gauge.js"></script>
 	<script src="js/CallPerformances.js"></script>
@@ -62,70 +62,43 @@
 
 		<header class="main-header">
 			<div class="d-flex align-items-center logo-box pl-10">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<!-- Logo Test -->
 				<a href="index.html" class="logo">
-					<!-- logo-->
 					<div class="logo-lg">
-						<span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
-						<span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+						<span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+						<span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
 					</div>
 				</a>
 			</div>
 			<!-- Header Navbar -->
 			<nav class="navbar navbar-static-top pl-10">
 				<!-- Sidebar toggle button-->
-				<div class="app-menu">
+				<div class="app-menu contact-center-text">
 					Contact Center <br>
-					Bravo Bea Cukai <a style="color: red;">1500225</a>
+					Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
 				</div>
-
 				<div class="navbar-custom-menu r-side">
 					<ul class="nav navbar-nav">
-
 						<li class="btn-group d-md-inline-flex d-none">
 							<div class="app-menu">
-								<div class="search-bx mx-5">
-
-									<br>
-									<a style="color: goldenrod;"><div id="dateNya"></div></a>
-
-									</form>
-								</div>
+								<a class="date-time-text" style="color: goldenrod;">Jumat | 27 September 2024 | 08:00</a>
 							</div>
-						</li>
-
-						<!-- Control Sidebar Toggle Button 
-          <li>
-			<a href="#" data-provide="fullscreen" class="waves-effect waves-light nav-link rounded full-screen" title="Full Screen">
-				<img src="../images/svg-icon/fullscreen.svg" class="img-fluid svg-icon" alt="">
-			</a>
-          </li>-->
-						<!-- Control Sidebar Toggle Button -->
-						<li>
-							<a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
-								<img src="../images/svg-icon/settings.svg" class="img-fluid svg-icon" alt="">
-							</a>
 						</li>
 					</ul>
 				</div>
 			</nav>
 		</header>
 
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<div class="container-full">
 				<!-- Content Header (Page header) -->
 				<div class="content-header">
-					<h1 class="page-title text-white">CALL PERFORMANCE</h1>
+					<h1 class="page-title text-white">CALL PERFORMANCES</h1>
 				</div>
 				<section class="content">
 
 					<div class="row">
-
 
 						<!--Background color!-->
 						<div class="col-4">
@@ -138,10 +111,9 @@
 												<ol class="breadcrumb">
 
 													<li class="breadcrumb-item" aria-current="page">
-														<a
-															style="color: goldenrod; font-size: 1.8rem; font-weight: bold;" id="Greeting" ></a>
+														<a style="color: goldenrod; font-size: 1.8rem; font-weight: bold;"
+															id="Greeting"></a>
 													</li>
-
 												</ol>
 											</nav>
 										</div>
@@ -149,156 +121,129 @@
 
 								</div>
 							</div>
+							<!-- Row Kiri -->
 							<div class="row">
 								<div class="col-6">
 									<center>
-										<div class="box">
-											<div class="box-body">
-												<h3 class="box-title text-white"> Received Calls</h3>
-												<h1 class="text-success" id="received">0</h1>
+										<div class="card">
+											<div class="card-body">
+												<h3 class="label text-white">Received Calls</h3>
+												<h1 class="value" id="received" style="color: #009946;">0</h1>
 											</div>
 										</div>
 									</center>
 								</div>
 								<div class="col-6">
 									<center>
-										<div class="box">
-											<div class="box-body">
-												<h3 class="box-title text-white">Answered Calls</h3>
-												<h1 class="text-primary" id ="answered">0</h1>
+										<div class="card">
+											<div class="card-body">
+												<h3 class="label text-white">Answered Calls</h3>
+												<h1 class="value" id="answered" style="color: #00a0e8;">0</h1>
 											</div>
 										</div>
 									</center>
 								</div>
 								<div class="col-6">
 									<center>
-										<div class="box">
-											<div class="box-body">
-												<h3 class="box-title text-white">Abandoned Calls</h3>
-												<h1 class="text-danger" id="abandoned">0</h1>
+										<div class="card">
+											<div class="card-body">
+												<h3 class="label text-white">Abandoned Calls</h3>
+												<h1 class="value text-danger" id="abandoned">0</h1>
 											</div>
 										</div>
 									</center>
 								</div>
 								<div class="col-6">
 									<center>
-										<div class="box">
-											<div class="box-body">
-												<h3 class="box-title text-white">Call Waiting</h3>
-												<h1 class="text-warning" id="waiting">0</h1>
+										<div class="card">
+											<div class="card-body">
+												<h3 class="label text-white">Call Waiting</h3>
+												<h1 class="value text-warning" id="waiting">0</h1>
 											</div>
 										</div>
 									</center>
 								</div>
 							</div>
-							<div class="row">
 
-								<div class="col-12">
+							<!-- Row Kiri Bawah -->
+							<div class="row">
+								<div class="col-12 mt-3">
 									<center>
-										<div class="box box-inverse">
+										<div class="card box-inverse">
 											<!-- Gauge Chart -->
 											<div class="mt-4">
-												<h4 class="box-title">Daily Call History</h4>
+												<h4 class="card-title" style="color: white; font-size: 24px;">Daily Call
+													History</h4>
 											</div>
 
 											<div>
-												<div class="box-body">
-													<!--<div id="row-oriented"></div>-->
-													<ul class="list-inline text-right">
-														<li>
-															<h5><i style="color: #05C740;"
-																	class="fa fa-circle mr-5"></i><a>Rcv.</a></h5>
-														</li>
-														<li>
-															<h5><i style="color: #240CD6;"
-																	class="fa fa-circle mr-5"></i><a>Ans.</a></h5>
-														</li>
-														<li>
-															<h5><i style="color: #D60C45;"
-																	class="fa fa-circle mr-5"></i><a>Abn.</a></h5>
-														</li>
-													</ul>
-													<div id="bar-chart1" ></div>
-
+												<div class="card-body">
+													<div id="bar-chart-apex"></div>
 												</div>
 											</div>
-											<!-- /.box-body 
-										<center>
-											<span class="badge badge badge-dot badge-danger"></span> <a style="font-size: small;"> AUX </a>
-											&nbsp;&nbsp;&nbsp;<span class="badge badge badge-dot badge-primary"></span> <a style="font-size: small;"> ACD </a>
-											&nbsp;&nbsp;&nbsp;<span class="badge badge badge-dot badge-success"></span> <a style="font-size: small;"> ACW </a>
-											&nbsp;&nbsp;&nbsp;<span class="badge badge badge-dot badge-info"></span> <a style="font-size: small;"> Available </a>
-										</center>-->
-											<!-- /.box -->
 										</div>
 									</center>
 								</div>
-
 							</div>
 						</div>
 
 						<div class="col-4">
 							<div class="row">
 								<div class="col-12">
-
-									<div class="box box-inverse">
-										
-										<div style="height: 200px;">
-											<div class="chart">
-												<center>
-													<!--<div class="ct-gauge-chart h-300"></div>
-										 partial -->
-													<div class="containerXXX">
-														<iframe class="responsive-iframe" src="gauge.html"
-															frameborder="0"></iframe>
-													</div>
-
-												</center>
+									<div class="card card-inverse chart-card">
+										<div class="chart-title">
+											<center>
+												<h4>% Answered Call</h4>
+											</center>
+										</div>
+								
+										<div class="chart-container">
+											<div id="chart-radial-bar" style="width: 600px; height: 100px; position: relative; margin-bottom: 100px;">
+												<!-- Needle will be added here -->
 											</div>
 										</div>
 										
-										<!-- /.box-body -->
-										<center>
-											<span class="badge badge badge-dot badge-danger"></span> <a
-												style="font-size: small;">
-												<= 50% </a>
-													&nbsp;&nbsp;&nbsp;<span
-														class="badge badge badge-dot badge-primary"></span> <a
-														style="font-size: small;"> > 50% and >=70% </a>
-													&nbsp;&nbsp;&nbsp;<span
-														class="badge badge badge-dot badge-success"></span> <a
-														style="font-size: small;"> >70% and <=100% </a>
+										<center style="padding-top: 30px;">
+											<span class="badge badge-dot badge-success"></span>
+											<a style="font-size: small;"> <= 50% </a>
+											&nbsp;&nbsp;&nbsp;
+											<span class="badge badge-dot badge-primary"></span>
+											<a style="font-size: small;"> > 50% and >=70% </a>
+											&nbsp;&nbsp;&nbsp;
+											<span class="badge badge-dot badge-danger"></span>
+											<a style="font-size: small;"> >70% and <=100% </a>
 										</center>
-										<!-- /.box -->
 									</div>
-
 								</div>
-								<div class="col-12">
-									<div class="box">
-										<div class="box-body">
+
+								<div class="col-12 mt-2">
+									<div class="card">
+										<div class="card-body">
 											<div class="pull-left d-none d-sm-inline-block">
 												<span class="h3 text-light">Last 5 Month</span><br>
 												<span class="h3 text-light">% Ans. Calls</span>
 											</div>
 											<div class="pull-right d-none d-sm-inline-block">
-												<span class="badge badge-info" id="fiveMonthTotal5" >0</span>
-												<span class="badge badge-success" id="fiveMonthTotal4">0</span>
-												<span class="badge badge-primary" id="fiveMonthTotal3">0</span>
-												<span class="badge badge-warning" id="fiveMonthTotal2">0</span>
-												<span class="badge badge-danger" id="fiveMonthTotal1">0</span>
+												<span class="badge2 badge-biru" id="fiveMonthTotal5">0</span>
+												<span class="badge2 badge-merah" id="fiveMonthTotal4">0</span>
+												<span class="badge2 badge-hijau" id="fiveMonthTotal3">0</span>
+												<span class="badge2 badge-kuning" id="fiveMonthTotal2">0</span>
+												<span class="badge2 badge-hijau" id="fiveMonthTotal1">0</span>
 											</div>
 										</div>
 									</div>
 								</div>
+								
 							</div>
 							<div class="row">
 								<div class="col-md-6 col-12">
 									<center>
-										<div class="box">
-											<h3 class="box-title text-white">Average Talk Time</h3>
-											<div class="box-body">
-												<center> <img src="stopwatch.png" width="54"><br>
-													<h3 class="box-title"><strong><a class="text-primary" id="avgTTime" >00:00</a></strong>
+										<div class="card">
+											<h3 class="card-title text-white">Average Talk Time</h3>
+											<div class="card-body">
+												<center> <img src="assets/Wallboard 2 - Average Talk Time.png" width="54"><br>
+													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="" style="color: #00a0e8;"
+																id="avgTTime">00:00</a></strong>
 													</h3>
 												</center>
 											</div>
@@ -308,11 +253,12 @@
 
 								<div class="col-md-6 col-12">
 									<center>
-										<div class="box">
-											<h3 class="box-title text-white">Longest Talk Time</h3>
-											<div class="box-body">
-												<center> <img src="stopwatch.png" width="54"><br>
-													<h3 class="box-title"><strong><a class="text-danger" id="longTTime">
+										<div class="card">
+											<h3 class="card-title text-white">Longest Talk Time</h3>
+											<div class="card-body">
+												<center> <img src="assets/Wallboard 2 - Longest Talk Time & Longest Wait Time.png" width="54"><br>
+													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="text-danger"
+																id="longTTime">
 																07:37</a></strong>
 													</h3>
 												</center>
@@ -323,11 +269,12 @@
 
 								<div class="col-md-6 col-12">
 									<center>
-										<div class="box">
-											<h3 class="box-title text-white">Average Waiting Time</h3>
-											<div class="box-body">
-												<center> <img src="stopwatch.png" width="54"><br>
-													<h3 class="box-title"><strong><a class="text-warning"id="avgWTime">
+										<div class="card">
+											<h3 class="card-title text-white">Average Waiting Time</h3>
+											<div class="card-body">
+												<center> <img src="assets/Wallboard 2 - Average Wait Time.png" width="54"><br>
+													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="text-warning"
+																id="avgWTime">
 																00:00</a></strong>
 													</h3>
 												</center>
@@ -338,11 +285,12 @@
 
 								<div class="col-md-6 col-12">
 									<center>
-										<div class="box">
-											<h3 class="box-title text-white">Longest Wait Time</h3>
-											<div class="box-body">
-												<center> <img src="stopwatch.png" width="54"><br>
-													<h3 class="box-title"><strong><a class="text-danger" id="longWTime">
+										<div class="card">
+											<h3 class="card-title text-white">Longest Wait Time</h3>
+											<div class="card-body">
+												<center> <img src="assets/Wallboard 2 - Longest Talk Time & Longest Wait Time.png" width="54"><br>
+													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="text-danger"
+																id="longWTime">
 																07:37</a></strong>
 													</h3>
 												</center>
@@ -358,22 +306,18 @@
 
 								<div class="col-12">
 									<center>
-										<div class="box box-inverse">
+										<div class="card card-inverse">
 											<!-- Gauge Chart -->
 
-											 <div class="box-header with-border">
-												<h4 class="box-title">Agent Status</h4>
-											</div> 
-
+											<div class="mt-4 mb-4">
+												<h4 class="card-title" style="color: white; font-size: 24px;">Agent
+													Status</h4>
+											</div>
 											<div>
-
-												<!--<canvas id="doughnut-chart" height="200"></canvas>-->
-												<div id="chart-donut1"></div>
-												<!--<div id="donut-chart"></div>-->
-
+												<div id="chart-agent-status"></div>
 											</div>
 
-											
+
 										</div>
 									</center>
 								</div>
@@ -381,42 +325,23 @@
 							</div>
 							<div class="row">
 
-								<div class="col-12">
+								<div class="col-12 mt-2">
 									<center>
-										<div class="box box-inverse">
+										<div class="card card-inverse">
 											<!-- Gauge Chart -->
-
 											<div class="mt-4">
-												<h4 class="box-title">Weekly Call History</h4>
+												<h4 class="card-title" style="color: white; font-size: 24px;">Weekly
+													Call History</h4>
 											</div>
 											<div>
-												<div class="box-body">
+												<div class="card-body">
 													<div>
 														<ul class="list-inline text-right">
-															<li>
-																<h5><i style="color: #05C740;"
-																		class="fa fa-circle mr-5"></i><a>Last week</a>
-																</h5>
-															</li>
-															<li>
-																<h5><i style="color: #240CD6;"
-																		class="fa fa-circle mr-5"></i><a>Current
-																		Week</a></h5>
-															</li>
-
 														</ul>
 														<div id="line-chart"></div>
 													</div>
 												</div>
 											</div>
-											<!-- /.box-body 
-								<center>
-									<span class="badge badge badge-dot badge-danger"></span> <a style="font-size: small;"> AUX </a>
-									&nbsp;&nbsp;&nbsp;<span class="badge badge badge-dot badge-primary"></span> <a style="font-size: small;"> ACD </a>
-									&nbsp;&nbsp;&nbsp;<span class="badge badge badge-dot badge-success"></span> <a style="font-size: small;"> ACW </a>
-									&nbsp;&nbsp;&nbsp;<span class="badge badge badge-dot badge-info"></span> <a style="font-size: small;"> Available </a>
-								</center>-->
-											<!-- /.box -->
 										</div>
 									</center>
 								</div>
@@ -429,13 +354,6 @@
 				<!-- /.content -->
 			</div>
 		</div>
-		<!-- /.content-wrapper -->
-
-		
-		
-
-		<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
-		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
 
@@ -456,8 +374,263 @@
 	<script src="js/template.js"></script>
 	<script src="js/demo.js"></script>
 
-	 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<style>
+		/* CSS for enlarging legend text */
+		.apexcharts-legend-text {
+			font-size: 24px !important;
+			/* Increase the font size */
+			color: #FFFFFF !important;
+			/* Ensure the text color is white */
+			padding: 0 20px;
+			/* Add 20px padding to the left and right */
+		}
+	</style>
+	<!-- Chart Daily Call History -->
+	<script>
+		var options = {
+			series: [{
+				name: 'Received Calls',
+				data: [44, 55, 57, 56, 61, 58, 63, 60, 66]  // Data for Received calls
+			}, {
+				name: 'Answered Calls',
+				data: [76, 85, 101, 98, 87, 105, 91, 114, 94]  // Data for Answered calls
+			}, {
+				name: 'Abandoned Calls',
+				data: [35, 41, 36, 26, 45, 48, 52, 53, 41]  // Data for Abandoned calls
+			}],
+			chart: {
+				type: 'bar',
+				height: 350,
+				toolbar: {
+					show: false
+				}
+			},
+			plotOptions: {
+				bar: {
+					horizontal: false,
+					columnWidth: '55%',
+					endingShape: 'rounded'
+				}
+			},
+			colors: ['#19884e', '#2596be', '#e64f54'],  // Green, Blue, Red for the bars
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				show: true,
+				width: 2,
+				colors: ['transparent']
+			},
+			xaxis: {
+				categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+				labels: {
+					style: {
+						colors: '#FFFFFF',  // White text for x-axis labels
+						fontSize: '14px'  // Increased font size for x-axis labels
+					}
+				},
+				axisBorder: {
+					show: true,
+					color: '#FFFFFF'  // White x-axis border
+				},
+				axisTicks: {
+					show: true,
+					color: '#FFFFFF'  // White x-axis ticks
+				}
+			},
+			yaxis: {
+				title: {
+					text: 'Number of Calls',
+					style: {
+						color: '#FFFFFF',  // White y-axis title
+						fontSize: '14px'  // Increased font size for y-axis title
+					}
+				},
+				labels: {
+					style: {
+						colors: '#FFFFFF',  // White text for y-axis labels
+						fontSize: '14px'  // Increased font size for y-axis labels
+					}
+				},
+				axisBorder: {
+					show: true,
+					color: '#FFFFFF'  // White y-axis border
+				},
+				axisTicks: {
+					show: true,
+					color: '#FFFFFF'  // White y-axis ticks
+				}
+			},
+			fill: {
+				opacity: 1
+			},
+			tooltip: {
+				y: {
+					formatter: function (val) {
+						return val + " calls"
+					}
+				}
+			},
+			legend: {
+				labels: {
+					colors: '#FFFFFF',  // White text for legend items (Received, Answered, Abandoned)
+					useSeriesColors: false
+				}
+			},
+			grid: {
+				borderColor: '#FFFFFF'  // White grid lines
+			}
+		};
+
+		var chart = new ApexCharts(document.querySelector("#bar-chart-apex"), options);
+		chart.render();
+	</script>
+
+	<!-- Chart Agent Status -->
+	<style>
+		/* CSS to ensure legend items are in one line */
+		.apexcharts-legend {
+			display: flex;
+			/* Use flexbox for layout */
+			justify-content: center;
+			/* Center align */
+			flex-wrap: nowrap;
+			/* Prevent wrapping */
+			white-space: nowrap;
+			/* Prevent line break */
+			font-size: 12px;
+			/* Reduce font size */
+		}
+
+		.apexcharts-legend .apexcharts-legend-series {
+			margin: 0 5px;
+			/* Adjust margin for legend items */
+		}
+	</style>
+	<script>
+		var options = {
+			series: [25, 25, 25, 25],  // Data points
+			chart: {
+				type: 'donut',
+				width: 500,  // Increase width if necessary
+				height: 300  // Set the desired height
+			},
+			colors: ['#009946', '#e64f54', '#dea039', '#00a0e8'],  // Green, Red, Yellow, Blue
+			stroke: {
+				show: true,  // Show the stroke
+				width: 0,    // Set stroke width to 0 for transparency
+				colors: ['transparent']  // Make stroke color transparent
+			},
+			labels: ['Available', 'AUX', 'ACW', 'ACD'],  // Custom labels for the donut chart
+			legend: {
+				position: 'bottom',  // Place the legend below the chart
+				horizontalAlign: 'center',  // Center-align the legend
+				itemMargin: {
+					horizontal: 5,  // Space between legend items
+					vertical: 0
+				}
+			},
+			responsive: [{
+				breakpoint: 480,
+				options: {
+					chart: {
+						width: 200
+					},
+					legend: {
+						position: 'bottom',
+						horizontalAlign: 'center' // Center-align the legend
+					}
+				}
+			}]
+		};
+
+		var chart = new ApexCharts(document.querySelector("#chart-agent-status"), options);
+		chart.render();
+	</script>
+
+<!-- Radial Bar -->
+<script>
+    // Radial Bar Chart
+    var options = {
+        series: [76], // Set your value here
+        chart: {
+            type: 'radialBar',
+            offsetY: -20,
+            sparkline: {
+                enabled: true
+            }
+        },
+        plotOptions: {
+            radialBar: {
+                startAngle: -90,
+                endAngle: 90,
+                track: {
+                    background: "#e7e7e7",
+                    strokeWidth: '97%',
+                    margin: 5,
+                    dropShadow: {
+                        enabled: true,
+                        top: 2,
+                        left: 0,
+                        color: '#999',
+                        opacity: 1,
+                        blur: 2
+                    }
+                },
+                dataLabels: {
+                    name: {
+                        show: false // Hide the name label
+                    },
+                    value: {
+                        show: false // Hide the value
+                    }
+                }
+            }
+        },
+        grid: {
+            padding: {
+                top: -10
+            }
+        },
+        fill: {
+            type: 'solid', // Change to solid
+            colors: [
+                '#009947', // Red for 0%-25%
+                '#ff8000', // Orange for 25%-50%
+                '#ffff00', // Yellow for 50%-75%
+                '#00ff00', // Green for 75%-100%
+                '#0000ff'  // Blue for above 100%
+            ]
+        },
+        labels: ['Average Results'],
+    };
+
+    // Render chart
+    var chart = new ApexCharts(document.querySelector("#chart-radial-bar"), options);
+    chart.render();
+
+    // Create the needle
+    var value = 76; // Your value
+    var needleAngle = (value / 100) * 180 - 90; // Calculate rotation based on value
+
+    var needle = document.createElement("div");
+    needle.classList.add("needle");
+    needle.style.transform = `rotate(${needleAngle}deg)`; // Set the rotation
+    needle.style.position = "absolute";
+    needle.style.bottom = "0"; // Position it at the bottom center
+    needle.style.left = "50%"; // Center it horizontally
+    needle.style.transformOrigin = "bottom center"; // Set the origin for rotation
+    needle.style.height = "170px"; // Set a longer length for the needle
+    needle.style.width = "4px"; // Width of the needle
+    needle.style.backgroundColor = "#000"; // Color of the needle
+    needle.style.zIndex = "10"; // Ensure it's on top
+
+    document.querySelector("#chart-radial-bar").appendChild(needle);
+</script>
+
+
+
 
 </body>
 
