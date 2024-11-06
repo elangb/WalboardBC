@@ -4,21 +4,91 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script src="Chart.bundle.js"></script>
-  <script src="chartjs-gauge.js"></script>
+  <title>Gauge Chart</title>
+  <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+  <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
+  <style>
+    /* Adjust the size of the container */
+    #canvas-holder {
+      width: 400px; /* Set width to make chart smaller */
+      margin: 0 auto; /* Center the chart */
+    }
+    canvas {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+  </style>
 </head>
 
 <body>
-<center>
-  <div id="canvas-holder" style="width:60%">
-    <canvas id="chart"></canvas>
+  <div id="canvas-holder">
+    <canvas id="chart-gauge" width="300" height="150"></canvas> <!-- Set canvas width and height -->
   </div>
-</center>
-</body>
-</html>
-<!-- partial -->
-  <script  src="gauge.js"></script>
+  <script>
+    var randomScalingFactor = function() {
+      return Math.round(Math.random() * 100);
+    };
 
+    var randomData = function () {
+      return [
+        randomScalingFactor(),
+        randomScalingFactor(),
+        randomScalingFactor(),
+        randomScalingFactor()
+      ];
+    };
+
+    var randomValue = function (data) {
+      return Math.max.apply(null, data) * Math.random();
+    };
+
+    var data = randomData();
+    var value = randomValue(data);
+
+    var config = {
+      type: 'gauge',
+      data: {
+        datasets: [{
+          data: data,
+          value: value,
+          backgroundColor: ['#e64f54', '#d69f3a', '#009946', '#009fe7'],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {},
+        layout: {
+          padding: {
+            bottom: 20
+          }
+        },
+        needle: {
+          radiusPercentage: 2,
+          widthPercentage: 3.2,
+          lengthPercentage: 80,
+          color: '#000000'
+        },
+        valueLabel: {
+          formatter: Math.round
+        }
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('chart-gauge').getContext('2d');
+      window.myGauge = new Chart(ctx, config);
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+      config.data.datasets.forEach(function(dataset) {
+        dataset.data = randomData();
+        dataset.value = randomValue(dataset.data);
+      });
+
+      window.myGauge.update();
+    });
+  </script>
 </body>
 </html>

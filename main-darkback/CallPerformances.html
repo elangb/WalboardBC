@@ -198,10 +198,8 @@
 										</div>
 								
 										<div class="chart-container">
-											<div id="chart-radial-bar" style="width: 600px; height: 100px; position: relative; margin-bottom: 100px;">
-												<!-- Needle will be added here -->
-											</div>
-										</div>
+											<iframe src="gauge.html" id="chart-radial-bar" style="width: 600px; height: 200px; border: none;"></iframe>
+										</div>										
 										
 										<center style="padding-top: 30px;">
 											<span class="badge badge-dot badge-danger"></span>
@@ -553,7 +551,7 @@
 	</script>
 
 <!-- Radial Bar -->
-<script>
+<!-- <script>
     // Radial Bar Chart
     var options = {
         series: [76], // Set your value here
@@ -630,8 +628,18 @@
     needle.style.zIndex = "10"; // Ensure it's on top
 
     document.querySelector("#chart-radial-bar").appendChild(needle);
-</script>
+</script> -->
 
+<script>
+	// Access the gauge iframe
+const gaugeIframe = document.getElementById("chart-radial-bar");
+
+// Once gauge is loaded, you can access its content
+gaugeIframe.onload = function() {
+    const gaugeDoc = gaugeIframe.contentDocument || gaugeIframe.contentWindow.document;
+    // Add any custom JavaScript to manipulate the gauge
+};
+</script>
 
 
 

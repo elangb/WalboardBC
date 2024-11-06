@@ -50,42 +50,57 @@
     .badge {
       font-size: 2rem;
     }
-	.kotak {
-         
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px; 
-            position: relative; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center;
-            height: 50px; 
-        }
-        .ikon-kecil {
-            position: absolute;
-            bottom: 5px;
-            left: 1px;
-            font-size: 1rem; 
-            color: #FFFFFF; 
-        }
-        .garis-vertikal {
-            width: 2px;
-            background-color: #FFFFFF; 
-            height: 270px;
-            position: absolute;
-            left: 100%; 
-            top: 0; 
-            margin-left: 10px; 
-        }
-        .merah { background-color: #f64e60; }
-        .kuning { background-color: #ffa800 ; }
-        .hijau { background-color: #1bc5bd; }
-        .biru-langit { background-color: #6993ff; }
 
-        .apexcharts-series{
-          margin-bottom: 10px;
-        }
+    .kotak {
+
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+    }
+
+    .ikon-kecil {
+      position: absolute;
+      bottom: 5px;
+      left: 1px;
+      font-size: 1rem;
+      color: #FFFFFF;
+    }
+
+    .garis-vertikal {
+      width: 2px;
+      background-color: #FFFFFF;
+      height: 270px;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      margin-left: 10px;
+    }
+
+    .merah {
+      background-color: #f64e60;
+    }
+
+    .kuning {
+      background-color: #ffa800;
+    }
+
+    .hijau {
+      background-color: #1bc5bd;
+    }
+
+    .biru-langit {
+      background-color: #6993ff;
+    }
+
+    .apexcharts-series {
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 
@@ -123,7 +138,9 @@
                 <div class="search-bx mx-5">
 
                   <br>
-                  <a style="color: goldenrod;"><div id="dateNya"></div></a>
+                  <a style="color: goldenrod;">
+                    <div id="dateNya"></div>
+                  </a>
 
                   </form>
                 </div>
@@ -170,46 +187,46 @@
                       </div>
 
                       <div>
-                         <div class="box-body">
+                        <div class="box-body">
                           <!--<div id="row-oriented"></div>-->
                           <div class="row">
-                            
+
                             <div class="col-3 mt-4">
                               <br>
-                                <div class="kotak merah">
-                                
-                                  <h1 class="text-white" style="font-size: 1rem;" id="callPercent">0</h1> 
-                                  
-                                  <i class="fa fa-phone ikon-kecil"></i>
-                                </div>
-                                <div class="kotak kuning">
-                                
-                                  <h1 class="text-white" style="font-size: 1rem;" id="emailPercent">0</h1> 
-                                  
-                                  <i class="fa fa-envelope ikon-kecil"></i>
-                                </div>
-                                <div class="kotak hijau">
-                                
-                                  <h1 class="text-white" style="font-size: 1rem;" id="chatPercent">0</h1> 
-                                  
-                                  <i class="fa fa-comments ikon-kecil"></i>
-                                </div>
-                                <div class="kotak biru-langit">
-                                
-                                  <h1 class="text-white" style="font-size: 1rem;" id="sosmedPercent">0</h1> 
-                                  
-                                  <i class="fa fa-comments-o ikon-kecil"></i>
-                                </div>
-                                <div class="garis-vertikal mt-4"></div>
-                                
+                              <div class="kotak merah">
+
+                                <h1 class="text-white" style="font-size: 1rem;" id="callPercent">0</h1>
+
+                                <i class="fa fa-phone ikon-kecil"></i>
+                              </div>
+                              <div class="kotak kuning">
+
+                                <h1 class="text-white" style="font-size: 1rem;" id="emailPercent">0</h1>
+
+                                <i class="fa fa-envelope ikon-kecil"></i>
+                              </div>
+                              <div class="kotak hijau">
+
+                                <h1 class="text-white" style="font-size: 1rem;" id="chatPercent">0</h1>
+
+                                <i class="fa fa-comments ikon-kecil"></i>
+                              </div>
+                              <div class="kotak biru-langit">
+
+                                <h1 class="text-white" style="font-size: 1rem;" id="sosmedPercent">0</h1>
+
+                                <i class="fa fa-comments-o ikon-kecil"></i>
+                              </div>
+                              <div class="garis-vertikal mt-4"></div>
+
                             </div>
                             <div class="col-9 mt-2">
-                              <div id="charging-chart"  ></div>
+                              <div id="charging-chart"></div>
                             </div>
-                          
+
+                          </div>
                         </div>
                       </div>
-                    </div>
                   </center>
                 </div>
 
@@ -220,7 +237,7 @@
                     <div class="box">
                       <div class="box-body">
                         <h3 class="box-title text-white">Total Services</h3>
-                        <h1 class="text-success" style="font-size: 4rem;" id="TotalSer" >0</h1>
+                        <h1 class="text-success" style="font-size: 4rem;" id="TotalSer">0</h1>
                       </div>
                     </div>
                   </center>
@@ -232,7 +249,7 @@
                     <div class="box">
                       <div class="box-body">
                         <h3 class="box-title text-white">Total Monthly Services</h3>
-                        <h1 class="text-success" style="font-size: 4rem;"id="TotalMSer" >0</h1>
+                        <h1 class="text-success" style="font-size: 4rem;" id="TotalMSer">0</h1>
                       </div>
                     </div>
                   </center>
@@ -258,7 +275,7 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id ="call">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id="call">0</h1>
                       </div>
                     </div>
                   </div>
@@ -277,7 +294,7 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id ="multichat">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id="multichat">0</h1>
                       </div>
                     </div>
                   </div>
@@ -296,7 +313,7 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id ="email">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id="email">0</h1>
                       </div>
                     </div>
                   </div>
@@ -306,7 +323,7 @@
                   <div class="box d-flex align-items-center flex-column">
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
-                      <h2 class="text-primary mt-3" id ="sosmed">Social Media</h2>
+                      <h2 class="text-primary mt-3" id="sosmed">Social Media</h2>
                     </div>
                     <div class="box-body d-flex flex-row align-items-center">
                       <!-- Gambar dan waktu berada di kiri -->
@@ -315,7 +332,7 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id="socmed" >0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id="socmed">0</h1>
                       </div>
                     </div>
                   </div>
@@ -346,7 +363,7 @@
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-danger" id ="TotalCase">0</a>
+                            <a class="text-danger" id="TotalCase">0</a>
                           </h1>
                         </center>
                       </div>
@@ -361,7 +378,7 @@
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-warning" id ="CaseResolved" >0</a>
+                            <a class="text-warning" id="CaseResolved">0</a>
                           </h1>
                         </center>
                       </div>
@@ -376,7 +393,7 @@
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-danger" id ="PendingCase">0</a>
+                            <a class="text-danger" id="PendingCase">0</a>
                           </h1>
                         </center>
                       </div>
@@ -396,7 +413,7 @@
                       <div>
 
                         <!--<canvas id="doughnut-chart" height="200"></canvas>-->
-                        <div id="barchart1" ></div>
+                        <div id="barchart1"></div>
                         <!--<div id="donut-chart"></div>-->
 
                       </div>
@@ -419,8 +436,7 @@
                       <div>
                         <div class="box-body">
                           <div>
-                            
-                            <div id="areachart1"></div>
+                            <div id="dailyservice"></div>
                           </div>
                         </div>
                       </div>
@@ -469,8 +485,64 @@
 
   <!-- Chat Bot Admin App -->
 
-   <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+  <script>
+    var options = {
+      series: [{
+        data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+      }],
+      chart: {
+        type: 'bar',
+        height: 350,
+        foreColor: '#ffffff',  
+        background: 'transparent'  
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          borderRadiusApplication: 'end',
+          horizontal: true,
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+          'United States', 'China', 'Germany'
+        ],
+        labels: {
+          style: {
+            colors: '#ffffff'
+          }
+        }
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: '#ffffff'
+          }
+        }
+      },
+      grid: {
+        borderColor: '#ffffff' 
+      },
+      tooltip: {
+        theme: 'dark',  
+        style: {
+          color: '#ffffff'
+        }
+      },
+      theme: {
+        mode: 'dark',  
+        palette: 'palette1', 
+      },
+      colors: ['#4bb9af']
+    };
 
+    var chart = new ApexCharts(document.querySelector("#dailyservice"), options);
+    chart.render();
+  </script>
 </body>
 
 </html>
