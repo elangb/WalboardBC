@@ -21,7 +21,7 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
-
+   
     <script src="js/Agent_Site_Activities_Performance.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -46,7 +46,7 @@
     </style>
 </head>
 
-<body onload="vvmyFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -78,7 +78,6 @@
                 </div>
             </nav>
         </header>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="container-full">
@@ -95,9 +94,9 @@
                         <div class="col-md-4">
                             <div class="section-titlebg tanjung-priok"> <!-- Larger section title -->
                                 Tanjung Priok
-                            </div>
+                            </div>                            
                             <!-- Calls Kiri -->
-                            <div class="table-container mt-4">
+                            <div class="table-container mt-2">
                                 <h3 class="section-title">
                                     Call
                                 </h3>
@@ -118,50 +117,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1101</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">Available</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">35</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1105</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">ACD</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">28</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Glorio Theodore
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1110</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">Available</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">26</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                   
                                 </table>
                             </div>
                             <!-- Multichat Kiri -->
@@ -169,7 +125,7 @@
                                 <h3 class="section-title">
                                     Multichat
                                 </h3>
-                                <table class="table">
+                                <table class="table" id="multichatTanjungPriuk">
                                     <thead>
                                         <tr>
                                             <th>
@@ -186,106 +142,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                <span class="status-available">Available</span>
-                                            </td>
-                                            <td>
-                                                3
-                                            </td>
-                                            <td>
-                                                <span class="chats">48</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                <span class="status-busy">Busy</span>
-                                            </td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                                <span class="chats">37</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Glorio Theodore
-                                            </td>
-                                            <td>
-                                                <span class="status-available">Available</span>
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                <span class="chats">29</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Hafazh Gumilar
-                                            </td>
-                                            <td>
-                                                <span class="status-away">Away</span>
-                                            </td>
-                                            <td>
-                                                0
-                                            </td>
-                                            <td>
-                                                <span class="chats">15</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Markus Afrie
-                                            </td>
-                                            <td>
-                                                <span class="status-offline">Offline</span>
-                                            </td>
-                                            <td>
-                                                0
-                                            </td>
-                                            <td>
-                                                <span class="chats">10</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                M. Afdal
-                                            </td>
-                                            <td>
-                                                <span class="status-available">Available</span>
-                                            </td>
-                                            <td>
-                                                4
-                                            </td>
-                                            <td>
-                                                <span class="chats">22</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Nuanda Febrian
-                                            </td>
-                                            <td>
-                                                <span class="status-busy">Busy</span>
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                <span class="chats">18</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                   
                                 </table>
                             </div>
 
@@ -296,7 +153,7 @@
                             <div class="section-titlebg soekarno-hatta"> <!-- Larger section title -->
                                 Soekarno Hatta
                             </div>
-                            <div class="table-container mt-4">
+                            <div class="table-container mt-2">
                                 <h3 class="section-title">
                                     Call
                                 </h3>
@@ -317,59 +174,59 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1101</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">Available</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">35</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1105</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">ACD</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">28</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Glorio Theodore
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1110</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">Available</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">26</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                    <!-- <tbody> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dhiyas Asadillah -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">1101</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">Available</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">35</span> -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dzamar Sulthon -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">1105</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-pink">ACD</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">28</span> -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Glorio Theodore -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">1110</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">Available</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">26</span> -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                    <!-- </tbody> -->
                                 </table>
                             </div>
 
-                            <!-- Multichat Tengah  -->
+                            <!-- Multichat Tengah -->
                             <div class="table-container mt-4">
                                 <h3 class="section-title">
                                     Multichat
                                 </h3>
-                                <table class="table">
+                                <table class="table" id="multichatSoetta">
                                     <thead>
                                         <tr>
                                             <th>
@@ -386,45 +243,45 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                12:30 PM
-                                            </td>
-                                            <td>
-                                                02:15
-                                            </td>
-                                            <td>
-                                                Completed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                12:45 PM
-                                            </td>
-                                            <td>
-                                                01:30
-                                            </td>
-                                            <td>
-                                                Missed
-                                            </td>
-                                        </tr>
+                                    <!-- <tbody> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dhiyas Asadillah -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:30 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 02:15 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Completed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dzamar Sulthon -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:45 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 01:30 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Missed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
 
-                                    </tbody>
+                                    <!-- </tbody> -->
                                 </table>
                             </div>
                             <!-- Email Tengah -->
-                            <div class="table-container mt-2">
+                            <div class="table-container mt-4 mb-4">
                                 <h3 class="section-title">
                                     Email
                                 </h3>
-                                <table class="table" id="listEailSoetta">
+                                <table class="table" id="listEmailSoetta">
                                     <thead>
                                         <tr>
                                             <th>
@@ -441,37 +298,37 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                12:30 PM
-                                            </td>
-                                            <td>
-                                                02:15
-                                            </td>
-                                            <td>
-                                                Completed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                12:45 PM
-                                            </td>
-                                            <td>
-                                                01:30
-                                            </td>
-                                            <td>
-                                                Missed
-                                            </td>
-                                        </tr>
+                                    <!-- <tbody> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dhiyas Asadillah -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:30 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 02:15 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Completed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dzamar Sulthon -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:45 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 01:30 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Missed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
 
-                                    </tbody>
+                                    <!-- </tbody> -->
                                 </table>
                             </div>
                         </div>
@@ -481,7 +338,7 @@
                             <div class="section-titlebg pos-pasar-baru"> <!-- Larger section title -->
                                 Pos Pasar Baru
                             </div>
-                            <div class="table-container mt-4">
+                            <div class="table-container mt-2">
                                 <h3 class="section-title">
                                     Call
                                 </h3>
@@ -502,50 +359,50 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1101</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">Available</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">35</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1105</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">ACD</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">28</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Glorio Theodore
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">1110</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">Available</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">26</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                    <!-- <tbody> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dhiyas Asadillah -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">1101</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">Available</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">35</span> -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dzamar Sulthon -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">1105</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-pink">ACD</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">28</span> -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Glorio Theodore -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">1110</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">Available</span> -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- <span class="badge badge-green">26</span> -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                    <!-- </tbody> -->
                                 </table>
                             </div>
                             <!-- Multi Chat Kanan -->
@@ -553,7 +410,7 @@
                                 <h3 class="section-title">
                                     Multi Chat
                                 </h3>
-                                <table class="table">
+                                <table class="table" id="multichatPasarBaru">
                                     <thead>
                                         <tr>
                                             <th>
@@ -570,41 +427,42 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                12:30 PM
-                                            </td>
-                                            <td>
-                                                02:15
-                                            </td>
-                                            <td>
-                                                Completed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                12:45 PM
-                                            </td>
-                                            <td>
-                                                01:30
-                                            </td>
-                                            <td>
-                                                Missed
-                                            </td>
-                                        </tr>
+									<tbody id="tbodyEmailPasarBaru"></tbody>
+                                    <!-- <tbody> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dhiyas Asadillah -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:30 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 02:15 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Completed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dzamar Sulthon -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:45 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 01:30 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Missed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
 
-                                    </tbody>
+                                    <!-- </tbody> -->
                                 </table>
                             </div>
                             <!-- Email Kanan -->
-                            <div class="table-container mt-2 mb-4">
+                            <div class="table-container mt-4 mb-4">
                                 <h3 class="section-title">
                                     Email
                                 </h3>
@@ -625,39 +483,43 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Dhiyas Asadillah
-                                            </td>
-                                            <td>
-                                                12:30 PM
-                                            </td>
-                                            <td>
-                                                02:15
-                                            </td>
-                                            <td>
-                                                Completed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Dzamar Sulthon
-                                            </td>
-                                            <td>
-                                                12:45 PM
-                                            </td>
-                                            <td>
-                                                01:30
-                                            </td>
-                                            <td>
-                                                Missed
-                                            </td>
-                                        </tr>
+									 <tbody id="tbodyEmailPasarBaru">
 
-                                    </tbody>
+									 </tbody>
+                                    <!-- <tbody> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dhiyas Asadillah -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:30 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 02:15 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Completed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+                                        <!-- <tr> -->
+                                            <!-- <td> -->
+                                                <!-- Dzamar Sulthon -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 12:45 PM -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- 01:30 -->
+                                            <!-- </td> -->
+                                            <!-- <td> -->
+                                                <!-- Missed -->
+                                            <!-- </td> -->
+                                        <!-- </tr> -->
+
+                                    <!-- </tbody> -->
                                 </table>
                             </div>
+                            
                         </div>
 
                     </div>
@@ -671,6 +533,15 @@
 
     <!-- Vendor JS -->
     <script src="js/vendors.min.js"></script>
+    
+
+    <!-- Chat Bot Admin App -->
+    <!--<script src="js/pages/gauge.js"></script>-->
+	
+	<script>
+	</script
+
+    
 
 </body>
 

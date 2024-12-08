@@ -23,8 +23,48 @@ function AutoCall() {
   // ListAgentSoetta();
   // ListAgentTanjungPriok();
   getDataEmail();
+  getDataDk();
+  lineChart();
 }
 
+async function lineChart(){
+	
+	  var ctx = document.getElementById('socialMediaTrend').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Facebook',
+            borderColor: '#21a1ff',
+            data: [10, 20, 15, 30, 25, 40, 35, 50, 45, 60]
+          }, {
+            label: 'Instagram',
+            borderColor: '#ff4d4d',
+            data: [5, 15, 10, 20, 15, 30, 25, 40, 35, 50]
+          }, {
+            label: 'X',
+            borderColor: '#ffb84d',
+            data: [2, 12, 8, 18, 14, 28, 22, 36, 30, 44]
+          }, {
+            label: 'Whatsapp',
+            borderColor: '#21ff4d',
+            data: [8, 18, 12, 22, 18, 32, 28, 42, 38, 52]
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+	
+}
 async function getDataEmail() {
   try {
     const response = await fetch(
@@ -92,6 +132,61 @@ async function getDataEmail() {
       var avrEmailHandlingTime = (emailHandling / emailInbox) * totalInboxTime;
       $("#emailHandlingTime").html(formatTime(avrEmailHandlingTime));
     }
+
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+}
+
+async function getDataDk() {
+  try {
+    const response = await fetch(
+      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/TotalDataDKPusat",
+      {
+        method: "GET",
+        headers: {
+          Accept: "text/plain",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.text();
+    console.log(data);
+
+    let json = JSON.parse(data);
+
+    let emailInbox = 0;
+    let emailHandling = 0;
+    let emailQueueing = 0;
+    let emailReviewing = 0;
+    let emailRejected = 0;
+    let emailSend = 0;
+
+    let totalInboxTime = 100;
+
+			json.forEach((item, index) => {
+				
+			 	   $('#incomingLiveChat').html(item["totaLInChat"])
+			 	   $('#handlingLiveChat').html(item["handlingLiveChat"])
+			 	   $('#answerLiveChat').html(item["totalAns"])
+			 	   $('#queueingLiveChat').html(item["totalQueue"])
+			 	   $('#abandonedLiveChat').html(item["totalAbn"])
+			 	   $('#waSosMed').html(item["totalWa"])
+			 	   $('#fbSosMed').html(item["totalFb"])
+			 	   $('#igSosMed').html(item["totalIg"])
+			 	   $('#xSosMed').html('0')
+			   
+			});
+
+        var avrLcHandlingTime = (parseInt($('#answerLiveChat').html()) / parseInt($('#incomingLiveChat').html())) * totalInboxTime;
+        $("#waitingTimeLiveChat").html(formatTime(avrLcHandlingTime));
+        
+        var avrLcConversation = (parseInt($('#handlingLiveChat').html()) / parseInt($('#incomingLiveChat').html())) * totalInboxTime;
+        $("#averageLiveChat").html(formatTime(avrLcConversation));
 
   } catch (error) {
     console.error("An error occurred:", error);
@@ -258,3 +353,30 @@ function convertSeconds(seconds) {
 
   return `${hours}:${minutes}:${seconds}`;
 }
+
+
+ // Mendapatkan waktu saat ini
+ function updateDateTime() {
+  const now = new Date();
+
+  // Daftar nama hari
+  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const day = days[now.getDay()]; // Mendapatkan hari saat ini
+
+  // Daftar nama bulan
+  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                  "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+  const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+
+  // Format tanggal
+  const date = now.getDate(); // Tanggal
+  const year = now.getFullYear(); // Tahun
+  const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
+  const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+
+  // Mengupdate elemen dengan waktu saat ini
+  document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
+}
+
+// Panggil fungsi saat halaman dimuat
+document.addEventListener('DOMContentLoaded', updateDateTime);

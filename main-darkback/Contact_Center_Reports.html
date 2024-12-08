@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../images/favicon.ico">
+  <link rel="icon" href="../images/bravo.png">
 
-  <title>Chat Bot Admin - Dashboard Box color </title>
+  <title>Contact Center Reports</title>
 
   <!-- Vendors Style-->
   <link rel="stylesheet" href="css/vendors_css.css">
@@ -20,7 +20,7 @@
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
- 
+
   <style>
     .containerXXX {
       position: relative;
@@ -52,51 +52,40 @@
     .badge {
       font-size: 2rem;
     }
-	.apexcharts-yaxis-texts-g apexcharts-xaxis-inversed-texts-g{
-	  font-size:8px;
-	  color:white;
-	}
+
+    .apexcharts-yaxis-texts-g apexcharts-xaxis-inversed-texts-g {
+      fon-size: 8px;
+      color: white;
+    }
   </style>
 </head>
 
 <body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
-  <!-- Site wrapper -->
+
   <div class="wrapper">
 
     <header class="main-header">
       <div class="d-flex align-items-center logo-box pl-10">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Logo Test -->
         <a href="index.html" class="logo">
-          <!-- logo-->
           <div class="logo-lg">
-            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
-            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
           </div>
         </a>
       </div>
       <!-- Header Navbar -->
       <nav class="navbar navbar-static-top pl-10">
         <!-- Sidebar toggle button-->
-        <div class="app-menu">
+        <div class="app-menu contact-center-text">
           Contact Center <br>
-          Bravo Bea Cukai <a style="color: red;">1500225</a>
+          Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
         </div>
-
         <div class="navbar-custom-menu r-side">
           <ul class="nav navbar-nav">
-
             <li class="btn-group d-md-inline-flex d-none">
               <div class="app-menu">
-                <div class="search-bx mx-5">
-
-                  <br>
-                  <a style="color: goldenrod;">12 Januari 2022 | Rabu | 13:38 WIB</a>
-
-                  </form>
-                </div>
+                <a class="date-time-text" style="color: goldenrod;">Selasa | 01 Oktober 2024 | 08:00</a>
               </div>
             </li>
           </ul>
@@ -124,7 +113,7 @@
                       <div class="card-body text-center">
                         <div class="label">Total Service</div>
                         <div class="value display-4" id="TotalPusat">0</div>
-                        <div class="label text-danger">Pusat</div>
+                        <div class="label color-merah">Pusat</div>
                       </div>
                     </div>
                   </div>
@@ -133,7 +122,7 @@
                       <div class="card-body text-center">
                         <div class="label">Total Service</div>
                         <div class="value display-4" id="TotalTp">0</div>
-                        <div class="label text-warning">Tanjung Priok</div>
+                        <div class="label color-kuning">Tanjung Priok</div>
                       </div>
                     </div>
                   </div>
@@ -143,7 +132,7 @@
                       <div class="card-body text-center">
                         <div class="label">Total Service</div>
                         <div class="value display-4" id="TotalSoeta">0</div>
-                        <div class="label text-primary">Soekarno-Hatta</div>
+                        <div class="label color-biru">Soekarno-Hatta</div>
                       </div>
                     </div>
                   </div>
@@ -152,7 +141,7 @@
                       <div class="card-body text-center">
                         <div class="label">Total Service</div>
                         <div class="value display-4" id="TotalPb">0</div>
-                        <div class="label text-success">Pos Pasar Baru</div>
+                        <div class="label color-hijau">Pos Pasar Baru</div>
                       </div>
                     </div>
                   </div>
@@ -167,9 +156,15 @@
                       <div class="card-body">
                         <h5 class="card-title">% Service Volume per Site</h5>
                         <div id="chart1"></div> <!-- Div for the first pie chart -->
+                        <div class="chart-labels">
+                          <span><span class="label-dot" style="background-color: #e65055;"></span> Pusat</span>
+                          <span><span class="label-dot" style="background-color: #f08f2e;"></span> Tj.Priok</span>
+                          <span><span class="label-dot" style="background-color: #00a6e1;"></span> Soetta</span>
+                          <span><span class="label-dot" style="background-color: #009945;"></span> Pos Pasbar</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </div>                  
 
                   <!-- Second Pie Chart -->
                   <div class="col-4 mb-3">
@@ -177,6 +172,12 @@
                       <div class="card-body">
                         <h5 class="card-title">% Service Volume per Channel</h5>
                         <div id="chart2"></div> <!-- Div for the second pie chart -->
+                        <div class="chart-labels">
+                          <span><span class="label-dot" style="background-color: #e65055;"></span> Call</span>
+                          <span><span class="label-dot" style="background-color: #f08f2e;"></span> Email</span>
+                          <span><span class="label-dot" style="background-color: #009945;"></span> Live Chat</span>
+                          <span><span class="label-dot" style="background-color: #00a6e1;"></span> Social Media</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -196,19 +197,33 @@
               <div class="col-12">
                 <div class="row">
                   <div class="col-4">
-                    <div class="card chart-card">
-                      <div class="card-body">
-                        <h5 class="card-title">Service Volume Trend per Site</h5>
-						
-						<div id="line-chart"></div>
-                      </div>
+                    <div class="card chart-cardline">
+                        <div class="card-body">
+                            <h5 class="card-title">Service Volume Trend per Site</h5>
+                            <div id="line-chart"></div>
+                            <!-- Menambahkan label HTML secara manual -->
+                            <div class="chart-labelsline">
+                              <span><span class="label-dotline" style="background-color: #e65055;"></span> Pusat</span>
+                              <span><span class="label-dotline" style="background-color: #f08f2e;"></span> Tj.Priok</span>
+                              <span><span class="label-dotline" style="background-color: #00a6e1;"></span> Soetta</span>
+                              <span><span class="label-dotline" style="background-color: #009945;"></span> Pos Pasbar</span>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                </div>
+                
                   <div class="col-4">
-                    <div class="card chart-card">
+                    <div class="card chart-cardline">
                       <div class="card-body">
                         <h5 class="card-title">Service Volume Trend per Channel</h5>
-                       <div id="line-chart2"></div>
+                        <div id="line-chart2"></div>
+                        <!-- Menambahkan label HTML secara manual -->
+                        <div class="chart-labelsline">
+                          <span><span class="label-dotline" style="background-color: #e65055;"></span> Call</span>
+                          <span><span class="label-dotline" style="background-color: #f08f2e;"></span> Email</span>
+                          <span><span class="label-dotline" style="background-color: #009945;"></span> Live Chat</span>
+                          <span><span class="label-dotline" style="background-color: #00a6e1;"></span> Social Media</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -219,7 +234,7 @@
                         <div class="card">
                           <div class="card-body text-center">
                             <div class="label">% Ans. Call</div>
-                            <div class="value text-success display-4" id="ansPusat">0</div>
+                            <div class="value color-hijau display-4" id="ansPusat">0</div>
                             <div class="label">Pusat</div>
                           </div>
                         </div>
@@ -228,7 +243,7 @@
                         <div class="card">
                           <div class="card-body text-center">
                             <div class="label">% Ans. Call</div>
-                            <div class="value text-success display-4" id="ansTp">0</div>
+                            <div class="value color-hijau display-4" id="ansTp">0</div>
                             <div class="label">Tanjung Priok</div>
                           </div>
                         </div>
@@ -239,7 +254,7 @@
                         <div class="card">
                           <div class="card-body text-center">
                             <div class="label">% Ans. Call</div>
-                            <div class="value text-warning display-4" id="ansSoetta" >0</div>
+                            <div class="value color-kuning display-4" id="ansSoetta">0</div>
                             <div class="label">Soekarno-Hatta</div>
                           </div>
                         </div>
@@ -248,7 +263,7 @@
                         <div class="card">
                           <div class="card-body text-center">
                             <div class="label">% Ans. Call</div>
-                            <div class="value text-danger display-4" id="ansPb">0</div>
+                            <div class="value color-merah display-4" id="ansPb">0</div>
                             <div class="label">Pasar Baru</div>
                           </div>
                         </div>
@@ -260,11 +275,6 @@
             </div>
           </div>
 
-
-
-
-
-
         </section>
         <!-- /.content -->
       </div>
@@ -273,15 +283,19 @@
     <!-- Vendor JS -->
     <script src="js/vendors.min.js"></script>
     <script src="js/CCReport.js"></script>
-    
-    <!-- Chat Bot Admin App -->
-    <!-- Include ApexCharts library -->
- 
-	 <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
-    
-   
-    
+    <!-- Chat Bot Admin App -->
+
+
+
+
+    <!-- Include ApexCharts library -->
+
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+
+
+
 </body>
 
 </html>

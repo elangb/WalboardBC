@@ -26,6 +26,10 @@ function AutoCall(){
     ListAgentSoetta();
 	 ListAgentTanjungPriok();
 	 getDataEmail();
+	 listMultiChatPriuk();
+	 listMultiChatPasarBaru();
+	 listMultiChatSoetta();
+	 
   
 }
 async function getDataEmail(){
@@ -183,7 +187,7 @@ function ListAgentSoetta(){
 								else
 									table += '<td><span class="badge badge-pink">' + items["State"] + '</span></td>';
 
-								table += '<td><span class="badge badge-green">' + items["Time"] + '</span></td>';
+								table += '<td><span >' + items["Time"] + '</span></td>';
 								
 							});
 
@@ -227,6 +231,8 @@ function ListAgentPasarBaru(){
 									table += '<td><span class="badge badge-green">' + items["State"] + '</span></td>';
 								else
 									table += '<td><span class="badge badge-pink">' + items["State"] + '</span></td>';
+								
+							
 
 								table += '<td><span class="badge badge-green">' + items["Time"] + '</span></td>';
 								
@@ -242,6 +248,225 @@ function ListAgentPasarBaru(){
              
 
     });
+	
+						
+}
+async function listMultiChatPriuk(){
+	 var lastweek=[];
+	 var currentWeek=[];
+	
+	try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain' // Setting the accept header
+            }
+        });
+
+        // Check if the response is okay
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text(); // Using text() since accept is text/plain
+		 console.log(data);
+		 var json = JSON.parse(data);
+		
+		 
+		 
+		 
+		 
+		
+			  var table = '<table class="table table-dark table-striped">';
+				  table += '<tr>' +                                               
+									'<th>Nama Agent</th>' +
+									
+									'<th>Status</th>' +
+									'<th>Now Handle</th>' +
+									'<th>Chats</th>' +							
+									'</tr>';
+									
+									
+							//sconst agents = JSON.parse(data);	
+							 json.forEach(items => {
+								 
+								 table += '<tr>';
+								table += '<td>' + items["agent"] + '</td>';
+								if (items["status"] == 'Ready')
+									table += '<td><span class="badge badge-green">' + items["status"] + '</span></td>';
+								else
+									table += '<td><span class="badge badge-pink">' + items["status"] + '</span></td>';
+
+								table += '<td><span>' + items["nowHandle"] + '</span></td>';
+								table += '<td><span>' + items["chat"] + '</span></td>';
+								
+							});
+
+							
+
+							table += '</table>';
+							$('#multichatTanjungPriuk').html(table);
+			   
+		
+							
+		 
+		 
+		
+		
+							
+		  
+					   
+						
+  
+       
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+	
+						
+}
+async function listMultiChatSoetta(){
+	 var lastweek=[];
+	 var currentWeek=[];
+	
+	try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain' // Setting the accept header
+            }
+        });
+
+        // Check if the response is okay
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text(); // Using text() since accept is text/plain
+		 console.log(data);
+		 var json = JSON.parse(data);
+		
+		 
+		 
+		 
+		 
+			
+			  var table = '<table class="table table-dark table-striped">';
+				  table += '<tr>' +                                               
+									'<th>Nama Agent</th>' +
+									
+									'<th>Status</th>' +
+									'<th>Now Handle</th>' +
+									'<th>Chats</th>' +							
+									'</tr>';
+									
+									
+							//sconst agents = JSON.parse(data);	
+							 json.forEach(items => {
+								 
+								 table += '<tr>';
+								table += '<td>' + items["agent"] + '</td>';
+								if (items["status"] == 'Ready')
+									table += '<td><span class="badge badge-green">' + items["status"] + '</span></td>';
+								else
+									table += '<td><span class="badge badge-pink">' + items["status"] + '</span></td>';
+
+								table += '<td><span>' + items["nowHandle"] + '</span></td>';
+								table += '<td><span>' + items["chat"] + '</span></td>';
+								
+							});
+
+							
+
+							table += '</table>';
+							$('#multichatSoetta').html(table);
+			   
+			
+				  
+			   
+			  
+							
+		 
+		 
+		
+		
+							
+		  
+					   
+						
+  
+       
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+	
+						
+}
+
+async function listMultiChatPasarBaru(){
+	 var lastweek=[];
+	 var currentWeek=[];
+	
+	try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain' // Setting the accept header
+            }
+        });
+
+        // Check if the response is okay
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text(); // Using text() since accept is text/plain
+		 console.log(data);
+		 var json = JSON.parse(data);
+		
+		 
+		 
+		 
+		 
+			
+			  var table = '<table class="table table-dark table-striped">';
+				  table += '<tr>' +                                               
+									'<th>Nama Agent</th>' +
+									
+									'<th>Status</th>' +
+									'<th>Now Handle</th>' +
+									'<th>Chats</th>' +							
+									'</tr>';
+									
+									
+							//sconst agents = JSON.parse(data);	
+							 json.forEach(items => {
+								 
+								 table += '<tr>';
+								table += '<td>' + items["agent"] + '</td>';
+								if (items["status"] == 'Ready')
+									table += '<td><span class="badge badge-green">' + items["status"] + '</span></td>';
+								else
+									table += '<td><span class="badge badge-pink">' + items["status"] + '</span></td>';
+
+								table += '<td><span>' + items["nowHandle"] + '</span></td>';
+								table += '<td><span>' + items["chat"] + '</span></td>';
+								
+							});
+
+							
+
+							table += '</table>';
+							$('#multichatPasarBaru').html(table);
+			   
+			
+       
+
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
 	
 						
 }
@@ -277,6 +502,8 @@ function getDateTime() {
   var time = hours + ":" + minutes + " WIB"
   var today = new Date();
   var dateNya = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  //var dateNya = 'September' + " " + '27' + ", " + '2024';
+ // divDateNya.append('September' + " " + '27' + ", " + '2024');
   //var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = dateNya + ' ' + time;
   
@@ -357,5 +584,6 @@ function updateDateTime() {
   
 // Panggil fungsi saat halaman dimuat
 document.addEventListener('DOMContentLoaded', updateDateTime);
+
 				
 				 

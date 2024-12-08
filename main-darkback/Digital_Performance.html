@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../images/favicon.ico">
+  <link rel="icon" href="../images/bravo.png">
 
-  <title>Chat Bot Admin - Dashboard Box color </title>
+  <title>Digital Performances</title>
 
   <!-- Vendors Style-->
   <link rel="stylesheet" href="css/vendors_css.css">
@@ -21,6 +21,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
   <script src="Chart.bundle.js"></script>
+  <script src="js/digitalPerformance.js"></script>
   <script src="chartjs-gauge.js"></script>
   <style>
     .containerXXX {
@@ -56,44 +57,32 @@
   </style>
 </head>
 
-<body onload="abcde()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
   <!-- Site wrapper -->
   <div class="wrapper">
 
     <header class="main-header">
       <div class="d-flex align-items-center logo-box pl-10">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Logo Test -->
         <a href="index.html" class="logo">
-          <!-- logo-->
           <div class="logo-lg">
-            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
-            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
           </div>
         </a>
       </div>
       <!-- Header Navbar -->
       <nav class="navbar navbar-static-top pl-10">
         <!-- Sidebar toggle button-->
-        <div class="app-menu">
+        <div class="app-menu contact-center-text">
           Contact Center <br>
-          Bravo Bea Cukai <a style="color: red;">1500225</a>
+          Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
         </div>
-
         <div class="navbar-custom-menu r-side">
           <ul class="nav navbar-nav">
-
             <li class="btn-group d-md-inline-flex d-none">
               <div class="app-menu">
-                <div class="search-bx mx-5">
-
-                  <br>
-                  <a style="color: goldenrod;">12 Januari 2022 | Rabu | 13:38 WIB</a>
-
-                  </form>
-                </div>
+                <a class="date-time-text" style="color: goldenrod;">Selasa | 01 Oktober 2024 | 08:00</a>
               </div>
             </li>
           </ul>
@@ -119,12 +108,12 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-inbox "> <!-- Larger icon -->
-                      </i>
-                      <div class="value text-warning"> <!-- Larger number -->
-                        48
+                      <img src="assets/Wallboard 3 - Email Inbox.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-warning" id="emailInbox"> <!-- Larger number -->
+                        0
                       </div>
-                      <div class="label" > <!-- Larger label text -->
+                      <div class="label"> <!-- Larger label text -->
                         Inbox
                       </div>
                     </div>
@@ -135,8 +124,8 @@
                     <div class="card-body">
                       <i class="fas fa-edit">
                       </i>
-                      <div class="value text-warning">
-                        13
+                      <div class="value text-warning" id="emailHandling">
+                        0
                       </div>
                       <div class="label">
                         Handling
@@ -147,10 +136,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-clock text-warning">
-                      </i>
-                      <div class="value text-danger">
-                        30
+                      <img src="assets/Wallboard 3 - Email Queueing.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-danger" id="emailQueueing">
+                        0
                       </div>
                       <div class="label">
                         Queueing
@@ -161,10 +150,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-search">
-                      </i>
-                      <div class="value text-warning">
-                        10
+                      <img src="assets/Wallboard 3 - Email Review.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-warning" id="emailReviewing">
+                        0
                       </div>
                       <div class="label">
                         Reviewing
@@ -175,10 +164,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-times">
-                      </i>
-                      <div class="value text-warning">
-                        10
+                      <img src="assets/Wallboard 3 - Email Rejected.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-warning" id="emailRejected">
+                        0
                       </div>
                       <div class="label">
                         Rejected
@@ -189,10 +178,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body text-primary">
-                      <i class="fas fa-paper-plane">
-                      </i>
-                      <div class="value text-success">
-                        21
+                      <img src="assets/Wallboard 3 - Email Sent.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value" id="emailSend" style="color: #009945;">
+                        0
                       </div>
                       <div class="label">
                         Sent
@@ -207,11 +196,10 @@
                   <div class="label" style="font-size: 14px; flex-grow: 1; text-align: left;">
                     Average Email <br> Response Time
                   </div>
-                  <i class="fas fa-stopwatch"
-                    style="font-size: 36px; margin-right: 100px; display: flex; justify-content: center;">
-                  </i>
-                  <div class="value text-warning" style="font-size: 64px; text-align: right;">
-                    04:06
+                  <img src="assets/Wallboard 2 - Average Wait Time.png" alt="Average Wait Time Icon"
+                    style="width: 50px; height: 50px; margin-right: 100px; display: flex; justify-content: center;">
+                  <div class="value text-warning" style="font-size: 64px; text-align: right;" id="emailResponseTime">
+                    00:00
                   </div>
                 </div>
               </div>
@@ -221,11 +209,10 @@
                   <div class="label" style="font-size: 14px; flex-grow: 1; text-align: left;">
                     Average Email <br> Handling Time
                   </div>
-                  <i class="fas fa-stopwatch"
-                    style="font-size: 36px; margin-right: 100px; display: flex; justify-content: center;">
-                  </i>
-                  <div class="value text-primary" style="font-size: 64px; text-align: right;">
-                    04:06
+                  <img src="assets/Wallboard 2 - Average Talk Time.png" alt="Average Wait Time Icon"
+                    style="width: 50px; height: 50px; margin-right: 100px; display: flex; justify-content: center;">
+                  <div class="value" style="font-size: 64px; text-align: right; color: #00a6e1;" id="emailHandlingTime">
+                    00:00
                   </div>
                 </div>
               </div>
@@ -240,10 +227,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-comments">
-                      </i>
-                      <div class="value text-warning">
-                        48
+                      <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-warning" id="incomingLiveChat">
+                        20
                       </div>
                       <div class="label">
                         Incoming
@@ -254,10 +241,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-comment-dots">
-                      </i>
-                      <div class="value text-warning">
-                        13
+                      <img src="assets/Wallboard 3 - Livechat On Handling.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-warning" id="handlingLiveChat">
+                        0
                       </div>
                       <div class="label">
                         On Handling
@@ -270,8 +257,8 @@
                     <div class="card-body">
                       <i class="fas fa-comment-slash">
                       </i>
-                      <div class="value text-danger">
-                        30
+                      <div class="value text-danger" id="answerLiveChat">
+                        0
                       </div>
                       <div class="label">
                         Answer chat
@@ -282,10 +269,10 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-comment-slash text-danger">
-                      </i>
-                      <div class="value text-danger">
-                        10
+                      <img src="assets/Wallboard 3 - Livechat Abandoned.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-danger" id="abandonedLiveChat">
+                        0
                       </div>
                       <div class="label">
                         Abandoned
@@ -296,13 +283,26 @@
                 <div class="col-4">
                   <div class="card">
                     <div class="card-body">
-                      <i class="fas fa-comment-dots text-warning">
-                      </i>
-                      <div class="value text-danger">
-                        30
+                      <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Email Inbox Icon"
+                        style="width: 50px; height: 50px;">
+                      <div class="value text-danger" id="queueingLiveChat">
+                        0
                       </div>
                       <div class="label">
                         Queueing
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <i class="fas fa-list" style="font-size: 40px;"></i>
+                      <div class="value" id="otherLc" style="color: #B2BEB5	;">
+                        0
+                      </div>
+                      <div class="label">
+                        Other
                       </div>
                     </div>
                   </div>
@@ -312,13 +312,12 @@
               <div class="card mt-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                   <div class="label" style="font-size: 14px; flex-grow: 1; text-align: left;">
-                    Average <br> Waiting Time
+                    Average Livechat <br> Waiting Time
                   </div>
-                  <i class="fas fa-stopwatch"
-                    style="font-size: 36px; margin-right: 100px; display: flex; justify-content: center;">
-                  </i>
-                  <div class="value text-warning" style="font-size: 64px; text-align: right;">
-                    04:06
+                  <img src="assets/Wallboard 2 - Average Wait Time.png" alt="Average Wait Time Icon"
+                    style="width: 50px; height: 50px; margin-right: 100px; display: flex; justify-content: center;">
+                  <div class="value text-warning" style="font-size: 64px; text-align: right;" id="waitingTimeLiveChat">
+                    00:00
                   </div>
                 </div>
               </div>
@@ -326,13 +325,12 @@
               <div class="card mt-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                   <div class="label" style="font-size: 14px; flex-grow: 1; text-align: left;">
-                    Average <br> Conversation Time
+                    Average Livechat <br> Conversation Time
                   </div>
-                  <i class="fas fa-stopwatch"
-                    style="font-size: 36px; margin-right: 100px; display: flex; justify-content: center;">
-                  </i>
-                  <div class="value text-primary" style="font-size: 64px; text-align: right;">
-                    04:06
+                  <img src="assets/Wallboard 2 - Average Talk Time.png" alt="Average Wait Time Icon"
+                    style="width: 50px; height: 50px; margin-right: 100px; display: flex; justify-content: center;">
+                  <div class="value" style="font-size: 64px; text-align: right; color: #00a6e1;" id="averageLiveChat">
+                    00:00
                   </div>
                 </div>
               </div>
@@ -348,38 +346,38 @@
                   <div class="card2 whatsapp">
                     <div class="card-body">
                       <div class="label">Whatsapp</div>
-                      <div class="value2 text-success">45</div>
+                      <div class="value2" style="color: #009945;" id="waSosMed">0</div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="col-6">
                   <div class="card2 facebook">
                     <div class="card-body">
                       <div class="label">Facebook</div>
-                      <div class="value2 text-primary">30</div>
+                      <div class="value2" style="color: #00a6e1;" id="fbSosMed">0</div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="col-6">
                   <div class="card2 instagram">
                     <div class="card-body">
                       <div class="label">Instagram</div>
-                      <div class="value2 text-danger">15</div>
+                      <div class="value2 text-danger" id="igSosMed">0</div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="col-6">
                   <div class="card2 x">
                     <div class="card-body">
                       <div class="label">X</div>
-                      <div class="value2 text-warning">11</div>
+                      <div class="value2 text-warning" id="xSosMed">0</div>
                     </div>
                   </div>
                 </div>
-                
+
               </div>
               <div class="chart mt-3">
                 <canvas id="socialMediaTrend">

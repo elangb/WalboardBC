@@ -4,6 +4,39 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.header {
+    background-color: #1e2746;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header .title {
+    font-size: 24px;
+}
+
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px; /* Increase font size */
+    margin-left: -100px;
+}
+
+
+.header .date-time {
+    text-align: right;
+}
+
+.date-time-text {
+    font-size: 22px; /* Ukuran teks lebih besar */
+    margin: 10px 0; /* Margin atas dan bawah sama */
+    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
+}
+
 /* Section Title Styles */
 .section-title {
     background-repeat: no-repeat;
@@ -183,3 +216,16 @@ body {
 .card2.x {
     background-image: url('assets/Wallboard 3 - X.png');
 }
+
+.color-hijau{
+    color: #009945;
+  }
+  .color-merah{
+    color: #e65055;
+  }
+  .color-biru{
+    color: #00a6e1;
+  }
+  .color-kuning{
+    color: #f08f2e;
+  }

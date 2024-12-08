@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../images/favicon.ico">
+  <link rel="icon" href="../images/bravo.png">
 
-  <title>BRAVO 1500225</title>
+  <title>Service Volume</title>
 
   <!-- Vendors Style-->
   <link rel="stylesheet" href="css/vendors_css.css">
@@ -27,6 +27,15 @@
       padding-top: 56.25%;
       /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
     }
+
+    body {
+      background-color: #000; /* Hitam */
+    }
+
+    .box-tengah {
+      height: 220px;
+    }
+
 
     /* Then style the iframe to fit in the container div with full height and width */
     .responsive-iframe {
@@ -101,63 +110,74 @@
     .apexcharts-series {
       margin-bottom: 10px;
     }
+
+    .header {
+      background-color: #1e2746;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header img {
+      height: 50px;
+    }
+
+    .header .title {
+      font-size: 24px;
+    }
+
+    .contact-center-text {
+      font-weight: bold;
+      font-size: 20px;
+      /* Increase font size */
+      margin-left: -100px;
+    }
+
+
+    .header .date-time {
+      text-align: right;
+    }
+
+    .date-time-text {
+      font-size: 22px;
+      /* Ukuran teks lebih besar */
+      margin: 10px 0;
+      /* Margin atas dan bawah sama */
+      color: goldenrod;
+      /* Warna sesuai dengan style yang sudah ada */
+    }
   </style>
 </head>
 
-<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse" style="background-color: #000; color: #fff;">
+
   <!-- Site wrapper -->
   <div class="wrapper">
 
     <header class="main-header">
       <div class="d-flex align-items-center logo-box pl-10">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- Logo Test -->
         <a href="index.html" class="logo">
-          <!-- logo-->
           <div class="logo-lg">
-            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
-            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
           </div>
         </a>
       </div>
       <!-- Header Navbar -->
       <nav class="navbar navbar-static-top pl-10">
         <!-- Sidebar toggle button-->
-        <div class="app-menu">
+        <div class="app-menu contact-center-text text-white">
           Contact Center <br>
-          Bravo Bea Cukai <a style="color: red;">1500225</a>
+          Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
         </div>
-
         <div class="navbar-custom-menu r-side">
           <ul class="nav navbar-nav">
-
             <li class="btn-group d-md-inline-flex d-none">
               <div class="app-menu">
-                <div class="search-bx mx-5">
-
-                  <br>
-                  <a style="color: goldenrod;">
-                    <div id="dateNya"></div>
-                  </a>
-
-                  </form>
-                </div>
+                <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
               </div>
-            </li>
-
-            <!-- Control Sidebar Toggle Button 
-          <li>
-			<a href="#" data-provide="fullscreen" class="waves-effect waves-light nav-link rounded full-screen" title="Full Screen">
-				<img src="../images/svg-icon/fullscreen.svg" class="img-fluid svg-icon" alt="">
-			</a>
-          </li>-->
-            <!-- Control Sidebar Toggle Button -->
-            <li>
-              <a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
-                <img src="../images/svg-icon/settings.svg" class="img-fluid svg-icon" alt="">
-              </a>
             </li>
           </ul>
         </div>
@@ -234,10 +254,10 @@
               <div class="row">
                 <div class="col-12">
                   <center>
-                    <div class="box">
+                    <div class="box box-tengah">
                       <div class="box-body">
-                        <h3 class="box-title text-white">Total Services</h3>
-                        <h1 class="text-success" style="font-size: 4rem;" id="TotalSer">0</h1>
+                        <h3 class="box-title text-white mt-2">Total Services</h3>
+                        <h1 class="text-success" style="font-size: 5rem;" id="TotalSer">0</h1>
                       </div>
                     </div>
                   </center>
@@ -246,10 +266,10 @@
               <div class="row">
                 <div class="col-12">
                   <center>
-                    <div class="box">
+                    <div class="box box-tengah">
                       <div class="box-body">
-                        <h3 class="box-title text-white">Total Monthly Services</h3>
-                        <h1 class="text-success" style="font-size: 4rem;" id="TotalMSer">0</h1>
+                        <h3 class="box-title text-white mt-2">Total Monthly Services</h3>
+                        <h1 class="text-success" style="font-size: 5rem;" id="TotalMSer">0</h1>
                       </div>
                     </div>
                   </center>
@@ -263,7 +283,7 @@
 
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column">
+                  <div class="box d-flex align-items-center flex-column box-tengah" >
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
                       <h2 class="text-danger mt-3">Call</h2>
@@ -282,7 +302,7 @@
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column">
+                  <div class="box d-flex align-items-center flex-column box-tengah" >
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
                       <h2 class="text-success mt-3">Multichat</h2>
@@ -301,7 +321,7 @@
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column">
+                  <div class="box d-flex align-items-center flex-column box-tengah" >
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
                       <h2 class="text-warning mt-3">Email</h2>
@@ -320,10 +340,10 @@
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column">
+                  <div class="box d-flex align-items-center flex-column box-tengah" >
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
-                      <h2 class="text-primary mt-3" id="sosmed">Social Media</h2>
+                      <h2 class="text-primary mt-3">Social Media</h2>
                     </div>
                     <div class="box-body d-flex flex-row align-items-center">
                       <!-- Gambar dan waktu berada di kiri -->
@@ -332,7 +352,7 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id="socmed">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id="socmed1">0</h1>
                       </div>
                     </div>
                   </div>
@@ -343,12 +363,12 @@
               <div class="row">
                 <div class="col-md-6">
                   <center>
-                    <div class="box">
-                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">First Call Resolution</h4>
+                    <div class="box box-tengah">
+                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">First Call Resolution</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-success" id="FirstCall">0</a>
+                            <a style="color: #009945;" id="FirstCall">0</a>
                           </h1>
                         </center>
                       </div>
@@ -358,8 +378,8 @@
 
                 <div class="col-md-6">
                   <center>
-                    <div class="box">
-                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Total Case</h4>
+                    <div class="box box-tengah">
+                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">Total Case</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
@@ -373,8 +393,8 @@
 
                 <div class="col-md-6">
                   <center>
-                    <div class="box">
-                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Case Resolved</h4>
+                    <div class="box box-tengah">
+                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">Case Resolved</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
@@ -388,8 +408,8 @@
 
                 <div class="col-md-6">
                   <center>
-                    <div class="box">
-                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Pending Case</h4>
+                    <div class="box box-tengah">
+                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">Pending Case</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
@@ -436,7 +456,8 @@
                       <div>
                         <div class="box-body">
                           <div>
-                            <div id="dailyservice"></div>
+
+                            <div id="areachart1"></div>
                           </div>
                         </div>
                       </div>
@@ -486,63 +507,35 @@
   <!-- Chat Bot Admin App -->
 
   <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-  <script>
-    var options = {
-      series: [{
-        data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-      }],
-      chart: {
-        type: 'bar',
-        height: 350,
-        foreColor: '#ffffff',  
-        background: 'transparent'  
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 4,
-          borderRadiusApplication: 'end',
-          horizontal: true,
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-          'United States', 'China', 'Germany'
-        ],
-        labels: {
-          style: {
-            colors: '#ffffff'
-          }
-        }
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: '#ffffff'
-          }
-        }
-      },
-      grid: {
-        borderColor: '#ffffff' 
-      },
-      tooltip: {
-        theme: 'dark',  
-        style: {
-          color: '#ffffff'
-        }
-      },
-      theme: {
-        mode: 'dark',  
-        palette: 'palette1', 
-      },
-      colors: ['#4bb9af']
-    };
 
-    var chart = new ApexCharts(document.querySelector("#dailyservice"), options);
-    chart.render();
+  <script>
+    // Fungsi untuk mengupdate tanggal dan waktu setiap detik
+    function updateDateTime() {
+      const dateTimeElement = document.getElementById("dateTime");
+
+      const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+      const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+      const now = new Date();
+      const dayName = days[now.getDay()];
+      const date = now.getDate();
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      // Format yang diinginkan: "Selasa | 01 Oktober 2024 | 08:00:00"
+      const formattedDateTime = `${dayName} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+
+      dateTimeElement.textContent = formattedDateTime;
+    }
+
+    // Update waktu saat halaman dimuat dan setiap detik
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
   </script>
+
 </body>
 
 </html>

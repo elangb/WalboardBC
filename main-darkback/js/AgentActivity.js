@@ -228,28 +228,3 @@ function convertSeconds(seconds) {
   return `${hours}:${minutes}:${seconds}`;
 }
 
- // Mendapatkan waktu saat ini
- function updateDateTime() {
-  const now = new Date();
-
-  // Daftar nama hari
-  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-  const day = days[now.getDay()]; // Mendapatkan hari saat ini
-
-  // Daftar nama bulan
-  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-                  "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-  const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
-
-  // Format tanggal
-  const date = now.getDate(); // Tanggal
-  const year = now.getFullYear(); // Tahun
-  const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
-  const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
-
-  // Mengupdate elemen dengan waktu saat ini
-  document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
-}
-
-// Panggil fungsi saat halaman dimuat
-document.addEventListener('DOMContentLoaded', updateDateTime);

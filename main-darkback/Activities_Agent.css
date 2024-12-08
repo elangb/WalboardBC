@@ -89,7 +89,6 @@ body {
 
 .status-available, .status-acd, .status-acw, .status-istirahat, 
 .status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
-    background-color: #059d55;
     color: #fff;
     border-radius: 5px;
     padding: 10px 20px; /* Padding atas-bawah 10px, kanan-kiri 20px */

@@ -1,5 +1,5 @@
 .section-titlebg.tanjung-priok {
-    background-image: url('../assets/Tanjung Priok.png'); /* Sesuaikan path */
+    background-image: url('assets/Tanjung Priok.png');
     font-size: 34px;
 }
 

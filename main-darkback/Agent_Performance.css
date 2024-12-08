@@ -128,11 +128,16 @@ body {
 .badge-green, .badge-orange, .badge-pink {
     background-color: #059d55;
     color: #fff;
-    padding: 5px 10px; /* Padding atas-bawah 5px, kanan-kiri 20px */
-    border-radius: 5px;
-    min-width: 60px; /* Set lebar minimal */
-    display: inline-block; /* Agar badge mengikuti konten */
-    text-align: center; /* Untuk membuat teks berada di tengah */
+    padding: 10px 26px;
+    /*Paddingatas-bawah5px,kanan-kiri20px*/border-radius: 5px;
+    min-width: 60px;
+    /*Setlebarminimal*/display: inline-block;
+    /*Agarbadgemengikutikonten*/text-align: center;
+     /* Untuk membuat teks berada di tengah */;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .badge-green {

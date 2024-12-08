@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../images/favicon.ico">
+    <link rel="icon" href="../images/bravo.png">
 
     <title>Site Performances</title>
 
@@ -22,7 +22,17 @@
 
     <script src="Chart.bundle.js"></script>
     <script src="chartjs-gauge.js"></script>
+    <script src="js/Site_Performance.js"></script>
     <style>
+        .card-body .label {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .cardtengahbawah-body .value {
+            font-weight: bold;
+            font-size: 44px;
+            margin-left: -35px;
+        }
         .containerXXX {
             position: relative;
             overflow: hidden;
@@ -56,44 +66,32 @@
     </style>
 </head>
 
-<body onload="abcde()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
     <!-- Site wrapper -->
     <div class="wrapper">
 
         <header class="main-header">
             <div class="d-flex align-items-center logo-box pl-10">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <!-- Logo Test -->
                 <a href="index.html" class="logo">
-                    <!-- logo-->
                     <div class="logo-lg">
-                        <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
-                        <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+                        <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+                        <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
                     </div>
                 </a>
             </div>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top pl-10">
                 <!-- Sidebar toggle button-->
-                <div class="app-menu">
+                <div class="app-menu contact-center-text">
                     Contact Center <br>
-                    Bravo Bea Cukai <a style="color: red;">1500225</a>
+                    Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
                 </div>
-
                 <div class="navbar-custom-menu r-side">
                     <ul class="nav navbar-nav">
-
                         <li class="btn-group d-md-inline-flex d-none">
                             <div class="app-menu">
-                                <div class="search-bx mx-5">
-
-                                    <br>
-                                    <a style="color: goldenrod;">12 Januari 2022 | Rabu | 13:38 WIB</a>
-
-                                    </form>
-                                </div>
+                                <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
                             </div>
                         </li>
                     </ul>
@@ -115,44 +113,44 @@
                             <div class="section-title tanjung-priok"> <!-- Larger section title -->
                                 Tanjung Priok
                             </div>
-                            <div class="col-12 card mb-4">
+                            <div class="col-12 card mb-3">
                                 <div class="">
                                     <div class="" id="chart"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Rcv. Calls</div>
-                                            <div class="value text-success">48</div>
+                                            <div class="label">Rcv. Calls</div>
+                                            <div id="rcvPriok" class="value color-hijau">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Ans. Calls
+                                            <div class="label">Ans. Calls
                                             </div>
-                                            <div class="value text-primary">13</div>
+                                            <div id="ansPriok" class="value color-biru">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Abn. Calls
+                                            <div class="label">Abn. Calls
                                             </div>
-                                            <div class="value text-danger">30</div>
+                                            <div id="abnPriok" class="value color-merah">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Calls Wait
+                                            <div class="label">Calls Wait
                                             </div>
-                                            <div class="value text-warning">10</div>
+                                            <div id="waitPriok" class="value color-kuning">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -169,9 +167,9 @@
                                                 <img src="assets/Wallboard 2 - Average Talk Time.png"
                                                     alt="Average Talk Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div class="value text-primary"
+                                                <div id="avgTalkTimePriok" class="value color-biru"
                                                     style="font-size: 44px; text-align: right;">
-                                                    04:06
+                                                    00:00
                                                 </div>
                                             </div>
                                         </div>
@@ -188,9 +186,9 @@
                                                 <img src="assets/Wallboard 2 - Average Wait Time.png"
                                                     alt="Average Waiting Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div class="value text-warning"
+                                                <div id="avgWaitTimePriok" class="value color-kuning"
                                                     style="font-size: 44px; text-align: right;">
-                                                    04:06
+                                                    00:00
                                                 </div>
                                             </div>
                                         </div>
@@ -198,13 +196,13 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
+                            <div class="row mt-1">
                                 <div class="col-4">
                                     <div class="cardkiribawah">
                                         <div class="card-body">
                                             <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat Icon" style="width:60px; height:60px;">
-                                            <div class="value text-warning">
-                                                48
+                                            <div id="incomingLiveChatPriok" class="value color-kuning">
+                                                0
                                             </div>
                                             <div class="label">
                                                 Inc. Chat
@@ -217,8 +215,8 @@
                                     <div class="cardkiribawah">
                                         <div class="card-body">
                                             <img src="assets/Wallboard 3 - Livechat Abandoned.png" alt="Abandoned Chat Icon" style="width:60px; height:60px;">
-                                            <div class="value text-warning">
-                                                13
+                                            <div id="abandonedLiveChatPriok" class="value color-kuning">
+                                                0
                                             </div>
                                             <div class="label">
                                                 Abn. Chat
@@ -231,8 +229,8 @@
                                     <div class="cardkiribawah">
                                         <div class="card-body">
                                             <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Queueing Chat Icon" style="width:60px; height:60px;">
-                                            <div class="value text-danger">
-                                                30
+                                            <div id="queueingLiveChatPriok" class="value color-merah">
+                                                0
                                             </div>
                                             <div class="label">
                                                 Queueing
@@ -250,7 +248,7 @@
                             <div class="section-title soekarno-hatta"> <!-- Larger section title -->
                                 Soekarno Hatta
                             </div>
-                            <div class="col-12 card mb-4">
+                            <div class="col-12 card mb-3">
                                 <div class=""> <!-- Larger section title -->
                                     <!-- Chart will be rendered here -->
                                     <div class="" id="chart2"></div>
@@ -258,37 +256,37 @@
                             </div>
                             <div class="row">
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Rcv. Calls</div>
-                                            <div class="value text-success">48</div>
+                                            <div class="label">Rcv. Calls</div>
+                                            <div id="rcvCallsSoetta" class="value color-hijau">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Ans. Calls
+                                            <div class="label">Ans. Calls
                                             </div>
-                                            <div class="value text-primary">13</div>
+                                            <div id="ansCallsSoetta" class="value color-biru">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Abn. Calls
+                                            <div class="label">Abn. Calls
                                             </div>
-                                            <div class="value text-danger">30</div>
+                                            <div id="abnCallsSoetta" class="value color-merah">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Calls Wait.
+                                            <div class="label">Calls Wait.
                                             </div>
-                                            <div class="value text-warning">10</div>
+                                            <div id="waitCallsSoetta" class="value color-kuning">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -304,9 +302,9 @@
                                                 <img src="assets/Wallboard 2 - Average Talk Time.png"
                                                     alt="Average Talk Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div class="value text-primary"
+                                                <div id="avgTalkTimeSoetta" class="value color-biru"
                                                     style="font-size: 44px; text-align: right;">
-                                                    04:06
+                                                    00:00
                                                 </div>
                                             </div>
                                         </div>
@@ -323,9 +321,9 @@
                                                 <img src="assets/Wallboard 2 - Average Wait Time.png"
                                                     alt="Average Waiting Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div class="value text-warning"
+                                                <div id="avgWaitTimeSoetta" class="value color-kuning"
                                                     style="font-size: 44px; text-align: right;">
-                                                    04:06
+                                                    00:00
                                                 </div>
                                             </div>
                                         </div>
@@ -333,7 +331,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
+                            <div class="row mt-1">
                                 <div class="col-6">
                                     <div class="cardtengahbawah">
                                         <div class="cardtengahbawah-body d-flex align-items-center">
@@ -341,8 +339,8 @@
                                                 Incoming <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="incomingChatSoetta" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -354,8 +352,8 @@
                                                 Queueing <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Queueing Chat" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="queueingChatSoetta" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -369,8 +367,8 @@
                                                 Incoming <br> Email
                                             </div>
                                             <img src="assets/Wallboard 3 - Email Inbox.png" alt="Incoming Email" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="incomingEmailSoetta" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -378,12 +376,12 @@
                                 <div class="col-6">
                                     <div class="cardtengahbawah">
                                         <div class="cardtengahbawah-body d-flex align-items-center">
-                                            <div class="text-left flex-grow-1">
+                                            <span class="text-left flex-grow-1">
                                                 Queueing <br> Email
-                                            </div>
+                                            </span>
                                             <img src="assets/Wallboard 3 - Email Queueing.png" alt="Average Waiting Time" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="queueingEmailSoetta" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -396,7 +394,7 @@
                             <div class="section-title pos-pasar-baru"> <!-- Larger section title -->
                                 Pos Pasar Baru
                             </div>
-                            <div class="col-12 card mb-4">
+                            <div class="col-12 card mb-3">
                                 <div class=""> <!-- Larger section title -->
                                     <!-- Chart will be rendered here -->
                                     <div class="" id="chart3"></div>
@@ -404,37 +402,37 @@
                             </div>
                             <div class="row">
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Rcv. Calls</div>
-                                            <div class="value text-success">48</div>
+                                            <div class="label">Rcv. Calls</div>
+                                            <div id="rcvCallsPb" class="value color-hijau">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Ans. Calls
+                                            <div class="label">Ans. Calls
                                             </div>
-                                            <div class="value text-primary">13</div>
+                                            <div id="ansCallsPb" class="value color-biru">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Abn. Calls
+                                            <div class="label">Abn. Calls
                                             </div>
-                                            <div class="value text-danger">30</div>
+                                            <div id="abnCallsPb" class="value color-merah">0</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card" style="width: 128px;">
+                                    <div class="card d-flex flex-column align-items-center">
                                         <div class="card-body">
-                                            <div class="label" style="font-size: 16px; font-weight: bold;">Calls Wait.
+                                            <div class="label">Calls Wait.
                                             </div>
-                                            <div class="value text-warning">10</div>
+                                            <div id="callWaitPb" class="value color-kuning">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -450,9 +448,9 @@
                                                 <img src="assets/Wallboard 2 - Average Talk Time.png"
                                                     alt="Average Talk Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div class="value text-primary"
+                                                <div id="averageTalkTimePb" class="value color-biru"
                                                     style="font-size: 44px; text-align: right;">
-                                                    04:06
+                                                    00:00
                                                 </div>
                                             </div>
                                         </div>
@@ -469,9 +467,9 @@
                                                 <img src="assets/Wallboard 2 - Average Wait Time.png"
                                                     alt="Average Waiting Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div class="value text-warning"
+                                                <div id="averageWaitTimePb" class="value color-kuning"
                                                     style="font-size: 44px; text-align: right;">
-                                                    04:06
+                                                    00:00
                                                 </div>
                                             </div>
                                         </div>
@@ -479,16 +477,37 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
+                            <div class="row mt-1">
                                 <div class="col-6">
+                                    <!-- <div class="d-flex align-items-center w-100 mt-2">
+                                        <img src="assets/Wallboard 2 - Average Talk Time.png"
+                                            alt="Average Talk Time"
+                                            style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
+                                        <div class="value color-biru"
+                                            style="font-size: 44px; text-align: right;">
+                                            04:06
+                                        </div>
+                                    </div> -->
                                     <div class="cardtengahbawah">
-                                        <div class="cardtengahbawah-body d-flex align-items-center">
+                                        <div class="cardtengahbawah-body d-flex align-items-center">                                            
+                                            <!-- <div class="flex-grow-1">
+                                                <div>
+                                                    <h5 class="font-size-14 mb-1">Incoming</h5>
+                                                    <p class="font-size-13 mb-0">Chat</p>
+                                                </div>
+                                            </div>
+                                            <div class="icon-img flex-shrink-0 me-1">
+                                                <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat" class="icon-img" style="margin-left: 0;">
+                                            </div>
+                                            <div class="value color-kuning">
+                                                38
+                                            </div> -->
                                             <div class="text-left flex-grow-1">
                                                 Incoming <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="incomingChatPb" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -500,8 +519,8 @@
                                                 Queueing <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Queueing Chat" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="queueingChatPb" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -511,12 +530,12 @@
                                 <div class="col-6">
                                     <div class="cardtengahbawah">
                                         <div class="cardtengahbawah-body d-flex align-items-center">
-                                            <div class="text-left flex-grow-1">
+                                            <div  class="text-left flex-grow-1">
                                                 Incoming <br> Email
                                             </div>
                                             <img src="assets/Wallboard 3 - Email Inbox.png" alt="Incoming Email" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <div id="incomingEmailPb" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -527,9 +546,9 @@
                                             <div class="text-left flex-grow-1">
                                                 Queueing <br> Email
                                             </div>
-                                            <img src="assets/Wallboard 3 - Email Queueing.png" alt="Average Waiting Time" class="icon-img">
-                                            <div class="value text-warning">
-                                                04
+                                            <img  src="assets/Wallboard 3 - Email Queueing.png" alt="Average Waiting Time" class="icon-img">
+                                            <div id="queueingEmailPb" class="value color-kuning">
+                                                0
                                             </div>
                                         </div>
                                     </div>
@@ -546,314 +565,51 @@
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js">
         </script>
-        <script>
-            var ctx = document.getElementById('socialMediaTrend').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-                    datasets: [{
-                        label: 'Facebook',
-                        borderColor: '#21a1ff',
-                        data: [10, 20, 15, 30, 25, 40, 35, 50, 45, 60]
-                    }, {
-                        label: 'Instagram',
-                        borderColor: '#ff4d4d',
-                        data: [5, 15, 10, 20, 15, 30, 25, 40, 35, 50]
-                    }, {
-                        label: 'X',
-                        borderColor: '#ffb84d',
-                        data: [2, 12, 8, 18, 14, 28, 22, 36, 30, 44]
-                    }, {
-                        label: 'Whatsapp',
-                        borderColor: '#21ff4d',
-                        data: [8, 18, 12, 22, 18, 32, 28, 42, 38, 52]
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
+        <!-- <script> -->
+            <!-- var ctx = document.getElementById('socialMediaTrend').getContext('2d'); -->
+            <!-- var chart = new Chart(ctx, { -->
+                <!-- type: 'line', -->
+                <!-- data: { -->
+                    <!-- labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'], -->
+                    <!-- datasets: [{ -->
+                        <!-- label: 'Facebook', -->
+                        <!-- borderColor: '#21a1ff', -->
+                        <!-- data: [10, 20, 15, 30, 25, 40, 35, 50, 45, 60] -->
+                    <!-- }, { -->
+                        <!-- label: 'Instagram', -->
+                        <!-- borderColor: '#ff4d4d', -->
+                        <!-- data: [5, 15, 10, 20, 15, 30, 25, 40, 35, 50] -->
+                    <!-- }, { -->
+                        <!-- label: 'X', -->
+                        <!-- borderColor: '#ffb84d', -->
+                        <!-- data: [2, 12, 8, 18, 14, 28, 22, 36, 30, 44] -->
+                    <!-- }, { -->
+                        <!-- label: 'Whatsapp', -->
+                        <!-- borderColor: '#21ff4d', -->
+                        <!-- data: [8, 18, 12, 22, 18, 32, 28, 42, 38, 52] -->
+                    <!-- }] -->
+                <!-- }, -->
+                <!-- options: { -->
+                    <!-- scales: { -->
+                        <!-- x: { -->
+                            <!-- beginAtZero: true -->
+                        <!-- }, -->
+                        <!-- y: { -->
+                            <!-- beginAtZero: true -->
+                        <!-- } -->
+                    <!-- } -->
+                <!-- } -->
+            <!-- }); -->
+        <!-- </script> -->
 
         <!-- Answer Call Chart -->
         <!-- Chart Kiri -->
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script>
-            var options = {
-                series: [{
-                    name: 'Answer Call',
-                    data: [75]  // Persentase Answer Call (75% dari total panggilan masuk)
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 150,
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: true,  // Orientasi bar menjadi horizontal (menyamping)
-                        dataLabels: {
-                            position: 'top'  // Menampilkan label persentase di atas bar
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function (val) {
-                        return val + "%";  // Format data label untuk menampilkan persentase
-                    },
-                    offsetX: 0,
-                    style: {
-                        fontSize: '12px',
-                        colors: ['#fff']  // Warna teks label putih
-                    }
-                },
-                stroke: {
-                    width: 1,
-                    colors: ['#fff']  // Warna garis putih
-                },
-                title: {
-                    text: '% Answer Calls',  // Judul chart
-                    align: 'center',
-                    style: {
-                        color: '#fff'  // Warna teks judul putih
-                    }
-                },
-                xaxis: {
-                    categories: ['Answer Call'],  // Label tunggal untuk Answer Call
-                    max: 100,  // Maksimal nilai x-axis adalah 100 (persentase)
-                    labels: {
-                        style: {
-                            colors: ['#fff'],  // Warna label sumbu x putih
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    labels: {
-                        style: {
-                            colors: ['#fff'],  // Warna label sumbu y putih
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return val + "%";  // Format tooltip untuk persentase
-                        },
-                        style: {
-                            fontSize: '12px',
-                            color: '#fff'  // Warna teks dalam tooltip putih
-                        }
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-                legend: {
-                    show: false  // Sembunyikan legenda karena hanya ada satu bar
-                },
-                grid: {
-                    show: true,
-                    xaxis: {
-                        lines: {
-                            show: true  // Menampilkan grid pada x-axis
-                        }
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
-        </script>
-
+       
         <!-- Chart Tengah -->
-        <script>
-            var options = {
-                series: [{
-                    name: 'Answer Call',
-                    data: [75]  // Persentase Answer Call (75% dari total panggilan masuk)
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 150,
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: true,  // Orientasi bar menjadi horizontal (menyamping)
-                        dataLabels: {
-                            position: 'top'  // Menampilkan label persentase di atas bar
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function (val) {
-                        return val + "%";  // Format data label untuk menampilkan persentase
-                    },
-                    offsetX: 0,
-                    style: {
-                        fontSize: '12px',
-                        colors: ['#fff']  // Warna teks label putih
-                    }
-                },
-                stroke: {
-                    width: 1,
-                    colors: ['#fff']  // Warna garis putih
-                },
-                title: {
-                    text: '% Answer Calls',  // Judul chart
-                    align: 'center',
-                    style: {
-                        color: '#fff'  // Warna teks judul putih
-                    }
-                },
-                xaxis: {
-                    categories: ['Answer Call'],  // Label tunggal untuk Answer Call
-                    max: 100,  // Maksimal nilai x-axis adalah 100 (persentase)
-                    labels: {
-                        style: {
-                            colors: ['#fff'],  // Warna label sumbu x putih
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    labels: {
-                        style: {
-                            colors: ['#fff'],  // Warna label sumbu y putih
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return val + "%";  // Format tooltip untuk persentase
-                        },
-                        style: {
-                            fontSize: '12px',
-                            color: '#fff'  // Warna teks dalam tooltip putih
-                        }
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-                legend: {
-                    show: false  // Sembunyikan legenda karena hanya ada satu bar
-                },
-                grid: {
-                    show: true,
-                    xaxis: {
-                        lines: {
-                            show: true  // Menampilkan grid pada x-axis
-                        }
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart2"), options);
-            chart.render();
-        </script>
-
+    
         <!-- Chart Kanan -->
-        <script>
-            var options = {
-                series: [{
-                    name: 'Answer Call',
-                    data: [75]  // Persentase Answer Call (75% dari total panggilan masuk)
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 150,
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: true,  // Orientasi bar menjadi horizontal (menyamping)
-                        dataLabels: {
-                            position: 'top'  // Menampilkan label persentase di atas bar
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function (val) {
-                        return val + "%";  // Format data label untuk menampilkan persentase
-                    },
-                    offsetX: 0,
-                    style: {
-                        fontSize: '12px',
-                        colors: ['#fff']  // Warna teks label putih
-                    }
-                },
-                stroke: {
-                    width: 1,
-                    colors: ['#fff']  // Warna garis putih
-                },
-                title: {
-                    text: '% Answer Calls',  // Judul chart
-                    align: 'center',
-                    style: {
-                        color: '#fff'  // Warna teks judul putih
-                    }
-                },
-                xaxis: {
-                    categories: ['Answer Call'],  // Label tunggal untuk Answer Call
-                    max: 100,  // Maksimal nilai x-axis adalah 100 (persentase)
-                    labels: {
-                        style: {
-                            colors: ['#fff'],  // Warna label sumbu x putih
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    labels: {
-                        style: {
-                            colors: ['#fff'],  // Warna label sumbu y putih
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return val + "%";  // Format tooltip untuk persentase
-                        },
-                        style: {
-                            fontSize: '12px',
-                            color: '#fff'  // Warna teks dalam tooltip putih
-                        }
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-                legend: {
-                    show: false  // Sembunyikan legenda karena hanya ada satu bar
-                },
-                grid: {
-                    show: true,
-                    xaxis: {
-                        lines: {
-                            show: true  // Menampilkan grid pada x-axis
-                        }
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart3"), options);
-            chart.render();
-        </script>
+      
 
         <!-- Vendor JS -->
         <script src="js/vendors.min.js"></script>

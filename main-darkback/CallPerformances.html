@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="CallPerformances.css">
 
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="Chart.bundle.js"></script>
 	<script src="chartjs-gauge.js"></script>
 	<script src="js/CallPerformances.js"></script>
@@ -81,7 +81,7 @@
 					<ul class="nav navbar-nav">
 						<li class="btn-group d-md-inline-flex d-none">
 							<div class="app-menu">
-								<a class="date-time-text" style="color: goldenrod;">Jumat | 27 September 2024 | 08:00</a>
+								<a class="date-time-text" style="color: goldenrod;"><span id="dateNya"></span></a>
 							</div>
 						</li>
 					</ul>
@@ -143,7 +143,7 @@
 										</div>
 									</center>
 								</div>
-								<div class="col-6">
+								<div class="col-6 mt-4">
 									<center>
 										<div class="card">
 											<div class="card-body">
@@ -153,7 +153,7 @@
 										</div>
 									</center>
 								</div>
-								<div class="col-6">
+								<div class="col-6 mt-4">
 									<center>
 										<div class="card">
 											<div class="card-body">
@@ -167,7 +167,7 @@
 
 							<!-- Row Kiri Bawah -->
 							<div class="row">
-								<div class="col-12 mt-3">
+								<div class="col-12 mt-4">
 									<center>
 										<div class="card box-inverse">
 											<!-- Gauge Chart -->
@@ -208,16 +208,16 @@
 											<span class="badge badge-dot badge-warning"></span>
 											<a style="font-size: small;"> > 50% and <= 70% </a>
 											&nbsp;&nbsp;&nbsp;
-											<span class="badge badge-dot badge-success"></span>
+											<span class="badge badge-dot badge-hijau"></span>
 											<a style="font-size: small;"> >70% and < 100% </a>
 											&nbsp;&nbsp;&nbsp;
-											<span class="badge badge-dot badge-primary"></span>
+											<span class="badge badge-dot badge-biru"></span>
 											<a style="font-size: small;"> 100% </a>
 										</center>
 									</div>
 								</div>
 
-								<div class="col-12 mt-2">
+								<div class="col-12 mt-4">
 									<div class="card">
 										<div class="card-body">
 											<div class="pull-left d-none d-sm-inline-block">
@@ -237,12 +237,12 @@
 								
 							</div>
 							<div class="row">
-								<div class="col-md-6 col-12">
+								<div class="col-md-6 col-12 mt-4">
 									<center>
 										<div class="card">
 											<h3 class="card-title text-white">Average Talk Time</h3>
 											<div class="card-body">
-												<center> <img src="assets/Wallboard 2 - Average Talk Time.png" width="54"><br>
+												<center> <img src="assets/Wallboard 2 - Average Talk Time.png" width="38"><br>
 													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="" style="color: #00a0e8;"
 																id="avgTTime">00:00</a></strong>
 													</h3>
@@ -252,12 +252,12 @@
 									</center>
 								</div>
 
-								<div class="col-md-6 col-12">
+								<div class="col-md-6 col-12 mt-4">
 									<center>
 										<div class="card">
 											<h3 class="card-title text-white">Longest Talk Time</h3>
 											<div class="card-body">
-												<center> <img src="assets/Wallboard 2 - Longest Talk Time & Longest Wait Time.png" width="54"><br>
+												<center> <img src="assets/Wallboard 2 - Longest Talk Time & Longest Wait Time.png" width="38"><br>
 													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="text-danger"
 																id="longTTime">
 																07:37</a></strong>
@@ -268,12 +268,12 @@
 									</center>
 								</div>
 
-								<div class="col-md-6 col-12">
+								<div class="col-md-6 col-12 mt-4">
 									<center>
 										<div class="card">
 											<h3 class="card-title text-white">Average Waiting Time</h3>
 											<div class="card-body">
-												<center> <img src="assets/Wallboard 2 - Average Wait Time.png" width="54"><br>
+												<center> <img src="assets/Wallboard 2 - Average Wait Time.png" width="38"><br>
 													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="text-warning"
 																id="avgWTime">
 																00:00</a></strong>
@@ -284,12 +284,12 @@
 									</center>
 								</div>
 
-								<div class="col-md-6 col-12">
+								<div class="col-md-6 col-12 mt-4">
 									<center>
 										<div class="card">
 											<h3 class="card-title text-white">Longest Wait Time</h3>
 											<div class="card-body">
-												<center> <img src="assets/Wallboard 2 - Longest Talk Time & Longest Wait Time.png" width="54"><br>
+												<center> <img src="assets/Wallboard 2 - Longest Talk Time & Longest Wait Time.png" width="38"><br>
 													<h3 class="card-title" style="font-size: 40px; margin-bottom: -10px;"><strong><a class="text-danger"
 																id="longWTime">
 																07:37</a></strong>
@@ -359,21 +359,12 @@
 	<!-- ./wrapper -->
 
 	<!-- Vendor JS -->
-	<script src="js/vendors.min.js"></script>
-	<script src="js/pages/chat-popup.js"></script>
-	<script src="../assets/vendor_components/chartist-js-develop/chartist.js"></script>
-	<script src="../assets/vendor_components/chart.js-master/Chart.min.js"></script>
-	<script src="../assets/vendor_components/c3/d3.min.js"></script>
-	<script src="../assets/vendor_components/c3/c3.min.js"></script>
-	<script src="../assets/vendor_components/echarts/dist/echarts-en.min.js"></script>
-	<script src="../assets/vendor_components/raphael/raphael.min.js"></script>
-	<script src="../assets/vendor_components/morris.js/morris.min.js"></script>
+	
 
 	<!-- Chat Bot Admin App -->
 	<!--<script src="js/pages/gauge.js"></script>-->
 
-	<script src="js/template.js"></script>
-	<script src="js/demo.js"></script>
+	
 
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<style>
@@ -388,105 +379,7 @@
 		}
 	</style>
 	<!-- Chart Daily Call History -->
-	<script>
-		var options = {
-			series: [{
-				name: 'Received Calls',
-				data: [44, 55, 57, 56, 61, 58, 63, 60, 66]  // Data for Received calls
-			}, {
-				name: 'Answered Calls',
-				data: [76, 85, 101, 98, 87, 105, 91, 114, 94]  // Data for Answered calls
-			}, {
-				name: 'Abandoned Calls',
-				data: [35, 41, 36, 26, 45, 48, 52, 53, 41]  // Data for Abandoned calls
-			}],
-			chart: {
-				type: 'bar',
-				height: 350,
-				toolbar: {
-					show: false
-				}
-			},
-			plotOptions: {
-				bar: {
-					horizontal: false,
-					columnWidth: '55%',
-					endingShape: 'rounded'
-				}
-			},
-			colors: ['#19884e', '#2596be', '#e64f54'],  // Green, Blue, Red for the bars
-			dataLabels: {
-				enabled: false
-			},
-			stroke: {
-				show: true,
-				width: 2,
-				colors: ['transparent']
-			},
-			xaxis: {
-				categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-				labels: {
-					style: {
-						colors: '#FFFFFF',  // White text for x-axis labels
-						fontSize: '14px'  // Increased font size for x-axis labels
-					}
-				},
-				axisBorder: {
-					show: true,
-					color: '#FFFFFF'  // White x-axis border
-				},
-				axisTicks: {
-					show: true,
-					color: '#FFFFFF'  // White x-axis ticks
-				}
-			},
-			yaxis: {
-				title: {
-					text: 'Number of Calls',
-					style: {
-						color: '#FFFFFF',  // White y-axis title
-						fontSize: '14px'  // Increased font size for y-axis title
-					}
-				},
-				labels: {
-					style: {
-						colors: '#FFFFFF',  // White text for y-axis labels
-						fontSize: '14px'  // Increased font size for y-axis labels
-					}
-				},
-				axisBorder: {
-					show: true,
-					color: '#FFFFFF'  // White y-axis border
-				},
-				axisTicks: {
-					show: true,
-					color: '#FFFFFF'  // White y-axis ticks
-				}
-			},
-			fill: {
-				opacity: 1
-			},
-			tooltip: {
-				y: {
-					formatter: function (val) {
-						return val + " calls"
-					}
-				}
-			},
-			legend: {
-				labels: {
-					colors: '#FFFFFF',  // White text for legend items (Received, Answered, Abandoned)
-					useSeriesColors: false
-				}
-			},
-			grid: {
-				borderColor: '#FFFFFF'  // White grid lines
-			}
-		};
-
-		var chart = new ApexCharts(document.querySelector("#bar-chart-apex"), options);
-		chart.render();
-	</script>
+	
 
 	<!-- Chart Agent Status -->
 	<style>
@@ -509,137 +402,14 @@
 			/* Adjust margin for legend items */
 		}
 	</style>
-	<script>
-		var options = {
-			series: [25, 25, 25, 25],  // Data points
-			chart: {
-				type: 'donut',
-				width: 500,  // Increase width if necessary
-				height: 300  // Set the desired height
-			},
-			colors: ['#009946', '#e64f54', '#dea039', '#00a0e8'],  // Green, Red, Yellow, Blue
-			stroke: {
-				show: true,  // Show the stroke
-				width: 0,    // Set stroke width to 0 for transparency
-				colors: ['transparent']  // Make stroke color transparent
-			},
-			labels: ['Available', 'AUX', 'ACW', 'ACD'],  // Custom labels for the donut chart
-			legend: {
-				position: 'bottom',  // Place the legend below the chart
-				horizontalAlign: 'center',  // Center-align the legend
-				itemMargin: {
-					horizontal: 5,  // Space between legend items
-					vertical: 0
-				}
-			},
-			responsive: [{
-				breakpoint: 480,
-				options: {
-					chart: {
-						width: 200
-					},
-					legend: {
-						position: 'bottom',
-						horizontalAlign: 'center' // Center-align the legend
-					}
-				}
-			}]
-		};
-
-		var chart = new ApexCharts(document.querySelector("#chart-agent-status"), options);
-		chart.render();
-	</script>
+	
 
 <!-- Radial Bar -->
-<!-- <script>
-    // Radial Bar Chart
-    var options = {
-        series: [76], // Set your value here
-        chart: {
-            type: 'radialBar',
-            offsetY: -20,
-            sparkline: {
-                enabled: true
-            }
-        },
-        plotOptions: {
-            radialBar: {
-                startAngle: -90,
-                endAngle: 90,
-                track: {
-                    background: "#e7e7e7",
-                    strokeWidth: '97%',
-                    margin: 5,
-                    dropShadow: {
-                        enabled: true,
-                        top: 2,
-                        left: 0,
-                        color: '#999',
-                        opacity: 1,
-                        blur: 2
-                    }
-                },
-                dataLabels: {
-                    name: {
-                        show: false // Hide the name label
-                    },
-                    value: {
-                        show: false // Hide the value
-                    }
-                }
-            }
-        },
-        grid: {
-            padding: {
-                top: -10
-            }
-        },
-        fill: {
-            type: 'solid', // Change to solid
-            colors: [
-                '#009947', // Red for 0%-25%
-                '#ff8000', // Orange for 25%-50%
-                '#ffff00', // Yellow for 50%-75%
-                '#00ff00', // Green for 75%-100%
-                '#0000ff'  // Blue for above 100%
-            ]
-        },
-        labels: ['Average Results'],
-    };
-
-    // Render chart
-    var chart = new ApexCharts(document.querySelector("#chart-radial-bar"), options);
-    chart.render();
-
-    // Create the needle
-    var value = 76; // Your value
-    var needleAngle = (value / 100) * 180 - 90; // Calculate rotation based on value
-
-    var needle = document.createElement("div");
-    needle.classList.add("needle");
-    needle.style.transform = `rotate(${needleAngle}deg)`; // Set the rotation
-    needle.style.position = "absolute";
-    needle.style.bottom = "0"; // Position it at the bottom center
-    needle.style.left = "50%"; // Center it horizontally
-    needle.style.transformOrigin = "bottom center"; // Set the origin for rotation
-    needle.style.height = "170px"; // Set a longer length for the needle
-    needle.style.width = "4px"; // Width of the needle
-    needle.style.backgroundColor = "#000"; // Color of the needle
-    needle.style.zIndex = "10"; // Ensure it's on top
-
-    document.querySelector("#chart-radial-bar").appendChild(needle);
-</script> -->
-
 <script>
-	// Access the gauge iframe
-const gaugeIframe = document.getElementById("chart-radial-bar");
-
-// Once gauge is loaded, you can access its content
-gaugeIframe.onload = function() {
-    const gaugeDoc = gaugeIframe.contentDocument || gaugeIframe.contentWindow.document;
-    // Add any custom JavaScript to manipulate the gauge
-};
+    // Radial Bar Chart
+    
 </script>
+
 
 
 
