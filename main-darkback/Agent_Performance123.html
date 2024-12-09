@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/favicon.ico">
+
+    <title>Agent Performances </title>
+
+    <!-- Vendors Style-->
+    <link rel="stylesheet" href="css/vendors_css.css">
+
+    <!-- Style-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/skin_color.css"> -->
+    <link rel="stylesheet" href="Agent_Performance.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+    <script src="Chart.bundle.js"></script>
+    <script src="chartjs-gauge.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <style>
+        .containerXXX {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        }
+
+        /* Then style the iframe to fit in the container div with full height and width */
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body onload="abcde()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <header class="main-header">
+            <div class="d-flex align-items-center logo-box pl-10">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- Logo Test -->
+                <a href="index.html" class="logo">
+                    <!-- logo-->
+                    <div class="logo-lg">
+                        <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+                        <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="120"></span>
+                    </div>
+                </a>
+            </div>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top pl-10">
+                <!-- Sidebar toggle button-->
+                <div class="app-menu">
+                    Contact Center <br>
+                    Bravo Bea Cukai <a style="color: red;">1500225</a>
+                </div>
+
+                <div class="navbar-custom-menu r-side">
+                    <ul class="nav navbar-nav">
+
+                        <li class="btn-group d-md-inline-flex d-none">
+                            <div class="app-menu">
+                                <div class="search-bx mx-5">
+
+                                    <br>
+                                    <a style="color: goldenrod;">01 OKtober 2024 | Selasa | </a>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="container-full">
+                <!-- Content Header (Page header) -->
+                <h2 class="text-center mb-4">
+                    Agent Performances
+                </h2>
+
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="row">
+                        <!-- Call -->
+                        <div class="col-md-6">
+                            <div class="table-container">
+                                <h3 class="section-title">
+                                    Call
+                                </h3>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Nama Agent
+                                            </th>
+                                            <th>
+                                                Calls
+                                            </th>
+                                            <th>
+                                                Avg. Ring Time
+                                            </th>
+                                            <th>
+                                                Avg. Talk Time
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr>
+                                            <td>
+                                                Dhiyas Asadillah
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    35
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:09
+                                            </td>
+                                            <td>
+                                                05:11
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Dzamar Sulthon
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    28
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    00:12
+                                                </span>
+                                            </td>
+                                            <td>
+                                                11:00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Glorio Theodore
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    26
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:03
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    23:11
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Hafazh Gumilar
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    21
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:02
+                                            </td>
+                                            <td>
+                                                01:20
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Markus Afrie
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    20
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:05
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    30:00
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                M. Ekawinny
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    15
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    00:10
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:12
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rizal Abdul
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    13
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    00:11
+                                                </span>
+                                            </td>
+                                            <td>
+                                                04:55
+                                            </td>
+                                        </tr> -->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Multichat -->
+                        <div class="col-md-6">
+                            <div class="table-container">
+                                <h3 class="section-title">
+                                    Multichat
+                                </h3>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Nama Agent
+                                            </th>
+                                            <th>
+                                                Chats
+                                            </th>
+                                            <th>
+                                                Avg. Resp. Time
+                                            </th>
+                                            <th>
+                                                Avg. Conv. Time
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Achmad Fahrurrodzi
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    48
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    02:09
+                                                </span>
+                                            </td>
+                                            <td>
+                                                05:11
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                David Clinton
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    37
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    01:12
+                                                </span>
+                                            </td>
+                                            <td>
+                                                11:00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Ferdian Kukuh
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    29
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:53
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    23:11
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Handika Rizqa
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    26
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:32
+                                            </td>
+                                            <td>
+                                                01:20
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                M. Afdal
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    25
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    01:45
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    30:00
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Nuanda Febrian
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    15
+                                                </span>
+                                            </td>
+                                            <td>
+                                                01:10
+                                            </td>
+                                            <td>
+                                                00:12
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rangga Shenggeng
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    13
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:11
+                                            </td>
+                                            <td>
+                                                04:55
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <div class="table-container">
+                                <h3 class="section-title">
+                                    Email
+                                </h3>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Nama Agent
+                                            </th>
+                                            <th>
+                                                Emails
+                                            </th>
+                                            <th>
+                                                Avg. Resp. Time
+                                            </th>
+                                            <th>
+                                                Avg. Hand. Time
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Achyarullah
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    68
+                                                </span>
+                                            </td>
+                                            <td>
+                                                05:11
+                                            </td>
+                                            <td>
+                                                05:11
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Bagus Dinar
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    35
+                                                </span>
+                                            </td>
+                                            <td>
+                                                11:00
+                                            </td>
+                                            <td>
+                                                11:00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Fajar Hendra
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    24
+                                                </span>
+                                            </td>
+                                            <td>
+                                                23:11
+                                            </td>
+                                            <td>
+                                                23:11
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Khoerotul Imron
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    9
+                                                </span>
+                                            </td>
+                                            <td>
+                                                01:20
+                                            </td>
+                                            <td>
+                                                01:20
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Comments & More -->
+                        <div class="col-md-6">
+                            <div class="table-container">
+                                <h3 class="section-title">
+                                    Comments & More
+                                </h3>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Nama Agent
+                                            </th>
+                                            <th>
+                                                Convs.
+                                            </th>
+                                            <th>
+                                                Avg. Resp. Time
+                                            </th>
+                                            <th>
+                                                Avg. Conv. Time
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Maruli Tua
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-green">
+                                                    21
+                                                </span>
+                                            </td>
+                                            <td>
+                                                02:09
+                                            </td>
+                                            <td>
+                                                05:11
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rizaldhi Putra
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    19
+                                                </span>
+                                            </td>
+                                            <td>
+                                                01:12
+                                            </td>
+                                            <td>
+                                                11:00
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Satria Utama
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-orange">
+                                                    15
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:53
+                                            </td>
+                                            <td>
+                                                23:11
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Sulfiandi
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pink">
+                                                    10
+                                                </span>
+                                            </td>
+                                            <td>
+                                                00:32
+                                            </td>
+                                            <td>
+                                                01:20
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <!-- /.content -->
+            </div>
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- Vendor JS -->
+    <script src="js/vendors.min.js"></script>
+    <script src="js/pages/chat-popup.js"></script>
+    <script src="../assets/vendor_components/chartist-js-develop/chartist.js"></script>
+    <script src="../assets/vendor_components/chart.js-master/Chart.min.js"></script>
+    <script src="../assets/vendor_components/c3/d3.min.js"></script>
+    <script src="../assets/vendor_components/c3/c3.min.js"></script>
+    <script src="../assets/vendor_components/echarts/dist/echarts-en.min.js"></script>
+    <script src="../assets/vendor_components/raphael/raphael.min.js"></script>
+    <script src="../assets/vendor_components/morris.js/morris.min.js"></script>
+
+    <!-- Chat Bot Admin App -->
+    <!--<script src="js/pages/gauge.js"></script>-->
+
+    <script src="js/template.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/pages/widget-chartist.js"></script>
+
+    <script src="js/pages/widget-charts2.js"></script>
+    <script src="js/pages/c3-data.js"></script>
+    <script src="js/pages/c3-bar-pie.js"></script>
+
+    <script src="js/pages/echart-pie-doghnut.js"></script>
+    <script src="js/pages/widget-morris-charts.js"></script>
+
+    <script>
+        function fetchAgentData() {
+            fetch('PHP/AgentActivity.php') // Adjust the PHP file path
+                .then(response => response.json())
+                .then(data => {
+                    let tableBody = document.querySelector('.table tbody');
+                    tableBody.innerHTML = ''; // Clear current table content
+    
+                    data.forEach(agent => {
+                        let row = `
+                            <tr>
+                                <td>${agent.nama_agent}</td>
+                                <td><span class="badge badge-green">${agent.calls}</span></td>
+                                <td>${agent.avg_ring_time}</td>
+                                <td>${agent.avg_talk_time}</td>
+                            </tr>
+                        `;
+                        tableBody.insertAdjacentHTML('beforeend', row);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+    
+        // Fetch data every 5 seconds
+        setInterval(fetchAgentData, 5000);
+    
+        // Initial data load
+        fetchAgentData();
+    </script>    
+
+</body>
+
+</html>

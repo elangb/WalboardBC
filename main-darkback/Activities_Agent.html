@@ -21,7 +21,7 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
-    <script src="js/AgentActivity.js"></script>
+   <script src="js/AgentActivity.js"></script>
     <style>
         .containerXXX {
             position: relative;
@@ -60,7 +60,6 @@
             </div>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top pl-10">
-                <!-- Sidebar toggle button-->
                 <div class="app-menu contact-center-text">
                     Contact Center <br>
                     Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
@@ -69,7 +68,7 @@
                     <ul class="nav navbar-nav">
                         <li class="btn-group d-md-inline-flex d-none">
                             <div class="app-menu">
-                                <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
+                                <a class="date-time-text" style="color: goldenrod;">Selasa | 01 Oktober 2024 | 08:00</a>
                             </div>
                         </li>
                     </ul>
@@ -80,7 +79,7 @@
         <div class="content-wrapper">
             <div class="container-full">
                 <!-- Content Header (Page header) -->
-                <h2 class="text-center mb-4">
+                <h2 class="text-center page-title">
                     Agent Activities
                 </h2>
 
@@ -111,7 +110,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-
+                                   
                                 </table>
                             </div>
                         </div>
@@ -141,7 +140,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-
+                                    
                                 </table>
                             </div>
                         </div>
@@ -175,7 +174,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-
+                                   
                                 </table>
                             </div>
                         </div>
@@ -188,7 +187,7 @@
                                 <table class="table" id="ListSosmed">
                                     <thead>
                                         <tr>
-                                            <th>
+                                            <th style="width: 150px;">
                                                 Nama Agent
                                             </th>
                                             <th>
@@ -205,7 +204,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-
+                                   
                                 </table>
                             </div>
                         </div>
@@ -243,34 +242,6 @@
 
     <script src="js/pages/echart-pie-doghnut.js"></script>
     <script src="js/pages/widget-morris-charts.js"></script>
-
-    <script>
-        function updateDateTime() {
-            const dateTimeElement = document.getElementById("dateTime");
-            if (!dateTimeElement) return; // Pastikan elemen ada sebelum melanjutkan
-
-            const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-
-            const now = new Date();
-            const dayName = days[now.getDay()];
-            const date = String(now.getDate()).padStart(2, '0'); // Tambahkan padding
-            const month = months[now.getMonth()];
-            const year = now.getFullYear();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-
-            // Format yang diinginkan: "Selasa | 01 Oktober 2024 | 08:00:00"
-            const formattedDateTime = `${dayName} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
-
-            dateTimeElement.textContent = formattedDateTime;
-        }
-
-        // Update waktu saat halaman dimuat dan setiap detik
-        updateDateTime(); // Panggil segera untuk inisialisasi
-        setInterval(updateDateTime, 1000); // Update setiap detik
-    </script>
 
 </body>
 

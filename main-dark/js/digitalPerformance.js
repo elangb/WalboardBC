@@ -355,8 +355,8 @@ function convertSeconds(seconds) {
 }
 
 
- // Mendapatkan waktu saat ini
- function updateDateTime() {
+// Fungsi untuk memperbarui waktu
+function updateDateTime() {
   const now = new Date();
 
   // Daftar nama hari
@@ -373,10 +373,14 @@ function convertSeconds(seconds) {
   const year = now.getFullYear(); // Tahun
   const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
   const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+  const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
 
   // Mengupdate elemen dengan waktu saat ini
-  document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
+  document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
 }
 
-// Panggil fungsi saat halaman dimuat
+// Memperbarui waktu setiap detik
+setInterval(updateDateTime, 1000);
+
+// Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
 document.addEventListener('DOMContentLoaded', updateDateTime);

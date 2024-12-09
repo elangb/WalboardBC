@@ -18,7 +18,7 @@
 	2;"Agent01";"5701";"4704";"";"AVAIL";0;"";25;""
 	*/
 	
-	$string =file_get_contents("AgentActivity.txt");
+	$string =file_get_contents("SitePerformance_site.txt");
 
     $baris = preg_split('/\r\n|\n|\r/', trim($string));
 

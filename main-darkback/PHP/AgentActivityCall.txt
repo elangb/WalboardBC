@@ -1,0 +1,17 @@
+Split/Skill;Informasi;Pengaduan;CC Priok;CC Ps Baru;CC Soetta
+Login ID;Agent Name;State;ACD Calls;ACW Time;AUX Time;AUX Intime With ACD Calls Held;AUX Outtime With ACD Calls Held;ACD Calls Released;Hold Time;Avg Extn In Time;RINGTIME
+1375;Veni Mellinia;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1338;M. Ekawinny Darmawan;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
+2010;Didit Rahadi Setiadi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+2019;Alifiandri Zaneta P;OTHER;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1336;Ratih Fartila;ACW;0;58;.00;.00;.00;0;.00.00;0;.00.00
+1338;M. Ekawinny Darmawan;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1374;Sulfiandi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1377;Rizaldhi Putra;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1403;Markus Afrie I;ACW;0;65;.00;.00;.00;0;.00.00;0;.00.00
+1375;Veni Mellinia;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1346;Dhyas Asadillah S;ACD;1;120;.00;.00;.00;1;.00.00;0;.00.03
+1346;Dhyas Asadillah S;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1403;Markus Afrie I;ACW;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1379;Nesya Kus Sandrea;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1374;Sulfiandi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00

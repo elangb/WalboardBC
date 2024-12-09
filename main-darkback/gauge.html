@@ -7,6 +7,7 @@
   <title>Gauge Chart</title>
   <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
   <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
+  <script src="gauge.js"></script>
   <style>
     /* Adjust the size of the container */
     #canvas-holder {
@@ -25,70 +26,6 @@
   <div id="canvas-holder">
     <canvas id="chart-gauge" width="300" height="150"></canvas> <!-- Set canvas width and height -->
   </div>
-  <script>
-    var randomScalingFactor = function() {
-      return Math.round(Math.random() * 100);
-    };
-
-    var randomData = function () {
-      return [
-        randomScalingFactor(),
-        randomScalingFactor(),
-        randomScalingFactor(),
-        randomScalingFactor()
-      ];
-    };
-
-    var randomValue = function (data) {
-      return Math.max.apply(null, data) * Math.random();
-    };
-
-    var data = randomData();
-    var value = randomValue(data);
-
-    var config = {
-      type: 'gauge',
-      data: {
-        datasets: [{
-          data: data,
-          value: value,
-          backgroundColor: ['#e64f54', '#d69f3a', '#009946', '#009fe7'],
-          borderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        title: {},
-        layout: {
-          padding: {
-            bottom: 20
-          }
-        },
-        needle: {
-          radiusPercentage: 2,
-          widthPercentage: 3.2,
-          lengthPercentage: 80,
-          color: '#000000'
-        },
-        valueLabel: {
-          formatter: Math.round
-        }
-      }
-    };
-
-    window.onload = function() {
-      var ctx = document.getElementById('chart-gauge').getContext('2d');
-      window.myGauge = new Chart(ctx, config);
-    };
-
-    document.getElementById('randomizeData').addEventListener('click', function() {
-      config.data.datasets.forEach(function(dataset) {
-        dataset.data = randomData();
-        dataset.value = randomValue(dataset.data);
-      });
-
-      window.myGauge.update();
-    });
-  </script>
+  
 </body>
 </html>

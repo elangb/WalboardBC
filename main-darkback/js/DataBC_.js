@@ -104,7 +104,7 @@ async function AreaChart(){
             }],
             chart: {
                 type: 'area',
-                height: 320,
+                height: 350,
                 zoom: {
                     enabled: false
                 }
@@ -125,23 +125,23 @@ async function AreaChart(){
                 width: 3 
             },
             title: {
-                text: '',
+                text: 'Your Chart Title',
                 align: 'left'
             },
             subtitle: {
-                text: '',
+                text: 'Your Chart Subtitle',
                 align: 'left'
             },
             labels: categories,
             yaxis: {
                 opposite: true,
                 title: {
-                    text: ''
+                    text: 'Y-Axis Title'
                 }
             },
             xaxis: {
                 title: {
-                    text: ''
+                    text: 'X-Axis Title'
                 },
                 labels: {
                     style: {
@@ -223,7 +223,7 @@ async function barchart() {
         const options = {
             chart: {
                 type: 'bar',
-                height: 410
+                height: 350
             },
             series: [{
                 name: 'Jumlah',
@@ -239,7 +239,7 @@ async function barchart() {
       },
       yaxis: {
         labels: {
-			style: {
+          style: {
             colors: '#ffffff'
           }
         }
@@ -293,16 +293,17 @@ async function barchart() {
     }
 }
 
+barchart();
 
 
 async function chartCharging(categories,chargingData){
 	
 
-  
+  console.log("DataLOG " + chargingData);
      var options = {
         chart: {
             type: 'bar',
-            height: 310,
+            height: 350,
             horizontal: true
         },
         plotOptions: {
@@ -430,7 +431,6 @@ async  function getData() {
 		var json = JSON.parse(data);
           var i;
           console.log(json);
-		  var TotalTicket =0;
           for (i = 0; i < json.length; i++) {
 				  // if (json[i].jenis == "Call")
 					  // $('#call').html(json[i].jumlah);
@@ -442,88 +442,55 @@ async  function getData() {
 					  $('#socmed1').html(json[i].jumlah);
 				  if (json[i].jenis == "Total Monthly Services")
 					  $('#TotalMSer').html(json[i].jumlah);
-				  // if (json[i].jenis == "Total Services")
-					  // $('#TotalSer').html(json[i].jumlah);
+				  if (json[i].jenis == "Total Services")
+					  $('#TotalSer').html(json[i].jumlah);
 				  if (json[i].jenis == "Total Case")
 					  $('#TotalCase').html(json[i].jumlah);
 				  if (json[i].jenis == "Pending Case")
 						    $('#PendingCase').html(json[i].jumlah);
 				   if (json[i].jenis == "Case Resolved")
 					  $('#CaseResolved').html(json[i].jumlah);
-				
-				  if (json[i].jenis == "Total")
-					  TotalTicket= json[i].jumlah;
+				  if (json[i].jenis == "Volume FCR")
+					  $('#FirstCall').html(json[i].jumlah +'%');
 					  
 				  
 				  
-				  
-				}
-				// if (json[i].jenis == "VolumeCallPercent" || json[i].jenis == "VolumeEmailPercent" || json[i].jenis == "VolumeMultichat" || json[i].jenis == "VolumeSocMedPercent" )
-				  // {
+				  if (json[i].jenis == "VolumeCallPercent" || json[i].jenis == "VolumeEmailPercent" || json[i].jenis == "VolumeMultichat" || json[i].jenis == "VolumeSocMedPercent" )
+				  {
 					  
-					  // if (json[i].jenis == "VolumeCallPercent"){
-						  
-						// var TotalScVolume = 
-						// parseFloat($('#call').val()) + 
-						// parseFloat($('#multichat').val()) + 
-						// parseFloat($('#email').val()) + 
-						// parseFloat($('#socmed1').val());
-						  // categories.push("Call");
-						  
-						 // var Total =(parseFloat($('#call').val())/TotalScVolume)*100
-						  // $('#callPercent').html(Total +' %');
-					  // }
+							var TotalScVolume = 
+								parseFloat($('#call').val()) + 
+								parseFloat($('#multichat').val()) + 
+								parseFloat($('#email').val()) + 
+								parseFloat($('#socmed1').val());
+					  if (json[i].jenis == "VolumeCallPercent"){
+						  categories.push("Call");
+						   var persenCall =(parseFloat($('#call').val())/TotalScVolume)*100;
+						  $('#callPercent').html(persenCall +' %');
+					  }
 							
-					// if (json[i].jenis == "VolumeEmailPercent"){
-						// categories.push("Email");
-						// $('#emailPercent').html(json[i].jumlah +' %');
+					if (json[i].jenis == "VolumeEmailPercent"){
+						categories.push("Email");
+						$('#emailPercent').html(json[i].jumlah +' %');
 						
-					// }
+					}
 						
-					// if (json[i].jenis == "VolumeMultichat"){
-						// $('#chatPercent').html(json[i].jumlah +' %');
-						// categories.push("Multichat");
-					// }
+					if (json[i].jenis == "VolumeMultichat"){
+						$('#chatPercent').html(json[i].jumlah +' %');
+						categories.push("Multichat");
+					}
 							
-					 // if (json[i].jenis == "VolumeSocMedPercent"){
-						 // categories.push("Social Media");
-						 // $('#sosmedPercent').html(json[i].jumlah +' %');
+					 if (json[i].jenis == "VolumeSocMedPercent"){
+						 categories.push("Social Media");
+						 $('#sosmedPercent').html(json[i].jumlah +' %');
 						 
-					 // }
+					 }
 							
 						
-				  // chargingData.push(json[i].jumlah);
+				  chargingData.push(json[i].jumlah);
 					  
-				  // }
-				   var TotalScVolume = 
-						 parseFloat($('#call').html()) + 
-						 parseFloat($('#multichat').html()) + 
-						 parseFloat($('#email').html()) + 
-						 parseFloat($('#socmed1').html());
-						 
-						 var totalCall = (parseFloat($('#call').html())/TotalScVolume)*100
-						 categories.push("Call");
-						  $('#callPercent').html(totalCall.toFixed(2) +' %');
-						  chargingData.push(totalCall.toFixed(2));
-						  
-						  var totalEmail = (parseFloat($('#email').html())/TotalScVolume)*100
-						 categories.push("Email");
-						  $('#emailPercent').html(totalEmail.toFixed(2) +' %');
-						  chargingData.push(totalEmail.toFixed(2));
-						  
-						    var totalMultiChat = (parseFloat($('#multichat').html())/TotalScVolume)*100
-						 categories.push("Multichat");
-						  $('#chatPercent').html(totalMultiChat.toFixed(2) +' %');
-						  chargingData.push(totalMultiChat.toFixed(2));
-						  $('#TotalSer').html(TotalScVolume);
-						  
-						  
-						 // jumlah seluruh ticket - total case) / jumlah seluruh incoming * 100%
-						 
-						 
-						 var Fcr = ((TotalTicket - parseInt($('#TotalCase').html())) / TotalScVolume) * 100;
-						$('#FirstCall').html(Fcr.toFixed(2) + '%');
-						  
+				  }
+		 }
 		  
 		  chartCharging(categories,chargingData);
 		  

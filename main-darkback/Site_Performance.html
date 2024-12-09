@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../images/bravo.png">
+        <link rel="icon" href="../images/bravo.png">
 
     <title>Site Performances</title>
 
@@ -70,34 +70,34 @@
     <!-- Site wrapper -->
     <div class="wrapper">
 
-        <header class="main-header">
-            <div class="d-flex align-items-center logo-box pl-10">
-                <!-- Logo Test -->
-                <a href="index.html" class="logo">
-                    <div class="logo-lg">
-                        <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
-                        <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
-                    </div>
-                </a>
-            </div>
-            <!-- Header Navbar -->
-            <nav class="navbar navbar-static-top pl-10">
-                <!-- Sidebar toggle button-->
-                <div class="app-menu contact-center-text">
-                    Contact Center <br>
-                    Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
-                </div>
-                <div class="navbar-custom-menu r-side">
-                    <ul class="nav navbar-nav">
-                        <li class="btn-group d-md-inline-flex d-none">
-                            <div class="app-menu">
-                                <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+           <header class="main-header">
+			<div class="d-flex align-items-center logo-box pl-10">
+				<!-- Logo Test -->
+				<a href="index.html" class="logo">
+					<div class="logo-lg">
+						<span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+						<span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+					</div>
+				</a>
+			</div>
+			<!-- Header Navbar -->
+			<nav class="navbar navbar-static-top pl-10">
+				<!-- Sidebar toggle button-->
+				<div class="app-menu contact-center-text">
+					Contact Center <br>
+					Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
+				</div>
+				<div class="navbar-custom-menu r-side">
+					<ul class="nav navbar-nav">
+						<li class="btn-group d-md-inline-flex d-none">
+							<div class="app-menu">
+								<a class="date-time-text" style="color: goldenrod;"><span id="dateNya"></span></a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -141,7 +141,7 @@
                                         <div class="card-body">
                                             <div class="label">Abn. Calls
                                             </div>
-                                            <div id="abnPriok" class="value color-merah">0</div>
+                                            <div id="abnPriok" class="value text-danger">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                         <div class="card-body">
                                             <div class="label">Calls Wait
                                             </div>
-                                            <div id="waitPriok" class="value color-kuning">0</div>
+                                            <div id="waitPriok" class="value text-warning">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                                                 <img src="assets/Wallboard 2 - Average Wait Time.png"
                                                     alt="Average Waiting Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div id="avgWaitTimePriok" class="value color-kuning"
+                                                <div id="avgWaitTimePriok" class="value text-warning"
                                                     style="font-size: 44px; text-align: right;">
                                                     00:00
                                                 </div>
@@ -201,7 +201,7 @@
                                     <div class="cardkiribawah">
                                         <div class="card-body">
                                             <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat Icon" style="width:60px; height:60px;">
-                                            <div id="incomingLiveChatPriok" class="value color-kuning">
+                                            <div id="incomingLiveChatPriok" class="value text-warning">
                                                 0
                                             </div>
                                             <div class="label">
@@ -215,7 +215,7 @@
                                     <div class="cardkiribawah">
                                         <div class="card-body">
                                             <img src="assets/Wallboard 3 - Livechat Abandoned.png" alt="Abandoned Chat Icon" style="width:60px; height:60px;">
-                                            <div id="abandonedLiveChatPriok" class="value color-kuning">
+                                            <div id="abandonedLiveChatPriok" class="value text-warning">
                                                 0
                                             </div>
                                             <div class="label">
@@ -229,7 +229,7 @@
                                     <div class="cardkiribawah">
                                         <div class="card-body">
                                             <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Queueing Chat Icon" style="width:60px; height:60px;">
-                                            <div id="queueingLiveChatPriok" class="value color-merah">
+                                            <div id="queueingLiveChatPriok" class="value text-danger">
                                                 0
                                             </div>
                                             <div class="label">
@@ -277,7 +277,7 @@
                                         <div class="card-body">
                                             <div class="label">Abn. Calls
                                             </div>
-                                            <div id="abnCallsSoetta" class="value color-merah">0</div>
+                                            <div id="abnCallsSoetta" class="value text-danger">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                         <div class="card-body">
                                             <div class="label">Calls Wait.
                                             </div>
-                                            <div id="waitCallsSoetta" class="value color-kuning">0</div>
+                                            <div id="waitCallsSoetta" class="value text-warning">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -321,7 +321,7 @@
                                                 <img src="assets/Wallboard 2 - Average Wait Time.png"
                                                     alt="Average Waiting Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div id="avgWaitTimeSoetta" class="value color-kuning"
+                                                <div id="avgWaitTimeSoetta" class="value text-warning"
                                                     style="font-size: 44px; text-align: right;">
                                                     00:00
                                                 </div>
@@ -339,7 +339,7 @@
                                                 Incoming <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat" class="icon-img">
-                                            <div id="incomingChatSoetta" class="value color-kuning">
+                                            <div id="incomingChatSoetta" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -352,7 +352,7 @@
                                                 Queueing <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Queueing Chat" class="icon-img">
-                                            <div id="queueingChatSoetta" class="value color-kuning">
+                                            <div id="queueingChatSoetta" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -367,7 +367,7 @@
                                                 Incoming <br> Email
                                             </div>
                                             <img src="assets/Wallboard 3 - Email Inbox.png" alt="Incoming Email" class="icon-img">
-                                            <div id="incomingEmailSoetta" class="value color-kuning">
+                                            <div id="incomingEmailSoetta" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -380,7 +380,7 @@
                                                 Queueing <br> Email
                                             </span>
                                             <img src="assets/Wallboard 3 - Email Queueing.png" alt="Average Waiting Time" class="icon-img">
-                                            <div id="queueingEmailSoetta" class="value color-kuning">
+                                            <div id="queueingEmailSoetta" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -423,7 +423,7 @@
                                         <div class="card-body">
                                             <div class="label">Abn. Calls
                                             </div>
-                                            <div id="abnCallsPb" class="value color-merah">0</div>
+                                            <div id="abnCallsPb" class="value text-danger">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -432,7 +432,7 @@
                                         <div class="card-body">
                                             <div class="label">Calls Wait.
                                             </div>
-                                            <div id="callWaitPb" class="value color-kuning">0</div>
+                                            <div id="callWaitPb" class="value text-warning">0</div>
                                         </div>
                                     </div>
                                 </div>
@@ -467,7 +467,7 @@
                                                 <img src="assets/Wallboard 2 - Average Wait Time.png"
                                                     alt="Average Waiting Time"
                                                     style="width: 55px; height: 55px; margin-right: 10px; margin-left: -30px;">
-                                                <div id="averageWaitTimePb" class="value color-kuning"
+                                                <div id="averageWaitTimePb" class="value text-warning"
                                                     style="font-size: 44px; text-align: right;">
                                                     00:00
                                                 </div>
@@ -499,14 +499,14 @@
                                             <div class="icon-img flex-shrink-0 me-1">
                                                 <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat" class="icon-img" style="margin-left: 0;">
                                             </div>
-                                            <div class="value color-kuning">
+                                            <div class="value text-warning">
                                                 38
                                             </div> -->
                                             <div class="text-left flex-grow-1">
                                                 Incoming <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Incoming.png" alt="Incoming Chat" class="icon-img">
-                                            <div id="incomingChatPb" class="value color-kuning">
+                                            <div id="incomingChatPb" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -519,7 +519,7 @@
                                                 Queueing <br> Chat
                                             </div>
                                             <img src="assets/Wallboard 3 - Livechat Queueing.png" alt="Queueing Chat" class="icon-img">
-                                            <div id="queueingChatPb" class="value color-kuning">
+                                            <div id="queueingChatPb" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -534,7 +534,7 @@
                                                 Incoming <br> Email
                                             </div>
                                             <img src="assets/Wallboard 3 - Email Inbox.png" alt="Incoming Email" class="icon-img">
-                                            <div id="incomingEmailPb" class="value color-kuning">
+                                            <div id="incomingEmailPb" class="value text-warning">
                                                 0
                                             </div>
                                         </div>
@@ -547,7 +547,7 @@
                                                 Queueing <br> Email
                                             </div>
                                             <img  src="assets/Wallboard 3 - Email Queueing.png" alt="Average Waiting Time" class="icon-img">
-                                            <div id="queueingEmailPb" class="value color-kuning">
+                                            <div id="queueingEmailPb" class="value text-warning">
                                                 0
                                             </div>
                                         </div>

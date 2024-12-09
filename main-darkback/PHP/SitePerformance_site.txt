@@ -1,0 +1,5 @@
+Splits/Skills;CC Priok;CC Ps Baru;CC Soetta
+Split/Skill;Skill State;Time in Overload1;Time in Overload2;Aban Calls;ACD Calls;Calls Waiting;% Ans Calls
+CC Priok;NORMAL;.00;.00;0;0;0;0
+CC Soetta;NORMAL;.00;.00;0;0;0;0
+CC Ps Baru;NORMAL;.00;.00;0;0;1;0

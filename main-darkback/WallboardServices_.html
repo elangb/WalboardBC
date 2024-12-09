@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../images/bravo.png">
+  <link rel="icon" href="../images/favicon.ico">
 
-  <title>Service Volume</title>
+  <title>BRAVO 1500225</title>
 
   <!-- Vendors Style-->
   <link rel="stylesheet" href="css/vendors_css.css">
@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/skin_color.css">
 
-  <script src="js/DataBC.js"></script>
+  <script src="js/DataBC_.js"></script>
   <style>
     .containerXXX {
       position: relative;
@@ -27,15 +27,6 @@
       padding-top: 56.25%;
       /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
     }
-
-    body {
-      background-color: #000; /* Hitam */
-    }
-
-    .box-tengah {
-      height: 198px;
-    }
-
 
     /* Then style the iframe to fit in the container div with full height and width */
     .responsive-iframe {
@@ -59,130 +50,109 @@
     .badge {
       font-size: 2rem;
     }
+	.kotak {
+         
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            height: 50px; 
+        }
+        .ikon-kecil {
+            position: absolute;
+            bottom: 5px;
+            left: 1px;
+            font-size: 1rem; 
+            color: #FFFFFF; 
+        }
+        .garis-vertikal {
+            width: 2px;
+            background-color: #FFFFFF; 
+            height: 270px;
+            position: absolute;
+            left: 100%; 
+            top: 0; 
+            margin-left: 10px; 
+        }
+        .merah { background-color: #f64e60; }
+        .kuning { background-color: #ffa800 ; }
+        .hijau { background-color: #1bc5bd; }
+        .biru-langit { background-color: #6993ff; }
 
-    .kotak {
+        .apexcharts-series{
+          margin-bottom: 10px;
+        }
+		.header {
+    background-color: #1e2746;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 50px;
-    }
+.header img {
+    height: 50px;
+}
 
-    .ikon-kecil {
-      position: absolute;
-      bottom: 5px;
-      left: 1px;
-      font-size: 1rem;
-      color: #FFFFFF;
-    }
+.header .title {
+    font-size: 24px;
+}
 
-    .garis-vertikal {
-      width: 2px;
-      background-color: #FFFFFF;
-      height: 270px;
-      position: absolute;
-      left: 100%;
-      top: 0;
-      margin-left: 10px;
-    }
-
-    .merah {
-      background-color: #f64e60;
-    }
-
-    .kuning {
-      background-color: #ffa800;
-    }
-
-    .hijau {
-      background-color: #1bc5bd;
-    }
-
-    .biru-langit {
-      background-color: #6993ff;
-    }
-
-    .apexcharts-series {
-      margin-bottom: 10px;
-    }
-
-    .header {
-      background-color: #1e2746;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header img {
-      height: 50px;
-    }
-
-    .header .title {
-      font-size: 24px;
-    }
-
-    .contact-center-text {
-      font-weight: bold;
-      font-size: 20px;
-      /* Increase font size */
-      margin-left: -100px;
-    }
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px; /* Increase font size */
+    margin-left: -100px;
+}
 
 
-    .header .date-time {
-      text-align: right;
-    }
+.header .date-time {
+    text-align: right;
+}
 
-    .date-time-text {
-      font-size: 22px;
-      /* Ukuran teks lebih besar */
-      margin: 10px 0;
-      /* Margin atas dan bawah sama */
-      color: goldenrod;
-      /* Warna sesuai dengan style yang sudah ada */
-    }
+.date-time-text {
+    font-size: 22px; /* Ukuran teks lebih besar */
+    margin: 10px 0; /* Margin atas dan bawah sama */
+    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
+}
   </style>
 </head>
 
-<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse" style="background-color: #000; color: #fff;">
-
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
   <!-- Site wrapper -->
   <div class="wrapper">
 
-    <header class="main-header">
-      <div class="d-flex align-items-center logo-box pl-10">
+<header class="main-header">
+    <div class="d-flex align-items-center logo-box pl-10">
         <!-- Logo Test -->
         <a href="index.html" class="logo">
-          <div class="logo-lg">
-            <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
-            <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
-          </div>
+            <div class="logo-lg">
+                <span class="light-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+                <span class="dark-logo"><img src="../images/bravo.png" alt="logo" width="100"></span>
+            </div>
         </a>
-      </div>
-      <!-- Header Navbar -->
-      <nav class="navbar navbar-static-top pl-10">
+    </div>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top pl-10">
         <!-- Sidebar toggle button-->
-        <div class="app-menu contact-center-text text-white">
-          Contact Center <br>
-          Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
+        <div class="app-menu contact-center-text">
+            Contact Center <br>
+            Bravo Bea Cukai <a class="phone-number" style="color: red; font-size: 24px;">1500225</a>
         </div>
         <div class="navbar-custom-menu r-side">
-          <ul class="nav navbar-nav">
-            <li class="btn-group d-md-inline-flex d-none">
-              <div class="app-menu">
-                <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
-              </div>
-            </li>
-          </ul>
+            <ul class="nav navbar-nav">
+                <li class="btn-group d-md-inline-flex d-none">
+                    <div class="app-menu">
+                        <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
+                    </div>
+                </li>
+            </ul>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -207,46 +177,46 @@
                       </div>
 
                       <div>
-                        <div class="box-body">
+                         <div class="box-body">
                           <!--<div id="row-oriented"></div>-->
                           <div class="row">
-
+                            
                             <div class="col-3 mt-4">
                               <br>
-                              <div class="kotak merah">
-
-                                <h1 class="text-white" style="font-size: 1rem;" id="callPercent">0</h1>
-
-                                <i class="fa fa-phone ikon-kecil"></i>
-                              </div>
-                              <div class="kotak kuning">
-
-                                <h1 class="text-white" style="font-size: 1rem;" id="emailPercent">0</h1>
-
-                                <i class="fa fa-envelope ikon-kecil"></i>
-                              </div>
-                              <div class="kotak hijau">
-
-                                <h1 class="text-white" style="font-size: 1rem;" id="chatPercent">0</h1>
-
-                                <i class="fa fa-comments ikon-kecil"></i>
-                              </div>
-                              <div class="kotak biru-langit">
-
-                                <h1 class="text-white" style="font-size: 1rem;" id="sosmedPercent">0</h1>
-
-                                <i class="fa fa-comments-o ikon-kecil"></i>
-                              </div>
-                              <div class="garis-vertikal mt-4"></div>
-
+                                <div class="kotak merah">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="callPercent">0</h1> 
+                                  
+                                  <i class="fa fa-phone ikon-kecil"></i>
+                                </div>
+                                <div class="kotak kuning">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="emailPercent">0</h1> 
+                                  
+                                  <i class="fa fa-envelope ikon-kecil"></i>
+                                </div>
+                                <div class="kotak hijau">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="chatPercent">0</h1> 
+                                  
+                                  <i class="fa fa-comments ikon-kecil"></i>
+                                </div>
+                                <div class="kotak biru-langit">
+                                
+                                  <h1 class="text-white" style="font-size: 1rem;" id="sosmedPercent">0</h1> 
+                                  
+                                  <i class="fa fa-comments-o ikon-kecil"></i>
+                                </div>
+                                <div class="garis-vertikal mt-4"></div>
+                                
                             </div>
                             <div class="col-9 mt-2">
-                              <div id="charging-chart"></div>
+                              <div id="charging-chart"  ></div>
                             </div>
-
-                          </div>
+                          
                         </div>
                       </div>
+                    </div>
                   </center>
                 </div>
 
@@ -254,10 +224,10 @@
               <div class="row">
                 <div class="col-12">
                   <center>
-                    <div class="box box-tengah">
+                    <div class="box">
                       <div class="box-body">
-                        <h3 class="box-title text-white mt-2">Total Services</h3>
-                        <h1 class="text-success" style="font-size: 5rem;" id="TotalSer">0</h1>
+                        <h3 class="box-title text-white">Total Services</h3>
+                        <h1 class="text-success" style="font-size: 4rem;" id="TotalSer" >0</h1>
                       </div>
                     </div>
                   </center>
@@ -266,10 +236,10 @@
               <div class="row">
                 <div class="col-12">
                   <center>
-                    <div class="box box-tengah">
+                    <div class="box">
                       <div class="box-body">
-                        <h3 class="box-title text-white mt-2">Total Monthly Services</h3>
-                        <h1 class="text-success" style="font-size: 5rem;" id="TotalMSer">0</h1>
+                        <h3 class="box-title text-white">Total Monthly Services</h3>
+                        <h1 class="text-success" style="font-size: 4rem;"id="TotalMSer" >0</h1>
                       </div>
                     </div>
                   </center>
@@ -283,7 +253,7 @@
 
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column box-tengah" >
+                  <div class="box d-flex align-items-center flex-column">
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
                       <h2 class="text-danger mt-3">Call</h2>
@@ -295,14 +265,14 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id="call">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id ="call">0</h1>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column box-tengah" >
+                  <div class="box d-flex align-items-center flex-column">
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
                       <h2 class="text-success mt-3">Multichat</h2>
@@ -314,14 +284,14 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id="multichat">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id ="multichat">0</h1>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column box-tengah" >
+                  <div class="box d-flex align-items-center flex-column">
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
                       <h2 class="text-warning mt-3">Email</h2>
@@ -333,17 +303,17 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id="email">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id ="email">0</h1>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <div class="box d-flex align-items-center flex-column box-tengah" >
+                  <div class="box d-flex align-items-center flex-column">
                     <!-- Menambahkan Title -->
                     <div class="box-title text-center">
-                      <h2 class="text-primary mt-3">Social Media</h2>
+                      <h2 class="text-primary mt-3" >Social Media</h2>
                     </div>
                     <div class="box-body d-flex flex-row align-items-center">
                       <!-- Gambar dan waktu berada di kiri -->
@@ -352,7 +322,7 @@
                       </div>
                       <!-- Teks angka berada di kanan -->
                       <div class="ml-2">
-                        <h1 class="text-white" style="font-size: 4rem;" id="socmed1">0</h1>
+                        <h1 class="text-white" style="font-size: 4rem;" id="socmed1" >0</h1>
                       </div>
                     </div>
                   </div>
@@ -363,12 +333,12 @@
               <div class="row">
                 <div class="col-md-6">
                   <center>
-                    <div class="box box-tengah">
-                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">First Call Resolution</h4>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">First Call Resolution</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a style="color: #009945;" id="FirstCall">0</a>
+                            <a class="text-success" id="FirstCall">0</a>
                           </h1>
                         </center>
                       </div>
@@ -378,12 +348,12 @@
 
                 <div class="col-md-6">
                   <center>
-                    <div class="box box-tengah">
-                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">Total Case</h4>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Total Case</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-danger" id="TotalCase">0</a>
+                            <a class="text-danger" id ="TotalCase">0</a>
                           </h1>
                         </center>
                       </div>
@@ -393,12 +363,12 @@
 
                 <div class="col-md-6">
                   <center>
-                    <div class="box box-tengah">
-                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">Case Resolved</h4>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Case Resolved</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-warning" id="CaseResolved">0</a>
+                            <a class="text-warning" id ="CaseResolved" >0</a>
                           </h1>
                         </center>
                       </div>
@@ -408,12 +378,12 @@
 
                 <div class="col-md-6">
                   <center>
-                    <div class="box box-tengah">
-                      <h4 class="box-title text-white mt-4 " style="font-size: 1.5rem;">Pending Case</h4>
+                    <div class="box">
+                      <h4 class="box-title text-white mt-4" style="font-size: 1.5rem;">Pending Case</h4>
                       <div class="box-body">
                         <center>
                           <h1 class="box-title" style="font-size: 4rem;">
-                            <a class="text-danger" id="PendingCase">0</a>
+                            <a class="text-danger" id ="PendingCase">0</a>
                           </h1>
                         </center>
                       </div>
@@ -433,7 +403,7 @@
                       <div>
 
                         <!--<canvas id="doughnut-chart" height="200"></canvas>-->
-                        <div id="barchart1"></div>
+                        <div id="barchart1" ></div>
                         <!--<div id="donut-chart"></div>-->
 
                       </div>
@@ -456,7 +426,7 @@
                       <div>
                         <div class="box-body">
                           <div>
-
+                            
                             <div id="areachart1"></div>
                           </div>
                         </div>
@@ -506,35 +476,35 @@
 
   <!-- Chat Bot Admin App -->
 
-  <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
+   <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+   
   <script>
-    // Fungsi untuk mengupdate tanggal dan waktu setiap detik
-    function updateDateTime() {
-      const dateTimeElement = document.getElementById("dateTime");
+// Fungsi untuk mengupdate tanggal dan waktu setiap detik
+function updateDateTime() {
+    const dateTimeElement = document.getElementById("dateTime");
+    
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    
+    const now = new Date();
+    const dayName = days[now.getDay()];
+    const date = now.getDate();
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    // Format yang diinginkan: "Selasa | 01 Oktober 2024 | 08:00:00"
+    const formattedDateTime = `${dayName} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+    
+    dateTimeElement.textContent = formattedDateTime;
+}
 
-      const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-      const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-
-      const now = new Date();
-      const dayName = days[now.getDay()];
-      const date = now.getDate();
-      const month = months[now.getMonth()];
-      const year = now.getFullYear();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-
-      // Format yang diinginkan: "Selasa | 01 Oktober 2024 | 08:00:00"
-      const formattedDateTime = `${dayName} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
-
-      dateTimeElement.textContent = formattedDateTime;
-    }
-
-    // Update waktu saat halaman dimuat dan setiap detik
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-  </script>
+// Update waktu saat halaman dimuat dan setiap detik
+setInterval(updateDateTime, 1000);
+updateDateTime();
+</script>
 
 </body>
 

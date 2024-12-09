@@ -10,13 +10,18 @@ function getParameterByName(name, url = window.location.href) {
 var myVarX;
 var myVarY;
 function myFunction() {
+  myVarx = setInterval(RefreshTime, 1000);
   myVarY = setInterval(AutoCall, 8000);
+   lineChart();
 
   //chartPie();
 }
+function RefreshTime() {
+	 getDateTime();
 
+}
 function AutoCall() {
-  getDateTime();
+ 
   // getGreeting();
 
   //ListAgent();
@@ -24,8 +29,85 @@ function AutoCall() {
   // ListAgentTanjungPriok();
   getDataEmail();
   getDataDk();
+ 
 }
 
+async function lineChart(){
+	
+	
+	
+	 var Fb = [];
+    var Ig = [];
+    var x = [];
+    var Wa = [];
+    var bulan = [];
+    
+    try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/TotalDataDKPusatPerMonth", {
+            method: "GET",
+            headers: {
+                'Accept': 'text/plain'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text();
+        console.log(data);
+        
+        var json = JSON.parse(data);
+
+        json.forEach(item => {
+            bulan.push(item.bulan);
+           
+                Fb.push(item.totalFb);
+                Ig.push(item.totalIg);
+                Wa.push(item.totalWa);
+                x.push(item.totaLx);
+        });
+
+       
+	  var ctx = document.getElementById('socialMediaTrend').getContext('2d');
+      var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: bulan,
+          datasets: [{
+            label: 'Facebook',
+            borderColor: '#21a1ff',
+            data: Fb
+          }, {
+            label: 'Instagram',
+            borderColor: '#ff4d4d',
+            data: Ig
+          }, {
+            label: 'X',
+            borderColor: '#ffb84d',
+            data: x
+          }, {
+            label: 'Whatsapp',
+            borderColor: '#21ff4d',
+            data: Wa
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+	  } catch (error) {
+        console.error("An error occurred:", error);
+    } 
+	
+}
 async function getDataEmail() {
   try {
     const response = await fetch(
@@ -82,23 +164,25 @@ async function getDataEmail() {
         emailSend = item.jumlah;
         $("#emailSend").html(emailSend);
       }
+	  
+	  if (item.jenis === "avg_Response_Time") {
+         $("#emailResponseTime").html(formatTime(item.jumlah));
+       
+      }
+	  if (item.jenis === "aht") {
+         $("#emailHandlingTime").html(formatTime(item.jumlah));
+       
+      }
+	  
     });
 
-    if (emailInbox > 0 && emailReviewing > 0) {
-      var avrEmailResponseTime = (emailReviewing / emailInbox) * totalInboxTime;
-      $("#emailResponseTime").html(formatTime(avrEmailResponseTime));
-    }
-
-    if (emailInbox > 0 && emailHandling > 0) {
-      var avrEmailHandlingTime = (emailHandling / emailInbox) * totalInboxTime;
-      $("#emailHandlingTime").html(formatTime(avrEmailHandlingTime));
-    }
+    
 
   } catch (error) {
     console.error("An error occurred:", error);
   }
 }
-async function getDataEmail() {
+async function getDataDk() {
   try {
     const response = await fetch(
       "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/TotalDataDKPusat",
@@ -131,7 +215,7 @@ async function getDataEmail() {
 			json.forEach((item, index) => {
 				
 			 	   $('#incomingLiveChat').html(item["totaLInChat"])
-			 	   $('#handlingLiveChat').html(item["handlingLiveChat"])
+			 	   $('#handlingLiveChat').html(item["totalHandling"])
 			 	   $('#answerLiveChat').html(item["totalAns"])
 			 	   $('#queueingLiveChat').html(item["totalQueue"])
 			 	   $('#abandonedLiveChat').html(item["totalAbn"])
@@ -139,8 +223,13 @@ async function getDataEmail() {
 			 	   $('#fbSosMed').html(item["totalFb"])
 			 	   $('#igSosMed').html(item["totalIg"])
 			 	   $('#xSosMed').html('0')
+			 	   $('#otherLc').html(item["totalOther"])
+				   $("#waitingTimeLiveChat").html(item["avgChatTime"]);
+				   $("#averageLiveChat").html(item["avgConverChatTime"]);
 			   
 			});
+			
+	    
       
 
   } catch (error) {
@@ -149,14 +238,17 @@ async function getDataEmail() {
 }
 
 
-function formatTime(minutes) {
-  let hours = Math.floor(minutes / 60);
-  let mins = Math.floor(minutes % 60);
+function formatTime(seconds) {
+  let hours = Math.floor(seconds / 3600); // Get the hours
+  let minutes = Math.floor((seconds % 3600) / 60); // Get the minutes
+  let remainingSeconds = seconds % 60;    // Get the remaining seconds
 
+  // Format the hours, minutes, and seconds with leading zeroes if necessary
   let formattedHours = hours < 10 ? '0' + hours : hours;
-  let formattedMinutes = mins < 10 ? '0' + mins : mins;
+  let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+  let formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
 
-  return `${formattedHours}:${formattedMinutes}`;
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
 

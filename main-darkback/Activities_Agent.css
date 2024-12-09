@@ -6,7 +6,6 @@ body {
 
 .header {
     background-color: #1e2746;
-    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,6 +30,13 @@ body {
     text-align: right;
 }
 
+.page-title {
+    font-size: 30px; /* Ukuran teks untuk judul */
+    margin-top: -0px; /* Hilangkan jarak atas */
+    margin-bottom: 20px; /* Sesuaikan jarak bawah */
+    color: white; /* Warna teks judul */
+}
+
 .date-time-text {
     font-size: 22px; /* Ukuran teks lebih besar */
     margin: 10px 0; /* Margin atas dan bawah sama */
@@ -39,15 +45,12 @@ body {
 
 .section-title {
     color: orange;
-    margin-top: 20px;
-    margin-bottom: 10px;
     text-align: center;
     font-size: 30px;
 }
 
 .table-container {
     background-color: #1e2746;
-    padding: 10px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -60,13 +63,13 @@ body {
     width: 100%;
     text-align: center; /* Default: Center align all content */
     border-collapse: collapse; /* Pastikan border di-collapse */
+    font-size: 24px;
 }
 
 .table th,
 .table td {
     border: none; /* Menghilangkan semua border */
-    padding: 8px;
-    font-size: 14px;
+    font-size: 18px;
     /* Untuk menghilangkan border atas jika masih ada */
     border-top: none !important; /* Menonaktifkan garis atas */
     border-bottom: none !important; /* Menonaktifkan garis atas */
@@ -87,11 +90,52 @@ body {
     background-color: #1e2746; /* Warna untuk baris genap */
 }
 
+/* Pastikan tinggi baris konsisten */
+.table tbody tr.empty-row td {
+    height: 38px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
+    line-height: 38px; /* Pastikan teks berada di tengah */
+}
+
+/* Untuk semua baris, pastikan ada tinggi minimum */
+.table tbody tr td {
+    min-height: 40px; /* Tinggi minimum untuk semua baris */
+    vertical-align: middle; /* Teks selalu di tengah */
+}
+
+
+#AgentCall tbody tr {
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+    -moz-transition: transform 0.5s ease;
+    -ms-transition: transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+}
+
+#AgentCall tbody {
+    overflow: hidden;
+    position: relative;
+}
+
+#listEmail tbody tr {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+#listEmail tbody tr.fade-out {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+#listEmail tbody tr.fade-in {
+    transform: translateY(0);
+    opacity: 1;
+}
+
 .status-available, .status-acd, .status-acw, .status-istirahat, 
 .status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
+    background-color: #059d55;
     color: #fff;
     border-radius: 5px;
-    padding: 10px 20px; /* Padding atas-bawah 10px, kanan-kiri 20px */
+    padding: 5px 10px; 
     min-width: 100px; /* Set lebar minimal */
     display: inline-block; /* Agar kotak mengikuti konten */
     text-align: center; /* Untuk membuat teks berada di tengah */

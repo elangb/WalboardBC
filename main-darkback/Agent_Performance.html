@@ -44,10 +44,47 @@
             width: 100%;
             height: 100%;
         }
+
+        .header {
+            background-color: #1e2746;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .header .title {
+            font-size: 24px;
+        }
+
+        .contact-center-text {
+            font-weight: bold;
+            font-size: 20px;
+            /* Increase font size */
+            margin-left: -100px;
+        }
+
+
+        .header .date-time {
+            text-align: right;
+        }
+
+        .date-time-text {
+            font-size: 22px;
+            /* Ukuran teks lebih besar */
+            margin: 10px 0;
+            /* Margin atas dan bawah sama */
+            color: goldenrod;
+            /* Warna sesuai dengan style yang sudah ada */
+        }
     </style>
 </head>
 
-<body onload="abcde()" class="hold-transition dark-skin theme-primary sidebar-collapse">
+<body onload="myFunction()" class="hold-transition dark-skin theme-primary sidebar-collapse">
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -72,7 +109,7 @@
                     <ul class="nav navbar-nav">
                         <li class="btn-group d-md-inline-flex d-none">
                             <div class="app-menu">
-                                <a class="date-time-text" style="color: goldenrod;">Selasa | 01 Oktober 2024 | 08:00</a>
+                                <a class="date-time-text" id="dateTime" style="color: goldenrod;"></a>
                             </div>
                         </li>
                     </ul>
@@ -96,21 +133,9 @@
                         <div class="col-md-6">
                             <div class="table-container">
                                 <h3 class="section-title">Call</h3>
-                                <div class="table-scroll">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Agent</th>
-                                                <th>Calls</th>
-                                                <th>Avg. Ring Time</th>
-                                                <th>Avg. Talk Time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Data akan dimasukkan di sini -->
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table class="table" id="AgentCall">
+
+                                </table>
                             </div>
                         </div>
 
@@ -120,147 +145,8 @@
                                 <h3 class="section-title">
                                     Multichat
                                 </h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Nama Agent
-                                            </th>
-                                            <th>
-                                                Chats
-                                            </th>
-                                            <th>
-                                                Avg. Resp. Time
-                                            </th>
-                                            <th>
-                                                Avg. Conv. Time
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Achmad Fahrurrodzi
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    48
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    02:09
-                                                </span>
-                                            </td>
-                                            <td>
-                                                05:11
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                David Clinton
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    37
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    01:12
-                                                </span>
-                                            </td>
-                                            <td>
-                                                11:00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Ferdian Kukuh
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    29
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:53
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    23:11
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Handika Rizqa
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    26
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:32
-                                            </td>
-                                            <td>
-                                                01:20
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                M. Afdal
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    25
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    01:45
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    30:00
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Nuanda Febrian
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    15
-                                                </span>
-                                            </td>
-                                            <td>
-                                                01:10
-                                            </td>
-                                            <td>
-                                                00:12
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Rangga Shenggeng
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    13
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:11
-                                            </td>
-                                            <td>
-                                                04:55
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                <table class="table" id="ListMultichat">
+
                                 </table>
                             </div>
                         </div>
@@ -274,89 +160,9 @@
                                 <h3 class="section-title">
                                     Email
                                 </h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Nama Agent
-                                            </th>
-                                            <th>
-                                                Emails
-                                            </th>
-                                            <th>
-                                                Avg. Resp. Time
-                                            </th>
-                                            <th>
-                                                Avg. Hand. Time
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Achyarullah
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    68
-                                                </span>
-                                            </td>
-                                            <td>
-                                                05:11
-                                            </td>
-                                            <td>
-                                                05:11
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Bagus Dinar
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    35
-                                                </span>
-                                            </td>
-                                            <td>
-                                                11:00
-                                            </td>
-                                            <td>
-                                                11:00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Fajar Hendra
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    24
-                                                </span>
-                                            </td>
-                                            <td>
-                                                23:11
-                                            </td>
-                                            <td>
-                                                23:11
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Khoerotul Imron
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    9
-                                                </span>
-                                            </td>
-                                            <td>
-                                                01:20
-                                            </td>
-                                            <td>
-                                                01:20
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                <table class="table" id="listEmail">
+
+
                                 </table>
                             </div>
                         </div>
@@ -366,89 +172,9 @@
                                 <h3 class="section-title">
                                     Comments & More
                                 </h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Nama Agent
-                                            </th>
-                                            <th>
-                                                Convs.
-                                            </th>
-                                            <th>
-                                                Avg. Resp. Time
-                                            </th>
-                                            <th>
-                                                Avg. Conv. Time
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Maruli Tua
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-green">
-                                                    21
-                                                </span>
-                                            </td>
-                                            <td>
-                                                02:09
-                                            </td>
-                                            <td>
-                                                05:11
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Rizaldhi Putra
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    19
-                                                </span>
-                                            </td>
-                                            <td>
-                                                01:12
-                                            </td>
-                                            <td>
-                                                11:00
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Satria Utama
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-orange">
-                                                    15
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:53
-                                            </td>
-                                            <td>
-                                                23:11
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Sulfiandi
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pink">
-                                                    10
-                                                </span>
-                                            </td>
-                                            <td>
-                                                00:32
-                                            </td>
-                                            <td>
-                                                01:20
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                <table class="table" id="ListSosmed">
+
+
                                 </table>
                             </div>
                         </div>
@@ -486,63 +212,34 @@
 
     <script src="js/pages/echart-pie-doghnut.js"></script>
     <script src="js/pages/widget-morris-charts.js"></script>
+    <script src="js/Agent_Performance.js"></script>
 
     <script>
-        function fetchAgentData() {
-            fetch('PHP/AgentActivity.php') // Adjust the PHP file path
-                .then(response => response.json())
-                .then(data => {
-                    let tableBody = document.querySelector('.table tbody');
-                    tableBody.innerHTML = ''; // Clear current table content
-
-                    data.forEach(agent => {
-                        let row = `
-                            <tr>
-                                <td>${agent.nama_agent}</td>
-                                <td><span class="badge badge-green">${agent.calls}</span></td>
-                                <td>${agent.avg_ring_time}</td>
-                                <td>${agent.avg_talk_time}</td>
-                            </tr>
-                        `;
-                        tableBody.insertAdjacentHTML('beforeend', row);
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
-
-        // Fetch data every 5 seconds
-        setInterval(fetchAgentData, 5000);
-
-        // Initial data load
-        fetchAgentData();
-    </script>
-
-    <script>
-        // Mendapatkan waktu saat ini
+        // Fungsi untuk mengupdate tanggal dan waktu setiap detik
         function updateDateTime() {
-            const now = new Date();
+            const dateTimeElement = document.getElementById("dateTime");
 
-            // Daftar nama hari
             const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            const day = days[now.getDay()]; // Mendapatkan hari saat ini
+            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-            // Daftar nama bulan
-            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
-                "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-            const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+            const now = new Date();
+            const dayName = days[now.getDay()];
+            const date = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
 
-            // Format tanggal
-            const date = now.getDate(); // Tanggal
-            const year = now.getFullYear(); // Tahun
-            const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
-            const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+            // Format yang diinginkan: "Selasa | 01 Oktober 2024 | 08:00:00"
+            const formattedDateTime = `${dayName} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
 
-            // Mengupdate elemen dengan waktu saat ini
-            document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
+            dateTimeElement.textContent = formattedDateTime;
         }
 
-        // Panggil fungsi saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', updateDateTime);
+        // Update waktu saat halaman dimuat dan setiap detik
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
     </script>
 
 </body>
