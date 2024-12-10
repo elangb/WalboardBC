@@ -180,6 +180,9 @@ function barchart1(answer) {
                 chart: {
                     type: 'bar',
                     height: 150,
+                    toolbar: {
+                        show: false // Menghilangkan toolbar
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -212,7 +215,7 @@ function barchart1(answer) {
                     }
                 },
                 xaxis: {
-                    categories: ['Answer Call'],  // Label tunggal untuk Answer Call
+                    categories: [''],  // Label tunggal untuk Answer Call
                     max: 100,  // Maksimal nilai x-axis adalah 100 (persentase)
                     labels: {
                         style: {
@@ -268,6 +271,9 @@ function barchart2(answer) {
                 chart: {
                     type: 'bar',
                     height: 150,
+                    toolbar: {
+                        show: false // Menghilangkan toolbar
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -300,7 +306,7 @@ function barchart2(answer) {
                     }
                 },
                 xaxis: {
-                    categories: ['Answer Call'],  // Label tunggal untuk Answer Call
+                    categories: [''],  // Label tunggal untuk Answer Call
                     max: 100,  // Maksimal nilai x-axis adalah 100 (persentase)
                     labels: {
                         style: {
@@ -356,6 +362,9 @@ function barchart3(answer) {
                 chart: {
                     type: 'bar',
                     height: 150,
+                    toolbar: {
+                        show: false // Menghilangkan toolbar
+                    }
                 },
                 plotOptions: {
                     bar: {
@@ -388,7 +397,7 @@ function barchart3(answer) {
                     }
                 },
                 xaxis: {
-                    categories: ['Answer Call'],  // Label tunggal untuk Answer Call
+                    categories: [''],  // Label tunggal untuk Answer Call
                     max: 100,  // Maksimal nilai x-axis adalah 100 (persentase)
                     labels: {
                         style: {
@@ -1003,3 +1012,33 @@ function addTimeDurations(time1, time2) {
 
       return `${hours}:${minutes}:${seconds}`;
   }
+
+// Fungsi untuk memperbarui waktu
+function updateDateTime() {
+    const now = new Date();
+
+    // Daftar nama hari
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const day = days[now.getDay()]; // Mendapatkan hari saat ini
+
+    // Daftar nama bulan
+    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+
+    // Format tanggal
+    const date = now.getDate(); // Tanggal
+    const year = now.getFullYear(); // Tahun
+    const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
+    const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+    const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
+
+    // Mengupdate elemen dengan waktu saat ini
+    document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+}
+
+// Memperbarui waktu setiap detik
+setInterval(updateDateTime, 1000);
+
+// Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
+document.addEventListener('DOMContentLoaded', updateDateTime);

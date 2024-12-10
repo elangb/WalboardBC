@@ -141,7 +141,10 @@ async function LineChart() {
         const options = {
             chart: {
                 height: 370,
-                type: 'line' // Jenis chart tetap "line"
+                type: 'line', // Jenis chart tetap "line"
+				toolbar: {
+                    show: false // Menghilangkan toolbar
+                }
             },
             series: [
                 {
@@ -395,39 +398,60 @@ function chartPie(avail,acd,acw,aux){
   
 }
 
-async function last5month() {
-   try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetmontlylHistory", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain' // Setting the accept header
-            }
-        });
+// async function last5month() {
+   // try {
+        // const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetmontlylHistory", {
+            // method: "GET",
+            // headers: {
+                // 'Accept': 'text/plain' // Setting the accept header
+            // }
+        // });
 
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        // // Check if the response is okay
+        // if (!response.ok) {
+            // throw new Error(`HTTP error! Status: ${response.status}`);
+        // }
 
-        const data = await response.text(); // Using text() since accept is text/plain
-		 console.log(data);
-		 var json = JSON.parse(data);
+        // const data = await response.text(); // Using text() since accept is text/plain
+		 // console.log(data);
+		 // var json = JSON.parse(data);
+		
 		
 		 
-		 
-			json.forEach((item, index) => {
-			  if (index  ==0) 
-				   $('#fiveMonthTotal5').html(item["answer"])
-			    if (index  ==1) 
-				   $('#fiveMonthTotal4').html(item["answer"])
-			    if (index  ==2) 
-				   $('#fiveMonthTotal3').html(item["answer"])
-			    if (index  ==3) 
-				   $('#fiveMonthTotal2').html(item["answer"])
-			    if (index  ==2) 
-				   $('#fiveMonthTotal1').html(item["answer"])
+			// json.forEach((item, index) => {
+			  // if (index  ==0) {
+				
+			      // const fiveMonthTotal5 = document.getElementById('fiveMonthTotal5');
+				  // var value = item["answer"];
+						// if (value < 50) {
+							// fiveMonthTotal5.classList.add('badge-merah'); // Merah jika kurang dari 50
+							// fiveMonthTotal5.classList.remove('badge-kuning', 'badge-hijau', 'badge-biru');
+						// } else if (value >= 50 && value < 70) {
+							// fiveMonthTotal5.classList.add('badge-kuning'); // Kuning jika antara 50 dan 70
+							// fiveMonthTotal5.classList.remove('badge-merah', 'badge-hijau', 'badge-biru');
+						// } else if (value >= 70 && value < 100) {
+							// fiveMonthTotal5.classList.add('badge-hijau'); // Hijau jika antara 70 dan 100
+							// fiveMonthTotal5.classList.remove('badge-merah', 'badge-kuning', 'badge-biru');
+						// } else if (value >= 100) {
+							// fiveMonthTotal5.classList.add('badge-biru'); // Biru jika lebih dari 100
+							// fiveMonthTotal5.classList.remove('badge-merah', 'badge-kuning', 'badge-hijau');
+						// }
+						 // $('#fiveMonthTotal5').html(item["answer"])
+			  // }
+			    // if (index  ==1) {
+				   // $('#fiveMonthTotal4').html(item["answer"])
+				// }
+			    // if (index  ==2) {
+				   // $('#fiveMonthTotal3').html(item["answer"])
+				   // }
+			    // if (index  ==3) {
+				   // $('#fiveMonthTotal2').html(item["answer"])
+				// }
+			    // if (index  ==2) {
+				   // $('#fiveMonthTotal1').html(item["answer"])
+				// }
 			   
-			});
+			// });
 				  
 			   
 			  
@@ -443,10 +467,10 @@ async function last5month() {
   
        
 
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-}
+    // } catch (error) {
+        // console.error("An error occurred:", error);
+    // }
+// }
 async function last5month() {
    try {
         const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetmontlylHistory", {
@@ -468,16 +492,101 @@ async function last5month() {
 		 
 		 
 			json.forEach((item, index) => {
-			  if (index  ==0) 
-				   $('#fiveMonthTotal5').html(item["answer"])
-			    if (index  ==1) 
+			  if (index  ==0) {
+				
+			      const fiveMonthTotal5 = document.getElementById('fiveMonthTotal5');
+				  var value = item["answer"];
+						if (value < 50) {
+							fiveMonthTotal5.classList.add('badge-merah'); // Merah jika kurang dari 50
+							fiveMonthTotal5.classList.remove('badge-kuning', 'badge-hijau', 'badge-biru');
+						} else if (value >= 50 && value < 70) {
+							fiveMonthTotal5.classList.add('badge-kuning'); // Kuning jika antara 50 dan 70
+							fiveMonthTotal5.classList.remove('badge-merah', 'badge-hijau', 'badge-biru');
+						} else if (value >= 70 && value < 100) {
+							fiveMonthTotal5.classList.add('badge-hijau'); // Hijau jika antara 70 dan 100
+							fiveMonthTotal5.classList.remove('badge-merah', 'badge-kuning', 'badge-biru');
+						} else if (value >= 100) {
+							fiveMonthTotal5.classList.add('badge-biru'); // Biru jika lebih dari 100
+							fiveMonthTotal5.classList.remove('badge-merah', 'badge-kuning', 'badge-hijau');
+						}
+						 $('#fiveMonthTotal5').html(item["answer"])
+			  }
+			    if (index  ==1) {
+					
+					 const fiveMonthTotal4 = document.getElementById('fiveMonthTotal4');
+				  var value = item["answer"];
+						if (value < 50) {
+							fiveMonthTotal4.classList.add('badge-merah'); // Merah jika kurang dari 50
+							fiveMonthTotal4.classList.remove('badge-kuning', 'badge-hijau', 'badge-biru');
+						} else if (value >= 50 && value < 70) {
+							fiveMonthTotal4.classList.add('badge-kuning'); // Kuning jika antara 50 dan 70
+							fiveMonthTotal4.classList.remove('badge-merah', 'badge-hijau', 'badge-biru');
+						} else if (value >= 70 && value < 100) {
+							fiveMonthTotal4.classList.add('badge-hijau'); // Hijau jika antara 70 dan 100
+							fiveMonthTotal4.classList.remove('badge-merah', 'badge-kuning', 'badge-biru');
+						} else if (value >= 100) {
+							fiveMonthTotal4.classList.add('badge-biru'); // Biru jika lebih dari 100
+							fiveMonthTotal4.classList.remove('badge-merah', 'badge-kuning', 'badge-hijau');
+						}
+						
 				   $('#fiveMonthTotal4').html(item["answer"])
-			    if (index  ==2) 
+				}
+			    if (index  ==2) {
+					
+					 const fiveMonthTotal3 = document.getElementById('fiveMonthTotal3');
+				  var value = item["answer"];
+						if (value < 50) {
+							fiveMonthTotal3.classList.add('badge-merah'); // Merah jika kurang dari 50
+							fiveMonthTotal3.classList.remove('badge-kuning', 'badge-hijau', 'badge-biru');
+						} else if (value >= 50 && value < 70) {
+							fiveMonthTotal3.classList.add('badge-kuning'); // Kuning jika antara 50 dan 70
+							fiveMonthTotal3.classList.remove('badge-merah', 'badge-hijau', 'badge-biru');
+						} else if (value >= 70 && value < 100) {
+							fiveMonthTotal3.classList.add('badge-hijau'); // Hijau jika antara 70 dan 100
+							fiveMonthTotal3.classList.remove('badge-merah', 'badge-kuning', 'badge-biru');
+						} else if (value >= 100) {
+							fiveMonthTotal3.classList.add('badge-biru'); // Biru jika lebih dari 100
+							fiveMonthTotal3.classList.remove('badge-merah', 'badge-kuning', 'badge-hijau');
+						}
 				   $('#fiveMonthTotal3').html(item["answer"])
-			    if (index  ==3) 
+				   }
+			    if (index  ==3) {
+					 const fiveMonthTotal2 = document.getElementById('fiveMonthTotal2');
+				  var value = item["answer"];
+						if (value < 50) {
+							fiveMonthTotal2.classList.add('badge-merah'); // Merah jika kurang dari 50
+							fiveMonthTotal2.classList.remove('badge-kuning', 'badge-hijau', 'badge-biru');
+						} else if (value >= 50 && value < 70) {
+							fiveMonthTotal2.classList.add('badge-kuning'); // Kuning jika antara 50 dan 70
+							fiveMonthTotal2.classList.remove('badge-merah', 'badge-hijau', 'badge-biru');
+						} else if (value >= 70 && value < 100) {
+							fiveMonthTotal2.classList.add('badge-hijau'); // Hijau jika antara 70 dan 100
+							fiveMonthTotal2.classList.remove('badge-merah', 'badge-kuning', 'badge-biru');
+						} else if (value >= 100) {
+							fiveMonthTotal2.classList.add('badge-biru'); // Biru jika lebih dari 100
+							fiveMonthTotal2.classList.remove('badge-merah', 'badge-kuning', 'badge-hijau');
+						}
 				   $('#fiveMonthTotal2').html(item["answer"])
-			    if (index  ==2) 
+				  
+				}
+			    if (index  ==2) {
+				   const fiveMonthTotal1 = document.getElementById('fiveMonthTotal1');
+				  var value = item["answer"];
+						if (value < 50) {
+							fiveMonthTotal1.classList.add('badge-merah'); // Merah jika kurang dari 50
+							fiveMonthTotal1.classList.remove('badge-kuning', 'badge-hijau', 'badge-biru');
+						} else if (value >= 50 && value < 70) {
+							fiveMonthTotal1.classList.add('badge-kuning'); // Kuning jika antara 50 dan 70
+							fiveMonthTotal1.classList.remove('badge-merah', 'badge-hijau', 'badge-biru');
+						} else if (value >= 70 && value < 100) {
+							fiveMonthTotal1.classList.add('badge-hijau'); // Hijau jika antara 70 dan 100
+							fiveMonthTotal1.classList.remove('badge-merah', 'badge-kuning', 'badge-biru');
+						} else if (value >= 100) {
+							fiveMonthTotal1.classList.add('badge-biru'); // Biru jika lebih dari 100
+							fiveMonthTotal1.classList.remove('badge-merah', 'badge-kuning', 'badge-hijau');
+						}
 				   $('#fiveMonthTotal1').html(item["answer"])
+				}
 			   
 			});
 				  
@@ -698,6 +807,34 @@ function addTimeDurations(time1, time2) {
         return `${hours}:${minutes}:${seconds}`;
     }
 
+// Fungsi untuk memperbarui waktu
+function updateDateTime() {
+    const now = new Date();
 
+    // Daftar nama hari
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const day = days[now.getDay()]; // Mendapatkan hari saat ini
+
+    // Daftar nama bulan
+    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+
+    // Format tanggal
+    const date = now.getDate(); // Tanggal
+    const year = now.getFullYear(); // Tahun
+    const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
+    const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+    const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
+
+    // Mengupdate elemen dengan waktu saat ini
+    document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+}
+
+// Memperbarui waktu setiap detik
+setInterval(updateDateTime, 1000);
+
+// Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
+document.addEventListener('DOMContentLoaded', updateDateTime);
 				
 				 

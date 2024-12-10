@@ -77,7 +77,6 @@ body {
 
 .table-container {
     background-color: #1e2746;
-    padding: 10px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -90,13 +89,13 @@ body {
     width: 100%;
     text-align: center; /* Default: Center align all content */
     border-collapse: collapse; /* Pastikan border di-collapse */
+    font-size: 24px;
 }
 
 .table th,
 .table td {
     border: none; /* Menghilangkan semua border */
-    padding: 8px;
-    font-size: 12px;
+    font-size: 16px;
     /* Untuk menghilangkan border atas jika masih ada */
     border-top: none !important; /* Menonaktifkan garis atas */
     border-bottom: none !important; /* Menonaktifkan garis atas */
@@ -115,6 +114,46 @@ body {
 
 .table tbody tr:nth-child(even) {
     background-color: #1e2746; /* Warna untuk baris genap */
+}
+
+/* Pastikan tinggi baris konsisten */
+.table tbody tr.empty-row td {
+    height: 27px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
+    line-height: 27px; /* Pastikan teks berada di tengah */
+}
+
+/* Untuk semua baris, pastikan ada tinggi minimum */
+.table tbody tr td {
+    min-height: 36px; /* Tinggi minimum untuk semua baris */
+    vertical-align: middle; /* Teks selalu di tengah */
+}
+
+
+#AgentCall tbody tr {
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+    -moz-transition: transform 0.5s ease;
+    -ms-transition: transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+}
+
+#AgentCall tbody {
+    overflow: hidden;
+    position: relative;
+}
+
+#listEmail tbody tr {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+#listEmail tbody tr.fade-out {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+#listEmail tbody tr.fade-in {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .badge-green, .badge-orange, .badge-pink {

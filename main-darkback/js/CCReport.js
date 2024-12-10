@@ -620,7 +620,10 @@ async function barchart() {
             chart: {
                 type: 'bar',
                 height: 500,
-                background: 'transparent' // Membuat background chart transparan
+                background: 'transparent',
+                toolbar: {
+                    show: false // Menghilangkan toolbar
+                }
             },
             theme: {
                 mode: 'dark'
@@ -700,30 +703,34 @@ async function barchart() {
         return `${hours}:${minutes}:${seconds}`;
     }
 
- // Mendapatkan waktu saat ini
- function updateDateTime() {
-  const now = new Date();
+// Fungsi untuk memperbarui waktu
+function updateDateTime() {
+    const now = new Date();
 
-  // Daftar nama hari
-  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-  const day = days[now.getDay()]; // Mendapatkan hari saat ini
+    // Daftar nama hari
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const day = days[now.getDay()]; // Mendapatkan hari saat ini
 
-  // Daftar nama bulan
-  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-                  "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-  const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+    // Daftar nama bulan
+    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
 
-  // Format tanggal
-  const date = now.getDate(); // Tanggal
-  const year = now.getFullYear(); // Tahun
-  const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
-  const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+    // Format tanggal
+    const date = now.getDate(); // Tanggal
+    const year = now.getFullYear(); // Tahun
+    const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
+    const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+    const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
 
-  // Mengupdate elemen dengan waktu saat ini
-  document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
+    // Mengupdate elemen dengan waktu saat ini
+    document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
 }
 
-// Panggil fungsi saat halaman dimuat
+// Memperbarui waktu setiap detik
+setInterval(updateDateTime, 1000);
+
+// Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
 document.addEventListener('DOMContentLoaded', updateDateTime);
 				
 				 

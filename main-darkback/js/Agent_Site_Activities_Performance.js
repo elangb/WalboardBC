@@ -1,517 +1,763 @@
 function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 var myVarX;
 var myVarY;
 function myFunction() {
-	
-	 myVarY = setInterval(AutoCall, 8000);
-	
-   
-   //chartPie();
-	
+  myVarY = setInterval(AutoCall, 8000);
+
+  //chartPie();
 }
 
-function AutoCall(){
-	getDateTime();
-   getGreeting();
-   
-   ListAgentPasarBaru();
-    ListAgentSoetta();
-	 ListAgentTanjungPriok();
-	 getDataEmail();
-	 listMultiChatPriuk();
-	 listMultiChatPasarBaru();
-	 listMultiChatSoetta();
-	 
-  
+function AutoCall() {
+  getDateTime();
+  getGreeting();
+
+  ListAgentPasarBaru();
+  ListAgentSoetta();
+  ListAgentTanjungPriok();
+  getDataEmail();
+  listMultiChatPriuk();
+  listMultiChatPasarBaru();
+  listMultiChatSoetta();
 }
-async function getDataEmail(){
+async function getDataEmail() {
+  try {
+    const response = await fetch(
+      "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailAllSide",
+      {
+        method: "GET",
+        headers: {
+          Accept: "text/plain", // Setting the accept header
+        },
+      }
+    );
 
-    try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailAllSide", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain' // Setting the accept header
-            }
-        });
-
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.text(); // Using text() since accept is text/plain
-		 console.log(data);
-		
-		 var json = JSON.parse(data);
-		
-		 var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									'<th>Status</th>' +
-									'<th>Now Handle</th>' +
-									'<th>Emails</th>' +							
-									'</tr>';
-									
-									
-		var table2 = '<table class="table table-dark table-striped">';
-				  table2 += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									'<th>Status</th>' +
-									'<th>Now Handle</th>' +
-									'<th>Emails</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 json.forEach(items => {
-								 
-								 if(items["sideId"] == "Soekarno Hatta"){
-								 
-									table += '<tr>';
-									table += '<td>' + items["name"] + '</td>';
-									table += '<td>' + items["loginTime"] + '</td>';
-									table += '<td>' + items["handleTime"] + '</td>';
-									table += '<td>' + items["status"] + '</td>';
-								 }
-								 
-								 if(items["sideId"] == "Pasar Baru"){
-								 
-									table2 += '<tr>';
-									table2 += '<td>' + items["name"] + '</td>';
-									table2 += '<td>' + items["loginTime"] + '</td>';
-									table2 += '<td>' + items["handleTime"] + '</td>';
-									table2 += '<td>' + items["status"] + '</td>';
-								 }
-								
-								
-							});
-
-							
-
-							table += '</table>';
-							
-							table2 += '</table>';
-							$('#listEailSoetta').html(table);
-							$('#ListEmailPasarBaru').html(table);
-		  
-		 
-					   
-						
-  
-       
-
-    } catch (error) {
-        console.error("An error occurred:", error);
+    // Check if the response is okay
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  
-    
 
-}
-function ListAgentTanjungPriok(){
-	 var lastweek=[];
-	 var currentWeek=[];
-	
-	var jqxhr = $.getJSON("PHP/Agent_Site_Activities_Performance_TanjungPriuk.php", function(data) {
-				 
-				  console.log(data);
-				  var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									'<th>Ext</th>' +
-									'<th>Status</th>' +
-									'<th>Calls</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 data.forEach(items => {
-								 
-								 table += '<tr>';
-								table += '<td>' + items["Agent Name"] + '</td>';
-								table += '<td><span class="badge badge-green">' + items["Extn"] + '</span></td>';
-								if (items["State"] == 'AVAIL')
-									table += '<td><span class="badge badge-green">' + items["State"] + '</span></td>';
-								else
-									table += '<td><span class="badge badge-pink">' + items["State"] + '</span></td>';
+    const data = await response.text(); // Using text() since accept is text/plain
+    console.log(data);
 
-								table += '<td><span class="badge badge-green">' + items["Time"] + '</span></td>';
-								
-								
-							});
+    var json = JSON.parse(data);
 
-							
+    var table = '<table class="table table-dark table-striped">';
+    table +=
+      "<tr>" +
+      "<th>Nama Agent</th>" +
+      "<th>Status</th>" +
+      "<th>Now Handle</th>" +
+      "<th>Emails</th>" +
+      "</tr>";
 
-							table += '</table>';
-							$('#ListAgentTanjungPriok').html(table);
-							
-							
-				 
-             
+    var table2 = '<table class="table table-dark table-striped">';
+    table2 +=
+      "<tr>" +
+      "<th>Nama Agent</th>" +
+      "<th>Status</th>" +
+      "<th>Now Handle</th>" +
+      "<th>Emails</th>" +
+      "</tr>";
 
+    //sconst agents = JSON.parse(data);
+    json.forEach((items) => {
+      if (items["sideId"] == "Soekarno Hatta") {
+        table += "<tr>";
+        table += "<td>" + items["name"] + "</td>";
+        table += "<td>" + items["loginTime"] + "</td>";
+        table += "<td>" + items["handleTime"] + "</td>";
+        table += "<td>" + items["status"] + "</td>";
+      }
+
+      if (items["sideId"] == "Pasar Baru") {
+        table2 += "<tr>";
+        table2 += "<td>" + items["name"] + "</td>";
+        table2 += "<td>" + items["loginTime"] + "</td>";
+        table2 += "<td>" + items["handleTime"] + "</td>";
+        table2 += "<td>" + items["status"] + "</td>";
+      }
     });
-	
-						
+
+    table += "</table>";
+
+    table2 += "</table>";
+    $("#listEailSoetta").html(table);
+    $("#ListEmailPasarBaru").html(table);
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 }
-function ListAgentSoetta(){
-	 var lastweek=[];
-	 var currentWeek=[];
-	
-	var jqxhr = $.getJSON("PHP/Agent_Site_Activities_Performance_soetta.php", function(data) {
-				 
-				  console.log(data);
-				  var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									'<th>Ext</th>' +
-									'<th>Status</th>' +
-									'<th>Calls</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 data.forEach(items => {
-								 
-								 table += '<tr>';
-								table += '<td>' + items["Agent Name"] + '</td>';
-								table += '<td><span class="badge badge-green">' + items["Extn"] + '</span></td>';
-								if (items["State"] == 'AVAIL')
-									table += '<td><span class="badge badge-green">' + items["State"] + '</span></td>';
-								else
-									table += '<td><span class="badge badge-pink">' + items["State"] + '</span></td>';
 
-								table += '<td><span >' + items["Time"] + '</span></td>';
-								
-							});
+function ListAgentTanjungPriok() {
+  $.getJSON(
+    "PHP/Agent_Site_Activities_Performance_TanjungPriuk.php",
+    function (data) {
+      const agents = data || []; // Data agent dari server
+      const minimumRows = 5; // Jumlah minimal baris di tabel
+      const tableRows = [];
 
-							
+      // Membuat baris data dari hasil fetch
+      agents.forEach((items) => {
+        let row = "<tr>";
+        row += "<td>" + (items["Agent Name"] || "-") + "</td>"; // Nama Agent
+        row +=
+          '<td><span class="badge badge-green">' +
+          (items["Extn"] || "-") +
+          "</span></td>"; // Extension
 
-							table += '</table>';
-							$('#ListAgentSoetta').html(table);
-							
-							
-				 
-             
+        // Status formatting
+        if (items["State"] === "AVAIL")
+          row +=
+            '<td><span class="badge badge-green">' +
+            items["State"] +
+            "</span></td>";
+        else if (items["State"] === "ACW")
+          row +=
+            '<td><span class="badge badge-orange">' +
+            items["State"] +
+            "</span></td>";
+        else if (items["State"] === "AUX")
+          row +=
+            '<td><span class="badge badge-blue">' +
+            items["State"] +
+            "</span></td>";
+        else
+          row +=
+            '<td><span class="badge badge-pink">' +
+            (items["State"] || "-") +
+            "</span></td>";
 
+        // Time formatting
+        const timeValue = items["Time"] || "0";
+        const duration = formatDuration(timeValue); // Optional: Implement duration formatting
+        row += "<td>" + duration + "</td>";
+        row += "</tr>";
+
+        tableRows.push(row);
+      });
+
+      // Tambahkan baris kosong jika kurang dari minimumRows
+      while (tableRows.length < minimumRows) {
+        tableRows.push(
+          '<tr class="empty-row">' +
+            "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+            "</tr>"
+        );
+      }
+
+      // Fungsi untuk memperbarui tabel
+      let startIndex = 0;
+      const updateTable = () => {
+        const displayedRows = [];
+        for (let i = 0; i < minimumRows; i++) {
+          const index = (startIndex + i) % tableRows.length; // Rolling index
+          displayedRows.push(tableRows[index]);
+        }
+
+        let table = '<table class="table table-dark table-striped">';
+        table +=
+          "<thead><tr>" +
+          "<th>Nama Agent</th>" +
+          "<th>Extension</th>" +
+          "<th>Status</th>" +
+          "<th>Duration</th>" +
+          "</tr></thead><tbody>";
+        table += displayedRows.join("");
+        table += "</tbody></table>";
+
+        // Tampilkan tabel
+        $("#ListAgentTanjungPriok").html(table);
+
+        // Update indeks awal untuk rolling
+        startIndex = (startIndex + 1) % tableRows.length;
+      };
+
+      // Update tabel pertama kali
+      updateTable();
+
+      // Interval untuk rolling data
+      if (tableRows.length > minimumRows) {
+        setInterval(updateTable, 2000); // Rolling setiap 2 detik
+      }
+    }
+  );
+}
+
+function ListAgentSoetta() {
+  $.getJSON(
+    "PHP/Agent_Site_Activities_Performance_soetta.php",
+    function (data) {
+      const agents = data || []; // Data agent dari server
+      const minimumRows = 3; // Jumlah minimal baris di tabel
+      const tableRows = [];
+
+      // Membuat baris data dari hasil fetch
+      agents.forEach((items) => {
+        let row = "<tr>";
+        row += "<td>" + (items["Agent Name"] || "-") + "</td>"; // Nama Agent
+        row +=
+          '<td><span class="badge badge-green">' +
+          (items["Extn"] || "-") +
+          "</span></td>"; // Extension
+
+        // Status formatting
+        if (items["State"] === "AVAIL")
+          row +=
+            '<td><span class="badge badge-green">' +
+            items["State"] +
+            "</span></td>";
+        else if (items["State"] === "ACW")
+          row +=
+            '<td><span class="badge badge-orange">' +
+            items["State"] +
+            "</span></td>";
+        else if (items["State"] === "AUX")
+          row +=
+            '<td><span class="badge badge-blue">' +
+            items["State"] +
+            "</span></td>";
+        else
+          row +=
+            '<td><span class="badge badge-pink">' +
+            (items["State"] || "-") +
+            "</span></td>";
+
+        // Time formatting
+        const timeValue = items["Time"] || "0";
+        const duration = formatDuration(timeValue); // Fungsi untuk memformat durasi
+        row += "<td>" + duration + "</td>";
+        row += "</tr>";
+
+        tableRows.push(row);
+      });
+
+      // Tambahkan baris kosong jika kurang dari minimumRows
+      while (tableRows.length < minimumRows) {
+        tableRows.push(
+          '<tr class="empty-row">' +
+            "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+            "</tr>"
+        );
+      }
+
+      // Fungsi untuk memperbarui tabel
+      let startIndex = 0;
+      const updateTable = () => {
+        const displayedRows = [];
+        for (let i = 0; i < minimumRows; i++) {
+          const index = (startIndex + i) % tableRows.length; // Rolling index
+          displayedRows.push(tableRows[index]);
+        }
+
+        let table = '<table class="table table-dark table-striped">';
+        table +=
+          "<thead><tr>" +
+          "<th>Nama Agent</th>" +
+          "<th>Extension</th>" +
+          "<th>Status</th>" +
+          "<th>Duration</th>" +
+          "</tr></thead><tbody>";
+        table += displayedRows.join("");
+        table += "</tbody></table>";
+
+        // Tampilkan tabel
+        $("#ListAgentSoetta").html(table);
+
+        // Update indeks awal untuk rolling
+        startIndex = (startIndex + 1) % tableRows.length;
+      };
+
+      // Update tabel pertama kali
+      updateTable();
+
+      // Interval untuk rolling data
+      if (tableRows.length > minimumRows) {
+        setInterval(updateTable, 2000); // Rolling setiap 2 detik
+      }
+    }
+  ).fail(function () {
+    // Error handling
+    $("#ListAgentSoetta").html(
+      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
+    );
+  });
+}
+
+function formatDuration(timeInSeconds) {
+  // Memastikan timeInSeconds adalah angka yang valid
+  const seconds = parseInt(timeInSeconds, 10);
+
+  if (isNaN(seconds)) {
+    return "0:00:00"; // Kembalikan default jika timeInSeconds tidak valid
+  }
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+  return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+function ListAgentPasarBaru() {
+  $.getJSON("PHP/Agent_Site_Activities_Performance.php", function (data) {
+    const agents = data || []; // Data agent dari server
+    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const tableRows = [];
+
+    // Membuat baris data dari hasil fetch
+    agents.forEach((items) => {
+      let row = "<tr>";
+      row += "<td>" + (items["Agent Name"] || "-") + "</td>"; // Nama Agent
+      row +=
+        '<td><span class="badge badge-green">' +
+        (items["Extn"] || "-") +
+        "</span></td>"; // Extension
+
+      // Status formatting
+      if (items["State"] === "AVAIL") {
+        row +=
+          '<td><span class="badge badge-green">' +
+          items["State"] +
+          "</span></td>";
+      } else {
+        row +=
+          '<td><span class="badge badge-pink">' +
+          (items["State"] || "-") +
+          "</span></td>";
+      }
+
+      // Time formatting
+      const timeValue = items["Time"] || "0";
+      const duration = formatDuration(timeValue); // Fungsi untuk memformat durasi
+      row += "<td>" + duration + "</td>";
+
+      row += "</tr>";
+      tableRows.push(row);
     });
-	
-						
+
+    // Tambahkan baris kosong jika kurang dari minimumRows
+    while (tableRows.length < minimumRows) {
+      tableRows.push(
+        '<tr class="empty-row">' +
+          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+          "</tr>"
+      );
+    }
+
+    // Fungsi untuk memperbarui tabel
+    let startIndex = 0;
+    const updateTable = () => {
+      const displayedRows = [];
+      for (let i = 0; i < minimumRows; i++) {
+        const index = (startIndex + i) % tableRows.length; // Rolling index
+        displayedRows.push(tableRows[index]);
+      }
+
+      let table = '<table class="table table-dark table-striped">';
+      table +=
+        "<thead><tr>" +
+        "<th>Nama Agent</th>" +
+        "<th>Ext</th>" +
+        "<th>Status</th>" +
+        "<th>Calls</th>" +
+        "</tr></thead><tbody>";
+      table += displayedRows.join("");
+      table += "</tbody></table>";
+
+      // Tampilkan tabel
+      $("#ListAgentPasarBaru").html(table);
+
+      // Update indeks awal untuk rolling
+      startIndex = (startIndex + 1) % tableRows.length;
+    };
+
+    // Update tabel pertama kali
+    updateTable();
+
+    // Interval untuk rolling data
+    if (tableRows.length > minimumRows) {
+      setInterval(updateTable, 2000); // Rolling setiap 2 detik
+    }
+  }).fail(function () {
+    // Error handling
+    $("#ListAgentPasarBaru").html(
+      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
+    );
+  });
 }
 
-function ListAgentPasarBaru(){
-	 var lastweek=[];
-	 var currentWeek=[];
-	
-	var jqxhr = $.getJSON("PHP/Agent_Site_Activities_Performance.php", function(data) {
-				 
-				  console.log(data);
-				  var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									'<th>Ext</th>' +
-									'<th>Status</th>' +
-									'<th>Calls</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 data.forEach(items => {
-								 
-								 table += '<tr>';
-								table += '<td>' + items["Agent Name"] + '</td>';
-								table += '<td><span class="badge badge-green">' + items["Extn"] + '</span></td>';
-								if (items["State"] == 'AVAIL')
-									table += '<td><span class="badge badge-green">' + items["State"] + '</span></td>';
-								else
-									table += '<td><span class="badge badge-pink">' + items["State"] + '</span></td>';
-								
-							
+// Fungsi tambahan untuk format durasi (misalnya "3600" menjadi "1:00:00")
+function formatDuration(timeInSeconds) {
+  const seconds = parseInt(timeInSeconds, 10);
 
-								table += '<td><span class="badge badge-green">' + items["Time"] + '</span></td>';
-								
-							});
+  if (isNaN(seconds)) {
+    return "0:00:00"; // Kembalikan default jika timeInSeconds tidak valid
+  }
 
-							
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+  return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
+}
 
-							table += '</table>';
-							$('#ListAgentPasarBaru').html(table);
-							
-							
-				 
-             
+async function listMultiChatPriuk() {
+  try {
+    const response = await fetch(
+      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk",
+      {
+        method: "GET",
+        headers: {
+          Accept: "text/plain",
+        },
+      }
+    );
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.text();
+    const agents = JSON.parse(data) || []; // Data agent dari server
+    const minimumRows = 5; // Jumlah minimal baris di tabel
+    const tableRows = [];
+
+    // Membuat baris data dari hasil fetch
+    agents.forEach((items) => {
+      let row = "<tr>";
+      row += "<td>" + (items["agent"] || "-") + "</td>"; // Nama Agent
+
+      // Status formatting
+      if (items["status"] === "Ready")
+        row +=
+          '<td><span class="badge badge-green">' +
+          items["status"] +
+          "</span></td>";
+      else
+        row +=
+          '<td><span class="badge badge-pink">' +
+          (items["status"] || "-") +
+          "</span></td>";
+
+      // Now Handle
+      row += "<td>" + (items["nowHandle"] || "-") + "</td>";
+
+      // Chats count
+      const chats = items["chat"] || "0";
+      row += "<td>" + chats + "</td>";
+      row += "</tr>";
+
+      tableRows.push(row);
     });
-	
-						
-}
-async function listMultiChatPriuk(){
-	 var lastweek=[];
-	 var currentWeek=[];
-	
-	try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain' // Setting the accept header
-            }
-        });
 
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.text(); // Using text() since accept is text/plain
-		 console.log(data);
-		 var json = JSON.parse(data);
-		
-		 
-		 
-		 
-		 
-		
-			  var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									
-									'<th>Status</th>' +
-									'<th>Now Handle</th>' +
-									'<th>Chats</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 json.forEach(items => {
-								 
-								 table += '<tr>';
-								table += '<td>' + items["agent"] + '</td>';
-								if (items["status"] == 'Ready')
-									table += '<td><span class="badge badge-green">' + items["status"] + '</span></td>';
-								else
-									table += '<td><span class="badge badge-pink">' + items["status"] + '</span></td>';
-
-								table += '<td><span>' + items["nowHandle"] + '</span></td>';
-								table += '<td><span>' + items["chat"] + '</span></td>';
-								
-							});
-
-							
-
-							table += '</table>';
-							$('#multichatTanjungPriuk').html(table);
-			   
-		
-							
-		 
-		 
-		
-		
-							
-		  
-					   
-						
-  
-       
-
-    } catch (error) {
-        console.error("An error occurred:", error);
+    // Tambahkan baris kosong jika kurang dari minimumRows
+    while (tableRows.length < minimumRows) {
+      tableRows.push(
+        '<tr class="empty-row">' +
+          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+          "</tr>"
+      );
     }
-	
-						
-}
-async function listMultiChatSoetta(){
-	 var lastweek=[];
-	 var currentWeek=[];
-	
-	try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain' // Setting the accept header
-            }
-        });
 
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    // Fungsi untuk memperbarui tabel
+    let startIndex = 0;
+    const updateTable = () => {
+      const displayedRows = [];
+      for (let i = 0; i < minimumRows; i++) {
+        const index = (startIndex + i) % tableRows.length; // Rolling index
+        displayedRows.push(tableRows[index]);
+      }
 
-        const data = await response.text(); // Using text() since accept is text/plain
-		 console.log(data);
-		 var json = JSON.parse(data);
-		
-		 
-		 
-		 
-		 
-			
-			  var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									
-									'<th>Status</th>' +
-									'<th>Now Handle</th>' +
-									'<th>Chats</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 json.forEach(items => {
-								 
-								 table += '<tr>';
-								table += '<td>' + items["agent"] + '</td>';
-								if (items["status"] == 'Ready')
-									table += '<td><span class="badge badge-green">' + items["status"] + '</span></td>';
-								else
-									table += '<td><span class="badge badge-pink">' + items["status"] + '</span></td>';
+      let table = '<table class="table table-dark table-striped">';
+      table +=
+        "<thead><tr>" +
+        "<th>Nama Agent</th>" +
+        "<th>Status</th>" +
+        "<th>Now Handle</th>" +
+        "<th>Chats</th>" +
+        "</tr></thead><tbody>";
+      table += displayedRows.join("");
+      table += "</tbody></table>";
 
-								table += '<td><span>' + items["nowHandle"] + '</span></td>';
-								table += '<td><span>' + items["chat"] + '</span></td>';
-								
-							});
+      // Tampilkan tabel
+      $("#multichatTanjungPriuk").html(table);
 
-							
+      // Update indeks awal untuk rolling
+      startIndex = (startIndex + 1) % tableRows.length;
+    };
 
-							table += '</table>';
-							$('#multichatSoetta').html(table);
-			   
-			
-				  
-			   
-			  
-							
-		 
-		 
-		
-		
-							
-		  
-					   
-						
-  
-       
+    // Update tabel pertama kali
+    updateTable();
 
-    } catch (error) {
-        console.error("An error occurred:", error);
+    // Interval untuk rolling data
+    if (tableRows.length > minimumRows) {
+      setInterval(updateTable, 2000); // Rolling setiap 2 detik
     }
-	
-						
+  } catch (error) {
+    console.error("An error occurred:", error);
+    // Menampilkan pesan error kepada user
+    $("#multichatTanjungPriuk").html(
+      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
+    );
+  }
 }
 
-async function listMultiChatPasarBaru(){
-	 var lastweek=[];
-	 var currentWeek=[];
-	
-	try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain' // Setting the accept header
-            }
-        });
+async function listMultiChatSoetta() {
+  try {
+    const response = await fetch(
+      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta",
+      {
+        method: "GET",
+        headers: {
+          Accept: "text/plain",
+        },
+      }
+    );
 
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.text(); // Using text() since accept is text/plain
-		 console.log(data);
-		 var json = JSON.parse(data);
-		
-		 
-		 
-		 
-		 
-			
-			  var table = '<table class="table table-dark table-striped">';
-				  table += '<tr>' +                                               
-									'<th>Nama Agent</th>' +
-									
-									'<th>Status</th>' +
-									'<th>Now Handle</th>' +
-									'<th>Chats</th>' +							
-									'</tr>';
-									
-									
-							//sconst agents = JSON.parse(data);	
-							 json.forEach(items => {
-								 
-								 table += '<tr>';
-								table += '<td>' + items["agent"] + '</td>';
-								if (items["status"] == 'Ready')
-									table += '<td><span class="badge badge-green">' + items["status"] + '</span></td>';
-								else
-									table += '<td><span class="badge badge-pink">' + items["status"] + '</span></td>';
-
-								table += '<td><span>' + items["nowHandle"] + '</span></td>';
-								table += '<td><span>' + items["chat"] + '</span></td>';
-								
-							});
-
-							
-
-							table += '</table>';
-							$('#multichatPasarBaru').html(table);
-			   
-			
-       
-
-    } catch (error) {
-        console.error("An error occurred:", error);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-	
-						
+
+    const data = await response.text();
+    const agents = JSON.parse(data) || []; // Data agent dari server
+    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const tableRows = [];
+
+    // Membuat baris data dari hasil fetch
+    agents.forEach((items) => {
+      let row = "<tr>";
+      row += "<td>" + (items["agent"] || "-") + "</td>"; // Nama Agent
+
+      // Status formatting
+      if (items["status"] === "Ready")
+        row +=
+          '<td><span class="badge badge-green">' +
+          items["status"] +
+          "</span></td>";
+      else
+        row +=
+          '<td><span class="badge badge-pink">' +
+          (items["status"] || "-") +
+          "</span></td>";
+
+      // Now Handle
+      row += "<td>" + (items["nowHandle"] || "-") + "</td>";
+
+      // Chats count
+      const chats = items["chat"] || "0";
+      row += "<td>" + chats + "</td>";
+      row += "</tr>";
+
+      tableRows.push(row);
+    });
+
+    // Tambahkan baris kosong jika kurang dari minimumRows
+    while (tableRows.length < minimumRows) {
+      tableRows.push(
+        '<tr class="empty-row">' +
+          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+          "</tr>"
+      );
+    }
+
+    // Fungsi untuk memperbarui tabel
+    let startIndex = 0;
+    const updateTable = () => {
+      const displayedRows = [];
+      for (let i = 0; i < minimumRows; i++) {
+        const index = (startIndex + i) % tableRows.length; // Rolling index
+        displayedRows.push(tableRows[index]);
+      }
+
+      let table = '<table class="table table-dark table-striped">';
+      table +=
+        "<thead><tr>" +
+        "<th>Nama Agent</th>" +
+        "<th>Status</th>" +
+        "<th>Now Handle</th>" +
+        "<th>Chats</th>" +
+        "</tr></thead><tbody>";
+      table += displayedRows.join("");
+      table += "</tbody></table>";
+
+      // Tampilkan tabel
+      $("#multichatSoetta").html(table);
+
+      // Update indeks awal untuk rolling
+      startIndex = (startIndex + 1) % tableRows.length;
+    };
+
+    // Update tabel pertama kali
+    updateTable();
+
+    // Interval untuk rolling data
+    if (tableRows.length > minimumRows) {
+      setInterval(updateTable, 2000); // Rolling setiap 2 detik
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+    // Menampilkan pesan error kepada user
+    $("#multichatSoetta").html(
+      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
+    );
+  }
+}
+
+async function listMultiChatPasarBaru() {
+  try {
+    const response = await fetch(
+      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru",
+      {
+        method: "GET",
+        headers: {
+          Accept: "text/plain",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.text();
+    const agents = JSON.parse(data) || []; // Data agent dari server
+    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const tableRows = [];
+
+    // Membuat baris data dari hasil fetch
+    agents.forEach((items) => {
+      let row = "<tr>";
+      row += "<td>" + (items["agent"] || "-") + "</td>"; // Nama Agent
+
+      // Status formatting
+      if (items["status"] === "Ready")
+        row +=
+          '<td><span class="badge badge-green">' +
+          items["status"] +
+          "</span></td>";
+      else
+        row +=
+          '<td><span class="badge badge-pink">' +
+          (items["status"] || "-") +
+          "</span></td>";
+
+      // Now Handle
+      row += "<td>" + (items["nowHandle"] || "-") + "</td>";
+
+      // Chats count
+      const chats = items["chat"] || "0";
+      row += "<td>" + chats + "</td>";
+      row += "</tr>";
+
+      tableRows.push(row);
+    });
+
+    // Tambahkan baris kosong jika kurang dari minimumRows
+    while (tableRows.length < minimumRows) {
+      tableRows.push(
+        '<tr class="empty-row">' +
+          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+          "</tr>"
+      );
+    }
+
+    // Fungsi untuk memperbarui tabel
+    let startIndex = 0;
+    const updateTable = () => {
+      const displayedRows = [];
+      for (let i = 0; i < minimumRows; i++) {
+        const index = (startIndex + i) % tableRows.length; // Rolling index
+        displayedRows.push(tableRows[index]);
+      }
+
+      let table = '<table class="table table-dark table-striped">';
+      table +=
+        "<thead><tr>" +
+        "<th>Nama Agent</th>" +
+        "<th>Status</th>" +
+        "<th>Now Handle</th>" +
+        "<th>Chats</th>" +
+        "</tr></thead><tbody>";
+      table += displayedRows.join("");
+      table += "</tbody></table>";
+
+      // Tampilkan tabel
+      $("#multichatPasarBaru").html(table);
+
+      // Update indeks awal untuk rolling
+      startIndex = (startIndex + 1) % tableRows.length;
+    };
+
+    // Update tabel pertama kali
+    updateTable();
+
+    // Interval untuk rolling data
+    if (tableRows.length > minimumRows) {
+      setInterval(updateTable, 2000); // Rolling setiap 2 detik
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+    // Menampilkan pesan error kepada user
+    $("#multichatPasarBaru").html(
+      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
+    );
+  }
 }
 
 function getGreeting() {
-        var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
 
-        // Determine the greeting based on the time range
-        if (hours < 10 || (hours === 10 && minutes === 0)) {
-            $('#Greeting').html("Good Morning");
-        } else if (hours < 14 || (hours === 14 && minutes === 0)) {
-			$('#Greeting').html("Good Afternoon")
-           
-        } else {
-			$('#Greeting').html("Good Evening")
-            
-        }
-    }
+  // Determine the greeting based on the time range
+  if (hours < 10 || (hours === 10 && minutes === 0)) {
+    $("#Greeting").html("Good Morning");
+  } else if (hours < 14 || (hours === 14 && minutes === 0)) {
+    $("#Greeting").html("Good Afternoon");
+  } else {
+    $("#Greeting").html("Good Evening");
+  }
+}
 
- 
- 
 function getDateTime() {
   var today = new Date();
   let hours = today.getHours(); // get hours
   let minutes = today.getMinutes(); // get minutes
   let seconds = today.getSeconds(); //  get seconds
   // add 0 if value < 10; Example: 2 => 02
-  if (hours < 10) { hours = "0" + hours; }
-  if (minutes < 10) { minutes = "0" + minutes; }
-  if (seconds < 10) { seconds = "0" + seconds; }
-  var time = hours + ":" + minutes + " WIB"
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  var time = hours + ":" + minutes + " WIB";
   var today = new Date();
-  var dateNya = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var dateNya =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   //var dateNya = 'September' + " " + '27' + ", " + '2024';
- // divDateNya.append('September' + " " + '27' + ", " + '2024');
+  // divDateNya.append('September' + " " + '27' + ", " + '2024');
   //var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var dateTime = dateNya + ' ' + time;
-  
+  var dateTime = dateNya + " " + time;
+
   // Good
-															// Morn/After/Even and Have a Nice Day // Good
-															// Morn/After/Even and Have a Nice Day
-  var divTimenya = $('#timeNya');
-  var divDateNya = $('#dateNya');
+  // Morn/After/Even and Have a Nice Day // Good
+  // Morn/After/Even and Have a Nice Day
+  var divTimenya = $("#timeNya");
+  var divDateNya = $("#dateNya");
 
   var months = new Array(12);
   months[0] = "January";
@@ -528,62 +774,67 @@ function getDateTime() {
   months[10] = "November";
   months[11] = "December";
 
-var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
   var current_date = new Date();
   current_date.setDate(current_date.getDate() + 0);
   month_value = current_date.getMonth();
   day_value = current_date.getDate();
   year_value = current_date.getFullYear();
-  
- 
-     
-  
+
   divTimenya.empty();
   divTimenya.append(time);
   divDateNya.empty();
-  divDateNya.append( hari[current_date.getDay()] +" | "+day_value + " " +  months[month_value]  + " " + year_value +" | " + time );
-  
-  
-     
+  divDateNya.append(
+    hari[current_date.getDay()] +
+      " | " +
+      day_value +
+      " " +
+      months[month_value] +
+      " " +
+      year_value +
+      " | " +
+      time
+  );
+}
+
+function convertSeconds(seconds) {
+  const days = Math.floor(seconds / (24 * 3600));
+  seconds %= 24 * 3600;
+  const hours = Math.floor(seconds / 3600);
+  seconds %= 3600;
+  const minutes = Math.floor(seconds / 60);
+  seconds %= 60;
+
+  return `${hours}:${minutes}:${seconds}`;
 }
 
 
-    function convertSeconds(seconds) {
-        const days = Math.floor(seconds / (24 * 3600));
-        seconds %= (24 * 3600);
-        const hours = Math.floor(seconds / 3600);
-        seconds %= 3600;
-        const minutes = Math.floor(seconds / 60);
-        seconds %= 60;
-
-        return `${hours}:${minutes}:${seconds}`;
-    }
-
-// Mendapatkan waktu saat ini
+// Fungsi untuk memperbarui waktu
 function updateDateTime() {
-	const now = new Date();
-  
-	// Daftar nama hari
-	const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-	const day = days[now.getDay()]; // Mendapatkan hari saat ini
-  
-	// Daftar nama bulan
-	const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-					"Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-	const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
-  
-	// Format tanggal
-	const date = now.getDate(); // Tanggal
-	const year = now.getFullYear(); // Tahun
-	const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
-	const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
-  
-	// Mengupdate elemen dengan waktu saat ini
-	document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}`;
-}
-  
-// Panggil fungsi saat halaman dimuat
-document.addEventListener('DOMContentLoaded', updateDateTime);
+    const now = new Date();
 
-				
-				 
+    // Daftar nama hari
+    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const day = days[now.getDay()]; // Mendapatkan hari saat ini
+
+    // Daftar nama bulan
+    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+
+    // Format tanggal
+    const date = now.getDate(); // Tanggal
+    const year = now.getFullYear(); // Tahun
+    const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
+    const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
+    const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
+
+    // Mengupdate elemen dengan waktu saat ini
+    document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+}
+
+// Memperbarui waktu setiap detik
+setInterval(updateDateTime, 1000);
+
+// Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
+document.addEventListener('DOMContentLoaded', updateDateTime);

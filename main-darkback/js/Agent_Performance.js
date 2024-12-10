@@ -49,7 +49,7 @@ async function getListSosmed() {
         // Membuat baris data dari hasil fetch
         json.forEach(items => {
             let row = '<tr>';
-            row += '<td>' + (items["name"] || '-') + '</td>'; // Nama Agent
+            row += '<td style="min-width: 200px; max-width: 200px;">' + (items["name"] || '-') + '</td>'; // Nama Agent
             
             // Chats dengan badge
             const chats = parseInt(items["answer"]) || 0;
@@ -88,7 +88,7 @@ async function getListSosmed() {
 
             let table = '<table class="table table-dark table-striped">';
             table += '<thead><tr>' +
-                '<th>Nama Agent</th>' +
+                '<th style="min-width: 200px; max-width: 200px;">Nama Agent</th>' +
                 '<th>Chats</th>' +
                 '<th>Avg. Resp. Time</th>' +
                 '<th>Avg. Conv. Time</th>' +
@@ -140,7 +140,7 @@ async function getListMultichat() {
         // Membuat baris data dari hasil fetch
         json.forEach(items => {
             let row = '<tr>';
-            row += '<td>' + (items["name"] || '-') + '</td>'; // Nama Agent
+            row += '<td style="min-width: 200px; max-width: 200px;">' + (items["name"] || '-') + '</td>'; // Nama Agent
             
             // Chats dengan badge
             const chats = parseInt(items["answer"]) || 0;
@@ -179,7 +179,7 @@ async function getListMultichat() {
 
             let table = '<table class="table table-dark table-striped">';
             table += '<thead><tr>' +
-                '<th>Nama Agent</th>' +
+                '<th style="min-width: 200px; max-width: 200px;">Nama Agent</th>' +
                 '<th>Chats</th>' +
                 '<th>Avg. Resp. Time</th>' +
                 '<th>Avg. Conv. Time</th>' +
@@ -230,7 +230,7 @@ async function getDataEmail() {
         // Membuat baris data dari hasil fetch
         json.forEach(items => {
             let row = '<tr>';
-            row += '<td>' + (items["name"] || '-') + '</td>'; // Nama Agent
+            row += '<td style="min-width: 200px; max-width: 200px;">' + (items["name"] || '-') + '</td>'; // Nama Agent
             
             // Emails dengan badge
             const emails = parseInt(items["answer"]) || 0;
@@ -269,7 +269,7 @@ async function getDataEmail() {
 
             let table = '<table class="table table-dark table-striped">';
             table += '<thead><tr>' +
-                '<th>Nama Agent</th>' +
+                '<th style="min-width: 200px; max-width: 200px;">Nama Agent</th>' +
                 '<th>Emails</th>' +
                 '<th>Avg. Resp. Time</th>' +
                 '<th>Avg. Hand. Time</th>' +
@@ -309,7 +309,7 @@ function ListAgent() {
                 const items = agents[key];
                 if (Array.isArray(items) && items[0] !== "Agent Name" && items[0] !== "Informasi") {
                     let row = '<tr>';
-                    row += '<td>' + (items[0] || '-') + '</td>'; // Nama Agent
+                    row += '<td style="min-width: 200px; max-width: 200px;">' + (items[0] || '-') + '</td>'; // Nama Agent
                     
                     // ACD Calls dengan badge
                     const acdCalls = parseInt(items[2]) || 0;
@@ -350,7 +350,7 @@ function ListAgent() {
 
             let table = '<table class="table table-dark table-striped">';
             table += '<thead><tr>' +
-                '<th>Nama Agent</th>' +
+                '<th style="min-width: 200px; max-width: 200px;">Nama Agent</th>' +
                 '<th>ACD Calls</th>' +
                 '<th>Avg Resp Time</th>' +
                 '<th>Avg Handle Time</th>' +
