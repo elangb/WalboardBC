@@ -32,56 +32,101 @@ function getDataAvaya() {
     $.getJSON("PHP/RealTime.php", function(data) {
         console.log(data);
 
+        const splitSkills = data.Head["Split Skill"];
+        const informasi = data.Head.Informasi;
+        const pengaduan = data.Head.Pengaduan;
+        const Priok = data.Head["CC Priok"];
+        const PsBaru = data.Head["CC Ps Baru"];
+        const Soetta = data.Head["CC Soetta"];
 
-       const splitSkills = data.Head["Split Skill"];
-const informasi = data.Head.Informasi;
-const pengaduan = data.Head.Pengaduan;
-const Priok = data.Head["CC Priok"];
-const PsBaru = data.Head["CC Ps Baru"];
-const Soetta = data.Head["CC Soetta"];
+        if (Array.isArray(splitSkills) && Array.isArray(informasi) && Array.isArray(pengaduan) && Array.isArray(Priok) && Array.isArray(PsBaru) && Array.isArray(Soetta)) {
+            if (splitSkills.length === informasi.length && splitSkills.length === pengaduan.length) {
+                // Combine skills, informasi, and pengaduan into an array of objects
+                const combinedData = splitSkills.map((skill, index) => ({
+                    skill: skill,
+                    value: informasi[index],
+                    pengaduan: pengaduan[index],
+                    PsBaru: PsBaru[index],
+                    Soetta: Soetta[index],
+                    Priok: Priok[index]
+                }));
 
+                // Process combined data
+                combinedData.forEach(item => {
+                    switch (item.skill) {
+                        case " Ans Calls":
+                            const ansPusatValue = Number(item.value) + Number(item.pengaduan);
+                            const ansTpValue = Number(item.Priok);
+                            const ansSoettaValue = Number(item.Soetta);
+                            const ansPbValue = Number(item.PsBaru);
 
-				if (Array.isArray(splitSkills) && Array.isArray(informasi) && Array.isArray(pengaduan)&& Array.isArray(Priok)&& Array.isArray(PsBaru) && Array.isArray(Soetta)) {
-					if (splitSkills.length === informasi.length && splitSkills.length === pengaduan.length) {
-						// Combine skills, informasi, and pengaduan into an array of objects
-						const combinedData = splitSkills.map((skill, index) => ({
-							skill: skill,
-							value: informasi[index],
-							pengaduan: pengaduan[index],
-							PsBaru: PsBaru[index],
-							Soetta: Soetta[index],
-							Priok: Priok[index]
-						}));
-						// Initialize variables for data extraction
-							
-							// Process combined data
-							combinedData.forEach(item => {
-								switch (item.skill) {
-									case " Ans Calls":
-										$('#ansPusat').html(Number(item.value)+Number(item.pengaduan));
-										$('#ansTp').html(Number(item.Priok));
-										$('#ansSoetta').html(Number(item.Soetta));
-										$('#ansPb').html(Number(item.PsBaru));
-										
-										break;
-									
-									default:
-										// Handle any other cases if necessary
-								}
-								
-										
-							});
+                            // Update values
+                            $('#ansPusat').html(ansPusatValue);
+                            $('#ansTp').html(ansTpValue);
+                            $('#ansSoetta').html(ansSoettaValue);
+                            $('#ansPb').html(ansPbValue);
 
-						
-					}
-				} 
+                            // Set colors based on values directly using if-else
+                            // Pusat
+                            if (ansPusatValue === 100) {
+                                $('#ansPusat').addClass('color-biru');
+                            } else if (ansPusatValue >= 71) {
+                                $('#ansPusat').addClass('color-hijau');
+                            } else if (ansPusatValue >= 51) {
+                                $('#ansPusat').addClass('color-kuning');
+                            } else if (ansPusatValue > 0) {
+                                $('#ansPusat').addClass('color-merah');
+                            } else {
+                                $('#ansPusat').removeClass('color-merah color-kuning color-hijau color-biru');
+                            }
 
-        
+                            // Tanjung Priok
+                            if (ansTpValue === 100) {
+                                $('#ansTp').addClass('color-biru');
+                            } else if (ansTpValue >= 71) {
+                                $('#ansTp').addClass('color-hijau');
+                            } else if (ansTpValue >= 51) {
+                                $('#ansTp').addClass('color-kuning');
+                            } else if (ansTpValue > 0) {
+                                $('#ansTp').addClass('color-merah');
+                            } else {
+                                $('#ansTp').removeClass('color-merah color-kuning color-hijau color-biru');
+                            }
 
-        // Call chart functions with the extracted values
-		
-		
-        
+                            // Soekarno-Hatta
+                            if (ansSoettaValue === 100) {
+                                $('#ansSoetta').addClass('color-biru');
+                            } else if (ansSoettaValue >= 71) {
+                                $('#ansSoetta').addClass('color-hijau');
+                            } else if (ansSoettaValue >= 51) {
+                                $('#ansSoetta').addClass('color-kuning');
+                            } else if (ansSoettaValue > 0) {
+                                $('#ansSoetta').addClass('color-merah');
+                            } else {
+                                $('#ansSoetta').removeClass('color-merah color-kuning color-hijau color-biru');
+                            }
+
+                            // Pasar Baru
+                            if (ansPbValue === 100) {
+                                $('#ansPb').addClass('color-biru');
+                            } else if (ansPbValue >= 71) {
+                                $('#ansPb').addClass('color-hijau');
+                            } else if (ansPbValue >= 51) {
+                                $('#ansPb').addClass('color-kuning');
+                            } else if (ansPbValue > 0) {
+                                $('#ansPb').addClass('color-merah');
+                            } else {
+                                $('#ansPb').removeClass('color-merah color-kuning color-hijau color-biru');
+                            }
+
+                            break;
+
+                        default:
+                            // Handle any other cases if necessary
+                    }
+                });
+            }
+        }
     });
 }
 
@@ -155,7 +200,8 @@ async function LineChart2() {
                     style: {
                         colors: '#FFFFFF', // Teks sumbu X berwarna putih
                         fontSize: '12px'
-                    }
+                    },
+                    rotate: 0 // Label tidak miring
                 }
             },
             yaxis: {
@@ -620,10 +666,10 @@ async function barchart() {
             chart: {
                 type: 'bar',
                 height: 500,
-                background: 'transparent',
+                background: 'transparent', // Membuat background chart transparan
                 toolbar: {
-                    show: false // Menghilangkan toolbar
-                }
+					show: false
+				}
             },
             theme: {
                 mode: 'dark'

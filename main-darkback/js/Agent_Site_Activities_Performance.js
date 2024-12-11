@@ -34,65 +34,123 @@ async function getDataEmail() {
       {
         method: "GET",
         headers: {
-          Accept: "text/plain", // Setting the accept header
+          Accept: "text/plain",
         },
       }
     );
 
-    // Check if the response is okay
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.text(); // Using text() since accept is text/plain
-    console.log(data);
+    const data = await response.text();
+    const emails = JSON.parse(data) || []; // Data email dari server
+    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const tableRowsSoetta = [];
+    const tableRowsPasarBaru = [];
 
-    var json = JSON.parse(data);
+    // Memisahkan data berdasarkan sideId dan membuat baris tabel
+    emails.forEach((items) => {
+      let row = "<tr>";
+      row += "<td>" + (items["name"] || "-") + "</td>";
+      row += "<td>" + (items["status"] || "-") + "</td>";
+      row += "<td>" + (items["handleTime"] || "-") + "</td>";
+      row += "<td>" + (items["loginTime"] || "-") + "</td>";
+      row += "</tr>";
 
-    var table = '<table class="table table-dark table-striped">';
-    table +=
-      "<tr>" +
-      "<th>Nama Agent</th>" +
-      "<th>Status</th>" +
-      "<th>Now Handle</th>" +
-      "<th>Emails</th>" +
-      "</tr>";
-
-    var table2 = '<table class="table table-dark table-striped">';
-    table2 +=
-      "<tr>" +
-      "<th>Nama Agent</th>" +
-      "<th>Status</th>" +
-      "<th>Now Handle</th>" +
-      "<th>Emails</th>" +
-      "</tr>";
-
-    //sconst agents = JSON.parse(data);
-    json.forEach((items) => {
-      if (items["sideId"] == "Soekarno Hatta") {
-        table += "<tr>";
-        table += "<td>" + items["name"] + "</td>";
-        table += "<td>" + items["loginTime"] + "</td>";
-        table += "<td>" + items["handleTime"] + "</td>";
-        table += "<td>" + items["status"] + "</td>";
-      }
-
-      if (items["sideId"] == "Pasar Baru") {
-        table2 += "<tr>";
-        table2 += "<td>" + items["name"] + "</td>";
-        table2 += "<td>" + items["loginTime"] + "</td>";
-        table2 += "<td>" + items["handleTime"] + "</td>";
-        table2 += "<td>" + items["status"] + "</td>";
+      if (items["sideId"] === "Soekarno Hatta") {
+        tableRowsSoetta.push(row);
+      } else if (items["sideId"] === "Pasar Baru") {
+        tableRowsPasarBaru.push(row);
       }
     });
 
-    table += "</table>";
+    // Tambahkan baris kosong jika kurang dari minimumRows
+    while (tableRowsSoetta.length < minimumRows) {
+      tableRowsSoetta.push(
+        '<tr class="empty-row">' +
+          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+          "</tr>"
+      );
+    }
 
-    table2 += "</table>";
-    $("#listEailSoetta").html(table);
-    $("#ListEmailPasarBaru").html(table);
+    while (tableRowsPasarBaru.length < minimumRows) {
+      tableRowsPasarBaru.push(
+        '<tr class="empty-row">' +
+          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
+          "</tr>"
+      );
+    }
+
+    // Fungsi untuk memperbarui tabel
+    const updateTable = (tableRows, selector) => {
+      let table = '<table class="table table-dark table-striped">';
+      table +=
+        "<thead><tr>" +
+        "<th>Nama Agent</th>" +
+        "<th>Status</th>" +
+        "<th>Now Handle</th>" +
+        "<th>Emails</th>" +
+        "</tr></thead><tbody>";
+      table += tableRows.join("");
+      table += "</tbody></table>";
+
+      // Tampilkan tabel di elemen yang sesuai
+      $(selector).html(table);
+    };
+
+    // Update tabel pertama kali
+    updateTable(tableRowsSoetta, "#listEmailSoetta");
+    updateTable(tableRowsPasarBaru, "#ListEmailPasarBaru");
+
+    // Interval untuk rolling data (jika diperlukan)
+    if (tableRowsSoetta.length > minimumRows) {
+      let startIndexSoetta = 0;
+      setInterval(() => {
+        startIndexSoetta = (startIndexSoetta + 1) % tableRowsSoetta.length;
+        const displayedRows = tableRowsSoetta
+          .slice(startIndexSoetta, startIndexSoetta + minimumRows)
+          .concat(
+            tableRowsSoetta.slice(
+              0,
+              Math.max(
+                0,
+                minimumRows - (tableRowsSoetta.length - startIndexSoetta)
+              )
+            )
+          );
+        updateTable(displayedRows, "#listEmailSoetta");
+      }, 2000); // Rolling setiap 2 detik
+    }
+
+    if (tableRowsPasarBaru.length > minimumRows) {
+      let startIndexPasarBaru = 0;
+      setInterval(() => {
+        startIndexPasarBaru =
+          (startIndexPasarBaru + 1) % tableRowsPasarBaru.length;
+        const displayedRows = tableRowsPasarBaru
+          .slice(startIndexPasarBaru, startIndexPasarBaru + minimumRows)
+          .concat(
+            tableRowsPasarBaru.slice(
+              0,
+              Math.max(
+                0,
+                minimumRows - (tableRowsPasarBaru.length - startIndexPasarBaru)
+              )
+            )
+          );
+        updateTable(displayedRows, "#ListEmailPasarBaru");
+      }, 2000); // Rolling setiap 2 detik
+    }
   } catch (error) {
     console.error("An error occurred:", error);
+    // Menampilkan pesan error kepada user
+    $("#listEmailSoetta").html(
+      '<div class="alert alert-danger">Failed to load data for Soekarno Hatta. Please try again later.</div>'
+    );
+    $("#ListEmailPasarBaru").html(
+      '<div class="alert alert-danger">Failed to load data for Pasar Baru. Please try again later.</div>'
+    );
   }
 }
 
@@ -530,7 +588,7 @@ async function listMultiChatSoetta() {
 
     const data = await response.text();
     const agents = JSON.parse(data) || []; // Data agent dari server
-    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const minimumRows = 2; // Jumlah minimal baris di tabel
     const tableRows = [];
 
     // Membuat baris data dari hasil fetch
@@ -631,7 +689,7 @@ async function listMultiChatPasarBaru() {
 
     const data = await response.text();
     const agents = JSON.parse(data) || []; // Data agent dari server
-    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const minimumRows = 2; // Jumlah minimal baris di tabel
     const tableRows = [];
 
     // Membuat baris data dari hasil fetch
@@ -808,33 +866,46 @@ function convertSeconds(seconds) {
   return `${hours}:${minutes}:${seconds}`;
 }
 
-
 // Fungsi untuk memperbarui waktu
 function updateDateTime() {
-    const now = new Date();
+  const now = new Date();
 
-    // Daftar nama hari
-    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const day = days[now.getDay()]; // Mendapatkan hari saat ini
+  // Daftar nama hari
+  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const day = days[now.getDay()]; // Mendapatkan hari saat ini
 
-    // Daftar nama bulan
-    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
+  // Daftar nama bulan
+  const months = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+  const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
 
-    // Format tanggal
-    const date = now.getDate(); // Tanggal
-    const year = now.getFullYear(); // Tahun
-    const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
-    const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
-    const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
+  // Format tanggal
+  const date = now.getDate(); // Tanggal
+  const year = now.getFullYear(); // Tahun
+  const hours = String(now.getHours()).padStart(2, "0"); // Jam (format 2 digit)
+  const minutes = String(now.getMinutes()).padStart(2, "0"); // Menit (format 2 digit)
+  const seconds = String(now.getSeconds()).padStart(2, "0"); // Detik (format 2 digit)
 
-    // Mengupdate elemen dengan waktu saat ini
-    document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+  // Mengupdate elemen dengan waktu saat ini
+  document.querySelector(
+    ".date-time-text"
+  ).textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
 }
 
 // Memperbarui waktu setiap detik
 setInterval(updateDateTime, 1000);
 
 // Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
-document.addEventListener('DOMContentLoaded', updateDateTime);
+document.addEventListener("DOMContentLoaded", updateDateTime);

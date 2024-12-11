@@ -32,82 +32,120 @@ function AutoCall() {
  
 }
 
-async function lineChart(){
-	
-	
-	
-	 var Fb = [];
-    var Ig = [];
-    var x = [];
-    var Wa = [];
-    var bulan = [];
-    
-    try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/TotalDataDKPusatPerMonth", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain'
-            }
-        });
+async function lineChart() {
+  var Fb = [];
+  var Ig = [];
+  var x = [];
+  var Wa = [];
+  var bulan = [];
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.text();
-        console.log(data);
-        
-        var json = JSON.parse(data);
-
-        json.forEach(item => {
-            bulan.push(item.bulan);
-           
-                Fb.push(item.totalFb);
-                Ig.push(item.totalIg);
-                Wa.push(item.totalWa);
-                x.push(item.totaLx);
-        });
-
-       
-	  var ctx = document.getElementById('socialMediaTrend').getContext('2d');
-      var chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: bulan,
-          datasets: [{
-            label: 'Facebook',
-            borderColor: '#21a1ff',
-            data: Fb
-          }, {
-            label: 'Instagram',
-            borderColor: '#ff4d4d',
-            data: Ig
-          }, {
-            label: 'X',
-            borderColor: '#ffb84d',
-            data: x
-          }, {
-            label: 'Whatsapp',
-            borderColor: '#21ff4d',
-            data: Wa
-          }]
-        },
-        options: {
-          scales: {
-            x: {
-              beginAtZero: true
-            },
-            y: {
-              beginAtZero: true
-            }
+  try {
+      const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/TotalDataDKPusatPerMonth", {
+          method: "GET",
+          headers: {
+              'Accept': 'text/plain'
           }
-        }
       });
-	  } catch (error) {
-        console.error("An error occurred:", error);
-    } 
-	
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.text();
+      console.log(data);
+
+      var json = JSON.parse(data);
+
+      json.forEach(item => {
+          bulan.push(item.bulan);
+          Fb.push(item.totalFb);
+          Ig.push(item.totalIg);
+          Wa.push(item.totalWa);
+          x.push(item.totaLx);
+      });
+
+      const options = {
+          chart: {
+              type: 'line',
+              height: 280,
+              width: '100%',
+              toolbar: {
+                  show: false
+              }
+          },
+          title: {
+            text: 'Social Media Trend',
+            align: 'center',
+            style: {
+              color: '#FFFFFF',
+              fontSize: '16px',
+              fontWeight: 'bold'
+            }
+          },
+          series: [
+              { name: 'Facebook', data: Fb },
+              { name: 'Instagram', data: Ig },
+              { name: 'X', data: x },
+              { name: 'Whatsapp', data: Wa }
+          ],
+          xaxis: {
+              categories: bulan,
+              labels: {
+                  style: {
+                      colors: '#FFFFFF',
+                      fontSize: '12px'
+                  },
+                  rotate: 0 // Label tidak miring
+              }
+          },
+          yaxis: {
+              labels: {
+                  style: {
+                      colors: '#FFFFFF',
+                      fontSize: '12px'
+                  }
+              }
+          },
+          stroke: {
+              curve: 'smooth'
+          },
+          markers: {
+              size: 5
+          },
+          tooltip: {
+              theme: 'dark'
+          },
+          colors: ['#21a1ff', '#ff4d4d', '#ffb84d', '#21ff4d'],
+          legend: {
+              show: true,
+              labels: {
+                  colors: '#FFFFFF',
+                  useSeriesColors: false
+              }
+          },
+          responsive: [
+              {
+                  breakpoint: 768,
+                  options: {
+                      chart: {
+                          width: '100%',
+                          height: 300
+                      }
+                  }
+              }
+          ]
+      };
+
+      // Pastikan elemen dengan id 'socialMediaTrend' ada di HTML
+      document.querySelector("#socialMediaTrend").innerHTML = '';
+      var chart = new ApexCharts(document.querySelector("#socialMediaTrend"), options);
+      chart.render();
+
+  } catch (error) {
+      console.error("An error occurred:", error);
+  }
 }
+
 async function getDataEmail() {
   try {
     const response = await fetch(

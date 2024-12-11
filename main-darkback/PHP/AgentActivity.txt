@@ -1,10 +1,7 @@
 Split/Skill:;Informasi
 ;Agent Name;Login ID;Extn;AUX Reason;State;Split/Skill;Time;VDN Name;Interrupt Status
-4;Markus Afrie I;1403;1123;;ACW;3;.32;Informasi;NA
-4;Ratih Fartila;1336;1124;;ACW;3;.25;Informasi;NA
-3;Nesya Kus Sandrea;1379;1120;;ACDIN;3;.10;Informasi;NA
-5;M. Ekawinny Darmawan;1338;1101;0;AUX;0;33.14;;NA
-4;Dhyas Asadillah S;1346;1115;;ACW;3;1.31;Informasi;NA
-3;Veni Mellinia;1375;1117;;ACDIN;3;3.24;Informasi;NA
-5;Rizaldhi Putra;1377;1111;0;AUX;0;.52;;NA
-6;Sulfiandi;1374;1121;;RING;3;.00;;NA
+5;M. Hilman Fauzi;1331;1108;Toilet;AUX;0;6.30;;NA
+4;Ratih Fartila;1336;1124;;ACW;3;1.12;Informasi;NA
+2;Hafazh Gumilar;1383;1117;;AVAIL;0;.04;;NA
+4;Ririn Dwi Utami;1367;1116;;ACW;3;.16;Informasi;NA
+7;Rizaldhi Putra;1377;1107;;OTHER;0;3.05;;NA

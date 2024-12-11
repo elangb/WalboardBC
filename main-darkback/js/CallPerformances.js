@@ -729,31 +729,42 @@ const pengaduan = data.Head.Pengaduan;
         
     });
 }
-async function getDataStatus(avail,aux,acw,acd) {
+
+async function getDataStatus(avail, aux, acw, acd) {
     // Data statis langsung di dalam kode
-    const statusData = [avail,aux,acw,acd];  // Data status: Available, AUX, ACW, ACD
+    const statusData = [avail, aux, acw, acd]; // Data status: Available, AUX, ACW, ACD
 
     // Membuat chart dengan data statis
     var options = {
-        series: statusData,  // Data points untuk chart
+        series: statusData, // Data points untuk chart
         chart: {
             type: 'donut',
-            width: 500,  // Ukuran chart
-            height: 300  // Tinggi chart
+            width: 500, // Ukuran chart
+            height: 300 // Tinggi chart
         },
-        colors: ['#009946', '#e64f54', '#dea039', '#00a0e8'],  // Warna untuk status
+        colors: ['#009946', '#e64f54', '#dea039', '#00a0e8'], // Warna untuk status
         stroke: {
-            show: true,  // Menampilkan stroke
-            width: 0,    // Mengatur stroke menjadi transparan
+            show: true, // Menampilkan stroke
+            width: 0, // Mengatur stroke menjadi transparan
             colors: ['transparent']
         },
-        labels: ['Available', 'AUX', 'ACW', 'ACD'],  // Label chart
+        labels: ['Available', 'AUX', 'ACW', 'ACD'], // Label chart
         legend: {
-            position: 'bottom',  // Posisi legend
-            horizontalAlign: 'center',  // Pusatkan legend
+            position: 'bottom', // Posisi legend
+            horizontalAlign: 'center', // Pusatkan legend
             itemMargin: {
-                horizontal: 5,  // Margin antara item di legend
+                horizontal: 5, // Margin antara item di legend
                 vertical: 0
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val, opts) {
+                return opts.w.config.series[opts.seriesIndex]; // Menampilkan nilai asli
+            },
+            style: {
+                fontSize: '14px',
+                colors: ['#FFF']
             }
         },
         responsive: [{
@@ -806,7 +817,7 @@ function addTimeDurations(time1, time2) {
 
         return `${hours}:${minutes}:${seconds}`;
     }
-
+	
 // Fungsi untuk memperbarui waktu
 function updateDateTime() {
     const now = new Date();
@@ -836,5 +847,7 @@ setInterval(updateDateTime, 1000);
 
 // Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
 document.addEventListener('DOMContentLoaded', updateDateTime);
+
+
 				
 				 

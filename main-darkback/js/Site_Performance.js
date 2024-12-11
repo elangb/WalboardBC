@@ -1016,29 +1016,43 @@ function addTimeDurations(time1, time2) {
 // Fungsi untuk memperbarui waktu
 function updateDateTime() {
     const now = new Date();
-
+  
     // Daftar nama hari
     const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
     const day = days[now.getDay()]; // Mendapatkan hari saat ini
-
+  
     // Daftar nama bulan
-    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const months = [
+      "Januari",
+      "Februari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember",
+    ];
     const month = months[now.getMonth()]; // Mendapatkan bulan saat ini
-
+  
     // Format tanggal
     const date = now.getDate(); // Tanggal
     const year = now.getFullYear(); // Tahun
-    const hours = String(now.getHours()).padStart(2, '0'); // Jam (format 2 digit)
-    const minutes = String(now.getMinutes()).padStart(2, '0'); // Menit (format 2 digit)
-    const seconds = String(now.getSeconds()).padStart(2, '0'); // Detik (format 2 digit)
-
+    const hours = String(now.getHours()).padStart(2, "0"); // Jam (format 2 digit)
+    const minutes = String(now.getMinutes()).padStart(2, "0"); // Menit (format 2 digit)
+    const seconds = String(now.getSeconds()).padStart(2, "0"); // Detik (format 2 digit)
+  
     // Mengupdate elemen dengan waktu saat ini
-    document.querySelector('.date-time-text').textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
-}
-
-// Memperbarui waktu setiap detik
-setInterval(updateDateTime, 1000);
-
-// Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
-document.addEventListener('DOMContentLoaded', updateDateTime);
+    document.querySelector(
+      ".date-time-text"
+    ).textContent = `${day} | ${date} ${month} ${year} | ${hours}:${minutes}:${seconds}`;
+  }
+  
+  // Memperbarui waktu setiap detik
+  setInterval(updateDateTime, 1000);
+  
+  // Panggil fungsi saat halaman dimuat untuk langsung menampilkan waktu
+  document.addEventListener("DOMContentLoaded", updateDateTime);

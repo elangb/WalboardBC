@@ -1,17 +1,17 @@
 Split/Skill;Informasi;Pengaduan;CC Priok;CC Ps Baru;CC Soetta
 Login ID;Agent Name;State;ACD Calls;ACW Time;AUX Time;AUX Intime With ACD Calls Held;AUX Outtime With ACD Calls Held;ACD Calls Released;Hold Time;Avg Extn In Time;RINGTIME
-1375;Veni Mellinia;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1338;M. Ekawinny Darmawan;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
-2010;Didit Rahadi Setiadi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
-2019;Alifiandri Zaneta P;OTHER;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1336;Ratih Fartila;ACW;0;58;.00;.00;.00;0;.00.00;0;.00.00
-1338;M. Ekawinny Darmawan;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1374;Sulfiandi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1377;Rizaldhi Putra;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1403;Markus Afrie I;ACW;0;65;.00;.00;.00;0;.00.00;0;.00.00
-1375;Veni Mellinia;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1346;Dhyas Asadillah S;ACD;1;120;.00;.00;.00;1;.00.00;0;.00.03
-1346;Dhyas Asadillah S;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1403;Markus Afrie I;ACW;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1379;Nesya Kus Sandrea;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
-1374;Sulfiandi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1346;Dhyas Asadillah S;AUX;0;0;.00;.00;.00;0;.00.00;0;.00.00
+2010;Didit Rahadi Setiadi;AUX;2;142;2.58;.00;.00;2;.06.43;0;.00.10
+1403;Markus Afrie I;OTHER;2;35;.00;.00;.00;2;.00.00;0;.00.08
+1306;Achmad Fahrurrodzi;ACD;1;120;.00;.00;.00;1;.01.44;0;.00.06
+1346;Dhyas Asadillah S;AUX;1;9;.00;.00;.00;1;.03.38;0;.00.08
+1375;Veni Mellinia;OTHER;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1379;Nesya Kus Sandrea;ACD;2;240;.00;.00;.00;2;.01.40;0;.00.18
+1336;Ratih Fartila;AUX;2;130;.00;.00;.00;2;.08.03;0;.00.15
+1377;Rizaldhi Putra;OTHER;2;240;.00;.00;.00;2;.11.33;0;.00.07
+1338;M. Ekawinny Darmawan;ACD;2;240;.00;.00;.00;2;.02.06;0;.00.11
+1306;Achmad Fahrurrodzi;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1338;M. Ekawinny Darmawan;ACD;0;0;.00;.00;.00;0;.00.00;0;.00.00
+1375;Veni Mellinia;OTHER;2;188;.00;.00;.00;2;.13.19;0;.00.11
+2014;Ayyubi Atmara;ACW;1;210;.00;.00;.00;1;.05.55;0;.00.05
+1403;Markus Afrie I;OTHER;0;0;.00;.00;.00;0;.00.00;0;.00.00

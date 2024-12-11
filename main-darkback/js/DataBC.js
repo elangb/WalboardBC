@@ -107,7 +107,10 @@ async function AreaChart(){
                 height: 320,
                 zoom: {
                     enabled: false
-                }
+                },
+                toolbar: {
+					show: false
+				}
             },
             dataLabels: {
                 enabled: true, // Enable data labels
@@ -223,7 +226,10 @@ async function barchart() {
         const options = {
             chart: {
                 type: 'bar',
-                height: 410
+                height: 410,
+                toolbar: {
+					show: false
+				}
             },
             series: [{
                 name: 'Jumlah',
@@ -293,64 +299,70 @@ async function barchart() {
     }
 }
 
+async function chartCharging(categories, chargingData) {
+    // Ensure that undefined values in chargingData are replaced with 0
+    chargingData = chargingData.map(data => data === undefined || data === null ? 0 : data);
 
-
-async function chartCharging(categories,chargingData){
-	
-
-  
-     var options = {
+    var options = {
         chart: {
             type: 'bar',
             height: 310,
-            horizontal: true
+            horizontal: true,
+            toolbar: {
+                show: false
+            }
         },
         plotOptions: {
             bar: {
                 horizontal: true,
                 endingShape: 'rounded',
                 borderRadius: 4,
-                barHeight: '100%', // Adjust this value for bar height
+                barHeight: '80%', // Adjust this value for bar height
             }
         },
         dataLabels: {
             enabled: false
         },
-        colors: ['#FF4560', '#FEB019', '#008FFB', '#775DD0', '#00E396'], 
+        colors: ['#FF4560', '#FEB019', '#00E396', '#008FFB'], // Define bar colors
         series: [
-            { name: 'Call', data: [chargingData[0]] },
-            { name: 'Email', data: [chargingData[1]] },
-            { name: 'Multichat', data: [chargingData[2]] },
-            { name: 'Social Media', data: [chargingData[3]] },
+            { data: [chargingData[0]] },
+            { data: [chargingData[1]] },
+            { data: [chargingData[2]] },
+            { data: [chargingData[3]] }
         ],
         grid: {
-            show: false // Hide grid lines
+            show: false
         },
         tooltip: {
             shared: true,
             intersect: false
         },
         xaxis: {
-            categories: ['', '', '', ''], // Ensure you have the same number of categories as series
+            categories: [' ', ' ', ' ', ' '], // Empty spaces to create gap between bars
             labels: {
                 style: {
-                    padding: 10 // Add padding to category labels if needed
+                    padding: 20 // Add padding to separate labels more clearly
                 }
             },
-            tickPlacement: 'between' // Optional: This can also affect spacing
+            tickPlacement: 'between',
+            tickAmount: 4 // Adjust to change how ticks are spaced
         },
-        title: {
-            text: ''
+        legend: {
+            show: false
         }
     };
-	
-document.querySelector("#charging-chart").innerHTML = '';
+
+    // Render the chart
+    document.querySelector("#charging-chart").innerHTML = '';
     const chart = new ApexCharts(document.querySelector("#charging-chart"), options);
     chart.render();
-  
-  
-}
 
+    // Update the HTML elements with the charging data and ensure no 'undefined%' is shown
+    document.querySelector("#callPercent").textContent = (chargingData[0] || 0) + "%";
+    document.querySelector("#emailPercent").textContent = (chargingData[1] || 0) + "%";
+    document.querySelector("#chatPercent").textContent = (chargingData[2] || 0) + "%";
+    document.querySelector("#sosmedPercent").textContent = (chargingData[3] || 0) + "%";
+}
 	
 function getDataCall() {
     $.getJSON("PHP/DataDaily.php", function(data) {
