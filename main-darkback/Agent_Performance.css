@@ -54,6 +54,8 @@ body {
     text-align: center; /* Default: Center align all content */
     border-collapse: collapse; /* Pastikan border di-collapse */
     font-size: 24px;
+    table-layout: fixed; /* Menghindari kolom meluas */
+    margin-bottom: 0 !important; /* Menimpa margin-bottom bawaan */
 }
 
 .table th,
@@ -104,6 +106,57 @@ body {
 #AgentCall tbody {
     overflow: hidden;
     position: relative;
+}
+#containerxx {
+    position: relative;
+    overflow: hidden; /* Hide the overflowing content */
+    height: 320px;    /* Set a fixed height for the container */
+}
+
+#div1, #div2, #div1-multichat, #div2-multichat, #emailDiv1, #emailDiv2, #div1-sosmed, #div2-sosmed {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.status-available, .status-acd, .status-acw, .status-istirahat, 
+.status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
+    background-color: #059d55;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px; 
+    min-width: 100px; /* Set lebar minimal */
+    display: inline-block; /* Agar kotak mengikuti konten */
+    text-align: center; /* Untuk membuat teks berada di tengah */
+}
+
+.status-available {
+    background-color: #059d55;
+}
+
+.status-acd {
+    background-color: #00a0e9;
+}
+
+.status-acw {
+    background-color: #dea039;
+}
+
+.status-istirahat, .status-toilet, .status-makan {
+    background-color: #e65055;
+}
+
+.status-ringing {
+    background-color: #746cac;
+}
+
+.status-other {
+    background-color: #4d4d4d;
+}
+
+.longest-time {
+    background-color: #e65055;
 }
 
 .badge-green, .badge-orange, .badge-pink {

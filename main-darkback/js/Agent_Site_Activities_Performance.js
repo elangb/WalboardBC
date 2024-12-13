@@ -18,15 +18,35 @@ function myFunction() {
 function AutoCall() {
   getDateTime();
   getGreeting();
-
+  scrollAgent();
+  scrollAgentSoeta();
+  scrollAgenPasbar();
+  scrollMultichatTanjungPriuk();
+  scrollMultichat();
+  scrollMultichatPasarBaru();
   ListAgentPasarBaru();
   ListAgentSoetta();
   ListAgentTanjungPriok();
   getDataEmail();
-  listMultiChatPriuk();
+  listMultiChatTanjungPriuk();
   listMultiChatPasarBaru();
   listMultiChatSoetta();
 }
+
+function getStatusClass(status) {
+  const statusMap = {
+    Available: "status-available",
+    ACW: "status-acw",
+    ACDIN: "status-acd",
+    Istirahat: "status-istirahat",
+    Toilet: "status-istirahat",
+    Makan: "status-istirahat",
+    AUX: "status-istirahat",
+    RING: "status-ringing",
+  };
+  return statusMap[status] || "status-other";
+}
+
 async function getDataEmail() {
   try {
     const response = await fetch(
@@ -45,7 +65,7 @@ async function getDataEmail() {
 
     const data = await response.text();
     const emails = JSON.parse(data) || []; // Data email dari server
-    const minimumRows = 3; // Jumlah minimal baris di tabel
+    const minimumRows = 2; // Jumlah minimal baris di tabel
     const tableRowsSoetta = [];
     const tableRowsPasarBaru = [];
 
@@ -154,199 +174,234 @@ async function getDataEmail() {
   }
 }
 
-function ListAgentTanjungPriok() {
-  $.getJSON(
-    "PHP/Agent_Site_Activities_Performance_TanjungPriuk.php",
-    function (data) {
-      const agents = data || []; // Data agent dari server
-      const minimumRows = 5; // Jumlah minimal baris di tabel
-      const tableRows = [];
+let scrollIntervalAgent = null;
+let mAgent = 0;
+let nAgent = 550; // Sesuaikan dengan tinggi div
+const speedAgent = 50; // Kecepatan scroll
 
-      // Membuat baris data dari hasil fetch
-      agents.forEach((items) => {
-        let row = "<tr>";
-        row += "<td>" + (items["Agent Name"] || "-") + "</td>"; // Nama Agent
-        row +=
-          '<td><span class="badge badge-green">' +
-          (items["Extn"] || "-") +
-          "</span></td>"; // Extension
+function scrollAgent(rowCount) {
+  const div1 = document.getElementById("div1");
+  const div2 = document.getElementById("div2");
 
-        // Status formatting
-        if (items["State"] === "AVAIL")
-          row +=
-            '<td><span class="badge badge-green">' +
-            items["State"] +
-            "</span></td>";
-        else if (items["State"] === "ACW")
-          row +=
-            '<td><span class="badge badge-orange">' +
-            items["State"] +
-            "</span></td>";
-        else if (items["State"] === "AUX")
-          row +=
-            '<td><span class="badge badge-blue">' +
-            items["State"] +
-            "</span></td>";
-        else
-          row +=
-            '<td><span class="badge badge-pink">' +
-            (items["State"] || "-") +
-            "</span></td>";
+  // Hentikan scroll jika row kurang dari atau sama dengan 5
+  if (rowCount <= 5) {
+    clearInterval(scrollIntervalAgent);
+    scrollIntervalAgent = null;
+    div1.style.top = "0px";
+    div2.style.top = "550px";
+    return;
+  }
 
-        // Time formatting
-        const timeValue = items["Time"] || "0";
-        const duration = formatDuration(timeValue); // Optional: Implement duration formatting
-        row += "<td>" + duration + "</td>";
-        row += "</tr>";
+  if (!scrollIntervalAgent) {
+    scrollIntervalAgent = setInterval(() => {
+      if (div1 && div2) {
+        div1.style.top = mAgent + "px";
+        div2.style.top = nAgent + "px";
+        mAgent--;
+        nAgent--;
 
-        tableRows.push(row);
-      });
-
-      // Tambahkan baris kosong jika kurang dari minimumRows
-      while (tableRows.length < minimumRows) {
-        tableRows.push(
-          '<tr class="empty-row">' +
-            "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-            "</tr>"
-        );
-      }
-
-      // Fungsi untuk memperbarui tabel
-      let startIndex = 0;
-      const updateTable = () => {
-        const displayedRows = [];
-        for (let i = 0; i < minimumRows; i++) {
-          const index = (startIndex + i) % tableRows.length; // Rolling index
-          displayedRows.push(tableRows[index]);
+        if (mAgent <= -550) {
+          mAgent = 550;
         }
 
-        let table = '<table class="table table-dark table-striped">';
-        table +=
-          "<thead><tr>" +
-          "<th>Nama Agent</th>" +
-          "<th>Extension</th>" +
-          "<th>Status</th>" +
-          "<th>Duration</th>" +
-          "</tr></thead><tbody>";
-        table += displayedRows.join("");
-        table += "</tbody></table>";
-
-        // Tampilkan tabel
-        $("#ListAgentTanjungPriok").html(table);
-
-        // Update indeks awal untuk rolling
-        startIndex = (startIndex + 1) % tableRows.length;
-      };
-
-      // Update tabel pertama kali
-      updateTable();
-
-      // Interval untuk rolling data
-      if (tableRows.length > minimumRows) {
-        setInterval(updateTable, 2000); // Rolling setiap 2 detik
+        if (nAgent <= -550) {
+          nAgent = 550;
+        }
       }
-    }
-  );
+    }, speedAgent);
+  }
 }
 
-function ListAgentSoetta() {
-  $.getJSON(
-    "PHP/Agent_Site_Activities_Performance_soetta.php",
-    function (data) {
-      const agents = data || []; // Data agent dari server
-      const minimumRows = 3; // Jumlah minimal baris di tabel
-      const tableRows = [];
+function scrollAgenPasbar(rowCount) {
+  const div1 = document.getElementById("divPasbar1");
+  const div2 = document.getElementById("divPasbar2");
 
-      // Membuat baris data dari hasil fetch
-      agents.forEach((items) => {
-        let row = "<tr>";
-        row += "<td>" + (items["Agent Name"] || "-") + "</td>"; // Nama Agent
-        row +=
-          '<td><span class="badge badge-green">' +
-          (items["Extn"] || "-") +
-          "</span></td>"; // Extension
+  // Hentikan scroll jika row kurang dari atau sama dengan 5
+  if (rowCount <= 5) {
+    clearInterval(scrollIntervalAgent);
+    scrollIntervalAgent = null;
+    div1.style.top = "0px";
+    div2.style.top = "550px";
+    return;
+  }
 
-        // Status formatting
-        if (items["State"] === "AVAIL")
-          row +=
-            '<td><span class="badge badge-green">' +
-            items["State"] +
-            "</span></td>";
-        else if (items["State"] === "ACW")
-          row +=
-            '<td><span class="badge badge-orange">' +
-            items["State"] +
-            "</span></td>";
-        else if (items["State"] === "AUX")
-          row +=
-            '<td><span class="badge badge-blue">' +
-            items["State"] +
-            "</span></td>";
-        else
-          row +=
-            '<td><span class="badge badge-pink">' +
-            (items["State"] || "-") +
-            "</span></td>";
+  if (!scrollIntervalAgent) {
+    scrollIntervalAgent = setInterval(() => {
+      if (div1 && div2) {
+        div1.style.top = mAgent + "px";
+        div2.style.top = nAgent + "px";
+        mAgent--;
+        nAgent--;
 
-        // Time formatting
-        const timeValue = items["Time"] || "0";
-        const duration = formatDuration(timeValue); // Fungsi untuk memformat durasi
-        row += "<td>" + duration + "</td>";
-        row += "</tr>";
-
-        tableRows.push(row);
-      });
-
-      // Tambahkan baris kosong jika kurang dari minimumRows
-      while (tableRows.length < minimumRows) {
-        tableRows.push(
-          '<tr class="empty-row">' +
-            "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-            "</tr>"
-        );
-      }
-
-      // Fungsi untuk memperbarui tabel
-      let startIndex = 0;
-      const updateTable = () => {
-        const displayedRows = [];
-        for (let i = 0; i < minimumRows; i++) {
-          const index = (startIndex + i) % tableRows.length; // Rolling index
-          displayedRows.push(tableRows[index]);
+        if (mAgent <= -550) {
+          mAgent = 550;
         }
 
-        let table = '<table class="table table-dark table-striped">';
-        table +=
-          "<thead><tr>" +
-          "<th>Nama Agent</th>" +
-          "<th>Extension</th>" +
-          "<th>Status</th>" +
-          "<th>Duration</th>" +
-          "</tr></thead><tbody>";
-        table += displayedRows.join("");
-        table += "</tbody></table>";
+        if (nAgent <= -550) {
+          nAgent = 550;
+        }
+      }
+    }, speedAgent);
+  }
+}
 
-        // Tampilkan tabel
-        $("#ListAgentSoetta").html(table);
+function scrollAgentSoeta(rowCount) {
+  const div1 = document.getElementById("divSoeta1");
+  const div2 = document.getElementById("divSoeta2");
 
-        // Update indeks awal untuk rolling
-        startIndex = (startIndex + 1) % tableRows.length;
-      };
+  // Hentikan scroll jika row kurang dari atau sama dengan 5
+  if (rowCount <= 4) {
+    clearInterval(scrollIntervalAgent);
+    scrollIntervalAgent = null;
+    div1.style.top = "0px";
+    div2.style.top = "550px";
+    return;
+  }
 
-      // Update tabel pertama kali
-      updateTable();
+  if (!scrollIntervalAgent) {
+    scrollIntervalAgent = setInterval(() => {
+      if (div1 && div2) {
+        div1.style.top = mAgent + "px";
+        div2.style.top = nAgent + "px";
+        mAgent--;
+        nAgent--;
 
-      // Interval untuk rolling data
-      if (tableRows.length > minimumRows) {
-        setInterval(updateTable, 2000); // Rolling setiap 2 detik
+        if (mAgent <= -550) {
+          mAgent = 550;
+        }
+
+        if (nAgent <= -550) {
+          nAgent = 550;
+        }
+      }
+    }, speedAgent);
+  }
+}
+
+async function ListAgentTanjungPriok() {
+  const apiUrl =
+    "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentPriuk";
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const div1 = document.getElementById("div1");
+    const div2 = document.getElementById("div2");
+
+    let tableRows = "<tbody>";
+
+    data.forEach((agent, index) => {
+      let row = `
+                <tr>
+                    <td style="min-width: 150px; max-width: 150px;">${
+                      agent.agentName || "-"
+                    }</td>
+                    <td>${agent.extn || "-"}</td>
+                    <td>
+                        <span class="badge ${getStatusClass(agent.state)}">${
+        agent.state || "-"
+      }</span>
+                    </td>
+                    <td>${agent.calls || "0"}</td>
+                </tr>
+            `;
+      tableRows += row;
+    });
+
+    // Tambahkan baris kosong jika jumlah row kurang dari 5
+    const missingRows = 5 - data.length;
+    if (missingRows > 0) {
+      for (let i = 0; i < missingRows; i++) {
+        tableRows += `
+                    <tr>
+                        <td style="min-width: 150px; max-width: 150px;">-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
       }
     }
-  ).fail(function () {
-    // Error handling
-    $("#ListAgentSoetta").html(
-      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
-    );
-  });
+
+    tableRows += "</tbody>";
+
+    // Set the same content for div1 and div2 for seamless scroll
+    div1.querySelector("table").innerHTML = tableRows;
+    div2.querySelector("table").innerHTML = tableRows;
+
+    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
+    const rowCount = Math.max(data.length, 5); // Minimal 5 row
+    scrollAgent(rowCount);
+  } catch (error) {
+    console.error("Error loading data: ", error);
+  }
+}
+
+async function ListAgentSoetta() {
+  const apiUrl =
+    "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentSoetta";
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    const div1 = document.getElementById("divSoeta1");
+    const div2 = document.getElementById("divSoeta2");
+
+    let tableRows = "<tbody>";
+
+    data.forEach((agent, index) => {
+      let row = `
+                <tr>
+                    <td style="min-width: 150px; max-width: 150px;">${
+                      agent.agentName || "-"
+                    }</td>
+                    <td>${agent.extn || "-"}</td>
+                    <td>
+                        <span class="badge ${getStatusClass(agent.state)}">${
+        agent.state || "-"
+      }</span>
+                    </td>
+                    <td>${agent.calls || "0"}</td>
+                </tr>
+            `;
+      tableRows += row;
+    });
+
+    // Tambahkan baris kosong jika jumlah row kurang dari 5
+    const missingRows = 4 - data.length;
+    if (missingRows > 0) {
+      for (let i = 0; i < missingRows; i++) {
+        tableRows += `
+                    <tr>
+                        <td style="min-width: 150px; max-width: 150px;">-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
+      }
+    }
+
+    tableRows += "</tbody>";
+
+    // Set the same content for div1 and div2 for seamless scroll
+    divSoeta1.querySelector("table").innerHTML = tableRows;
+    divSoeta2.querySelector("table").innerHTML = tableRows;
+
+    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
+    const rowCount = Math.max(data.length, 4); // Minimal 5 row
+    scrollAgentSoeta(rowCount);
+  } catch (error) {
+    console.error("Error loading data: ", error);
+  }
 }
 
 function formatDuration(timeInSeconds) {
@@ -365,92 +420,100 @@ function formatDuration(timeInSeconds) {
     .padStart(2, "0")}`;
 }
 
-function ListAgentPasarBaru() {
-  $.getJSON("PHP/Agent_Site_Activities_Performance.php", function (data) {
-    const agents = data || []; // Data agent dari server
-    const minimumRows = 3; // Jumlah minimal baris di tabel
-    const tableRows = [];
+async function ListAgentPasarBaru() {
+  const apiUrl =
+    "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentPasarBaru";
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-    // Membuat baris data dari hasil fetch
-    agents.forEach((items) => {
-      let row = "<tr>";
-      row += "<td>" + (items["Agent Name"] || "-") + "</td>"; // Nama Agent
-      row +=
-        '<td><span class="badge badge-green">' +
-        (items["Extn"] || "-") +
-        "</span></td>"; // Extension
+    const data = await response.json();
 
-      // Status formatting
-      if (items["State"] === "AVAIL") {
-        row +=
-          '<td><span class="badge badge-green">' +
-          items["State"] +
-          "</span></td>";
-      } else {
-        row +=
-          '<td><span class="badge badge-pink">' +
-          (items["State"] || "-") +
-          "</span></td>";
-      }
+    const div1 = document.getElementById("divPasbar1");
+    const div2 = document.getElementById("divPasbar2");
 
-      // Time formatting
-      const timeValue = items["Time"] || "0";
-      const duration = formatDuration(timeValue); // Fungsi untuk memformat durasi
-      row += "<td>" + duration + "</td>";
+    let tableRows = "<tbody>";
 
-      row += "</tr>";
-      tableRows.push(row);
+    data.forEach((agent, index) => {
+      let row = `
+                <tr>
+                    <td style="min-width: 150px; max-width: 150px;">${
+                      agent.agentName || "-"
+                    }</td>
+                    <td>${agent.extn || "-"}</td>
+                    <td>
+                        <span class="badge ${getStatusClass(agent.state)}">${
+        agent.state || "-"
+      }</span>
+                    </td>
+                    <td>${agent.calls || "0"}</td>
+                </tr>
+            `;
+      tableRows += row;
     });
 
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRows.length < minimumRows) {
-      tableRows.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    // Fungsi untuk memperbarui tabel
-    let startIndex = 0;
-    const updateTable = () => {
-      const displayedRows = [];
-      for (let i = 0; i < minimumRows; i++) {
-        const index = (startIndex + i) % tableRows.length; // Rolling index
-        displayedRows.push(tableRows[index]);
+    // Tambahkan baris kosong jika jumlah row kurang dari 5
+    const missingRows = 5 - data.length;
+    if (missingRows > 0) {
+      for (let i = 0; i < missingRows; i++) {
+        tableRows += `
+                    <tr>
+                        <td style="min-width: 150px; max-width: 150px;">-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
       }
-
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        "<th>Nama Agent</th>" +
-        "<th>Ext</th>" +
-        "<th>Status</th>" +
-        "<th>Calls</th>" +
-        "</tr></thead><tbody>";
-      table += displayedRows.join("");
-      table += "</tbody></table>";
-
-      // Tampilkan tabel
-      $("#ListAgentPasarBaru").html(table);
-
-      // Update indeks awal untuk rolling
-      startIndex = (startIndex + 1) % tableRows.length;
-    };
-
-    // Update tabel pertama kali
-    updateTable();
-
-    // Interval untuk rolling data
-    if (tableRows.length > minimumRows) {
-      setInterval(updateTable, 2000); // Rolling setiap 2 detik
     }
-  }).fail(function () {
-    // Error handling
-    $("#ListAgentPasarBaru").html(
-      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
-    );
-  });
+
+    tableRows += "</tbody>";
+
+    // Set the same content for div1 and div2 for seamless scroll
+    divPasbar1.querySelector("table").innerHTML = tableRows;
+    divPasbar2.querySelector("table").innerHTML = tableRows;
+
+    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
+    const rowCount = Math.max(data.length, 5); // Minimal 5 row
+    scrollAgenPasbar(rowCount);
+  } catch (error) {
+    console.error("Error loading data: ", error);
+  }
+}
+function formatDurationNew(time) {
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+
+  // Cek jika formatnya hanya detik, misalnya ":54"
+  if (time.startsWith(":")) {
+    seconds = parseInt(time.slice(1)); // Ambil angka setelah ":"
+  } else if (time.includes(":")) {
+    // Cek format menit:detik, misalnya "105:31"
+    const parts = time.split(":");
+    minutes = parseInt(parts[0]); // Menit
+    seconds = parseInt(parts[1]); // Detik
+
+    // Jika menit lebih dari 60, konversikan menjadi jam
+    if (minutes >= 60) {
+      hours = Math.floor(minutes / 60); // Menghitung jam
+      minutes = minutes % 60; // Menghitung sisa menit
+    }
+  } else if (time.includes(".")) {
+    // Cek format menit.detik, misalnya "105.31"
+    const totalMinutes = parseFloat(time); // Menangani format menit.detik
+    hours = Math.floor(totalMinutes / 60); // Menghitung jam
+    minutes = Math.floor(totalMinutes % 60); // Menghitung menit
+    seconds = Math.round((totalMinutes % 1) * 60); // Menghitung detik dari bagian desimal
+  }
+
+  // Format menjadi HH:mm:ss
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+    2,
+    "0"
+  )}:${String(seconds).padStart(2, "0")}`;
 }
 
 // Fungsi tambahan untuk format durasi (misalnya "3600" menjadi "1:00:00")
@@ -469,308 +532,301 @@ function formatDuration(timeInSeconds) {
     .padStart(2, "0")}`;
 }
 
-async function listMultiChatPriuk() {
-  try {
-    const response = await fetch(
-      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk",
-      {
-        method: "GET",
-        headers: {
-          Accept: "text/plain",
-        },
-      }
-    );
+let mMultichatTanjungPriuk = 650; // Initial scroll position for divMultichatTanjungPriuk1
+let nMultichatTanjungPriuk = 650; // Initial scroll position for divMultichatTanjungPriuk2
+let speedMultichatTanjungPriuk = 30; // Scroll speed (adjust as needed)
+let scrollIntervalMultichatTanjungPriuk = null;
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+function scrollMultichatTanjungPriuk(rowCount) {
+    const div1 = document.getElementById("divMultichatTanjungPriuk1");
+    const div2 = document.getElementById("divMultichatTanjungPriuk2");
+
+    // Stop scrolling if rows <= 5
+    if (rowCount <= 5) {
+        clearInterval(scrollIntervalMultichatTanjungPriuk);
+        scrollIntervalMultichatTanjungPriuk = null;
+        div1.style.top = "0px";
+        div2.style.top = "650px";
+        return;
     }
 
-    const data = await response.text();
-    const agents = JSON.parse(data) || []; // Data agent dari server
-    const minimumRows = 5; // Jumlah minimal baris di tabel
-    const tableRows = [];
+    if (!scrollIntervalMultichatTanjungPriuk) {
+        scrollIntervalMultichatTanjungPriuk = setInterval(() => {
+            if (div1 && div2) {
+                div1.style.top = mMultichatTanjungPriuk + "px";
+                div2.style.top = nMultichatTanjungPriuk + "px";
+                mMultichatTanjungPriuk--;
+                nMultichatTanjungPriuk--;
 
-    // Membuat baris data dari hasil fetch
-    agents.forEach((items) => {
-      let row = "<tr>";
-      row += "<td>" + (items["agent"] || "-") + "</td>"; // Nama Agent
+                // Reset scroll position if it reaches the end
+                if (mMultichatTanjungPriuk <= -650) {
+                    mMultichatTanjungPriuk = 650;
+                }
 
-      // Status formatting
-      if (items["status"] === "Ready")
-        row +=
-          '<td><span class="badge badge-green">' +
-          items["status"] +
-          "</span></td>";
-      else
-        row +=
-          '<td><span class="badge badge-pink">' +
-          (items["status"] || "-") +
-          "</span></td>";
-
-      // Now Handle
-      row += "<td>" + (items["nowHandle"] || "-") + "</td>";
-
-      // Chats count
-      const chats = items["chat"] || "0";
-      row += "<td>" + chats + "</td>";
-      row += "</tr>";
-
-      tableRows.push(row);
-    });
-
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRows.length < minimumRows) {
-      tableRows.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
+                if (nMultichatTanjungPriuk <= -650) {
+                    nMultichatTanjungPriuk = 650;
+                }
+            }
+        }, speedMultichatTanjungPriuk);
     }
+}
 
-    // Fungsi untuk memperbarui tabel
-    let startIndex = 0;
-    const updateTable = () => {
-      const displayedRows = [];
-      for (let i = 0; i < minimumRows; i++) {
-        const index = (startIndex + i) % tableRows.length; // Rolling index
-        displayedRows.push(tableRows[index]);
-      }
+async function listMultiChatTanjungPriuk() {
+    try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk", {
+            method: "GET",
+            headers: {
+                Accept: "text/plain",
+            },
+        });
 
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        "<th>Nama Agent</th>" +
-        "<th>Status</th>" +
-        "<th>Now Handle</th>" +
-        "<th>Chats</th>" +
-        "</tr></thead><tbody>";
-      table += displayedRows.join("");
-      table += "</tbody></table>";
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-      // Tampilkan tabel
-      $("#multichatTanjungPriuk").html(table);
+        const data = await response.text();
+        const agents = JSON.parse(data) || [];
+        const div1 = document.getElementById("divMultichatTanjungPriuk1");
+        const div2 = document.getElementById("divMultichatTanjungPriuk2");
+        let tableRows = "<tbody>";
 
-      // Update indeks awal untuk rolling
-      startIndex = (startIndex + 1) % tableRows.length;
-    };
+        // Loop through agents and generate table rows
+        agents.forEach((item) => {
+            let row = `
+                <tr>
+                    <td>${item.agent || "-"}</td>
+                    <td><span class="badge ${item.status === 'Ready' ? 'badge-green' : 'badge-pink'}">${item.status || "-"}</span></td>
+                    <td>${item.nowHandle || "-"}</td>
+                    <td>${item.chat || "0"}</td>
+                </tr>
+            `;
+            tableRows += row;
+        });
 
-    // Update tabel pertama kali
-    updateTable();
+        // Fill missing rows if less than 5
+        const missingRows = 5 - agents.length;
+        for (let i = 0; i < missingRows; i++) {
+            tableRows += `
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            `;
+        }
 
-    // Interval untuk rolling data
-    if (tableRows.length > minimumRows) {
-      setInterval(updateTable, 2000); // Rolling setiap 2 detik
+        tableRows += "</tbody>";
+
+        // Inject content into both divs for seamless scrolling
+        div1.querySelector("table").innerHTML = tableRows;
+        div2.querySelector("table").innerHTML = tableRows;
+
+        const rowCount = Math.max(agents.length, 5);
+        scrollMultichatTanjungPriuk(rowCount);
+
+    } catch (error) {
+        console.error("Error loading data: ", error);
     }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    // Menampilkan pesan error kepada user
-    $("#multichatTanjungPriuk").html(
-      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
-    );
+}
+
+
+let mMultichatSoeta = 550; // Initial scroll position for divMultichatSoeta1
+let nMultichatSoeta = 550; // Initial scroll position for divMultichatSoeta2
+let speedMultichatSoeta = 30; // Scroll speed (adjust as needed)
+let scrollIntervalMultichat = null;
+
+function scrollMultichat(rowCount) {
+  const div1 = document.getElementById("divMultichatSoeta1");
+  const div2 = document.getElementById("divMultichatSoeta2");
+
+  // Stop scrolling if rows <= 5
+  if (rowCount <= 2) {
+      clearInterval(scrollIntervalMultichat);
+      scrollIntervalMultichat = null;
+      div1.style.top = "0px";
+      div2.style.top = "550px";
+      return;
+  }
+
+  if (!scrollIntervalMultichat) {
+      scrollIntervalMultichat = setInterval(() => {
+          if (div1 && div2) {
+              div1.style.top = mMultichatSoeta + "px";  // Use mMultichatSoeta
+              div2.style.top = nMultichatSoeta + "px";  // Use nMultichatSoeta
+              mMultichatSoeta--;
+              nMultichatSoeta--;
+
+              // Reset scroll position if it reaches the end
+              if (mMultichatSoeta <= -550) {
+                  mMultichatSoeta = 550;
+              }
+
+              if (nMultichatSoeta <= -550) {
+                  nMultichatSoeta = 550;
+              }
+          }
+      }, speedMultichatSoeta);
   }
 }
 
 async function listMultiChatSoetta() {
-  try {
-    const response = await fetch(
-      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta",
-      {
-        method: "GET",
-        headers: {
-          Accept: "text/plain",
-        },
-      }
-    );
+    try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta", {
+            method: "GET",
+            headers: {
+                Accept: "text/plain",
+            },
+        });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text();
+        const agents = JSON.parse(data) || [];
+        const div1 = document.getElementById("divMultichatSoeta1");
+        const div2 = document.getElementById("divMultichatSoeta2");
+        let tableRows = "<tbody>";
+
+        // Loop through agents and generate table rows
+        agents.forEach((item) => {
+            let row = `
+                <tr>
+                    <td>${item.agent || "-"}</td>
+                    <td><span class="badge ${item.status === 'Ready' ? 'badge-green' : 'badge-pink'}">${item.status || "-"}</span></td>
+                    <td>${item.nowHandle || "-"}</td>
+                    <td>${item.chat || "0"}</td>
+                </tr>
+            `;
+            tableRows += row;
+        });
+
+        // Fill missing rows if less than 5
+        const missingRows = 2 - agents.length;
+        for (let i = 0; i < missingRows; i++) {
+            tableRows += `
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            `;
+        }
+
+        tableRows += "</tbody>";
+
+        // Inject content into both divs for seamless scrolling
+        div1.querySelector("table").innerHTML = tableRows;
+        div2.querySelector("table").innerHTML = tableRows;
+
+        const rowCount = Math.max(agents.length, 2);
+        scrollMultichat(rowCount);
+
+    } catch (error) {
+        console.error("Error loading data: ", error);
     }
+}
 
-    const data = await response.text();
-    const agents = JSON.parse(data) || []; // Data agent dari server
-    const minimumRows = 2; // Jumlah minimal baris di tabel
-    const tableRows = [];
+let mMultichatPasarBaru = 550; // Initial scroll position for divMultichatPasarBaru1
+let nMultichatPasarBaru = 550; // Initial scroll position for divMultichatPasarBaru2
+let speedMultichatPasarBaru = 30; // Scroll speed (adjust as needed)
+let scrollIntervalMultichatPasarBaru = null;
 
-    // Membuat baris data dari hasil fetch
-    agents.forEach((items) => {
-      let row = "<tr>";
-      row += "<td>" + (items["agent"] || "-") + "</td>"; // Nama Agent
+function scrollMultichatPasarBaru(rowCount) {
+  const div1 = document.getElementById("divMultichatPasarBaru1");
+  const div2 = document.getElementById("divMultichatPasarBaru2");
 
-      // Status formatting
-      if (items["status"] === "Ready")
-        row +=
-          '<td><span class="badge badge-green">' +
-          items["status"] +
-          "</span></td>";
-      else
-        row +=
-          '<td><span class="badge badge-pink">' +
-          (items["status"] || "-") +
-          "</span></td>";
+  // Stop scrolling if rows <= 5
+  if (rowCount <= 3) {
+      clearInterval(scrollIntervalMultichatPasarBaru);
+      scrollIntervalMultichatPasarBaru = null;
+      div1.style.top = "0px";
+      div2.style.top = "550px";
+      return;
+  }
 
-      // Now Handle
-      row += "<td>" + (items["nowHandle"] || "-") + "</td>";
+  if (!scrollIntervalMultichatPasarBaru) {
+      scrollIntervalMultichatPasarBaru = setInterval(() => {
+          if (div1 && div2) {
+              div1.style.top = mMultichatPasarBaru + "px";
+              div2.style.top = nMultichatPasarBaru + "px";
+              mMultichatPasarBaru--;
+              nMultichatPasarBaru--;
 
-      // Chats count
-      const chats = items["chat"] || "0";
-      row += "<td>" + chats + "</td>";
-      row += "</tr>";
+              // Reset scroll position if it reaches the end
+              if (mMultichatPasarBaru <= -550) {
+                  mMultichatPasarBaru = 550;
+              }
 
-      tableRows.push(row);
-    });
-
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRows.length < minimumRows) {
-      tableRows.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    // Fungsi untuk memperbarui tabel
-    let startIndex = 0;
-    const updateTable = () => {
-      const displayedRows = [];
-      for (let i = 0; i < minimumRows; i++) {
-        const index = (startIndex + i) % tableRows.length; // Rolling index
-        displayedRows.push(tableRows[index]);
-      }
-
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        "<th>Nama Agent</th>" +
-        "<th>Status</th>" +
-        "<th>Now Handle</th>" +
-        "<th>Chats</th>" +
-        "</tr></thead><tbody>";
-      table += displayedRows.join("");
-      table += "</tbody></table>";
-
-      // Tampilkan tabel
-      $("#multichatSoetta").html(table);
-
-      // Update indeks awal untuk rolling
-      startIndex = (startIndex + 1) % tableRows.length;
-    };
-
-    // Update tabel pertama kali
-    updateTable();
-
-    // Interval untuk rolling data
-    if (tableRows.length > minimumRows) {
-      setInterval(updateTable, 2000); // Rolling setiap 2 detik
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    // Menampilkan pesan error kepada user
-    $("#multichatSoetta").html(
-      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
-    );
+              if (nMultichatPasarBaru <= -550) {
+                  nMultichatPasarBaru = 550;
+              }
+          }
+      }, speedMultichatPasarBaru);
   }
 }
 
 async function listMultiChatPasarBaru() {
-  try {
-    const response = await fetch(
-      "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru",
-      {
-        method: "GET",
-        headers: {
-          Accept: "text/plain",
-        },
-      }
-    );
+    try {
+        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru", {
+            method: "GET",
+            headers: {
+                Accept: "text/plain",
+            },
+        });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.text();
+        const agents = JSON.parse(data) || [];
+        const div1 = document.getElementById("divMultichatPasarBaru1");
+        const div2 = document.getElementById("divMultichatPasarBaru2");
+        let tableRows = "<tbody>";
+
+        // Loop through agents and generate table rows
+        agents.forEach((item) => {
+            let row = `
+                <tr>
+                    <td>${item.agent || "-"}</td>
+                    <td><span class="badge ${item.status === 'Ready' ? 'badge-green' : 'badge-pink'}">${item.status || "-"}</span></td>
+                    <td>${item.nowHandle || "-"}</td>
+                    <td>${item.chat || "0"}</td>
+                </tr>
+            `;
+            tableRows += row;
+        });
+
+        // Fill missing rows if less than 5
+        const missingRows = 3 - agents.length;
+        for (let i = 0; i < missingRows; i++) {
+            tableRows += `
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            `;
+        }
+
+        tableRows += "</tbody>";
+
+        // Inject content into both divs for seamless scrolling
+        div1.querySelector("table").innerHTML = tableRows;
+        div2.querySelector("table").innerHTML = tableRows;
+
+        const rowCount = Math.max(agents.length, 3);
+        scrollMultichatPasarBaru(rowCount);
+
+    } catch (error) {
+        console.error("Error loading data: ", error);
     }
-
-    const data = await response.text();
-    const agents = JSON.parse(data) || []; // Data agent dari server
-    const minimumRows = 2; // Jumlah minimal baris di tabel
-    const tableRows = [];
-
-    // Membuat baris data dari hasil fetch
-    agents.forEach((items) => {
-      let row = "<tr>";
-      row += "<td>" + (items["agent"] || "-") + "</td>"; // Nama Agent
-
-      // Status formatting
-      if (items["status"] === "Ready")
-        row +=
-          '<td><span class="badge badge-green">' +
-          items["status"] +
-          "</span></td>";
-      else
-        row +=
-          '<td><span class="badge badge-pink">' +
-          (items["status"] || "-") +
-          "</span></td>";
-
-      // Now Handle
-      row += "<td>" + (items["nowHandle"] || "-") + "</td>";
-
-      // Chats count
-      const chats = items["chat"] || "0";
-      row += "<td>" + chats + "</td>";
-      row += "</tr>";
-
-      tableRows.push(row);
-    });
-
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRows.length < minimumRows) {
-      tableRows.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    // Fungsi untuk memperbarui tabel
-    let startIndex = 0;
-    const updateTable = () => {
-      const displayedRows = [];
-      for (let i = 0; i < minimumRows; i++) {
-        const index = (startIndex + i) % tableRows.length; // Rolling index
-        displayedRows.push(tableRows[index]);
-      }
-
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        "<th>Nama Agent</th>" +
-        "<th>Status</th>" +
-        "<th>Now Handle</th>" +
-        "<th>Chats</th>" +
-        "</tr></thead><tbody>";
-      table += displayedRows.join("");
-      table += "</tbody></table>";
-
-      // Tampilkan tabel
-      $("#multichatPasarBaru").html(table);
-
-      // Update indeks awal untuk rolling
-      startIndex = (startIndex + 1) % tableRows.length;
-    };
-
-    // Update tabel pertama kali
-    updateTable();
-
-    // Interval untuk rolling data
-    if (tableRows.length > minimumRows) {
-      setInterval(updateTable, 2000); // Rolling setiap 2 detik
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    // Menampilkan pesan error kepada user
-    $("#multichatPasarBaru").html(
-      '<div class="alert alert-danger">Failed to load data. Please try again later.</div>'
-    );
-  }
 }
+
 
 function getGreeting() {
   var now = new Date();

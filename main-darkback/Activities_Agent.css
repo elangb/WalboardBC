@@ -49,6 +49,12 @@ body {
     font-size: 30px;
 }
 
+#ListAgent, #div2 {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+}
+
 .table-container {
     background-color: #1e2746;
     border-radius: 10px;
@@ -64,6 +70,8 @@ body {
     text-align: center; /* Default: Center align all content */
     border-collapse: collapse; /* Pastikan border di-collapse */
     font-size: 24px;
+    table-layout: fixed; /* Menghindari kolom meluas */
+    margin-bottom: 0 !important; /* Menimpa margin-bottom bawaan */
 }
 
 .table th,
@@ -99,6 +107,7 @@ body {
 /* Untuk semua baris, pastikan ada tinggi minimum */
 .table tbody tr td {
     min-height: 40px; /* Tinggi minimum untuk semua baris */
+    height: 40px;
     vertical-align: middle; /* Teks selalu di tengah */
 }
 
@@ -129,6 +138,20 @@ body {
     transform: translateY(0);
     opacity: 1;
 }
+
+#containerxx {
+    position: relative;
+    overflow: hidden; /* Hide the overflowing content */
+    height: 320px;    /* Set a fixed height for the container */
+}
+
+#div1, #div2, #div1-multichat, #div2-multichat, #div1-email, #div2-email, #div1-sosmed, #div2-sosmed {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
 
 .status-available, .status-acd, .status-acw, .status-istirahat, 
 .status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {

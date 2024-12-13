@@ -211,161 +211,103 @@ async function LineChart() {
     }
 }
 
-async function barchart(){
-  // Retrieve data from local storage under the key 'user'
-  var datajson=[];
-  var categories=[];
-   try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetDailyCallHistory", {
-            method: "GET",
-            headers: {
-                'Accept': 'text/plain' // Setting the accept header
-            }
-        });
-
-        // Check if the response is okay
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-		
-		 const chartData = [
-			  { name: 'Answered Calls', data: [] },
-			  { name: 'Abandoned Calls', data: [] },
-			  { name: 'Resolved Calls', data: [] }
-			];
-
-        const data = await response.text(); // Using text() since accept is text/plain
-		 console.log(data);
-		 var json = JSON.parse(data);
-		
-		 
-		
-
-			json.forEach(day => {
-				categories.push(day.hari);
-			  chartData[0].data.push(day.answer);     // Add 'answer' values to "Answered Calls"
-			  chartData[1].data.push(day.abandon);    // Add 'abandon' values to "Abandoned Calls"
-			  chartData[2].data.push(day.resolved);   // Add 'resolved' values to "Resolved Calls"
-			});
-			console.log(categories);
-			console.log(chartData);
-		 
-      var options = {
-			// series: [{
-				// name: 'received calls',
-				// data: [44, 55, 57, 56, 61, 58, 63, 60, 66]  // data for received calls
-			// }, {
-				// name: 'answered calls',
-				// data: [76, 85, 101, 98, 87, 105, 91, 114, 94]  // data for answered calls
-			// }, {
-				// name: 'abandoned calls',
-				// data: [35, 41, 36, 26, 45, 48, 52, 53, 41]  // data for abandoned calls
-			// }],
-			series:chartData,
-			chart: {
-				type: 'bar',
-				height: 330,
-				toolbar: {
-					show: false
-				}
-			},
-			plotoptions: {
-				bar: {
-					horizontal: false,
-					columnwidth: '55%',
-					endingshape: 'rounded'
-				}
-			},
-			colors: ['#19884e', '#2596be', '#e64f54'],  // green, blue, red for the bars
-			datalabels: {
-				enabled: false
-			},
-			stroke: {
-				show: true,
-				width: 2,
-				colors: ['transparent']
-			},
-			xaxis: {
-				categories: categories,
-				labels: {
-					style: {
-						colors: '#ffffff',  // white text for x-axis labels
-						fontsize: '14px'  // increased font size for x-axis labels
-					}
-				},
-				axisborder: {
-					show: true,
-					color: '#ffffff'  // white x-axis border
-				},
-				axisticks: {
-					show: true,
-					color: '#ffffff'  // white x-axis ticks
-				}
-			},
-			yaxis: {
-				title: {
-					text: 'number of calls',
-					style: {
-						color: '#ffffff',  // white y-axis title
-						fontsize: '14px'  // increased font size for y-axis title
-					}
-				},
-				labels: {
-					style: {
-						colors: '#ffffff',  // white text for y-axis labels
-						fontsize: '14px'  // increased font size for y-axis labels
-					}
-				},
-				axisborder: {
-					show: true,
-					color: '#ffffff'  // white y-axis border
-				},
-				axisticks: {
-					show: true,
-					color: '#ffffff'  // white y-axis ticks
-				}
-			},
-			fill: {
-				opacity: 1
-			},
-			tooltip: {
-				y: {
-					formatter: function (val) {
-						return val + " calls"
-					}
-				}
-			},
-			legend: {
-				labels: {
-					colors: '#ffffff',  // white text for legend items (received, answered, abandoned)
-					useseriescolors: false
-				}
-			},
-			grid: {
-				bordercolor: '#ffffff'  // white grid lines
+async function barchart() {
+	var categories = [];
+	try {
+	  const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetDailyCallHistory", {
+		method: "GET",
+		headers: {
+		  'Accept': 'text/plain'
+		}
+	  });
+  
+	  if (!response.ok) {
+		throw new Error(`HTTP error! Status: ${response.status}`);
+	  }
+  
+	  const chartData = [
+		{ name: 'Answered Calls', data: [] },
+		{ name: 'Abandoned Calls', data: [] },
+		{ name: 'Resolved Calls', data: [] }
+	  ];
+  
+	  const data = await response.text();
+	  console.log(data);
+	  var json = JSON.parse(data);
+  
+	  json.forEach(day => {
+		categories.push(day.hari);
+		chartData[0].data.push(day.answer);
+		chartData[1].data.push(day.abandon);
+		chartData[2].data.push(day.resolved);
+	  });
+  
+	  console.log(categories);
+	  console.log(chartData);
+  
+	  var options = {
+		series: chartData,
+		chart: {
+		  type: 'bar',
+		  height: 330,
+		  toolbar: {
+			show: false
+		  },
+		  background: 'transparent' // Set background to transparent
+		},
+		plotOptions: {
+		  bar: {
+			horizontal: false,
+			columnWidth: '55%',
+			endingShape: 'rounded'
+		  }
+		},
+		colors: ['#19884e', '#2596be', '#e64f54'], // green, blue, red for the bars
+		dataLabels: {
+		  enabled: false
+		},
+		stroke: {
+		  show: true,
+		  width: 2,
+		  colors: ['transparent']
+		},
+		xaxis: {
+		  categories: categories
+		},
+		yaxis: {
+		  title: {
+			text: 'Number of Calls'
+		  }
+		},
+		fill: {
+		  opacity: 1
+		},
+		tooltip: {
+		  y: {
+			formatter: function (val) {
+			  return val + " calls";
 			}
-		};
+		  }
+		},
+		legend: {
+		  useSeriesColors: false
+		},
+		theme: {
+		  mode: 'dark' // Use the built-in dark theme
+		}
+	  };
+  
+	  // Create and render the chart
+	  document.querySelector("#bar-chart-apex").innerHTML = '';
+	  var chart = new ApexCharts(document.querySelector("#bar-chart-apex"), options);
+	  chart.render();
+  
+	} catch (error) {
+	  console.error("An error occurred:", error);
+	}
+  }
+  
 
-        // Create and render the chart
-		document.querySelector("#bar-chart-apex").innerHTML = '';
-        var chart = new ApexCharts(document.querySelector("#bar-chart-apex"), options);
-        chart.render();
-  
-							
-		  
-					   
-						
-  
-       
-
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
-  
-  
-  
-  
-}
 function chartPie(avail,acd,acw,aux){
   // Retrieve data from local storage under the key 'user'
   var storedDataAUX = aux;

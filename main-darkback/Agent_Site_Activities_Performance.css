@@ -19,14 +19,17 @@
     background-position: center;
     background-size: contain;
     width: 100%;
-    height: 120px; /* Adjusted height */
+    height: 120px;
+    /* Adjusted height */
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     text-align: center;
-    margin-top: 10px; /* Reduced top margin */
-    margin-bottom: 10px; /* Reduced bottom margin */
+    margin-top: 10px;
+    /* Reduced top margin */
+    margin-bottom: 10px;
+    /* Reduced bottom margin */
 }
 
 body {
@@ -45,7 +48,8 @@ body {
 
 .contact-center-text {
     font-weight: bold;
-    font-size: 20px; /* Increase font size */
+    font-size: 20px;
+    /* Increase font size */
     margin-left: -100px;
 }
 
@@ -62,9 +66,12 @@ body {
 }
 
 .date-time-text {
-    font-size: 22px; /* Ukuran teks lebih besar */
-    margin: 10px 0; /* Margin atas dan bawah sama */
-    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
+    font-size: 22px;
+    /* Ukuran teks lebih besar */
+    margin: 10px 0;
+    /* Margin atas dan bawah sama */
+    color: goldenrod;
+    /* Warna sesuai dengan style yang sudah ada */
 }
 
 .section-title {
@@ -87,18 +94,23 @@ body {
 .table {
     color: #fff;
     width: 100%;
-    text-align: center; /* Default: Center align all content */
-    border-collapse: collapse; /* Pastikan border di-collapse */
+    text-align: center;
+    /* Default: Center align all content */
+    border-collapse: collapse;
+    /* Pastikan border di-collapse */
     font-size: 24px;
 }
 
 .table th,
 .table td {
-    border: none; /* Menghilangkan semua border */
+    border: none;
+    /* Menghilangkan semua border */
     font-size: 16px;
     /* Untuk menghilangkan border atas jika masih ada */
-    border-top: none !important; /* Menonaktifkan garis atas */
-    border-bottom: none !important; /* Menonaktifkan garis atas */
+    border-top: none !important;
+    /* Menonaktifkan garis atas */
+    border-bottom: none !important;
+    /* Menonaktifkan garis atas */
 }
 
 /* Align left only for the "Nama Agent" column */
@@ -109,23 +121,63 @@ body {
 
 /* Alternate row colors */
 .table tbody tr:nth-child(odd) {
-    background-color: #050513; /* Warna untuk baris ganjil */
+    background-color: #050513;
+    /* Warna untuk baris ganjil */
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: #1e2746; /* Warna untuk baris genap */
+    background-color: #1e2746;
+    /* Warna untuk baris genap */
 }
 
 /* Pastikan tinggi baris konsisten */
 .table tbody tr.empty-row td {
-    height: 27px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
-    line-height: 27px; /* Pastikan teks berada di tengah */
+    height: 27px;
+    /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
+    line-height: 27px;
+    /* Pastikan teks berada di tengah */
 }
 
 /* Untuk semua baris, pastikan ada tinggi minimum */
 .table tbody tr td {
-    min-height: 36px; /* Tinggi minimum untuk semua baris */
-    vertical-align: middle; /* Teks selalu di tengah */
+    min-height: 36px;
+    /* Tinggi minimum untuk semua baris */
+    vertical-align: middle;
+    /* Teks selalu di tengah */
+}
+
+#containerxx {
+    position: relative;
+    overflow: hidden;
+    /* Hide the overflowing content */
+    height: 260px;
+    /* Set a fixed height for the container */
+}
+
+#containerxxCallSoeta, #containerxxCallPasbar {
+    position: relative;
+    overflow: hidden;
+    /* Hide the overflowing content */
+    height: 210px;
+    /* Set a fixed height for the container */
+}
+
+#containerxx-Soeta, #containerxx-PasarBaru {
+    position: relative;
+    overflow: hidden;
+    /* Hide the overflowing content */
+    height: 100px;
+    /* Set a fixed height for the container */
+}
+
+
+#div1, #div2, #divSoeta1, #divSoeta2, #divPasbar1, #divPasbar2, #div1-multichat, #div2-multichat, #div1-email, 
+#div2-email, #div1-sosmed, #div2-sosmed, #divMultichatTanjungPriuk1, #divMultichatTanjungPriuk2, #divMultichatSoeta1, 
+#divMultichatSoeta2, #divMultichatPasarBaru1, #divMultichatPasarBaru2, #divEmailSoetta1, #divEmailSoetta2, #divEmailPasarBaru1, #divEmailPasarBaru2 {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 
@@ -156,14 +208,18 @@ body {
     opacity: 1;
 }
 
-.badge-green, .badge-orange, .badge-pink {
+.badge-green, .badge-orange, .badge-pink, .badge-blue {
     background-color: #059d55;
     color: #fff;
-    padding: 5px 10px; /* Padding atas-bawah 5px, kanan-kiri 20px */
+    padding: 5px 10px;
+    /* Padding atas-bawah 5px, kanan-kiri 20px */
     border-radius: 5px;
-    min-width: 60px; /* Set lebar minimal */
-    display: inline-block; /* Agar badge mengikuti konten */
-    text-align: center; /* Untuk membuat teks berada di tengah */
+    min-width: 70px;
+    /* Set lebar minimal */
+    display: inline-block;
+    /* Agar badge mengikuti konten */
+    text-align: center;
+    /* Untuk membuat teks berada di tengah */
 }
 
 .badge-green {
@@ -178,7 +234,52 @@ body {
     background-color: #e65055;
 }
 
+.badge-blue {
+    background-color: #00a0e9;
+}
+
 .channel-icons i {
     margin-right: 5px;
 }
 
+.status-available, .status-acd, .status-acw, .status-istirahat,
+.status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
+    background-color: #059d55;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    min-width: 100px;
+    /* Set lebar minimal */
+    display: inline-block;
+    /* Agar kotak mengikuti konten */
+    text-align: center;
+    /* Untuk membuat teks berada di tengah */
+}
+
+.status-available {
+    background-color: #059d55;
+}
+
+.status-acd {
+    background-color: #00a0e9;
+}
+
+.status-acw {
+    background-color: #dea039;
+}
+
+.status-istirahat, .status-toilet, .status-makan {
+    background-color: #e65055;
+}
+
+.status-ringing {
+    background-color: #746cac;
+}
+
+.status-other {
+    background-color: #4d4d4d;
+}
+
+.longest-time {
+    background-color: #e65055;
+}
