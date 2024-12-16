@@ -15,215 +15,24 @@ function myFunction() {
 
 function AutoCall() {
   getDateTime();
-  // getGreeting();
-  scrollAgent();
-  scrollEmail();
-
+  // scrollAgent();
+  // scrollEmail();
+  // scrollMultichat();
+  // scrollSosmed();
   ListAgent();
-  // ListAgentSoetta();
-  // ListAgentTanjungPriok();
+  getDataMultichat();
   getDataEmail();
-  getListMultichat();
   getListSosmed();
 }
+
+let scrollIntervalSosmed = null;
+let scrollPositionSosmed = 0;
+const rowHeightSosmed = 40; // Adjust based on row height
+const speedSosmed = 50; // Scroll speed
+
 async function getListSosmed() {
-  try {
-    const response = await fetch(
-      "http://10.216.206.10/apiDataBravoWb/api/Wallboad/PerformanceSosmed",
-      {
-        method: "GET",
-        headers: {
-          Accept: "text/plain", // Setting the accept header
-        },
-      }
-    );
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/PerformanceSosmed";
 
-    // Periksa apakah respons berhasil
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.text(); // Menggunakan text() karena header Accept adalah text/plain
-    const json = JSON.parse(data);
-
-    const minimumRows = 5; // Jumlah minimal baris di tabel
-    const tableRows = [];
-
-    // Membuat baris data dari hasil fetch
-    json.forEach((items) => {
-      let row = "<tr>";
-      row +=
-        '<td style="min-width: 200px; max-width: 200px;">' +
-        (items["name"] || "-") +
-        "</td>"; // Nama Agent
-
-      // Chats dengan badge
-      const chats = parseInt(items["answer"]) || 0;
-      if (chats > 20) {
-        row += '<td><span class="badge badge-green">' + chats + "</span></td>";
-      } else if (chats > 10) {
-        row += '<td><span class="badge badge-orange">' + chats + "</span></td>";
-      } else {
-        row += '<td><span class="badge badge-pink">' + chats + "</span></td>";
-      }
-
-      // Avg Response Time
-      row += "<td>" + (items["frt"] || "-") + "</td>";
-
-      // Avg Conversation Time
-      row += "<td>" + (items["aht"] || "-") + "</td>";
-      row += "</tr>";
-      tableRows.push(row);
-    });
-
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRows.length < minimumRows) {
-      tableRows.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    // Fungsi untuk memperbarui tabel
-    let startIndex = 0;
-    const updateTable = () => {
-      const displayedRows = [];
-      for (let i = 0; i < minimumRows; i++) {
-        const index = (startIndex + i) % tableRows.length; // Rolling index
-        displayedRows.push(tableRows[index]);
-      }
-
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        '<th style="min-width: 200px; max-width: 200px;">Nama Agent</th>' +
-        "<th>Chats</th>" +
-        "<th>Avg. Resp. Time</th>" +
-        "<th>Avg. Conv. Time</th>" +
-        "</tr></thead><tbody>";
-      table += displayedRows.join("");
-      table += "</tbody></table>";
-
-      // Tampilkan tabel
-      $("#ListSosmed").html(table);
-
-      // Update indeks awal untuk rolling
-      startIndex = (startIndex + 1) % tableRows.length;
-    };
-
-    // Update tabel pertama kali
-    updateTable();
-
-    // Interval untuk rolling data
-    if (tableRows.length > minimumRows) {
-      setInterval(updateTable, 2000); // Rolling setiap 2 detik
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-}
-
-async function getListMultichat() {
-  try {
-    const response = await fetch(
-      "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataPerformanceMultiChat",
-      {
-        method: "GET",
-        headers: {
-          Accept: "text/plain", // Setting the accept header
-        },
-      }
-    );
-
-    // Periksa apakah respons berhasil
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.text(); // Menggunakan text() karena header Accept adalah text/plain
-    const json = JSON.parse(data);
-
-    const minimumRows = 5; // Jumlah minimal baris di tabel
-    const tableRows = [];
-
-    // Membuat baris data dari hasil fetch
-    json.forEach((items) => {
-      let row = "<tr>";
-      row +=
-        '<td style="min-width: 200px; max-width: 200px;">' +
-        (items["name"] || "-") +
-        "</td>"; // Nama Agent
-
-      // Chats dengan badge
-      const chats = parseInt(items["answer"]) || 0;
-      if (chats > 20) {
-        row += '<td><span class="badge badge-green">' + chats + "</span></td>";
-      } else if (chats > 10) {
-        row += '<td><span class="badge badge-orange">' + chats + "</span></td>";
-      } else {
-        row += '<td><span class="badge badge-pink">' + chats + "</span></td>";
-      }
-
-      // Avg Response Time
-      row += "<td>" + (items["frt"] || "-") + "</td>";
-
-      // Avg Conversation Time
-      row += "<td>" + (items["aht"] || "-") + "</td>";
-      row += "</tr>";
-      tableRows.push(row);
-    });
-
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRows.length < minimumRows) {
-      tableRows.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    // Fungsi untuk memperbarui tabel
-    let startIndex = 0;
-    const updateTable = () => {
-      const displayedRows = [];
-      for (let i = 0; i < minimumRows; i++) {
-        const index = (startIndex + i) % tableRows.length; // Rolling index
-        displayedRows.push(tableRows[index]);
-      }
-
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        '<th style="min-width: 200px; max-width: 200px;">Nama Agent</th>' +
-        "<th>Chats</th>" +
-        "<th>Avg. Resp. Time</th>" +
-        "<th>Avg. Conv. Time</th>" +
-        "</tr></thead><tbody>";
-      table += displayedRows.join("");
-      table += "</tbody></table>";
-
-      // Tampilkan tabel
-      $("#ListMultichat").html(table);
-
-      // Update indeks awal untuk rolling
-      startIndex = (startIndex + 1) % tableRows.length;
-    };
-
-    // Update tabel pertama kali
-    updateTable();
-
-    // Interval untuk rolling data
-    if (tableRows.length > minimumRows) {
-      setInterval(updateTable, 2000); // Rolling setiap 2 detik
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-}
-
-async function getDataEmail() {
-    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailPerpormance";
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -231,21 +40,18 @@ async function getDataEmail() {
         }
 
         const data = await response.json();
+        const tableBody = document.getElementById("table-body-sosmed");
 
-        const divEmail1 = document.getElementById("emailDiv1");
-        const divEmail2 = document.getElementById("emailDiv2");
-
-        let tableRows = "<tbody>";
+        let tableRows = "";
 
         data.forEach((item) => {
-            const emails = parseInt(item.answer) || 0;
-            const emailBadge = emails > 20
-                ? '<span class="badge badge-green">' + emails + '</span>'
-                : emails > 10
-                    ? '<span class="badge badge-orange">' + emails + '</span>'
-                    : '<span class="badge badge-pink">' + emails + '</span>';
+            const chats = parseInt(item.answer) || 0;
+            const chatBadge = chats > 20
+                ? '<span class="badge badge-green">' + chats + '</span>'
+                : chats > 10
+                    ? '<span class="badge badge-orange">' + chats + '</span>'
+                    : '<span class="badge badge-pink">' + chats + '</span>';
 
-            // Batasi panjang nama agen menjadi 15 karakter
             const truncatedName = item.name
                 ? (item.name.length > 15 ? item.name.substring(0, 15) + "..." : item.name)
                 : "-";
@@ -253,18 +59,19 @@ async function getDataEmail() {
             tableRows += `
                 <tr>
                     <td style="min-width: 200px; max-width: 200px;" title="${item.name || '-'}">${truncatedName}</td>
-                    <td>${emailBadge}</td>
+                    <td>${chatBadge}</td>
                     <td>${item.frt || "-"}</td>
                     <td>${item.aht || "-"}</td>
                 </tr>
             `;
         });
 
+        // Add empty rows if data length is less than 5
         const missingRows = 5 - data.length;
         if (missingRows > 0) {
             for (let i = 0; i < missingRows; i++) {
                 tableRows += `
-                    <tr>
+                    <tr class="empty-row">
                         <td style="min-width: 200px; max-width: 200px;">-</td>
                         <td>-</td>
                         <td>-</td>
@@ -274,30 +81,277 @@ async function getDataEmail() {
             }
         }
 
-        tableRows += "</tbody>";
+        // Duplicate rows for seamless scrolling
+        let duplicatedRows = "";
+        for (let i = 0; i < 3; i++) {
+            duplicatedRows += tableRows; // Duplicate rows for infinite scroll
+        }
+        tableBody.innerHTML = duplicatedRows;
 
-        divEmail1.querySelector("table").innerHTML = tableRows;
-        divEmail2.querySelector("table").innerHTML = tableRows;
-
-        const rowCount = Math.max(data.length, 5);
-        scrollEmail(rowCount);
+        // Start auto-scrolling if data has more than 5 rows
+        const rowCountSosmed = Math.max(data.length, 5) * 3; // Total rows including duplicates
+        if (data.length > 5) {
+            startAutoScrollSosmed(rowCountSosmed);
+        }
     } catch (error) {
         console.error("Error loading data: ", error);
     }
 }
 
-function getStatusClass(calls) {
-    // Status mapping based on calls
-    if (calls < 10) {
-      return "status-istirahat";
-    } else if (calls >= 10 && calls < 20) {
-      return "status-acd";
-    } else if (calls >= 20) {
-      return "status-available";
+function startAutoScrollSosmed(rowCountSosmed) {
+    const tableBodySosmed = document.getElementById("table-body-sosmed");
+
+    // Stop scrolling if row count is less than or equal to 5
+    if (rowCountSosmed <= 5) {
+        clearInterval(scrollIntervalSosmed);
+        scrollIntervalSosmed = null;
+        tableBodySosmed.style.transform = "translateY(0px)";
+        return;
     }
-  
-    // Default case (this can be kept for other cases if needed)
-    const statusMap = {
+
+    // Start auto-scrolling
+    if (!scrollIntervalSosmed) {
+        scrollIntervalSosmed = setInterval(() => {
+            scrollPositionSosmed -= 1; // Move up 1px
+            tableBodySosmed.style.transform = `translateY(${scrollPositionSosmed}px)`;
+
+            // Save the scroll position to localStorage on each change
+            localStorage.setItem("scrollPositionSosmed", scrollPositionSosmed);
+
+            // If scroll position exceeds the data's total length, reset it
+            if (Math.abs(scrollPositionSosmed) >= rowCountSosmed * rowHeightSosmed) {
+                scrollPositionSosmed = 0; // Reset scroll to the top after the data is scrolled through
+            }
+        }, speedSosmed);
+    }
+}
+
+async function getDataMultichat() {
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataPerformanceMultiChat";
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const tableBody = document.getElementById("table-body-multichat");
+
+        let tableRows = "";
+
+        data.forEach((item) => {
+            const chats = parseInt(item.answer) || 0;
+            const chatBadge = chats > 20
+                ? '<span class="badge badge-green">' + chats + '</span>'
+                : chats > 10
+                    ? '<span class="badge badge-orange">' + chats + '</span>'
+                    : '<span class="badge badge-pink">' + chats + '</span>';
+
+            const truncatedName = item.name
+                ? (item.name.length > 15 ? item.name.substring(0, 15) + "..." : item.name)
+                : "-";
+
+            tableRows += `
+                <tr>
+                    <td style="min-width: 200px; max-width: 200px;" title="${item.name || '-'}">${truncatedName}</td>
+                    <td>${chatBadge}</td>
+                    <td>${item.frt || "-"}</td>
+                    <td>${item.aht || "-"}</td>
+                </tr>
+            `;
+        });
+
+        // Add empty rows if data length is less than 5
+        const missingRows = 5 - data.length;
+        if (missingRows > 0) {
+            for (let i = 0; i < missingRows; i++) {
+                tableRows += `
+                    <tr class="empty-row">
+                        <td style="min-width: 200px; max-width: 200px;">-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Duplicate rows for seamless scrolling
+        let duplicatedRows = "";
+        for (let i = 0; i < 3; i++) {
+            duplicatedRows += tableRows; // Duplicate rows for infinite scroll
+        }
+        tableBody.innerHTML = duplicatedRows;
+
+        // Get the last scroll position from localStorage
+        const lastScrollPositionMultichat = localStorage.getItem("scrollPositionMultichat");
+        if (lastScrollPositionMultichat) {
+            scrollPositionMultichat = parseInt(lastScrollPositionMultichat, 10); // Set scroll position to the last saved value
+        }
+
+        // Calculate row count for seamless scrolling
+        const rowCountMultichat = Math.max(data.length, 5) * 3; // Total rows including duplicates
+
+        // Activate auto-scrolling if data has more than 5 rows
+        if (data.length > 5) {
+            startAutoScrollMultichat(rowCountMultichat);
+        }
+    } catch (error) {
+        console.error("Error loading data: ", error);
+    }
+}
+
+function startAutoScrollMultichat(rowCountMultichat) {
+    const tableBodyMultichat = document.getElementById("table-body-multichat");
+
+    // Stop scrolling if row count is less than or equal to 5
+    if (rowCountMultichat <= 5) {
+        clearInterval(scrollIntervalMultichat);
+        scrollIntervalMultichat = null;
+        tableBodyMultichat.style.transform = "translateY(0px)";
+        return;
+    }
+
+    // Start auto-scrolling
+    if (!scrollIntervalMultichat) {
+        scrollIntervalMultichat = setInterval(() => {
+            scrollPositionMultichat -= 1; // Move up 1px
+            tableBodyMultichat.style.transform = `translateY(${scrollPositionMultichat}px)`;
+
+            // Save the scroll position to localStorage on each change
+            localStorage.setItem("scrollPositionMultichat", scrollPositionMultichat);
+
+            // If scroll position exceeds the data's total length, reset it
+            if (Math.abs(scrollPositionMultichat) >= rowCountMultichat * rowHeightMultichat) {
+                scrollPositionMultichat = 0; // Reset scroll to the top after the data is scrolled through
+            }
+        }, speedMultichat);
+    }
+}
+
+
+let scrollIntervalEmail = null;
+let scrollPositionEmail = 0;
+const rowHeightEmail = 40; // Adjust this based on your table row height
+const speedEmail = 50; // Scroll speed
+
+async function getDataEmail() {
+  const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailPerpormance";
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const tableBody = document.getElementById("table-body-email");
+
+    let tableRows = "";
+
+    data.forEach((item) => {
+      const emails = parseInt(item.answer) || 0;
+      const emailBadge = emails > 20
+          ? '<span class="badge badge-green">' + emails + '</span>'
+          : emails > 10
+              ? '<span class="badge badge-orange">' + emails + '</span>'
+              : '<span class="badge badge-pink">' + emails + '</span>';
+
+      const truncatedName = item.name
+          ? (item.name.length > 15 ? item.name.substring(0, 15) + "..." : item.name)
+          : "-";
+
+      tableRows += `
+        <tr>
+          <td style="min-width: 200px; max-width: 200px;" title="${item.name || '-'}">${truncatedName}</td>
+          <td>${emailBadge}</td>
+          <td>${item.frt || "-"}</td>
+          <td>${item.aht || "-"}</td>
+        </tr>
+      `;
+    });
+
+    // Add empty rows if data length is less than 5
+    const missingRows = 5 - data.length;
+    if (missingRows > 0) {
+      for (let i = 0; i < missingRows; i++) {
+        tableRows += `
+          <tr class="empty-row">
+            <td style="min-width: 200px; max-width: 200px;">-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        `;
+      }
+    }
+
+    // Duplicate rows for seamless scrolling
+    let duplicatedRows = "";
+    for (let i = 0; i < 3; i++) {
+      duplicatedRows += tableRows; // Duplicate rows three times for infinite scroll
+    }
+    tableBody.innerHTML = duplicatedRows;
+
+    // Get the last scroll position from localStorage
+    const lastScrollPositionEmail = localStorage.getItem("scrollPositionEmail");
+    if (lastScrollPositionEmail) {
+      scrollPositionEmail = parseInt(lastScrollPositionEmail, 10); // Set scroll position to the last saved value
+    }
+
+    // Calculate row count for seamless scrolling
+    const rowCountEmail = Math.max(data.length, 5) * 3; // Total rows including duplicates
+
+    // Activate auto-scrolling if data has more than 5 rows
+    if (data.length > 5) {
+      startAutoScrollEmail(rowCountEmail);
+    }
+  } catch (error) {
+    console.error("Error loading data: ", error);
+  }
+}
+
+function startAutoScrollEmail(rowCountEmail) {
+  const tableBodyEmail = document.getElementById("table-body-email");
+
+  // Stop scrolling if row count is less than or equal to 5
+  if (rowCountEmail <= 5) {
+    clearInterval(scrollIntervalEmail);
+    scrollIntervalEmail = null;
+    tableBodyEmail.style.transform = "translateY(0px)";
+    return;
+  }
+
+  // Start auto-scrolling
+  if (!scrollIntervalEmail) {
+    scrollIntervalEmail = setInterval(() => {
+      scrollPositionEmail -= 1; // Move up 1px
+      tableBodyEmail.style.transform = `translateY(${scrollPositionEmail}px)`;
+
+      // Save the scroll position to localStorage on each change
+      localStorage.setItem("scrollPositionEmail", scrollPositionEmail);
+
+      // If scroll position exceeds the data's total length, reset it
+      if (Math.abs(scrollPositionEmail) >= rowCountEmail * rowHeightEmail) {
+        scrollPositionEmail = 0; // Reset scroll to the top after the data is scrolled through
+      }
+    }, speedEmail);
+  }
+}
+
+
+
+function getStatusClass(calls) {
+  // Status mapping based on calls
+  if (calls < 10) {
+      return "status-istirahat";
+  } else if (calls >= 10 && calls < 20) {
+      return "status-acd";
+  } else if (calls >= 20) {
+      return "status-available";
+  }
+
+  // Default case (this can be kept for other cases if needed)
+  const statusMap = {
       Available: "status-available",
       ACW: "status-acw",
       ACDIN: "status-acd",
@@ -306,50 +360,11 @@ function getStatusClass(calls) {
       Makan: "status-istirahat",
       AUX: "status-istirahat",
       RING: "status-ringing",
-    };
-  
-    // If no custom rules match, fall back to this mapping
-    return statusMap[status] || "status-other";
-  }
+  };
 
-let scrollIntervalEmail = null;
-let mEmail = 0;
-let nEmail = 750; // Sesuaikan dengan tinggi div
-const speedEmail = 50; // Kecepatan scroll
-
-function scrollEmail(rowCount) {
-    const divEmail1 = document.getElementById("divEmail1");
-    const divEmail2 = document.getElementById("divEmail2");
-
-    if (rowCount <= 5) {
-        clearInterval(scrollIntervalEmail);
-        scrollIntervalEmail = null;
-        divEmail1.style.top = "0px";
-        divEmail2.style.top = "750px";
-        return;
-    }
-
-    if (!scrollIntervalEmail) {
-        scrollIntervalEmail = setInterval(() => {
-            if (divEmail1 && divEmail2) {
-                divEmail1.style.top = mEmail + "px";
-                divEmail2.style.top = nEmail + "px";
-                mEmail--;
-                nEmail--;
-
-                if (mEmail <= -750) {
-                    mEmail = 750;
-                }
-
-                if (nEmail <= -750) {
-                    nEmail = 750;
-                }
-            }
-        }, speedEmail);
-    }
+  // If no custom rules match, fall back to this mapping
+  return statusMap[status] || "status-other";
 }
-
-
 
 function formatDurationNew(time) {
   let hours = 0;
@@ -385,6 +400,11 @@ function formatDurationNew(time) {
   )}:${String(seconds).padStart(2, "0")}`;
 }
 
+let scrollInterval = null;
+let scrollPosition = 0;
+const rowHeight = 40; // Tinggi satu baris (sesuaikan dengan CSS)
+const speed = 50; // Kecepatan scroll dalam ms
+
 async function ListAgent() {
   const apiUrl =
     "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetDataAgentPerPormancePusat";
@@ -395,94 +415,96 @@ async function ListAgent() {
     }
 
     const data = await response.json();
+    const tableBody = document.getElementById("table-body");
 
-    const div1 = document.getElementById("div1");
-    const div2 = document.getElementById("div2");
+    let tableRows = "";
 
-    let tableRows = "<tbody>";
-
-    data.forEach((agent, index) => {
+    data.forEach((agent) => {
       let row = `
-                <tr>
-                    <td style="min-width: 80px; max-width: 80px;">${
-                      agent.agentName || "-"
-                    }</td>
-                   
-                    <td>
-                        <span class="badge ${getStatusClass(
-                          Number(agent.calls)
-                        )}">${agent.calls || "-"}</span>
-                    </td>
-                    <td>${formatDurationNew(agent.art) || "0"}</td>
-                    <td>${formatDurationNew(agent.aht) || "0"}</td>
-                </tr>
-            `;
+        <tr>
+          <td style="min-width: 80px; max-width: 80px;">${agent.agentName || "-"}</td>
+          <td>
+            <span class="badge ${getStatusClass(Number(agent.calls))}">
+              ${agent.calls || "-"}
+            </span>
+          </td>
+          <td>${formatDurationNew(agent.art) || "0"}</td>
+          <td>${formatDurationNew(agent.aht) || "0"}</td>
+        </tr>
+      `;
       tableRows += row;
     });
 
-    // Tambahkan baris kosong jika jumlah row kurang dari 5
+    // Tambahkan baris kosong jika kurang dari 5 baris
     const missingRows = 5 - data.length;
     if (missingRows > 0) {
       for (let i = 0; i < missingRows; i++) {
         tableRows += `
-                    <tr>
-                        <td style="min-width: 70px; max-width: 70px;">-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                `;
+          <tr class="empty-row">
+            <td style="min-width: 70px; max-width: 70px;">-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        `;
       }
     }
 
-    tableRows += "</tbody>";
+    // Gandakan data untuk looping tanpa batas
+    let duplicatedRows = "";
+    for (let i = 0; i < 3; i++) {
+      duplicatedRows += tableRows; // Duplikasi tiga kali untuk scroll seamless
+    }
+    tableBody.innerHTML = duplicatedRows;
 
-    // Set the same content for div1 and div2 for seamless scroll
-    div1.querySelector("table").innerHTML = tableRows;
-    div2.querySelector("table").innerHTML = tableRows;
+    // Ambil posisi scroll terakhir dari localStorage
+    const lastScrollPosition = localStorage.getItem("scrollPosition");
+    if (lastScrollPosition) {
+      scrollPosition = parseInt(lastScrollPosition, 10); // Set posisi scroll ke nilai terakhir
+    }
 
-    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
-    const rowCount = Math.max(data.length, 5); // Minimal 5 row
-    scrollAgent(rowCount);
+    // Hitung jumlah baris yang ditampilkan
+    const rowCount = Math.max(data.length, 5) * 3; // Total baris (termasuk duplikat)
+
+    // Aktifkan auto scrolling hanya jika data lebih dari 5
+    if (data.length > 5) {
+      startAutoScroll(rowCount);
+    } else {
+      clearInterval(scrollInterval); // Pastikan scrolling dihentikan jika data kurang dari atau sama dengan 5
+    }
+
   } catch (error) {
     console.error("Error loading data: ", error);
   }
 }
 
-let scrollIntervalAgent = null;
-let mAgent = 0;
-let nAgent = 750; // Sesuaikan dengan tinggi div
-const speedAgent = 50; // Kecepatan scroll
-function scrollAgent(rowCount) {
-  const div1 = document.getElementById("div1");
-  const div2 = document.getElementById("div2");
+function startAutoScroll(rowCount) {
+  const tableBody = document.getElementById("table-body");
 
-  // Hentikan scroll jika row kurang dari atau sama dengan 5
+  // Hentikan scrolling jika row kurang dari atau sama dengan 5
   if (rowCount <= 5) {
-    clearInterval(scrollIntervalAgent);
-    scrollIntervalAgent = null;
-    div1.style.top = "0px";
-    div2.style.top = "750px";
+    clearInterval(scrollInterval);
+    scrollInterval = null;
+    tableBody.style.transform = "translateY(0px)";
     return;
   }
 
-  if (!scrollIntervalAgent) {
-    scrollIntervalAgent = setInterval(() => {
-      if (div1 && div2) {
-        div1.style.top = mAgent + "px";
-        div2.style.top = nAgent + "px";
-        mAgent--;
-        nAgent--;
+  // Mulai auto scrolling
+  if (!scrollInterval) {
+    scrollInterval = setInterval(() => {
+      scrollPosition -= 1; // Geser ke atas 1px
+      tableBody.style.transform = `translateY(${scrollPosition}px)`;
 
-        if (mAgent <= -750) {
-          mAgent = 750;
-        }
+      // Simpan posisi scroll ke localStorage setiap perubahan
+      localStorage.setItem("scrollPosition", scrollPosition);
 
-        if (nAgent <= -750) {
-          nAgent = 750;
-        }
+      // Periksa jika posisi scroll sudah melewati data pertama yang ditampilkan,
+      // dan kemudian periksa apakah data sudah sepenuhnya selesai
+      if (Math.abs(scrollPosition) >= rowCount * rowHeight) {
+        // Looping terus tanpa reset posisi
+        scrollPosition = 0; // Setelah data selesai, kembalikan scroll ke posisi awal
       }
-    }, speedAgent);
+    }, speed);
   }
 }
 

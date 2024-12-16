@@ -48,6 +48,13 @@ body {
     -o-border-radius: 10px;
 }
 
+.scrollable-table {
+    max-height: 364px; /* Sesuaikan tinggi kontainer */
+    overflow: hidden; /* Hilangkan scrollbar manual */
+    position: relative;
+}
+
+
 .table {
     color: #fff;
     width: 100%;
@@ -56,6 +63,15 @@ body {
     font-size: 24px;
     table-layout: fixed; /* Menghindari kolom meluas */
     margin-bottom: 0 !important; /* Menimpa margin-bottom bawaan */
+    position: relative; /* Untuk animasi scrolling */
+}
+
+.table thead th {
+    position: sticky; /* Sticky header */
+    top: 0; /* Tetap berada di atas */
+    background-color: #1e2746; /* Sesuaikan warna background header */
+    color: #fff; /* Warna teks header */
+    z-index: 1; /* Pastikan di atas konten */
 }
 
 .table th,
@@ -84,8 +100,8 @@ body {
 
 /* Pastikan tinggi baris konsisten */
 .table tbody tr.empty-row td {
-    height: 32px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
-    line-height: 32px; /* Pastikan teks berada di tengah */
+    height: 33px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
+    line-height: 33px; /* Pastikan teks berada di tengah */
 }
 
 /* Untuk semua baris, pastikan ada tinggi minimum */
@@ -113,7 +129,8 @@ body {
     height: 320px;    /* Set a fixed height for the container */
 }
 
-#div1, #div2, #div1-multichat, #div2-multichat, #emailDiv1, #emailDiv2, #div1-sosmed, #div2-sosmed {
+#div1, #div2, #div1-multichat, #div2-multichat, #emailDiv1, #emailDiv2, #div1-sosmed, #div2-sosmed,
+#multichat-div1, #multichat-div2, #sosmed-div1, #sosmed-div2 {
     position: absolute;
     width: 100%;
     top: 0;

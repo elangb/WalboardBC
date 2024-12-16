@@ -133,41 +133,44 @@
                         <div class="col-md-6">
                             <div class="table-container">
                                 <h3 class="section-title">Call</h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Agent</th>
-                                            <th style="width:30%">Acd Calls</th>
-                                            <th>Avg Resp Time</th>
-                                            <th>Avg Handle Time</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                <div id="containerxx">
-                                    <div id="div1">
-                                        <table class="table">
-                                            <!-- Content will be injected here dynamically -->
-                                        </table>
-                                    </div>
-                                    <div id="div2">
-                                        <table class="table">
-                                            <!-- Duplicate content for scrolling -->
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                <div class="scrollable-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Agent</th>
+                                                <th style="width:30%">Acd Calls</th>
+                                                <th>Avg Resp Time</th>
+                                                <th>Avg Handle Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body">
+                                            <!-- Content will be injected dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>                                
+                            </div>                                                   
                         </div>
 
                         <!-- Multichat -->
                         <div class="col-md-6">
                             <div class="table-container">
-                                <h3 class="section-title">
-                                    Multichat
-                                </h3>
-                                <table class="table" id="ListMultichat">
-
-                                </table>
-                            </div>
+                                <h3 class="section-title">Multichat</h3>
+                                <div class="scrollable-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Agent</th>
+                                                <th>Chats</th>
+                                                <th>Avg Resp Time</th>
+                                                <th>Avg Conv Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body-multichat">
+                                            <!-- Content will be injected dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                                                 
                         </div>
 
                     </div>
@@ -177,41 +180,44 @@
                         <div class="col-md-6">
                             <div class="table-container">
                                 <h3 class="section-title">Email</h3>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Agent</th>
-                                            <th style="width:30%">Emails</th>
-                                            <th>Avg Resp Time</th>
-                                            <th>Avg Handle Time</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                <div id="containerxx">
-                                    <div id="emailDiv1">
-                                        <table class="table">
-                                            <!-- Content will be injected here dynamically -->
-                                        </table>
-                                    </div>
-                                    <div id="emailDiv2">
-                                        <table class="table">
-                                            <!-- Duplicate content for scrolling -->
-                                        </table>
-                                    </div>
+                                <div class="scrollable-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Agent</th>
+                                                <th style="width:30%">Emails</th>
+                                                <th>Avg Resp Time</th>
+                                                <th>Avg Handle Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body-email">
+                                            <!-- Content will be injected dynamically -->
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
+                            
                         </div>
                         <!-- Comments & More -->
                         <div class="col-md-6">
                             <div class="table-container">
-                                <h3 class="section-title">
-                                    Comments & More
-                                </h3>
-                                <table class="table" id="ListSosmed">
-
-
-                                </table>
-                            </div>
+                                <h3 class="section-title">Comments & More</h3>
+                                <div class="scrollable-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Agent</th>
+                                                <th>Chats</th>
+                                                <th>Avg Resp Time</th>
+                                                <th>Avg Conv Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body-sosmed">
+                                            <!-- Content will be injected dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>                            
                         </div>
 
                     </div>
@@ -223,30 +229,6 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- Vendor JS -->
-    <script src="js/vendors.min.js"></script>
-    <script src="js/pages/chat-popup.js"></script>
-    <script src="../assets/vendor_components/chartist-js-develop/chartist.js"></script>
-    <script src="../assets/vendor_components/chart.js-master/Chart.min.js"></script>
-    <script src="../assets/vendor_components/c3/d3.min.js"></script>
-    <script src="../assets/vendor_components/c3/c3.min.js"></script>
-    <script src="../assets/vendor_components/echarts/dist/echarts-en.min.js"></script>
-    <script src="../assets/vendor_components/raphael/raphael.min.js"></script>
-    <script src="../assets/vendor_components/morris.js/morris.min.js"></script>
-
-    <!-- Chat Bot Admin App -->
-    <!--<script src="js/pages/gauge.js"></script>-->
-
-    <script src="js/template.js"></script>
-    <script src="js/demo.js"></script>
-    <script src="js/pages/widget-chartist.js"></script>
-
-    <script src="js/pages/widget-charts2.js"></script>
-    <script src="js/pages/c3-data.js"></script>
-    <script src="js/pages/c3-bar-pie.js"></script>
-
-    <script src="js/pages/echart-pie-doghnut.js"></script>
-    <script src="js/pages/widget-morris-charts.js"></script>
     <script src="js/Agent_Performance.js"></script>
 
     <script>
