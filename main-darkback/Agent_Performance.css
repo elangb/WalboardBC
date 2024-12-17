@@ -81,6 +81,9 @@ body {
     /* Untuk menghilangkan border atas jika masih ada */
     border-top: none !important; /* Menonaktifkan garis atas */
     border-bottom: none !important; /* Menonaktifkan garis atas */
+    white-space: nowrap; /* Prevent line breaks in cells */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
 /* Align left only for the "Nama Agent" column */
@@ -109,7 +112,6 @@ body {
     min-height: 40px; /* Tinggi minimum untuk semua baris */
     vertical-align: middle; /* Teks selalu di tengah */
 }
-
 
 #AgentCall tbody tr {
     transition: transform 0.5s ease;
