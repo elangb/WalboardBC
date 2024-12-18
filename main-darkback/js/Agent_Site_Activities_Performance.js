@@ -16,24 +16,137 @@ function myFunction() {
 }
 
 function AutoCall() {
-  getDateTime();
-  getGreeting();
-  scrollAgent();
-  scrollAgentSoeta();
-  scrollAgenPasbar();
-  scrollMultichatTanjungPriuk();
-  scrollMultichat();
-  scrollMultichatPasarBaru();
-  ListAgentPasarBaru();
+  // scrollAgent();
+  // scrollAgentSoeta();
+  // scrollAgenPasbar();
+  // scrollMultichatTanjungPriuk();
+  // scrollMultichat();
+  // scrollMultichatPasarBaru();
+
+  ListAgentPasbar();
   ListAgentSoetta();
   ListAgentTanjungPriok();
   getDataEmail();
+//   getDataEmailPasbar();
   listMultiChatTanjungPriuk();
   listMultiChatPasarBaru();
-  listMultiChatSoetta();
+  listMultiChatSoeta();
+  getDateTime();
+  getGreeting();
 }
 
-function getStatusClass(status) {
+let scrollIntervalsEmail = {};
+let scrollPositionsEmail = {};
+const rowHeightEmail = 40; // Adjust row height if necessary
+const speedEmail = 50; // Scrolling speed in milliseconds
+
+async function getDataEmail(sideId, tableBodyId) {
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailAllSide";
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("Data API:", data);
+
+        
+        const sideData = data.filter(item => {
+            
+            return item.sideId && typeof item.sideId === 'String' && item.sideId === sideId();
+        });
+
+        console.log(`${sideId} Data:`, sideData);
+
+        populateTable(tableBodyId, sideData, 2);
+
+        if (sideData.length > 2) {
+            startAutoScroll(tableBodyId, sideId, sideData.length);
+        }
+    } catch (error) {
+        console.error("Error loading data:", error);
+    }
+}
+
+function populateTable(tableBodyId, data, minRows) {
+    const tableBody = document.getElementById(tableBodyId);
+    if (!tableBody) {
+        console.error(`Element with ID '${tableBodyId}' not found!`);
+        return; // Exit the function if the table body element is not found
+    }
+
+    let tableRows = "";
+
+    if (data.length === 0) {
+        console.warn(`No data found for table: ${tableBodyId}`);
+    }
+
+    // Populate the table with actual data
+    data.forEach(item => {
+        tableRows += `
+            <tr>
+                <td>${item.name || "-"}</td>
+                <td>${item.status || "-"}</td>
+                <td>${item.handleTime || "-"}</td>
+                <td>${item.loginTime || "-"}</td>
+            </tr>
+        `;
+    });
+
+    // Ensure at least `minRows` are displayed by adding empty rows
+    const missingRows = Math.max(minRows - data.length, 0);
+    for (let i = 0; i < missingRows; i++) {
+        tableRows += `
+            <tr class="empty-row">
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        `;
+    }
+
+    // Add table rows directly
+    tableBody.innerHTML = tableRows;
+
+    // Create duplicated rows for scrolling effect
+    let duplicatedRows = tableRows.repeat(30); // Duplicate rows for scrolling effect
+
+    // Apply duplicated rows for the scrolling effect
+    tableBody.innerHTML += duplicatedRows;
+}
+
+function startAutoScroll(tableBodyId, sideId, totalRows) {
+    if (scrollIntervalsEmail[sideId]) clearInterval(scrollIntervalsEmail[sideId]);
+
+    const tableBody = document.getElementById(tableBodyId);
+    scrollPositionsEmail[sideId] = 0;
+
+    const scrollFunction = () => {
+        scrollPositionsEmail[sideId] -= 1;
+        tableBody.style.transform = `translateY(${scrollPositionsEmail[sideId]}px)`;
+
+        // Reset scroll position if the end is reached
+        if (Math.abs(scrollPositionsEmail[sideId]) >= totalRows * rowHeightEmail) {
+            scrollPositionsEmail[sideId] = 0;
+        }
+    };
+
+    // Start scrolling only if there are enough rows for scrolling
+    if (totalRows > 2) {
+        scrollIntervalsEmail[sideId] = setInterval(scrollFunction, speedEmail);
+    }
+}
+
+function getStatusClass(calls) {
+  if (calls < 10) {
+    return "status-istirahat";
+  } else if (calls >= 10 && calls < 20) {
+    return "status-acd";
+  } else if (calls >= 20) {
+    return "status-available";
+  }
+
   const statusMap = {
     Available: "status-available",
     ACW: "status-acw",
@@ -44,365 +157,229 @@ function getStatusClass(status) {
     AUX: "status-istirahat",
     RING: "status-ringing",
   };
-  return statusMap[status] || "status-other";
+
+  return statusMap[calls] || "status-other";
 }
 
-async function getDataEmail() {
-  try {
-    const response = await fetch(
-      "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataEmailAllSide",
-      {
-        method: "GET",
-        headers: {
-          Accept: "text/plain",
-        },
-      }
-    );
+// Fungsi utama untuk memuat data
+let scrollInterval = null;
+let scrollPosition = 0;
+const rowHeight = 40; // Tinggi satu baris dalam px
+const speed = 50; // Kecepatan scroll dalam ms
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.text();
-    const emails = JSON.parse(data) || []; // Data email dari server
-    const minimumRows = 2; // Jumlah minimal baris di tabel
-    const tableRowsSoetta = [];
-    const tableRowsPasarBaru = [];
-
-    // Memisahkan data berdasarkan sideId dan membuat baris tabel
-    emails.forEach((items) => {
-      let row = "<tr>";
-      row += "<td>" + (items["name"] || "-") + "</td>";
-      row += "<td>" + (items["status"] || "-") + "</td>";
-      row += "<td>" + (items["handleTime"] || "-") + "</td>";
-      row += "<td>" + (items["loginTime"] || "-") + "</td>";
-      row += "</tr>";
-
-      if (items["sideId"] === "Soekarno Hatta") {
-        tableRowsSoetta.push(row);
-      } else if (items["sideId"] === "Pasar Baru") {
-        tableRowsPasarBaru.push(row);
-      }
-    });
-
-    // Tambahkan baris kosong jika kurang dari minimumRows
-    while (tableRowsSoetta.length < minimumRows) {
-      tableRowsSoetta.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    while (tableRowsPasarBaru.length < minimumRows) {
-      tableRowsPasarBaru.push(
-        '<tr class="empty-row">' +
-          "<td>-</td><td>-</td><td>-</td><td>-</td>" +
-          "</tr>"
-      );
-    }
-
-    // Fungsi untuk memperbarui tabel
-    const updateTable = (tableRows, selector) => {
-      let table = '<table class="table table-dark table-striped">';
-      table +=
-        "<thead><tr>" +
-        "<th>Nama Agent</th>" +
-        "<th>Status</th>" +
-        "<th>Now Handle</th>" +
-        "<th>Emails</th>" +
-        "</tr></thead><tbody>";
-      table += tableRows.join("");
-      table += "</tbody></table>";
-
-      // Tampilkan tabel di elemen yang sesuai
-      $(selector).html(table);
-    };
-
-    // Update tabel pertama kali
-    updateTable(tableRowsSoetta, "#listEmailSoetta");
-    updateTable(tableRowsPasarBaru, "#ListEmailPasarBaru");
-
-    // Interval untuk rolling data (jika diperlukan)
-    if (tableRowsSoetta.length > minimumRows) {
-      let startIndexSoetta = 0;
-      setInterval(() => {
-        startIndexSoetta = (startIndexSoetta + 1) % tableRowsSoetta.length;
-        const displayedRows = tableRowsSoetta
-          .slice(startIndexSoetta, startIndexSoetta + minimumRows)
-          .concat(
-            tableRowsSoetta.slice(
-              0,
-              Math.max(
-                0,
-                minimumRows - (tableRowsSoetta.length - startIndexSoetta)
-              )
-            )
-          );
-        updateTable(displayedRows, "#listEmailSoetta");
-      }, 2000); // Rolling setiap 2 detik
-    }
-
-    if (tableRowsPasarBaru.length > minimumRows) {
-      let startIndexPasarBaru = 0;
-      setInterval(() => {
-        startIndexPasarBaru =
-          (startIndexPasarBaru + 1) % tableRowsPasarBaru.length;
-        const displayedRows = tableRowsPasarBaru
-          .slice(startIndexPasarBaru, startIndexPasarBaru + minimumRows)
-          .concat(
-            tableRowsPasarBaru.slice(
-              0,
-              Math.max(
-                0,
-                minimumRows - (tableRowsPasarBaru.length - startIndexPasarBaru)
-              )
-            )
-          );
-        updateTable(displayedRows, "#ListEmailPasarBaru");
-      }, 2000); // Rolling setiap 2 detik
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    // Menampilkan pesan error kepada user
-    $("#listEmailSoetta").html(
-      '<div class="alert alert-danger">Failed to load data for Soekarno Hatta. Please try again later.</div>'
-    );
-    $("#ListEmailPasarBaru").html(
-      '<div class="alert alert-danger">Failed to load data for Pasar Baru. Please try again later.</div>'
-    );
-  }
-}
-
-let scrollIntervalAgent = null;
-let mAgent = 0;
-let nAgent = 550; // Sesuaikan dengan tinggi div
-const speedAgent = 50; // Kecepatan scroll
-
-function scrollAgent(rowCount) {
-  const div1 = document.getElementById("div1");
-  const div2 = document.getElementById("div2");
-
-  // Hentikan scroll jika row kurang dari atau sama dengan 5
-  if (rowCount <= 5) {
-    clearInterval(scrollIntervalAgent);
-    scrollIntervalAgent = null;
-    div1.style.top = "0px";
-    div2.style.top = "550px";
-    return;
-  }
-
-  if (!scrollIntervalAgent) {
-    scrollIntervalAgent = setInterval(() => {
-      if (div1 && div2) {
-        div1.style.top = mAgent + "px";
-        div2.style.top = nAgent + "px";
-        mAgent--;
-        nAgent--;
-
-        if (mAgent <= -550) {
-          mAgent = 550;
-        }
-
-        if (nAgent <= -550) {
-          nAgent = 550;
-        }
-      }
-    }, speedAgent);
-  }
-}
-
-function scrollAgenPasbar(rowCount) {
-  const div1 = document.getElementById("divPasbar1");
-  const div2 = document.getElementById("divPasbar2");
-
-  // Hentikan scroll jika row kurang dari atau sama dengan 5
-  if (rowCount <= 5) {
-    clearInterval(scrollIntervalAgent);
-    scrollIntervalAgent = null;
-    div1.style.top = "0px";
-    div2.style.top = "550px";
-    return;
-  }
-
-  if (!scrollIntervalAgent) {
-    scrollIntervalAgent = setInterval(() => {
-      if (div1 && div2) {
-        div1.style.top = mAgent + "px";
-        div2.style.top = nAgent + "px";
-        mAgent--;
-        nAgent--;
-
-        if (mAgent <= -550) {
-          mAgent = 550;
-        }
-
-        if (nAgent <= -550) {
-          nAgent = 550;
-        }
-      }
-    }, speedAgent);
-  }
-}
-
-function scrollAgentSoeta(rowCount) {
-  const div1 = document.getElementById("divSoeta1");
-  const div2 = document.getElementById("divSoeta2");
-
-  // Hentikan scroll jika row kurang dari atau sama dengan 5
-  if (rowCount <= 4) {
-    clearInterval(scrollIntervalAgent);
-    scrollIntervalAgent = null;
-    div1.style.top = "0px";
-    div2.style.top = "550px";
-    return;
-  }
-
-  if (!scrollIntervalAgent) {
-    scrollIntervalAgent = setInterval(() => {
-      if (div1 && div2) {
-        div1.style.top = mAgent + "px";
-        div2.style.top = nAgent + "px";
-        mAgent--;
-        nAgent--;
-
-        if (mAgent <= -550) {
-          mAgent = 550;
-        }
-
-        if (nAgent <= -550) {
-          nAgent = 550;
-        }
-      }
-    }, speedAgent);
-  }
-}
-
+// Fungsi utama untuk memuat data agent di Tanjung Priok
 async function ListAgentTanjungPriok() {
-  const apiUrl =
-    "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentPriuk";
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentPriuk";
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-    const data = await response.json();
+        const data = await response.json();
+        const tableBody = document.getElementById("table-body");
 
-    const div1 = document.getElementById("div1");
-    const div2 = document.getElementById("div2");
+        let tableRows = "";
 
-    let tableRows = "<tbody>";
-
-    data.forEach((agent, index) => {
-      let row = `
+        // Buat baris berdasarkan data
+        data.forEach((agent) => {
+            let row = `
                 <tr>
-                    <td style="min-width: 150px; max-width: 150px;">${
-                      agent.agentName || "-"
-                    }</td>
+                    <td style="min-width: 80px;">${agent.agentName || "-"}</td>
                     <td>${agent.extn || "-"}</td>
                     <td>
-                        <span class="badge ${getStatusClass(agent.state)}">${
-        agent.state || "-"
-      }</span>
+                        <span class="badge ${getStatusClass(agent.state)}">
+                            ${agent.state || "-"}</span>
                     </td>
                     <td>${agent.calls || "0"}</td>
                 </tr>
             `;
-      tableRows += row;
-    });
+            tableRows += row;
+        });
 
-    // Tambahkan baris kosong jika jumlah row kurang dari 5
-    const missingRows = 5 - data.length;
-    if (missingRows > 0) {
-      for (let i = 0; i < missingRows; i++) {
-        tableRows += `
-                    <tr>
-                        <td style="min-width: 150px; max-width: 150px;">-</td>
+        // Tambahkan baris kosong jika kurang dari 4 baris
+        const missingRows = 4 - data.length;
+        if (missingRows > 0) {
+            for (let i = 0; i < missingRows; i++) {
+                tableRows += `
+                    <tr class="empty-row">
+                        <td>-</td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
                     </tr>
                 `;
-      }
+            }
+        }
+
+        // Masukkan baris ke tabel
+        tableBody.innerHTML = tableRows;
+
+        // Aktifkan atau hentikan scrolling berdasarkan jumlah baris
+        const rowCount = Math.max(data.length, 4); // Minimal 4 baris
+        if (rowCount > 4) {
+            startAutoScroll(rowCount);
+        } else {
+            stopAutoScroll();
+        }
+    } catch (error) {
+        console.error("Error loading data: ", error);
+    }
+}
+
+// Fungsi untuk memulai auto-scroll
+function startAutoScroll(rowCount) {
+    const tableBody = document.getElementById("table-body");
+
+    if (rowCount <= 4) {
+        stopAutoScroll();
+        return;
     }
 
-    tableRows += "</tbody>";
+    if (!scrollInterval) {
+        scrollInterval = setInterval(() => {
+            scrollPosition -= 1; // Geser scroll ke atas 1px
+            tableBody.style.transform = `translateY(${scrollPosition}px)`;
 
-    // Set the same content for div1 and div2 for seamless scroll
-    div1.querySelector("table").innerHTML = tableRows;
-    div2.querySelector("table").innerHTML = tableRows;
-
-    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
-    const rowCount = Math.max(data.length, 5); // Minimal 5 row
-    scrollAgent(rowCount);
-  } catch (error) {
-    console.error("Error loading data: ", error);
-  }
+            // Reset posisi ketika sudah mencapai akhir
+            if (Math.abs(scrollPosition) >= rowCount * rowHeight) {
+                scrollPosition = 0; // Kembalikan ke posisi awal
+            }
+        }, speed);
+    }
 }
+
+// Fungsi untuk menghentikan auto-scroll
+function stopAutoScroll() {
+    const tableBody = document.getElementById("table-body");
+    clearInterval(scrollInterval);
+    scrollInterval = null;
+    scrollPosition = 0; // Reset posisi scroll
+    tableBody.style.transform = "translateY(0px)"; // Reset posisi ke atas
+}
+
+// Fungsi untuk menentukan kelas status
+function getStatusClass(status) {
+    const statusMap = {
+        'Available': 'status-available',
+        'AVAIL': 'status-available',
+        'ACW': 'status-acw',
+        'ACDIN': 'status-acd',
+        'Istirahat': 'status-istirahat',
+        'Toilet': 'status-istirahat',
+        'Makan': 'status-istirahat',
+        'AUX': 'status-istirahat',
+        'RING': 'status-ringing'
+    };
+    return statusMap[status] || 'status-other';
+}
+
+
+let scrollIntervalSoeta = null;
+let scrollPositionSoeta = 0;
+const rowHeightSoeta = 40; // Tinggi satu baris dalam px
+const scrollSpeedSoeta = 50; // Kecepatan scroll dalam ms
 
 async function ListAgentSoetta() {
-  const apiUrl =
-    "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentSoetta";
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentSoetta";
 
-    const data = await response.json();
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-    const div1 = document.getElementById("divSoeta1");
-    const div2 = document.getElementById("divSoeta2");
+        const data = await response.json();
+        const tableBody = document.getElementById("table-body-soeta");
 
-    let tableRows = "<tbody>";
+        // Render data dari API
+        let tableRows = data.map(agent => `
+            <tr>
+                <td style="min-width: 80px;">${agent.agentName || "-"}</td>
+                <td>${agent.extn || "-"}</td>
+                <td>
+                    <span class="badge ${getStatusClassSoeta(agent.state)}">
+                        ${agent.state || "-"}
+                    </span>
+                </td>
+                <td>${agent.calls || "0"}</td>
+            </tr>
+        `).join("");
 
-    data.forEach((agent, index) => {
-      let row = `
-                <tr>
-                    <td style="min-width: 150px; max-width: 150px;">${
-                      agent.agentName || "-"
-                    }</td>
-                    <td>${agent.extn || "-"}</td>
-                    <td>
-                        <span class="badge ${getStatusClass(agent.state)}">${
-        agent.state || "-"
-      }</span>
-                    </td>
-                    <td>${agent.calls || "0"}</td>
+        // Tambahkan baris kosong jika kurang dari 2 baris
+        const totalRows = Math.max(data.length, 2); // Minimal 2 baris
+        const missingRows = Math.max(2 - data.length, 0);
+
+        if (missingRows > 0) {
+            tableRows += Array(missingRows).fill(`
+                <tr class="empty-row">
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
-            `;
-      tableRows += row;
-    });
+            `).join("");
+        }
 
-    // Tambahkan baris kosong jika jumlah row kurang dari 5
-    const missingRows = 4 - data.length;
-    if (missingRows > 0) {
-      for (let i = 0; i < missingRows; i++) {
-        tableRows += `
-                    <tr>
-                        <td style="min-width: 150px; max-width: 150px;">-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                `;
-      }
+        tableBody.innerHTML = tableRows;
+
+        // Aktifkan scrolling jika data lebih dari 2 baris
+        if (totalRows > 2) {
+            startAutoScrollSoeta(totalRows);
+        } else {
+            stopAutoScrollSoeta();
+        }
+    } catch (error) {
+        console.error("Error loading data: ", error);
     }
-
-    tableRows += "</tbody>";
-
-    // Set the same content for div1 and div2 for seamless scroll
-    divSoeta1.querySelector("table").innerHTML = tableRows;
-    divSoeta2.querySelector("table").innerHTML = tableRows;
-
-    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
-    const rowCount = Math.max(data.length, 4); // Minimal 5 row
-    scrollAgentSoeta(rowCount);
-  } catch (error) {
-    console.error("Error loading data: ", error);
-  }
 }
+
+// Fungsi untuk memulai auto-scroll
+function startAutoScrollSoeta(rowCount) {
+    const tableBody = document.getElementById("table-body-soeta");
+
+    // Hitung tinggi tabel total
+    const totalHeight = rowCount * rowHeightSoeta;
+
+    // Mulai auto-scrolling
+    if (!scrollIntervalSoeta) {
+        scrollIntervalSoeta = setInterval(() => {
+            scrollPositionSoeta -= 1; // Geser scroll ke atas 1px
+            tableBody.style.transform = `translateY(${scrollPositionSoeta}px)`;
+
+            // Reset posisi scroll jika sudah mencapai akhir
+            if (Math.abs(scrollPositionSoeta) >= totalHeight) {
+                scrollPositionSoeta = 0; // Kembalikan ke posisi awal
+            }
+        }, scrollSpeedSoeta);
+    }
+}
+
+// Fungsi untuk menghentikan auto-scroll
+function stopAutoScrollSoeta() {
+    const tableBody = document.getElementById("table-body-soeta");
+    clearInterval(scrollIntervalSoeta);
+    scrollIntervalSoeta = null;
+    scrollPositionSoeta = 0; // Reset posisi scroll
+    tableBody.style.transform = "translateY(0px)"; // Reset posisi scroll ke atas
+}
+
+// Fungsi tambahan untuk status badge
+function getStatusClassSoeta(state) {
+    const statusMap = {
+        'Available': 'status-available',
+        'AVAIL': 'status-available',
+        'ACW': 'status-acw',
+        'ACDIN': 'status-acd',
+        'Istirahat': 'status-istirahat',
+        'Toilet': 'status-istirahat',
+        'Makan': 'status-istirahat',
+        'AUX': 'status-istirahat',
+        'RING': 'status-ringing'
+    };
+    return statusMap[state] || 'status-other';
+}
+
 
 function formatDuration(timeInSeconds) {
   // Memastikan timeInSeconds adalah angka yang valid
@@ -420,68 +397,111 @@ function formatDuration(timeInSeconds) {
     .padStart(2, "0")}`;
 }
 
-async function ListAgentPasarBaru() {
-  const apiUrl =
-    "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentPasarBaru";
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+let scrollIntervalPasbar = null;
+let scrollPositionPasbar = 0;
+const rowHeightPasbar = 40; // Tinggi satu baris dalam px
+const scrollSpeedPasbar = 50; // Kecepatan scroll dalam ms
 
-    const data = await response.json();
+async function ListAgentPasbar() {
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Voip/GetDataAgentPasarBaru";
 
-    const div1 = document.getElementById("divPasbar1");
-    const div2 = document.getElementById("divPasbar2");
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-    let tableRows = "<tbody>";
+        const data = await response.json();
+        const tableBody = document.getElementById("table-body-pasbar");
 
-    data.forEach((agent, index) => {
-      let row = `
-                <tr>
-                    <td style="min-width: 150px; max-width: 150px;">${
-                      agent.agentName || "-"
-                    }</td>
-                    <td>${agent.extn || "-"}</td>
-                    <td>
-                        <span class="badge ${getStatusClass(agent.state)}">${
-        agent.state || "-"
-      }</span>
-                    </td>
-                    <td>${agent.calls || "0"}</td>
+        // Render data dari API
+        let tableRows = data.map(agent => `
+            <tr>
+                <td style="min-width: 80px;">${agent.agentName || "-"}</td>
+                <td>${agent.extn || "-"}</td>
+                <td>
+                    <span class="badge ${getStatusClassPasbar(agent.state)}">
+                        ${agent.state || "-"}
+                    </span>
+                </td>
+                <td>${agent.calls || "0"}</td>
+            </tr>
+        `).join("");
+
+        // Tambahkan baris kosong jika kurang dari 2 baris
+        const missingRows = Math.max(2 - data.length, 0);
+        if (missingRows > 0) {
+            tableRows += Array(missingRows).fill(`
+                <tr class="empty-row">
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
-            `;
-      tableRows += row;
-    });
+            `).join("");
+        }
 
-    // Tambahkan baris kosong jika jumlah row kurang dari 5
-    const missingRows = 5 - data.length;
-    if (missingRows > 0) {
-      for (let i = 0; i < missingRows; i++) {
-        tableRows += `
-                    <tr>
-                        <td style="min-width: 150px; max-width: 150px;">-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                `;
-      }
+        tableBody.innerHTML = tableRows;
+
+        // Aktifkan scrolling jika data lebih dari 2 baris
+        if (data.length > 2) {
+            startAutoScrollPasbar(data.length);
+        } else {
+            stopAutoScrollPasbar();
+        }
+
+    } catch (error) {
+        console.error("Error loading data: ", error);
     }
-
-    tableRows += "</tbody>";
-
-    // Set the same content for div1 and div2 for seamless scroll
-    divPasbar1.querySelector("table").innerHTML = tableRows;
-    divPasbar2.querySelector("table").innerHTML = tableRows;
-
-    // Hitung jumlah row dan aktifkan/disable scrolling berdasarkan jumlah row
-    const rowCount = Math.max(data.length, 5); // Minimal 5 row
-    scrollAgenPasbar(rowCount);
-  } catch (error) {
-    console.error("Error loading data: ", error);
-  }
 }
+
+// Fungsi untuk memulai auto-scroll
+function startAutoScrollPasbar(rowCount) {
+    const tableBody = document.getElementById("table-body-pasbar");
+
+    // Hitung tinggi total berdasarkan jumlah baris
+    const totalHeight = rowCount * rowHeightPasbar;
+
+    // Mulai auto-scrolling
+    if (!scrollIntervalPasbar) {
+        scrollIntervalPasbar = setInterval(() => {
+            scrollPositionPasbar -= 1; // Scroll ke atas 1px
+            tableBody.style.transform = `translateY(${scrollPositionPasbar}px)`;
+
+            // Reset posisi scroll jika sudah mencapai akhir
+            if (Math.abs(scrollPositionPasbar) >= totalHeight - (2 * rowHeightPasbar)) {
+                scrollPositionPasbar = 0; // Kembali ke awal
+            }
+        }, scrollSpeedPasbar);
+    }
+}
+
+// Fungsi untuk menghentikan auto-scroll
+function stopAutoScrollPasbar() {
+    const tableBody = document.getElementById("table-body-pasbar");
+    clearInterval(scrollIntervalPasbar);
+    scrollIntervalPasbar = null;
+    scrollPositionPasbar = 0; // Reset posisi scroll
+    tableBody.style.transform = "translateY(0px)"; // Kembali ke posisi awal
+}
+
+// Fungsi untuk menentukan kelas status
+function getStatusClassPasbar(status) {
+    const statusMap = {
+        'Available': 'status-available',
+        'AVAIL': 'status-available',
+        'ACW': 'status-acw',
+        'ACDIN': 'status-acd',
+        'Istirahat': 'status-istirahat',
+        'Toilet': 'status-istirahat',
+        'Makan': 'status-istirahat',
+        'AUX': 'status-istirahat',
+        'RING': 'status-ringing'
+    };
+    return statusMap[status] || 'status-other';
+}
+
+
 function formatDurationNew(time) {
   let hours = 0;
   let minutes = 0;
@@ -532,66 +552,27 @@ function formatDuration(timeInSeconds) {
     .padStart(2, "0")}`;
 }
 
-let mMultichatTanjungPriuk = 650; // Initial scroll position for divMultichatTanjungPriuk1
-let nMultichatTanjungPriuk = 650; // Initial scroll position for divMultichatTanjungPriuk2
-let speedMultichatTanjungPriuk = 30; // Scroll speed (adjust as needed)
-let scrollIntervalMultichatTanjungPriuk = null;
-
-function scrollMultichatTanjungPriuk(rowCount) {
-    const div1 = document.getElementById("divMultichatTanjungPriuk1");
-    const div2 = document.getElementById("divMultichatTanjungPriuk2");
-
-    // Stop scrolling if rows <= 5
-    if (rowCount <= 5) {
-        clearInterval(scrollIntervalMultichatTanjungPriuk);
-        scrollIntervalMultichatTanjungPriuk = null;
-        div1.style.top = "0px";
-        div2.style.top = "650px";
-        return;
-    }
-
-    if (!scrollIntervalMultichatTanjungPriuk) {
-        scrollIntervalMultichatTanjungPriuk = setInterval(() => {
-            if (div1 && div2) {
-                div1.style.top = mMultichatTanjungPriuk + "px";
-                div2.style.top = nMultichatTanjungPriuk + "px";
-                mMultichatTanjungPriuk--;
-                nMultichatTanjungPriuk--;
-
-                // Reset scroll position if it reaches the end
-                if (mMultichatTanjungPriuk <= -650) {
-                    mMultichatTanjungPriuk = 650;
-                }
-
-                if (nMultichatTanjungPriuk <= -650) {
-                    nMultichatTanjungPriuk = 650;
-                }
-            }
-        }, speedMultichatTanjungPriuk);
-    }
-}
+let scrollIntervalMultichatTanjungPriok = null;
+let scrollPositionMultichat = 0;
+const rowHeightMultichat = 40; // Tinggi satu baris dalam px
+const speedMultichat = 50; // Kecepatan scroll dalam ms
 
 async function listMultiChatTanjungPriuk() {
-    try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk", {
-            method: "GET",
-            headers: {
-                Accept: "text/plain",
-            },
-        });
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPriuk"; // Ganti dengan URL API Anda
 
+    try {
+        const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.text();
-        const agents = JSON.parse(data) || [];
-        const div1 = document.getElementById("divMultichatTanjungPriuk1");
-        const div2 = document.getElementById("divMultichatTanjungPriuk2");
-        let tableRows = "<tbody>";
+        const data = await response.json(); // Asumsikan respons berupa JSON
+        const tableBody = document.getElementById("multichat-body");
 
-        // Loop through agents and generate table rows
-        agents.forEach((item) => {
+        let tableRows = "";
+
+        // Buat baris berdasarkan data
+        data.forEach((item) => {
             let row = `
                 <tr>
                     <td>${item.agent || "-"}</td>
@@ -603,94 +584,82 @@ async function listMultiChatTanjungPriuk() {
             tableRows += row;
         });
 
-        // Fill missing rows if less than 5
-        const missingRows = 5 - agents.length;
-        for (let i = 0; i < missingRows; i++) {
-            tableRows += `
-                <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            `;
+        // Tambahkan baris kosong jika data kurang dari 4
+        const missingRows = 4 - data.length;
+        if (missingRows > 0) {
+            for (let i = 0; i < missingRows; i++) {
+                tableRows += `
+                    <tr class="empty-row">
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            }
         }
 
-        tableRows += "</tbody>";
+        // Tampilkan baris pada tabel
+        tableBody.innerHTML = tableRows;
 
-        // Inject content into both divs for seamless scrolling
-        div1.querySelector("table").innerHTML = tableRows;
-        div2.querySelector("table").innerHTML = tableRows;
-
-        const rowCount = Math.max(agents.length, 5);
-        scrollMultichatTanjungPriuk(rowCount);
-
+        // Aktifkan scrolling jika data lebih dari 4
+        if (data.length > 4) {
+            startAutoScrollMultichat(data.length);
+        } else {
+            stopAutoScrollMultichat(); // Matikan scrolling jika data <= 4
+        }
     } catch (error) {
         console.error("Error loading data: ", error);
     }
 }
 
+// Fungsi untuk memulai auto-scroll
+function startAutoScrollMultichat(rowCount) {
+    const tableBody = document.getElementById("multichat-body");
 
-let mMultichatSoeta = 550; // Initial scroll position for divMultichatSoeta1
-let nMultichatSoeta = 550; // Initial scroll position for divMultichatSoeta2
-let speedMultichatSoeta = 30; // Scroll speed (adjust as needed)
-let scrollIntervalMultichat = null;
+    if (!scrollIntervalMultichatTanjungPriok) {
+        scrollIntervalMultichatTanjungPriok = setInterval(() => {
+            scrollPositionMultichat -= 1; // Geser scroll ke atas 1px
+            tableBody.style.transform = `translateY(${scrollPositionMultichat}px)`;
 
-function scrollMultichat(rowCount) {
-  const div1 = document.getElementById("divMultichatSoeta1");
-  const div2 = document.getElementById("divMultichatSoeta2");
-
-  // Stop scrolling if rows <= 5
-  if (rowCount <= 2) {
-      clearInterval(scrollIntervalMultichat);
-      scrollIntervalMultichat = null;
-      div1.style.top = "0px";
-      div2.style.top = "550px";
-      return;
-  }
-
-  if (!scrollIntervalMultichat) {
-      scrollIntervalMultichat = setInterval(() => {
-          if (div1 && div2) {
-              div1.style.top = mMultichatSoeta + "px";  // Use mMultichatSoeta
-              div2.style.top = nMultichatSoeta + "px";  // Use nMultichatSoeta
-              mMultichatSoeta--;
-              nMultichatSoeta--;
-
-              // Reset scroll position if it reaches the end
-              if (mMultichatSoeta <= -550) {
-                  mMultichatSoeta = 550;
-              }
-
-              if (nMultichatSoeta <= -550) {
-                  nMultichatSoeta = 550;
-              }
-          }
-      }, speedMultichatSoeta);
-  }
+            // Reset posisi scroll jika mencapai akhir
+            if (Math.abs(scrollPositionMultichat) >= rowCount * rowHeightMultichat) {
+                scrollPositionMultichat = 0; // Kembali ke awal
+            }
+        }, speedMultichat);
+    }
 }
 
-async function listMultiChatSoetta() {
-    try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta", {
-            method: "GET",
-            headers: {
-                Accept: "text/plain",
-            },
-        });
+// Fungsi untuk menghentikan auto-scroll
+function stopAutoScrollMultichat() {
+    const tableBody = document.getElementById("multichat-body");
+    clearInterval(scrollIntervalMultichatTanjungPriok);
+    scrollIntervalMultichatTanjungPriok = null;
+    scrollPositionMultichat = 0; // Reset posisi scroll
+    tableBody.style.transform = "translateY(0px)"; // Reset posisi ke atas
+}
 
+let scrollIntervalMultichatSoeta = null;
+let scrollPositionMultichatSoeta = 0;
+const rowHeightMultichatSoeta = 40; // Tinggi satu baris dalam px
+const speedMultichatSoeta = 50; // Kecepatan scroll dalam ms
+
+async function listMultiChatSoeta() {
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivitySoetta";
+
+    try {
+        const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.text();
-        const agents = JSON.parse(data) || [];
-        const div1 = document.getElementById("divMultichatSoeta1");
-        const div2 = document.getElementById("divMultichatSoeta2");
-        let tableRows = "<tbody>";
+        const data = await response.json(); // Asumsikan respons berupa JSON
+        const tableBody = document.getElementById("multichat-soeta-body");
 
-        // Loop through agents and generate table rows
-        agents.forEach((item) => {
+        let tableRows = "";
+
+        // Buat baris berdasarkan data
+        data.forEach((item) => {
             let row = `
                 <tr>
                     <td>${item.agent || "-"}</td>
@@ -702,93 +671,82 @@ async function listMultiChatSoetta() {
             tableRows += row;
         });
 
-        // Fill missing rows if less than 5
-        const missingRows = 2 - agents.length;
-        for (let i = 0; i < missingRows; i++) {
-            tableRows += `
-                <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            `;
+        // Tambahkan baris kosong jika data kurang dari 2
+        const missingRows = 2 - data.length;
+        if (missingRows > 0) {
+            for (let i = 0; i < missingRows; i++) {
+                tableRows += `
+                    <tr class="empty-row">
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            }
         }
 
-        tableRows += "</tbody>";
+        // Tampilkan baris pada tabel
+        tableBody.innerHTML = tableRows;
 
-        // Inject content into both divs for seamless scrolling
-        div1.querySelector("table").innerHTML = tableRows;
-        div2.querySelector("table").innerHTML = tableRows;
-
-        const rowCount = Math.max(agents.length, 2);
-        scrollMultichat(rowCount);
-
+        // Aktifkan scrolling jika data lebih dari 2
+        if (data.length > 2) {
+            startAutoScrollMultichatSoeta(data.length);
+        } else {
+            stopAutoScrollMultichatSoeta(); // Matikan scrolling jika data <= 2
+        }
     } catch (error) {
         console.error("Error loading data: ", error);
     }
 }
 
-let mMultichatPasarBaru = 550; // Initial scroll position for divMultichatPasarBaru1
-let nMultichatPasarBaru = 550; // Initial scroll position for divMultichatPasarBaru2
-let speedMultichatPasarBaru = 30; // Scroll speed (adjust as needed)
+// Fungsi untuk memulai auto-scroll
+function startAutoScrollMultichatSoeta(rowCount) {
+    const tableBody = document.getElementById("multichat-soeta-body");
+
+    if (!scrollIntervalMultichatSoeta) {
+        scrollIntervalMultichatSoeta = setInterval(() => {
+            scrollPositionMultichatSoeta -= 1; // Geser scroll ke atas 1px
+            tableBody.style.transform = `translateY(${scrollPositionMultichatSoeta}px)`;
+
+            // Reset posisi scroll jika mencapai akhir
+            if (Math.abs(scrollPositionMultichatSoeta) >= rowCount * rowHeightMultichatSoeta) {
+                scrollPositionMultichatSoeta = 0; // Kembali ke awal
+            }
+        }, speedMultichatSoeta);
+    }
+}
+
+// Fungsi untuk menghentikan auto-scroll
+function stopAutoScrollMultichatSoeta() {
+    const tableBody = document.getElementById("multichat-soeta-body");
+    clearInterval(scrollIntervalMultichatSoeta);
+    scrollIntervalMultichatSoeta = null;
+    scrollPositionMultichatSoeta = 0; // Reset posisi scroll
+    tableBody.style.transform = "translateY(0px)"; // Reset posisi ke atas
+}
+
 let scrollIntervalMultichatPasarBaru = null;
-
-function scrollMultichatPasarBaru(rowCount) {
-  const div1 = document.getElementById("divMultichatPasarBaru1");
-  const div2 = document.getElementById("divMultichatPasarBaru2");
-
-  // Stop scrolling if rows <= 5
-  if (rowCount <= 3) {
-      clearInterval(scrollIntervalMultichatPasarBaru);
-      scrollIntervalMultichatPasarBaru = null;
-      div1.style.top = "0px";
-      div2.style.top = "550px";
-      return;
-  }
-
-  if (!scrollIntervalMultichatPasarBaru) {
-      scrollIntervalMultichatPasarBaru = setInterval(() => {
-          if (div1 && div2) {
-              div1.style.top = mMultichatPasarBaru + "px";
-              div2.style.top = nMultichatPasarBaru + "px";
-              mMultichatPasarBaru--;
-              nMultichatPasarBaru--;
-
-              // Reset scroll position if it reaches the end
-              if (mMultichatPasarBaru <= -550) {
-                  mMultichatPasarBaru = 550;
-              }
-
-              if (nMultichatPasarBaru <= -550) {
-                  nMultichatPasarBaru = 550;
-              }
-          }
-      }, speedMultichatPasarBaru);
-  }
-}
+let scrollPositionMultichatPasarBaru = 0;
+const rowHeightMultichatPasarBaru = 40; // Tinggi satu baris dalam px
+const speedMultichatPasarBaru = 50; // Kecepatan scroll dalam ms
 
 async function listMultiChatPasarBaru() {
-    try {
-        const response = await fetch("http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru", {
-            method: "GET",
-            headers: {
-                Accept: "text/plain",
-            },
-        });
+    const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/DataFromDK/DataAgentActivityPasarBaru";
 
+    try {
+        const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.text();
-        const agents = JSON.parse(data) || [];
-        const div1 = document.getElementById("divMultichatPasarBaru1");
-        const div2 = document.getElementById("divMultichatPasarBaru2");
-        let tableRows = "<tbody>";
+        const data = await response.json(); // Asumsikan respons berupa JSON
+        const tableBody = document.getElementById("multichat-pasarbaru-body");
 
-        // Loop through agents and generate table rows
-        agents.forEach((item) => {
+        let tableRows = "";
+
+        // Buat baris berdasarkan data
+        data.forEach((item) => {
             let row = `
                 <tr>
                     <td>${item.agent || "-"}</td>
@@ -800,31 +758,59 @@ async function listMultiChatPasarBaru() {
             tableRows += row;
         });
 
-        // Fill missing rows if less than 5
-        const missingRows = 3 - agents.length;
-        for (let i = 0; i < missingRows; i++) {
-            tableRows += `
-                <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            `;
+        // Tambahkan baris kosong jika data kurang dari 2
+        const missingRows = 2 - data.length;
+        if (missingRows > 0) {
+            for (let i = 0; i < missingRows; i++) {
+                tableRows += `
+                    <tr class="empty-row">
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            }
         }
 
-        tableRows += "</tbody>";
+        // Tampilkan baris pada tabel
+        tableBody.innerHTML = tableRows;
 
-        // Inject content into both divs for seamless scrolling
-        div1.querySelector("table").innerHTML = tableRows;
-        div2.querySelector("table").innerHTML = tableRows;
-
-        const rowCount = Math.max(agents.length, 3);
-        scrollMultichatPasarBaru(rowCount);
-
+        // Aktifkan scrolling jika data lebih dari 2
+        if (data.length > 2) {
+            startAutoScrollMultichatPasarBaru(data.length);
+        } else {
+            stopAutoScrollMultichatPasarBaru(); // Matikan scrolling jika data <= 2
+        }
     } catch (error) {
         console.error("Error loading data: ", error);
     }
+}
+
+// Fungsi untuk memulai auto-scroll
+function startAutoScrollMultichatPasarBaru(rowCount) {
+    const tableBody = document.getElementById("multichat-pasarbaru-body");
+
+    if (!scrollIntervalMultichatPasarBaru) {
+        scrollIntervalMultichatPasarBaru = setInterval(() => {
+            scrollPositionMultichatPasarBaru -= 1; // Geser scroll ke atas 1px
+            tableBody.style.transform = `translateY(${scrollPositionMultichatPasarBaru}px)`;
+
+            // Reset posisi scroll jika mencapai akhir
+            if (Math.abs(scrollPositionMultichatPasarBaru) >= rowCount * rowHeightMultichatPasarBaru) {
+                scrollPositionMultichatPasarBaru = 0; // Kembali ke awal
+            }
+        }, speedMultichatPasarBaru);
+    }
+}
+
+// Fungsi untuk menghentikan auto-scroll
+function stopAutoScrollMultichatPasarBaru() {
+    const tableBody = document.getElementById("multichat-pasarbaru-body");
+    clearInterval(scrollIntervalMultichatPasarBaru);
+    scrollIntervalMultichatPasarBaru = null;
+    scrollPositionMultichatPasarBaru = 0; // Reset posisi scroll
+    tableBody.style.transform = "translateY(0px)"; // Reset posisi ke atas
 }
 
 

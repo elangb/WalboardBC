@@ -82,6 +82,18 @@ body {
     font-size: 28px;
 }
 
+.scrollable-table {
+    max-height: 320px; /* Sesuaikan tinggi kontainer */
+    overflow: hidden; /* Hilangkan scrollbar manual */
+    position: relative;
+}
+
+.scrollable-table-short {
+    max-height: 320px; /* Sesuaikan tinggi kontainer */
+    overflow: hidden; /* Hilangkan scrollbar manual */
+    position: relative;
+}
+
 .table-container {
     background-color: #1e2746;
     border-radius: 10px;
@@ -94,24 +106,36 @@ body {
 .table {
     color: #fff;
     width: 100%;
-    text-align: center;
-    /* Default: Center align all content */
-    border-collapse: collapse;
-    /* Pastikan border di-collapse */
+    text-align: center; /* Default: Center align all content */
+    border-collapse: collapse; /* Pastikan border di-collapse */
     font-size: 24px;
+    table-layout: fixed; /* Menghindari kolom meluas */
+	margin-bottom: 0 !important; /* Menimpa margin-bottom bawaan */
+    position: relative; /* Untuk animasi scrolling */
+}
+
+.table thead th {
+    position: sticky; /* Sticky header */
+    top: 0; /* Tetap berada di atas */
+    background-color: #1e2746; /* Sesuaikan warna background header */
+    color: #fff; /* Warna teks header */
+    z-index: 1; /* Pastikan di atas konten */
 }
 
 .table th,
 .table td {
-    border: none;
-    /* Menghilangkan semua border */
-    font-size: 16px;
+    border: none; /* Menghilangkan semua border */
+    font-size: 18px;
     /* Untuk menghilangkan border atas jika masih ada */
-    border-top: none !important;
-    /* Menonaktifkan garis atas */
-    border-bottom: none !important;
-    /* Menonaktifkan garis atas */
+    border-top: none !important; /* Menonaktifkan garis atas */
+    border-bottom: none !important; /* Menonaktifkan garis atas */
 }
+
+.table td {
+    white-space: nowrap; /* Prevent text from wrapping to a new line */
+    overflow: hidden;    /* Hide overflowed text */
+    text-overflow: ellipsis; /* Display ellipsis (...) when text overflows */
+  }
 
 /* Align left only for the "Nama Agent" column */
 .table td:first-child,
@@ -121,63 +145,23 @@ body {
 
 /* Alternate row colors */
 .table tbody tr:nth-child(odd) {
-    background-color: #050513;
-    /* Warna untuk baris ganjil */
+    background-color: #050513; /* Warna untuk baris ganjil */
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: #1e2746;
-    /* Warna untuk baris genap */
+    background-color: #1e2746; /* Warna untuk baris genap */
 }
 
 /* Pastikan tinggi baris konsisten */
 .table tbody tr.empty-row td {
-    height: 27px;
-    /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
-    line-height: 27px;
-    /* Pastikan teks berada di tengah */
+    height: 40px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
+    line-height: 40px; /* Pastikan teks berada di tengah */
 }
 
 /* Untuk semua baris, pastikan ada tinggi minimum */
 .table tbody tr td {
-    min-height: 36px;
-    /* Tinggi minimum untuk semua baris */
-    vertical-align: middle;
-    /* Teks selalu di tengah */
-}
-
-#containerxx {
-    position: relative;
-    overflow: hidden;
-    /* Hide the overflowing content */
-    height: 260px;
-    /* Set a fixed height for the container */
-}
-
-#containerxxCallSoeta, #containerxxCallPasbar {
-    position: relative;
-    overflow: hidden;
-    /* Hide the overflowing content */
-    height: 210px;
-    /* Set a fixed height for the container */
-}
-
-#containerxx-Soeta, #containerxx-PasarBaru {
-    position: relative;
-    overflow: hidden;
-    /* Hide the overflowing content */
-    height: 100px;
-    /* Set a fixed height for the container */
-}
-
-
-#div1, #div2, #divSoeta1, #divSoeta2, #divPasbar1, #divPasbar2, #div1-multichat, #div2-multichat, #div1-email, 
-#div2-email, #div1-sosmed, #div2-sosmed, #divMultichatTanjungPriuk1, #divMultichatTanjungPriuk2, #divMultichatSoeta1, 
-#divMultichatSoeta2, #divMultichatPasarBaru1, #divMultichatPasarBaru2, #divEmailSoetta1, #divEmailSoetta2, #divEmailPasarBaru1, #divEmailPasarBaru2 {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
+    min-height: 40px; /* Tinggi minimum untuk semua baris */
+    vertical-align: middle; /* Teks selalu di tengah */
 }
 
 
@@ -208,52 +192,32 @@ body {
     opacity: 1;
 }
 
-.badge-green, .badge-orange, .badge-pink, .badge-blue {
-    background-color: #059d55;
-    color: #fff;
-    padding: 5px 10px;
-    /* Padding atas-bawah 5px, kanan-kiri 20px */
-    border-radius: 5px;
-    min-width: 70px;
-    /* Set lebar minimal */
-    display: inline-block;
-    /* Agar badge mengikuti konten */
-    text-align: center;
-    /* Untuk membuat teks berada di tengah */
+#containerxx {
+    position: relative;
+    overflow: hidden; /* Hide the overflowing content */
+    height: 320px;    /* Set a fixed height for the container */
 }
 
-.badge-green {
-    background-color: #059d55;
+#div1, #div2, #div1-multichat, #div2-multichat, #div1-email, #div2-email, #div1-sosmed, #div2-sosmed {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
-.badge-orange {
-    background-color: #dea039;
-}
 
-.badge-pink {
-    background-color: #e65055;
-}
-
-.badge-blue {
-    background-color: #00a0e9;
-}
-
-.channel-icons i {
-    margin-right: 5px;
-}
-
-.status-available, .status-acd, .status-acw, .status-istirahat,
+.status-available, .status-acd, .status-acw, .status-istirahat, 
 .status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
     background-color: #059d55;
     color: #fff;
     border-radius: 5px;
-    padding: 5px 10px;
-    min-width: 100px;
-    /* Set lebar minimal */
-    display: inline-block;
-    /* Agar kotak mengikuti konten */
-    text-align: center;
-    /* Untuk membuat teks berada di tengah */
+    padding: 5px 10px; 
+    min-width: 100px; /* Minimum width to ensure uniformity */
+    width: 100px; /* Ensures all status elements have the same width */
+    height: 40px; /* Consistent height for all status elements */
+    display: inline-block; /* Keeps the status block inline */
+    text-align: center; /* Centers the text horizontally */
+    line-height: 30px; /* Centers the text vertically */
 }
 
 .status-available {

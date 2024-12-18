@@ -78,13 +78,13 @@ function getParameterByName(name, url = window.location.href) {
   
           // Gandakan data untuk scrolling seamless
           let duplicatedRows = "";
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < 30; i++) {
               duplicatedRows += tableRows; // Duplikasi tiga kali
           }
           tableBody.innerHTML = duplicatedRows;
   
           // Hitung jumlah baris total
-          const rowCount = Math.max(data.length, 5) * 3; // Total baris (termasuk duplikat)
+          const rowCount = Math.max(data.length, 5) * 30; // Total baris (termasuk duplikat)
   
           // Aktifkan auto scrolling hanya jika data lebih dari 5
           if (data.length > 5) {
@@ -193,13 +193,13 @@ function getParameterByName(name, url = window.location.href) {
   
           // Gandakan data untuk scrolling seamless
           let duplicatedRows = "";
-          for (let i = 0; i < 3; i++) {
+          for (let i = 0; i < 30; i++) {
               duplicatedRows += tableRows; // Duplikasi tiga kali
           }
           tableBody.innerHTML = duplicatedRows;
   
           // Hitung jumlah baris total
-          const rowCount = Math.max(data.length, 5) * 3; // Total baris (termasuk duplikat)
+          const rowCount = Math.max(data.length, 5) * 30; // Total baris (termasuk duplikat)
   
           // Aktifkan auto scrolling hanya jika data lebih dari 5
           if (data.length > 5) {
@@ -300,7 +300,7 @@ async function getDataEmail() {
       }
   
       let duplicatedRows = "";
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 30; i++) {
         duplicatedRows += tableRows;
       }
       tableBody.innerHTML = duplicatedRows;
@@ -415,7 +415,7 @@ function getStatusClass(calls) {
     
             // Gandakan data untuk seamless scroll
             let duplicatedRows = "";
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 30; i++) {
                 duplicatedRows += tableRows; // Duplikasi tiga kali
             }
             tableBody.innerHTML = duplicatedRows;
@@ -427,7 +427,7 @@ function getStatusClass(calls) {
             }
     
             // Hitung jumlah baris yang ditampilkan
-            const rowCount = Math.max(data.length, 5) * 3; // Total baris (termasuk duplikat)
+            const rowCount = Math.max(data.length, 5) * 30; // Total baris (termasuk duplikat)
     
             // Aktifkan auto scrolling hanya jika data lebih dari 5
             if (data.length > 5) {

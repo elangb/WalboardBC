@@ -262,7 +262,7 @@ async function barchart() {
 			endingShape: 'rounded'
 		  }
 		},
-		colors: ['#19884e', '#2596be', '#e64f54'], // green, blue, red for the bars
+		colors: ['#19884e', '#e64f54', '#2596be'], // Set the colors for Answered, Abandoned, and Resolved Calls
 		dataLabels: {
 		  enabled: false
 		},
@@ -305,8 +305,8 @@ async function barchart() {
 	} catch (error) {
 	  console.error("An error occurred:", error);
 	}
-  }
-  
+}
+
 
 function chartPie(avail,acd,acw,aux){
   // Retrieve data from local storage under the key 'user'

@@ -83,13 +83,13 @@ async function getListSosmed() {
 
         // Duplicate rows for seamless scrolling
         let duplicatedRows = "";
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 30; i++) {
             duplicatedRows += tableRows; // Duplicate rows for infinite scroll
         }
         tableBody.innerHTML = duplicatedRows;
 
         // Start auto-scrolling if data has more than 5 rows
-        const rowCountSosmed = Math.max(data.length, 5) * 3; // Total rows including duplicates
+        const rowCountSosmed = Math.max(data.length, 5) * 30; // Total rows including duplicates
         if (data.length > 5) {
             startAutoScrollSosmed(rowCountSosmed);
         }
@@ -178,7 +178,7 @@ async function getDataMultichat() {
 
         // Duplicate rows for seamless scrolling
         let duplicatedRows = "";
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 30; i++) {
             duplicatedRows += tableRows; // Duplicate rows for infinite scroll
         }
         tableBody.innerHTML = duplicatedRows;
@@ -190,7 +190,7 @@ async function getDataMultichat() {
         }
 
         // Calculate row count for seamless scrolling
-        const rowCountMultichat = Math.max(data.length, 5) * 3; // Total rows including duplicates
+        const rowCountMultichat = Math.max(data.length, 5) * 30; // Total rows including duplicates
 
         // Activate auto-scrolling if data has more than 5 rows
         if (data.length > 5) {
@@ -287,7 +287,7 @@ async function getDataEmail() {
 
     // Duplicate rows for seamless scrolling
     let duplicatedRows = "";
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 30; i++) {
       duplicatedRows += tableRows; // Duplicate rows three times for infinite scroll
     }
     tableBody.innerHTML = duplicatedRows;
@@ -299,7 +299,7 @@ async function getDataEmail() {
     }
 
     // Calculate row count for seamless scrolling
-    const rowCountEmail = Math.max(data.length, 5) * 3; // Total rows including duplicates
+    const rowCountEmail = Math.max(data.length, 5) * 30; // Total rows including duplicates
 
     // Activate auto-scrolling if data has more than 5 rows
     if (data.length > 5) {
@@ -452,7 +452,7 @@ async function ListAgent() {
 
     // Gandakan data untuk looping tanpa batas
     let duplicatedRows = "";
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 30; i++) {
       duplicatedRows += tableRows; // Duplikasi tiga kali untuk scroll seamless
     }
     tableBody.innerHTML = duplicatedRows;
@@ -464,7 +464,7 @@ async function ListAgent() {
     }
 
     // Hitung jumlah baris yang ditampilkan
-    const rowCount = Math.max(data.length, 5) * 3; // Total baris (termasuk duplikat)
+    const rowCount = Math.max(data.length, 5) * 30; // Total baris (termasuk duplikat)
 
     // Aktifkan auto scrolling hanya jika data lebih dari 5
     if (data.length > 5) {
