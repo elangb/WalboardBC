@@ -88,6 +88,12 @@ async function getListSosmed() {
         }
         tableBody.innerHTML = duplicatedRows;
 
+        // Get the last scroll position from localStorage
+        const lastScrollPositionSosmed = localStorage.getItem("scrollPositionSosmed");
+        if (lastScrollPositionSosmed) {
+            scrollPositionSosmed = parseInt(lastScrollPositionSosmed, 10); // Set scroll position to the last saved value
+        }
+
         // Start auto-scrolling if data has more than 5 rows
         const rowCountSosmed = Math.max(data.length, 5) * 30; // Total rows including duplicates
         if (data.length > 5) {
@@ -100,14 +106,6 @@ async function getListSosmed() {
 
 function startAutoScrollSosmed(rowCountSosmed) {
     const tableBodySosmed = document.getElementById("table-body-sosmed");
-
-    // Stop scrolling if row count is less than or equal to 5
-    if (rowCountSosmed <= 5) {
-        clearInterval(scrollIntervalSosmed);
-        scrollIntervalSosmed = null;
-        tableBodySosmed.style.transform = "translateY(0px)";
-        return;
-    }
 
     // Start auto-scrolling
     if (!scrollIntervalSosmed) {
@@ -125,6 +123,12 @@ function startAutoScrollSosmed(rowCountSosmed) {
         }, speedSosmed);
     }
 }
+
+
+let scrollIntervalMultichat = null;
+let scrollPositionMultichat = 0;
+const rowHeightMultichat = 40; // Adjust this based on your table row height
+const speedMultichat = 50; // Scroll speed
 
 async function getDataMultichat() {
     const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataPerformanceMultiChat";
@@ -204,14 +208,6 @@ async function getDataMultichat() {
 function startAutoScrollMultichat(rowCountMultichat) {
     const tableBodyMultichat = document.getElementById("table-body-multichat");
 
-    // Stop scrolling if row count is less than or equal to 5
-    if (rowCountMultichat <= 5) {
-        clearInterval(scrollIntervalMultichat);
-        scrollIntervalMultichat = null;
-        tableBodyMultichat.style.transform = "translateY(0px)";
-        return;
-    }
-
     // Start auto-scrolling
     if (!scrollIntervalMultichat) {
         scrollIntervalMultichat = setInterval(() => {
@@ -221,7 +217,7 @@ function startAutoScrollMultichat(rowCountMultichat) {
             // Save the scroll position to localStorage on each change
             localStorage.setItem("scrollPositionMultichat", scrollPositionMultichat);
 
-            // If scroll position exceeds the data's total length, reset it
+            // If scroll position exceeds the total length of data, reset it
             if (Math.abs(scrollPositionMultichat) >= rowCountMultichat * rowHeightMultichat) {
                 scrollPositionMultichat = 0; // Reset scroll to the top after the data is scrolled through
             }
@@ -260,7 +256,7 @@ async function getDataEmail() {
           ? (item.name.length > 15 ? item.name.substring(0, 15) + "..." : item.name)
           : "-";
 
-      tableRows += `
+      tableRows += ` 
         <tr>
           <td style="min-width: 200px; max-width: 200px;" title="${item.name || '-'}">${truncatedName}</td>
           <td>${emailBadge}</td>
@@ -288,7 +284,7 @@ async function getDataEmail() {
     // Duplicate rows for seamless scrolling
     let duplicatedRows = "";
     for (let i = 0; i < 30; i++) {
-      duplicatedRows += tableRows; // Duplicate rows three times for infinite scroll
+      duplicatedRows += tableRows; // Duplicate rows for infinite scroll
     }
     tableBody.innerHTML = duplicatedRows;
 
@@ -313,14 +309,6 @@ async function getDataEmail() {
 function startAutoScrollEmail(rowCountEmail) {
   const tableBodyEmail = document.getElementById("table-body-email");
 
-  // Stop scrolling if row count is less than or equal to 5
-  if (rowCountEmail <= 5) {
-    clearInterval(scrollIntervalEmail);
-    scrollIntervalEmail = null;
-    tableBodyEmail.style.transform = "translateY(0px)";
-    return;
-  }
-
   // Start auto-scrolling
   if (!scrollIntervalEmail) {
     scrollIntervalEmail = setInterval(() => {
@@ -330,13 +318,14 @@ function startAutoScrollEmail(rowCountEmail) {
       // Save the scroll position to localStorage on each change
       localStorage.setItem("scrollPositionEmail", scrollPositionEmail);
 
-      // If scroll position exceeds the data's total length, reset it
+      // If scroll position exceeds the total length of data, reset it
       if (Math.abs(scrollPositionEmail) >= rowCountEmail * rowHeightEmail) {
         scrollPositionEmail = 0; // Reset scroll to the top after the data is scrolled through
       }
     }, speedEmail);
   }
 }
+
 
 
 
@@ -471,6 +460,7 @@ async function ListAgent() {
       startAutoScroll(rowCount);
     } else {
       clearInterval(scrollInterval); // Pastikan scrolling dihentikan jika data kurang dari atau sama dengan 5
+      tableBody.scrollTop = 0; // Set posisi scroll ke awal
     }
 
   } catch (error) {
@@ -480,14 +470,6 @@ async function ListAgent() {
 
 function startAutoScroll(rowCount) {
   const tableBody = document.getElementById("table-body");
-
-  // Hentikan scrolling jika row kurang dari atau sama dengan 5
-  if (rowCount <= 5) {
-    clearInterval(scrollInterval);
-    scrollInterval = null;
-    tableBody.style.transform = "translateY(0px)";
-    return;
-  }
 
   // Mulai auto scrolling
   if (!scrollInterval) {

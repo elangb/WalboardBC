@@ -26,17 +26,48 @@ body {
     font-size: 24px;
 }
 
-.date-time-text {
-    font-size: 22px; /* Ukuran teks lebih besar */
-    margin: 10px 0; /* Margin atas dan bawah sama */
-    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
+.navbar-custom-menu .nav {
+    display: flex;
+    align-items: center; /* Sejajarkan elemen secara vertikal */
+    gap: 15px; /* Beri jarak antara hamburger dan waktu */
 }
+
+
+.date-time-text {
+    font-size: 22px; /* Ukuran teks */
+    color: goldenrod; /* Warna teks */
+    white-space: nowrap; /* Cegah teks terpotong ke bawah */
+}
+
+.hamburger-icon i {
+    font-size: 24px; /* Tetap sama */
+    color: goldenrod; /* Warna tetap sama */
+}
+
+.hamburger-icon {
+    cursor: pointer; /* Menambahkan kursor pointer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, color 0.3s ease; /* Animasi untuk transformasi dan warna */
+}
+
+.dropdown-menu {
+    margin-top: 8px; /* Agar dropdown tidak terlalu dekat dengan hamburger */
+    border: 1px solid #ccc; /* Mengubah border menjadi lebih tipis dan berwarna abu-abu */
+    border-radius: 4px; /* Untuk sudut yang lebih halus */
+}
+
+.dropdown-item {
+    background-color: #1e2746; /* Warna latar belakang */
+    color: #fff;
+}
+
 
 .section-title {
     color: orange;
-    margin-top: 20px;
-    margin-bottom: 10px;
     text-align: center;
+    font-size: 30px;
 }
 
 .table-container {

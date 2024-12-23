@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
 .header {
     background-color: #1e2746;
     display: flex;
@@ -186,6 +187,27 @@ body {
     text-align: center; /* Centers the text horizontally */
     line-height: 30px; /* Centers the text vertically */
 }
+
+/* .blink{ */
+		/* width:200px; */
+		/* height: 50px; */
+	    /* background-color: #e65055; */
+		/* padding: 15px;	 */
+		/* text-align: center; */
+		/* line-height: 50px; */
+	/* } */
+	/* span{ */
+		/* font-size: 25px; */
+		/* font-family: cursive; */
+		/* color: white; */
+		/* animation: blink 1s linear infinite; */
+	/* } */
+/* @keyframes blink{ */
+/* 0%{opacity: 0;} */
+/* 50%{opacity: .5;} */
+/* 100%{opacity: 1;} */
+/* } */
+
 
 .status-available {
     background-color: #059d55;
