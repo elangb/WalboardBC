@@ -32,70 +32,84 @@ const speedSosmed = 50; // Kecepatan scroll dalam ms
 
 async function getListSosmed() {
     const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/GetWbDataActivitiesSosmed";
+    const tableBody = document.getElementById("sosmed-body");
+
+    // Mapping channel ke nama file ikon
+    const gambarMap = {
+        10: "wa-whtie.png",
+        1: "fb-white.png",
+        99: "x-white.png",
+        11: "chat.png",
+        2: "ig-white.png",
+        7: "chat-white.png"
+    };
 
     try {
         const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
-    data.sort((a, b) => a.name.localeCompare(b.name));
-        const tableBody = document.getElementById("sosmed-body");
+
+        // Sort berdasarkan nama agent
+        data.sort((a, b) => (a.agent || "").localeCompare(b.agent || ""));
 
         let tableRows = "";
 
-        data.forEach((items) => {
+        data.forEach(item => {
+            const channelIcons = (() => {
+                const gambarHTML = [];
+                const channels = item.chat ? item.chat.split(",") : [];
+                channels.forEach(channel => {
+                    const trimmed = channel.trim();
+                    const imgSrc = gambarMap[trimmed];
+                    if (imgSrc) {
+                        gambarHTML.push(`<img src="../images/agentactivity/${imgSrc}" alt="Channel ${trimmed}" width="22px" style="margin-right: 5px;">`);
+                    }
+                });
+                return gambarHTML.join("");
+            })();
+
             tableRows += `
-            <tr>
-                <td style="min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                    ${items["name"] || "-"}
-                </td>
-                <td>
-                    <span class="${items["status"] === "Ready" ? "status-available" : "status-istirahat"}">
-                        ${items["status"] || "-"}
-                    </span>
-                </td>
-                <td>${items["nowHandle"] || "-"}</td>
-                <td>-</td>
-                <td>${items["longers"] || "-"}</td>
-            </tr>`;
+                <tr>
+                    <td style="min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        ${item.agent || "-"}
+                    </td>
+                    <td>
+                        <span class="${item.status === "Ready" ? "status-available" : "status-istirahat"}">
+                            ${item.status || "-"}
+                        </span>
+                    </td>
+                    <td>${item.nowHandle ?? "-"}</td>
+                    <td>${channelIcons || "-"}</td>
+                    <td>${item.longest || "-"}</td>
+                </tr>`;
         });
 
-        // Tambahkan baris kosong jika kurang dari 5
-        const missingRows = 5 - data.length;
-        if (missingRows > 0) {
-            for (let i = 0; i < missingRows; i++) {
-                tableRows += `
+        // Tambah baris kosong jika data kurang dari 5
+        const missingRows = Math.max(0, 5 - data.length);
+        for (let i = 0; i < missingRows; i++) {
+            tableRows += `
                 <tr class="empty-row">
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
                 </tr>`;
-            }
         }
 
-        // Gandakan data untuk scrolling seamless
-        let duplicatedRows = "";
-        for (let i = 0; i < 30; i++) {
-            duplicatedRows += tableRows; // Duplikasi tiga kali
-        }
+        // Duplikasi baris agar auto-scroll seamless
+        const duplicatedRows = tableRows.repeat(30);
         tableBody.innerHTML = duplicatedRows;
 
-        // Hitung jumlah baris total
-        const rowCount = Math.max(data.length, 5) * 30; // Total baris (termasuk duplikat)
+        const rowCount = Math.max(data.length, 5) * 30;
 
-        // Aktifkan auto scrolling hanya jika data lebih dari 5
         if (data.length > 5) {
             startAutoScrollSosmed(rowCount);
         } else {
-            clearInterval(scrollIntervalSosmed); // Pastikan scrolling dihentikan jika data kurang dari atau sama dengan 5
-      tableBody.scrollTop = 0; // Set posisi scroll ke awal
+            clearInterval(scrollIntervalSosmed);
+            scrollPositionSosmed = 0;
+            tableBody.style.transform = "translateY(0px)";
         }
+
     } catch (error) {
-        console.error("Error loading data: ", error);
+        console.error("Error loading data:", error);
     }
 }
 
@@ -180,7 +194,7 @@ async function ListMultichat() {
       
       const longestBadge = 
         menit > 15  
-        ? '<span class="status-istirahat">' + items.longest + '</span>'
+        ? '<span class="status-blink">' + items.longest + '</span>'
         : items.longest;
 
       
@@ -312,9 +326,15 @@ async function getDataEmail() {
 
       // Assuming 'item.longers' and other variables like 'statusBadge', 'item.name' etc., are defined elsewhere
 
+      // let hours = parseInt(timeParts[0], 10);
+      let minutesPart = parseInt(timeParts[1], 10);
+      let secondsPart = parseInt(timeParts[2], 10);
+
+      let totalSeconds = hours * 3600 + minutesPart * 60 + secondsPart;
+
       const longestBadge = 
-        hours > 4 
-        ? '<span class="status-istirahat">' + item.longers + '</span>'
+        totalSeconds > 14400 
+        ? '<span class="status-blink">' + item.longers + '</span>'
         : item.longers;
 
       tableRows += `
@@ -442,14 +462,13 @@ async function ListAgent() {
           // Apply color logic based on status and time
           if (agent.state === "AUX" || agent.state === "OTHER") {
               if (seconds > 300) { // More than 5 minutes
-                  rowClass = 'status-istirahat';
+                  rowClass = '.status-blink';
               }
           } else if (agent.state === "RING") {
               if (seconds > 10) { // More than 10 seconds
-                  rowClass = 'status-istirahat';
+                  rowClass = '.status-blink';
               }
           }
-      
       
       
             let row = `

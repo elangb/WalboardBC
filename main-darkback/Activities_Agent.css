@@ -175,7 +175,7 @@ body {
 
 
 .status-available, .status-acd, .status-acw, .status-istirahat, 
-.status-ringing, .status-other, .status-toilet, .status-makan, .longest-time {
+.status-ringing, .status-other, .status-toilet, .status-makan, .longest-time, .status-blink {
     background-color: #059d55;
     color: #fff;
     border-radius: 5px;
@@ -221,7 +221,7 @@ body {
     background-color: #dea039;
 }
 
-.status-istirahat, .status-toilet, .status-makan {
+.status-istirahat, .status-toilet, .status-makan, .status-blink {
     background-color: #e65055;
 }
 
@@ -236,3 +236,23 @@ body {
 .longest-time {
     background-color: #e65055;
 }
+
+
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .status-blink {
+    animation: blink 2s infinite;
+    /*Animasikedipdengandurasi1detik*/background-color: #e65055;
+    -webkit-animation: blink 2s infinite;
+}
+  
