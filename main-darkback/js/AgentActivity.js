@@ -38,7 +38,7 @@ async function getListSosmed() {
     const gambarMap = {
         10: "wa-whtie.png",
         1: "fb-white.png",
-        99: "x-white.png",
+        0: "x-white.png",
         11: "chat.png",
         2: "ig-white.png",
         7: "chat-white.png"
@@ -56,34 +56,40 @@ async function getListSosmed() {
         let tableRows = "";
 
         data.forEach(item => {
-            const channelIcons = (() => {
-                const gambarHTML = [];
-                const channels = item.chat ? item.chat.split(",") : [];
-                channels.forEach(channel => {
-                    const trimmed = channel.trim();
-                    const imgSrc = gambarMap[trimmed];
-                    if (imgSrc) {
-                        gambarHTML.push(`<img src="../images/agentactivity/${imgSrc}" alt="Channel ${trimmed}" width="22px" style="margin-right: 5px;">`);
-                    }
-                });
-                return gambarHTML.join("");
-            })();
-
-            tableRows += `
-                <tr>
-                    <td style="min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        ${item.agent || "-"}
-                    </td>
-                    <td>
-                        <span class="${item.status === "Ready" ? "status-available" : "status-istirahat"}">
-                            ${item.status || "-"}
-                        </span>
-                    </td>
-                    <td>${item.nowHandle ?? "-"}</td>
-                    <td>${channelIcons || "-"}</td>
-                    <td>${item.longest || "-"}</td>
-                </tr>`;
-        });
+           const channels = item.chat ? item.chat.split(",").map(c => c.trim()) : [];
+           const isOnlyZero = channels.length === 1 && channels[0] === "0"; // hanya 0
+               
+           // Generate ikon channel
+           const channelIcons = (() => {
+               const gambarHTML = [];
+               channels.forEach(channel => {
+                   const imgSrc = gambarMap[channel];
+                   if (imgSrc) {
+                       gambarHTML.push(`<img src="../images/agentactivity/${imgSrc}" alt="Channel ${channel}" width="22px" style="margin-right: 5px;">`);
+                   }
+               });
+               return gambarHTML.join("");
+           })();
+         
+           // Jika hanya "0", tampilkan '-' untuk handle dan longest
+           const nowHandleValue = isOnlyZero ? "-" : (item.nowHandle ?? "-");
+           const longestValue = isOnlyZero ? "-" : (item.longest ?? "-");
+         
+           tableRows += `
+               <tr>
+                   <td style="min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                       ${item.agent || "-"}
+                   </td>
+                   <td>
+                       <span class="${item.status === "Ready" ? "status-available" : "status-istirahat"}">
+                           ${item.status || "-"}
+                       </span>
+                   </td>
+                   <td>${nowHandleValue}</td>
+                   <td>${channelIcons || "-"}</td>
+                   <td>${longestValue}</td>
+               </tr>`;
+       });
 
         // Tambah baris kosong jika data kurang dari 5
         const missingRows = Math.max(0, 5 - data.length);
