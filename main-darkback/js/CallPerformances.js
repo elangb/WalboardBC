@@ -672,37 +672,40 @@ const pengaduan = data.Head.Pengaduan;
     });
 }
 
+ // Simpan instance chart secara global
+let chartStatusInstance = null;
 async function getDataStatus(avail, aux, acw, acd) {
-    // Data statis langsung di dalam kode
-    const statusData = [avail, aux, acw, acd]; // Data status: Available, AUX, ACW, ACD
-
-    // Membuat chart dengan data statis
-    var options = {
-        series: statusData, // Data points untuk chart
+    const statusData = [avail, aux, acw, acd];
+    // Hapus chart lama jika sudah ada
+    if (chartStatusInstance) {
+        chartStatusInstance.destroy();
+    }
+    const options = {
+        series: statusData,
         chart: {
             type: 'donut',
-            width: 500, // Ukuran chart
-            height: 300 // Tinggi chart
+            width: 500,
+            height: 300
         },
-        colors: ['#009946', '#e64f54', '#dea039', '#00a0e8'], // Warna untuk status
+        colors: ['#009946', '#e64f54', '#dea039', '#00a0e8'],
         stroke: {
-            show: true, // Menampilkan stroke
-            width: 0, // Mengatur stroke menjadi transparan
+            show: true,
+            width: 0,
             colors: ['transparent']
         },
-        labels: ['Available', 'AUX', 'ACW', 'ACD'], // Label chart
+        labels: ['Available', 'AUX', 'ACW', 'ACD'],
         legend: {
-            position: 'bottom', // Posisi legend
-            horizontalAlign: 'center', // Pusatkan legend
+            position: 'bottom',
+            horizontalAlign: 'center',
             itemMargin: {
-                horizontal: 5, // Margin antara item di legend
+                horizontal: 5,
                 vertical: 0
             }
         },
         dataLabels: {
             enabled: true,
             formatter: function (val, opts) {
-                return opts.w.config.series[opts.seriesIndex]; // Menampilkan nilai asli
+                return opts.w.config.series[opts.seriesIndex];
             },
             style: {
                 fontSize: '14px',
@@ -717,15 +720,14 @@ async function getDataStatus(avail, aux, acw, acd) {
                 },
                 legend: {
                     position: 'bottom',
-                    horizontalAlign: 'center' // Pusatkan legend
+                    horizontalAlign: 'center'
                 }
             }
         }]
     };
-
-    // Render chart dengan data yang didefinisikan secara statis
-    var chart = new ApexCharts(document.querySelector("#chart-agent-status"), options);
-    chart.render();
+    // Buat chart baru dan simpan ke variabel global
+    chartStatusInstance = new ApexCharts(document.querySelector("#chart-agent-status"), options);
+    chartStatusInstance.render();
 }
 
 // Memanggil fungsi untuk merender chart
