@@ -57,24 +57,27 @@ async function getListSosmed() {
                 : chats > 10
                     ? '<span class="badge badge-orange">' + chats + '</span>'
                     : '<span class="badge badge-pink">' + chats + '</span>';
+            
+            const chatx = parseInt(item.totalx) || 0;
+            const chatBadgeX = chats > 20
+                ? '<span class="badge badge-green">' + chatx + '</span>'
+                : chatx > 10
+                    ? '<span class="badge badge-orange">' + chatx + '</span>'
+                    : '<span class="badge badge-pink">' + chatx + '</span>';
 
             const truncatedName = item.name
                 ? (item.name.length > 15 ? item.name.substring(0, 15) + "..." : item.name)
                 : "-";
 
-            const frtFormatted = item.frt || "-";
-            const frtInSeconds = timeToSeconds(item.frt);
-            const frtDisplay = frtInSeconds > 90
-                ? `<span class="badge badge-pink">${frtFormatted}</span>`
-                : frtFormatted;
-
+            const frt = item.frt || "-";
             const aht = item.aht || "-";
 
             tableRows += `
                 <tr>
                     <td style="min-width: 200px; max-width: 200px;" title="${item.name || '-'}">${truncatedName}</td>
                     <td>${chatBadge}</td>
-                    <td>${frtDisplay}</td>
+                    <td>${chatBadgeX}</td>
+                    <td>${frt}</td>
                     <td>${aht}</td>
                 </tr>
             `;
@@ -87,6 +90,7 @@ async function getListSosmed() {
                 tableRows += `
                     <tr class="empty-row">
                         <td style="min-width: 200px; max-width: 200px;">-</td>
+                        <td>-</td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
