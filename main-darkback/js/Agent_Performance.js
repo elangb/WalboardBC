@@ -30,6 +30,12 @@ let scrollPositionSosmed = 0;
 const rowHeightSosmed = 40; // Adjust based on row height
 const speedSosmed = 50; // Scroll speed
 
+function timeToSeconds(time) {
+    if (!time || typeof time !== "string") return 0;
+    const parts = time.split(":").map(Number);
+    return (parts[0] * 3600) + (parts[1] * 60) + (parts[2] || 0);
+}
+
 async function getListSosmed() {
     const apiUrl = "http://10.216.206.10/apiDataBravoWb/api/Wallboad/PerformanceSosmed";
 
@@ -45,7 +51,7 @@ async function getListSosmed() {
         let tableRows = "";
 
         data.forEach((item) => {
-            const chats = parseInt(item.answer) || 0;
+            const chats = parseInt(item.total) || 0;
             const chatBadge = chats > 20
                 ? '<span class="badge badge-green">' + chats + '</span>'
                 : chats > 10
@@ -56,17 +62,25 @@ async function getListSosmed() {
                 ? (item.name.length > 15 ? item.name.substring(0, 15) + "..." : item.name)
                 : "-";
 
+            const frtFormatted = item.frt || "-";
+            const frtInSeconds = timeToSeconds(item.frt);
+            const frtDisplay = frtInSeconds > 90
+                ? `<span class="badge badge-pink">${frtFormatted}</span>`
+                : frtFormatted;
+
+            const aht = item.aht || "-";
+
             tableRows += `
                 <tr>
                     <td style="min-width: 200px; max-width: 200px;" title="${item.name || '-'}">${truncatedName}</td>
                     <td>${chatBadge}</td>
-                    <td>${item.frt || "-"}</td>
-                    <td>${item.aht || "-"}</td>
+                    <td>${frtDisplay}</td>
+                    <td>${aht}</td>
                 </tr>
             `;
         });
 
-        // Add empty rows if data length is less than 5
+        // Tambah baris kosong jika data kurang dari 5
         const missingRows = 5 - data.length;
         if (missingRows > 0) {
             for (let i = 0; i < missingRows; i++) {
@@ -81,24 +95,25 @@ async function getListSosmed() {
             }
         }
 
-        // Duplicate rows for seamless scrolling
+        // Duplikasi baris untuk auto-scroll
         let duplicatedRows = "";
         for (let i = 0; i < 30; i++) {
-            duplicatedRows += tableRows; // Duplicate rows for infinite scroll
+            duplicatedRows += tableRows;
         }
         tableBody.innerHTML = duplicatedRows;
 
-        // Get the last scroll position from localStorage
+        // Ambil posisi scroll terakhir
         const lastScrollPositionSosmed = localStorage.getItem("scrollPositionSosmed");
         if (lastScrollPositionSosmed) {
-            scrollPositionSosmed = parseInt(lastScrollPositionSosmed, 10); // Set scroll position to the last saved value
+            scrollPositionSosmed = parseInt(lastScrollPositionSosmed, 10);
         }
 
-        // Start auto-scrolling if data has more than 5 rows
-        const rowCountSosmed = Math.max(data.length, 5) * 30; // Total rows including duplicates
+        // Mulai auto-scroll jika data lebih dari 5
+        const rowCountSosmed = Math.max(data.length, 5) * 30;
         if (data.length > 5) {
             startAutoScrollSosmed(rowCountSosmed);
         }
+
     } catch (error) {
         console.error("Error loading data: ", error);
     }
