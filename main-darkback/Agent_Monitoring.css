@@ -76,7 +76,7 @@ body {
     width: 100%;
     text-align: center; /* Default: Center align all content */
     border-collapse: collapse; /* Pastikan border di-collapse */
-    font-size: 24px;
+    /* font-size: 24px; */
     table-layout: fixed; /* Menghindari kolom meluas */
 	margin-bottom: 0 !important; /* Menimpa margin-bottom bawaan */
     position: relative; /* Untuk animasi scrolling */
@@ -93,7 +93,7 @@ body {
 .table th,
 .table td {
     border: none; /* Menghilangkan semua border */
-    font-size: 18px;
+    font-size: 14px;
     /* Untuk menghilangkan border atas jika masih ada */
     border-top: none !important; /* Menonaktifkan garis atas */
     border-bottom: none !important; /* Menonaktifkan garis atas */
@@ -104,11 +104,41 @@ body {
     overflow: hidden;    /* Hide overflowed text */
     text-overflow: ellipsis; /* Display ellipsis (...) when text overflows */
   }
-
-/* Align left only for the "Nama Agent" column */
-.table td:first-child,
-.table th:first-child {
+/* Atur lebar per kolom */
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    width: 22%;
     text-align: left;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 10%;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 16%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    width: 14%;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+    width: 12%;
+}
+
+.table th:nth-child(6),
+.table td:nth-child(6) {
+    width: 16%;
+}
+
+.table th:nth-child(7),
+.table td:nth-child(7) {
+    width: 10%;
 }
 
 /* Alternate row colors */
@@ -179,10 +209,10 @@ body {
     background-color: #059d55;
     color: #fff;
     border-radius: 5px;
-    padding: 5px 10px; 
+    padding: 5px 8px; 
     min-width: 100px; /* Minimum width to ensure uniformity */
     width: 100px; /* Ensures all status elements have the same width */
-    height: 40px; /* Consistent height for all status elements */
+    height: 35px; /* Consistent height for all status elements */
     display: inline-block; /* Keeps the status block inline */
     text-align: center; /* Centers the text horizontally */
     line-height: 30px; /* Centers the text vertically */

@@ -24,8 +24,7 @@ function mapStatusAux(status) {
     return { text: status, class: "status-available" };
   if (s.includes("acd")) return { text: status, class: "status-acd" };
   if (s.includes("acw")) return { text: status, class: "status-acw" };
-  if (s.includes("istirahat"))
-    return { text: status, class: "status-istirahat" };
+  if (s.includes("istirahat")) return { text: status, class: "status-istirahat" };
   if (s.includes("toilet")) return { text: status, class: "status-toilet" };
   if (s.includes("makan")) return { text: status, class: "status-makan" };
   if (s.includes("ring")) return { text: status, class: "status-ringing" };
@@ -47,6 +46,9 @@ function injectTable(data, id) {
     html += `
       <tr>
         <td>${d.nama}</td>
+        <td>${d.kodeJadwal}</td>
+        <td>${d.sesi}</td>
+        <td>${d.lastLogin}</td>
         <td>${d.login}</td>
         <td><span class="${d.auxClass}">${d.auxText}</span></td>
         <td>${d.site}</td>
@@ -57,9 +59,14 @@ function injectTable(data, id) {
   // fill "-"
   if (data.length < 5) {
     const sisa = 5 - data.length;
+
     for (let i = 0; i < sisa; i++) {
       html += `
         <tr>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>
@@ -72,7 +79,6 @@ function injectTable(data, id) {
   tbody.dataset.original = html;
 
   if (!tbody.dataset.initialized) {
-    // pertama kali render
     tbody.innerHTML = html;
     tbody.dataset.initialized = "true";
   } else {
@@ -116,7 +122,7 @@ function updateTableSmooth(tbody, newHtml) {
 
 // ===================== SMOOTH MARQUEE =====================
 
-function smoothMarquee(tbodyId, speed = 0.5) {
+function smoothMarquee(tbodyId, speed = 0.4) {
   const tbody = document.getElementById(tbodyId);
   if (!tbody) return;
 
@@ -137,7 +143,7 @@ function smoothMarquee(tbodyId, speed = 0.5) {
 
   if (!tbody.dataset.cloned || tbody.dataset.forceReclone === "true") {
     const original = tbody.dataset.original || tbody.innerHTML;
-    tbody.innerHTML = original + original; // 🔥 penting
+    tbody.innerHTML = original + original;
     tbody.dataset.cloned = "true";
   }
 
@@ -239,9 +245,19 @@ function AutoCall() {
           } else {
             aux = mapStatusAux(item.StatusAUX);
           }
-
+        
           return {
             nama: item.AgentName,
+            kodeJadwal: item.KodeJadwal,
+            sesi: item.Sesi,
+          
+            lastLogin:
+              String(item.LastLoginTime.Hours).padStart(2, "0") + ":" +
+              String(item.LastLoginTime.Minutes).padStart(2, "0") + ":" +
+              String(item.LastLoginTime.Seconds).padStart(2, "0"),
+          
+            // statusKetepatan: item.StatusKetepatan,
+          
             login: item.StatusLogin,
             auxText: aux.text,
             auxClass: aux.class,
