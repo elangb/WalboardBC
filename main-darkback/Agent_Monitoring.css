@@ -1,0 +1,279 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+
+.header {
+    background-color: #1e2746;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+}
+
+.header .title {
+    font-size: 24px;
+}
+
+.contact-center-text {
+    font-weight: bold;
+    font-size: 20px; /* Increase font size */
+    margin-left: -100px;
+}
+
+
+.header .date-time {
+    text-align: right;
+}
+
+.page-title {
+    font-size: 30px; /* Ukuran teks untuk judul */
+    margin-top: -0px; /* Hilangkan jarak atas */
+    margin-bottom: 20px; /* Sesuaikan jarak bawah */
+    color: white; /* Warna teks judul */
+}
+
+.date-time-text {
+    font-size: 22px; /* Ukuran teks lebih besar */
+    margin: 10px 0; /* Margin atas dan bawah sama */
+    color: goldenrod; /* Warna sesuai dengan style yang sudah ada */
+}
+
+.section-title {
+    color: orange;
+    text-align: center;
+    font-size: 30px;
+}
+
+#ListAgent, #div2 {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+}
+
+.scrollable-table {
+    max-height: 390px; /* Sesuaikan tinggi kontainer */
+    overflow: hidden; /* Hilangkan scrollbar manual */
+    position: relative;
+}
+
+.table-container {
+    background-color: #1e2746;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.table {
+    color: #fff;
+    width: 100%;
+    text-align: center; /* Default: Center align all content */
+    border-collapse: collapse; /* Pastikan border di-collapse */
+    font-size: 24px;
+    table-layout: fixed; /* Menghindari kolom meluas */
+	margin-bottom: 0 !important; /* Menimpa margin-bottom bawaan */
+    position: relative; /* Untuk animasi scrolling */
+}
+
+.table thead th {
+    position: sticky; /* Sticky header */
+    top: 0; /* Tetap berada di atas */
+    background-color: #1e2746; /* Sesuaikan warna background header */
+    color: #fff; /* Warna teks header */
+    z-index: 1; /* Pastikan di atas konten */
+}
+
+.table th,
+.table td {
+    border: none; /* Menghilangkan semua border */
+    font-size: 18px;
+    /* Untuk menghilangkan border atas jika masih ada */
+    border-top: none !important; /* Menonaktifkan garis atas */
+    border-bottom: none !important; /* Menonaktifkan garis atas */
+}
+
+.table td {
+    white-space: nowrap; /* Prevent text from wrapping to a new line */
+    overflow: hidden;    /* Hide overflowed text */
+    text-overflow: ellipsis; /* Display ellipsis (...) when text overflows */
+  }
+
+/* Align left only for the "Nama Agent" column */
+.table td:first-child,
+.table th:first-child {
+    text-align: left;
+}
+
+/* Alternate row colors */
+.table tbody tr:nth-child(odd) {
+    background-color: #050513; /* Warna untuk baris ganjil */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #1e2746; /* Warna untuk baris genap */
+}
+
+/* Pastikan tinggi baris konsisten */
+.table tbody tr.empty-row td {
+    height: 40px; /* Tinggi baris kosong (sesuaikan dengan kebutuhan) */
+    line-height: 40px; /* Pastikan teks berada di tengah */
+}
+
+/* Untuk semua baris, pastikan ada tinggi minimum */
+.table tbody tr td {
+    min-height: 40px; /* Tinggi minimum untuk semua baris */
+    vertical-align: middle; /* Teks selalu di tengah */
+}
+
+
+#AgentCall tbody tr {
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+    -moz-transition: transform 0.5s ease;
+    -ms-transition: transform 0.5s ease;
+    -o-transition: transform 0.5s ease;
+}
+
+#AgentCall tbody {
+    overflow: hidden;
+    position: relative;
+}
+
+#listEmail tbody tr {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+#listEmail tbody tr.fade-out {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+#listEmail tbody tr.fade-in {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#containerxx {
+    position: relative;
+    overflow: hidden; /* Hide the overflowing content */
+    height: 320px;    /* Set a fixed height for the container */
+}
+
+#div1, #div2, #div1-multichat, #div2-multichat, #div1-email, #div2-email, #div1-sosmed, #div2-sosmed {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+
+.status-available, .status-acd, .status-acw, .status-istirahat, 
+.status-ringing, .status-other, .status-toilet, .status-makan, .longest-time, .status-blink {
+    background-color: #059d55;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px; 
+    min-width: 100px; /* Minimum width to ensure uniformity */
+    width: 100px; /* Ensures all status elements have the same width */
+    height: 40px; /* Consistent height for all status elements */
+    display: inline-block; /* Keeps the status block inline */
+    text-align: center; /* Centers the text horizontally */
+    line-height: 30px; /* Centers the text vertically */
+}
+
+/* .blink{ */
+		/* width:200px; */
+		/* height: 50px; */
+	    /* background-color: #e65055; */
+		/* padding: 15px;	 */
+		/* text-align: center; */
+		/* line-height: 50px; */
+	/* } */
+	/* span{ */
+		/* font-size: 25px; */
+		/* font-family: cursive; */
+		/* color: white; */
+		/* animation: blink 1s linear infinite; */
+	/* } */
+/* @keyframes blink{ */
+/* 0%{opacity: 0;} */
+/* 50%{opacity: .5;} */
+/* 100%{opacity: 1;} */
+/* } */
+
+
+.status-available {
+    background-color: #059d55;
+}
+
+.status-acd {
+    background-color: #00a0e9;
+}
+
+.status-acw {
+    background-color: #dea039;
+}
+
+.status-istirahat, .status-toilet, .status-makan, .status-blink {
+    background-color: #e65055;
+}
+
+.status-ringing {
+    background-color: #746cac;
+}
+
+.status-other {
+    background-color: #4d4d4d;
+}
+
+.longest-time {
+    background-color: #e65055;
+}
+
+
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .status-blink {
+    animation: blink 2s infinite;
+    /*Animasikedipdengandurasi1detik*/background-color: #e65055;
+    -webkit-animation: blink 2s infinite;
+}
+  
+
+.scrollable-table {
+  overflow: hidden;
+  height: 450px; /* bebas, tapi tetap */
+  position: relative;
+}
+
+.scrollable-table table {
+  margin: 0;
+}
+
+.scrollable-table tbody {
+  display: block;
+}
+
+.scrollable-table thead,
+.scrollable-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
